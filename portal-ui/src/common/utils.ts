@@ -501,7 +501,8 @@ export const getTimeFromTimestamp = (
 export const calculateBytes = (
   x: string,
   showDecimals = false,
-  roundFloor = true
+  roundFloor = true,
+  k8s = false
 ) => {
   const bytes = parseInt(x, 10);
 
@@ -510,7 +511,7 @@ export const calculateBytes = (
   }
 
   // Gi : GiB
-  const k = 1024;
+  const k = k8s ? 1000 : 1024;
 
   // Get unit for measure
   const i = Math.floor(Math.log(bytes) / Math.log(k));
@@ -523,7 +524,7 @@ export const calculateBytes = (
 
   // Get Unit parsed
   const unitParsed = parseFloat(roundedUnit.toFixed(fractionDigits));
-  const finalUnit = units[i];
+  const finalUnit = k8s ? k8sCalcUnits[i] : units[i];
 
   return { total: unitParsed, unit: finalUnit };
 };
