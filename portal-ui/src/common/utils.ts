@@ -501,7 +501,8 @@ export const getTimeFromTimestamp = (
 export const calculateBytes = (
   x: string,
   showDecimals = false,
-  roundFloor = true
+  roundFloor = true,
+  k8sUnit = false
 ) => {
   const bytes = parseInt(x, 10);
 
@@ -523,7 +524,7 @@ export const calculateBytes = (
 
   // Get Unit parsed
   const unitParsed = parseFloat(roundedUnit.toFixed(fractionDigits));
-  const finalUnit = units[i];
+  const finalUnit = k8sUnit ? k8sCalcUnits[i] : units[i];
 
   return { total: unitParsed, unit: finalUnit };
 };
