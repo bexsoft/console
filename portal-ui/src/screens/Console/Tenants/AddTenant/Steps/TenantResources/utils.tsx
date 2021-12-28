@@ -54,7 +54,7 @@ export const resourcesConfigurations = {
 export const AWSConfigurations: IntegrationConfiguration[] = [
   {
     typeSelection: "nvme",
-    storageClass: "minio-nvme-storage",
+    storageClass: "nvme-i3en-12xlarge",
     CPU: 48,
     memory: 384,
     driveSize: { driveSize: "7500", sizeUnit: "Gi" },
@@ -62,7 +62,7 @@ export const AWSConfigurations: IntegrationConfiguration[] = [
   },
   {
     typeSelection: "hdd",
-    storageClass: "minio-hdd-storage",
+    storageClass: "hdd-d3en-12xlarge",
     CPU: 8,
     memory: 32,
     driveSize: { driveSize: "12.7", sizeUnit: "Ti" },
