@@ -29,16 +29,14 @@ import {
   wizardCommon,
 } from "../../../../Common/FormComponents/common/styleLibrary";
 import Grid from "@mui/material/Grid";
-import {
-  calculateBytes,
-  calculateDistribution,
-  erasureCodeCalc,
-  getBytes,
-} from "../../../../../../common/utils";
+import { erasureCodeCalc, getBytes } from "../../../../../../common/utils";
 import { clearValidationError } from "../../../utils";
 import { ecListTransform, Opts } from "../../../ListTenants/utils";
 import { IResourcesSize } from "../../../ListTenants/types";
-import { ICapacity, IErasureCodeCalc } from "../../../../../../common/types";
+import {
+  IErasureCodeCalc,
+  IStorageDistribution,
+} from "../../../../../../common/types";
 import { commonFormValidation } from "../../../../../../utils/validationFunctions";
 import api from "../../../../../../common/api";
 import InputBoxWrapper from "../../../../Common/FormComponents/InputBoxWrapper/InputBoxWrapper";
@@ -177,35 +175,22 @@ const TenantSizeMK = ({
           updateField("integrationSelection", mainSelection);
           updateMainField("selectedStorageClass", mainSelection.storageClass);
 
-          const driveBytes = getBytes(
-            mainSelection.driveSize.driveSize,
-            mainSelection.driveSize.sizeUnit,
-            true
+          let pvSize = parseInt(
+            getBytes(
+              mainSelection.driveSize.driveSize,
+              mainSelection.driveSize.sizeUnit,
+              true
+            ),
+            10
           );
 
-          const totalClusterSize: number =
-            parseInt(driveBytes) *
-            mainSelection.drivesPerServer *
-            parseInt(nodes);
-
-          const elm = calculateBytes(
-            totalClusterSize.toString(),
-            false,
-            true,
-            true
-          );
-
-          const clusterCapacity: ICapacity = {
-            unit: elm.unit,
-            value: elm.total.toString(),
+          const distrCalculate: IStorageDistribution = {
+            pvSize,
+            nodes: parseInt(nodes),
+            disks: mainSelection.drivesPerServer,
+            persistentVolumes: mainSelection.drivesPerServer * parseInt(nodes),
+            error: "",
           };
-
-          const distrCalculate = calculateDistribution(
-            clusterCapacity,
-            parseInt(nodes),
-            0,
-            parseInt(mainSelection.drivesPerServer.toString())
-          );
 
           updateField("distribution", distrCalculate);
         }
