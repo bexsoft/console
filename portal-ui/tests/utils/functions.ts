@@ -41,6 +41,11 @@ export const setUpNamedBucket = (t, name) => {
 
 export const uploadObjectToBucket = (t, modifier, objectName, objectPath) => {
   const bucketName = `${constants.TEST_BUCKET_NAME}-${modifier}`;
+  return uploadNamedObjectToBucket(t, bucketName, objectName, objectPath)
+};
+
+export const uploadNamedObjectToBucket = (t, modifier, objectName, objectPath) => {
+  const bucketName = modifier;
   const minioClient = new Minio.Client({
     endPoint: "localhost",
     port: 9000,
@@ -50,9 +55,9 @@ export const uploadObjectToBucket = (t, modifier, objectName, objectPath) => {
   });
   return new Promise((resolve, reject) => {
     minioClient
-      .fPutObject(bucketName, objectName, objectPath, {})
-      .then(resolve)
-      .catch(resolve);
+        .fPutObject(bucketName, objectName, objectPath, {})
+        .then(resolve)
+        .catch(resolve);
   });
 };
 
