@@ -17,11 +17,12 @@
 import * as roles from "../utils/roles";
 import { Selector } from "testcafe";
 import * as functions from "../utils/functions";
-import {cleanUpNamedBucketAndUploads, namedTestBucketBrowseButtonFor} from "../utils/functions";
+import {
+  cleanUpNamedBucketAndUploads,
+  namedTestBucketBrowseButtonFor,
+} from "../utils/functions";
 
-fixture("Test resources policy").page(
-  "http://localhost:9090/"
-);
+fixture("Test resources policy").page("http://localhost:9090/");
 
 const bucket1 = "testcondition";
 const test1BucketBrowseButton = namedTestBucketBrowseButtonFor(bucket1);
@@ -35,25 +36,25 @@ test
       t,
       bucket1,
       "test.txt",
-      "portal-ui/tests/uploads/test.txt"
+      "tests/uploads/test.txt"
     );
     await functions.uploadNamedObjectToBucket(
       t,
       bucket1,
       "firstlevel/test.txt",
-      "portal-ui/tests/uploads/test.txt"
+      "tests/uploads/test.txt"
     );
     await functions.uploadNamedObjectToBucket(
       t,
       bucket1,
       "firstlevel/secondlevel/test.txt",
-      "portal-ui/tests/uploads/test.txt"
+      "tests/uploads/test.txt"
     );
     await functions.uploadNamedObjectToBucket(
       t,
       bucket1,
       "firstlevel/secondlevel/thirdlevel/test.txt",
-      "portal-ui/tests/uploads/test.txt"
+      "tests/uploads/test.txt"
     );
   })(
     "User can only see permitted files in last path as expected",
@@ -73,7 +74,7 @@ test
           )
         )
         .expect(file.exists)
-        .notOk()
+        .notOk();
     }
   )
   .after(async (t) => {
@@ -87,25 +88,25 @@ test
       t,
       bucket1,
       "test.txt",
-      "portal-ui/tests/uploads/test.txt"
+      "tests/uploads/test.txt"
     );
     await functions.uploadNamedObjectToBucket(
       t,
       bucket1,
       "firstlevel/test.txt",
-      "portal-ui/tests/uploads/test.txt"
+      "tests/uploads/test.txt"
     );
     await functions.uploadNamedObjectToBucket(
       t,
       bucket1,
       "firstlevel/secondlevel/test.txt",
-      "portal-ui/tests/uploads/test.txt"
+      "tests/uploads/test.txt"
     );
     await functions.uploadNamedObjectToBucket(
       t,
       bucket1,
       "firstlevel/secondlevel/thirdlevel/test.txt",
-      "portal-ui/tests/uploads/test.txt"
+      "tests/uploads/test.txt"
     );
   })("User can browse from first level as policy has wildcard", async (t) => {
     await t
