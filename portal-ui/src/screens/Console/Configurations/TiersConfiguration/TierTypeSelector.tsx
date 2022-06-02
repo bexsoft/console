@@ -14,70 +14,68 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import React, { Fragment } from "react";
-
+import React, {Fragment} from "react";
+import {useNavigate} from "react-router-dom";
+import {Box} from "@mui/material";
+import {tierTypes} from "./utils";
+import {IAM_PAGES} from "../../../../common/SecureComponent/permissions";
 import PageHeader from "../../Common/PageHeader/PageHeader";
-import { tierTypes } from "./utils";
 import BackLink from "../../../../common/BackLink";
 import PageLayout from "../../Common/Layout/PageLayout";
-import { Box } from "@mui/material";
 import TierTypeCard from "./TierTypeCard";
-import { IAM_PAGES } from "../../../../common/SecureComponent/permissions";
 import ContentBox from "../../Common/ContentBox";
 
-interface ITypeTiersConfig {
-  history: any;
-}
+const TierTypeSelector = () => {
+    const navigate = useNavigate();
 
-const TierTypeSelector = ({ history }: ITypeTiersConfig) => {
-  const typeSelect = (selectName: string) => {
-    history.push(`${IAM_PAGES.TIERS_ADD}/${selectName}`);
-  };
+    const typeSelect = (selectName: string) => {
+        navigate(`${IAM_PAGES.TIERS_ADD}/${selectName}`);
+    };
 
-  return (
-    <Fragment>
-      <PageHeader
-        label={
-          <Fragment>
-            <BackLink to={IAM_PAGES.TIERS} label="Tier Types" />
-          </Fragment>
-        }
-        actions={<React.Fragment />}
-      />
+    return (
+        <Fragment>
+            <PageHeader
+                label={
+                    <Fragment>
+                        <BackLink to={IAM_PAGES.TIERS} label="Tier Types"/>
+                    </Fragment>
+                }
+                actions={<React.Fragment/>}
+            />
 
-      <PageLayout>
-        <ContentBox>
-          <div style={{ fontSize: 16, fontWeight: 600, paddingBottom: 15 }}>
-            Select Tier Type
-          </div>
-          <Box
-            sx={{
-              margin: "0 auto",
-              display: "grid",
-              gridGap: "47px",
-              gridTemplateColumns: {
-                xs: "repeat(1, 1fr)",
-                sm: "repeat(2, 1fr)",
-                md: "repeat(3, 1fr)",
-                lg: "repeat(4, 1fr)",
-              },
-            }}
-          >
-            {tierTypes.map((tierType, index) => (
-              <TierTypeCard
-                key={`tierOpt-${index.toString}-${tierType.targetTitle}`}
-                name={tierType.targetTitle}
-                onClick={() => {
-                  typeSelect(tierType.serviceName);
-                }}
-                icon={tierType.logo}
-              />
-            ))}
-          </Box>
-        </ContentBox>
-      </PageLayout>
-    </Fragment>
-  );
+            <PageLayout>
+                <ContentBox>
+                    <div style={{fontSize: 16, fontWeight: 600, paddingBottom: 15}}>
+                        Select Tier Type
+                    </div>
+                    <Box
+                        sx={{
+                            margin: "0 auto",
+                            display: "grid",
+                            gridGap: "47px",
+                            gridTemplateColumns: {
+                                xs: "repeat(1, 1fr)",
+                                sm: "repeat(2, 1fr)",
+                                md: "repeat(3, 1fr)",
+                                lg: "repeat(4, 1fr)",
+                            },
+                        }}
+                    >
+                        {tierTypes.map((tierType, index) => (
+                            <TierTypeCard
+                                key={`tierOpt-${index.toString}-${tierType.targetTitle}`}
+                                name={tierType.targetTitle}
+                                onClick={() => {
+                                    typeSelect(tierType.serviceName);
+                                }}
+                                icon={tierType.logo}
+                            />
+                        ))}
+                    </Box>
+                </ContentBox>
+            </PageLayout>
+        </Fragment>
+    );
 };
 
 export default TierTypeSelector;

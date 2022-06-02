@@ -14,12 +14,13 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import React, { Fragment, useEffect, useState } from "react";
-import { Theme } from "@mui/material/styles";
+import React, {Fragment, useEffect, useState} from "react";
+import {Theme} from "@mui/material/styles";
+import {useNavigate} from "react-router-dom";
 import createStyles from "@mui/styles/createStyles";
 import withStyles from "@mui/styles/withStyles";
 import Grid from "@mui/material/Grid";
-import { Box, LinearProgress } from "@mui/material";
+import {Box, LinearProgress} from "@mui/material";
 import {
   AddIcon,
   DeleteIcon,
@@ -28,15 +29,15 @@ import {
   UsersIcon,
 } from "../../../icons";
 
-import { GroupsList } from "./types";
-import { stringSort } from "../../../utils/sortFunctions";
+import {GroupsList} from "./types";
+import {stringSort} from "../../../utils/sortFunctions";
 import {
   actionsTray,
   containerForHeader,
   searchField,
   tableStyles,
 } from "../Common/FormComponents/common/styleLibrary";
-import { ErrorResponseHandler } from "../../../common/types";
+import {ErrorResponseHandler} from "../../../common/types";
 import api from "../../../common/api";
 import TableWrapper from "../Common/TableWrapper/TableWrapper";
 import PageHeader from "../Common/PageHeader/PageHeader";
@@ -56,13 +57,13 @@ import {
 
 import withSuspense from "../Common/Components/withSuspense";
 import RBIconButton from "../Buckets/BucketDetails/SummaryItems/RBIconButton";
-import { encodeURLString } from "../../../common/utils";
-import { useDispatch } from "react-redux";
-import { setErrorSnackMessage } from "../../../systemSlice";
+import {encodeURLString} from "../../../common/utils";
+import {useDispatch} from "react-redux";
+import {setErrorSnackMessage} from "../../../systemSlice";
 
 const DeleteGroup = withSuspense(React.lazy(() => import("./DeleteGroup")));
 const SetPolicy = withSuspense(
-  React.lazy(() => import("../Policies/SetPolicy"))
+    React.lazy(() => import("../Policies/SetPolicy"))
 );
 
 interface IGroupsProps {
@@ -72,21 +73,23 @@ interface IGroupsProps {
 }
 
 const styles = (theme: Theme) =>
-  createStyles({
-    tableBlock: {
-      ...tableStyles.tableBlock,
-      marginTop: 15,
-    },
-    ...actionsTray,
-    searchField: {
-      ...searchField.searchField,
-      maxWidth: 380,
-    },
-    ...containerForHeader(theme.spacing(4)),
-  });
+    createStyles({
+      tableBlock: {
+        ...tableStyles.tableBlock,
+        marginTop: 15,
+      },
+      ...actionsTray,
+      searchField: {
+        ...searchField.searchField,
+        maxWidth: 380,
+      },
+      ...containerForHeader(theme.spacing(4)),
+    });
 
-const Groups = ({ classes, history }: IGroupsProps) => {
+const Groups = ({classes}: IGroupsProps) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
   const [loading, isLoading] = useState<boolean>(false);
   const [records, setRecords] = useState<any[]>([]);
@@ -115,7 +118,7 @@ const Groups = ({ classes, history }: IGroupsProps) => {
   ]);
 
   const selectionChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { target: { value = "", checked = false } = {} } = e;
+    const {target: {value = "", checked = false} = {}} = e;
 
     let elements: string[] = [...checkedGroups]; // We clone the checkedUsers array
 
@@ -137,19 +140,19 @@ const Groups = ({ classes, history }: IGroupsProps) => {
       if (displayGroups) {
         const fetchRecords = () => {
           api
-            .invoke("GET", `/api/v1/groups`)
-            .then((res: GroupsList) => {
-              let resGroups: string[] = [];
-              if (res.groups !== null) {
-                resGroups = res.groups.sort(stringSort);
-              }
-              setRecords(resGroups);
-              isLoading(false);
-            })
-            .catch((err: ErrorResponseHandler) => {
-              dispatch(setErrorSnackMessage(err));
-              isLoading(false);
-            });
+              .invoke("GET", `/api/v1/groups`)
+              .then((res: GroupsList) => {
+                let resGroups: string[] = [];
+                if (res.groups !== null) {
+                  resGroups = res.groups.sort(stringSort);
+                }
+                setRecords(resGroups);
+                isLoading(false);
+              })
+              .catch((err: ErrorResponseHandler) => {
+                dispatch(setErrorSnackMessage(err));
+                isLoading(false);
+              });
         };
         fetchRecords();
       } else {
@@ -167,11 +170,11 @@ const Groups = ({ classes, history }: IGroupsProps) => {
   };
 
   const filteredRecords = records.filter((elementItem) =>
-    elementItem.includes(filter)
+      elementItem.includes(filter)
   );
 
   const viewAction = (group: any) => {
-    history.push(`${IAM_PAGES.GROUPS}/${encodeURLString(group)}`);
+    navigate(`${IAM_PAGES.GROUPS}/${encodeURLString(group)}`);
   };
 
   const tableActions = [
@@ -188,200 +191,200 @@ const Groups = ({ classes, history }: IGroupsProps) => {
   ];
 
   return (
-    <React.Fragment>
-      {deleteOpen && (
-        <DeleteGroup
-          deleteOpen={deleteOpen}
-          selectedGroups={checkedGroups}
-          closeDeleteModalAndRefresh={closeDeleteModalAndRefresh}
-        />
-      )}
-      {policyOpen && (
-        <SetPolicy
-          open={policyOpen}
-          selectedGroups={checkedGroups}
-          selectedUser={null}
-          closeModalAndRefresh={() => {
-            setPolicyOpen(false);
-          }}
-        />
-      )}
-      <PageHeader label={"Groups"} />
-
-      <PageLayout>
-        <Grid item xs={12} className={classes.actionsTray}>
-          <SecureComponent
-            resource={CONSOLE_UI_RESOURCE}
-            scopes={[IAM_SCOPES.ADMIN_LIST_GROUPS]}
-            errorProps={{ disabled: true }}
-          >
-            <SearchBox
-              placeholder={"Search Groups"}
-              onChange={setFilter}
-              overrideClass={classes.searchField}
-              value={filter}
+      <Fragment>
+        {deleteOpen && (
+            <DeleteGroup
+                deleteOpen={deleteOpen}
+                selectedGroups={checkedGroups}
+                closeDeleteModalAndRefresh={closeDeleteModalAndRefresh}
             />
-          </SecureComponent>
-          <Box
-            sx={{
-              display: "flex",
-            }}
-          >
-            <SecureComponent
-              resource={CONSOLE_UI_RESOURCE}
-              scopes={[IAM_SCOPES.ADMIN_ATTACH_USER_OR_GROUP_POLICY]}
-              matchAll
-              errorProps={{ disabled: true }}
-            >
-              <RBIconButton
-                tooltip={"Select Policy"}
-                onClick={() => {
-                  setPolicyOpen(true);
-                }}
-                text={"Assign Policy"}
-                icon={<IAMPoliciesIcon />}
-                color="primary"
-                disabled={checkedGroups.length < 1}
-                variant={"outlined"}
-              />
-            </SecureComponent>
-            <SecureComponent
-              resource={CONSOLE_UI_RESOURCE}
-              scopes={[IAM_SCOPES.ADMIN_REMOVE_USER_FROM_GROUP]}
-              matchAll
-              errorProps={{ disabled: true }}
-            >
-              <RBIconButton
-                tooltip={"Delete Selected"}
-                onClick={() => {
-                  setDeleteOpen(true);
-                }}
-                text={"Delete Selected"}
-                icon={<DeleteIcon />}
-                color="secondary"
-                disabled={checkedGroups.length === 0}
-                variant={"outlined"}
-              />
-            </SecureComponent>
-            <SecureComponent
-              resource={CONSOLE_UI_RESOURCE}
-              scopes={[
-                IAM_SCOPES.ADMIN_ADD_USER_TO_GROUP,
-                IAM_SCOPES.ADMIN_LIST_USERS,
-              ]}
-              matchAll
-              errorProps={{ disabled: true }}
-            >
-              <RBIconButton
-                tooltip={"Create Group"}
-                text={"Create Group"}
-                variant="contained"
-                color="primary"
-                icon={<AddIcon />}
-                onClick={() => {
-                  history.push(`${IAM_PAGES.GROUPS_ADD}`);
-                }}
-              />
-            </SecureComponent>
-          </Box>
-        </Grid>
-        {loading && <LinearProgress />}
-        {!loading && (
-          <Fragment>
-            {records.length > 0 && (
-              <Fragment>
-                <Grid item xs={12} className={classes.tableBlock}>
-                  <SecureComponent
-                    resource={CONSOLE_UI_RESOURCE}
-                    scopes={[IAM_SCOPES.ADMIN_LIST_GROUPS]}
-                    errorProps={{ disabled: true }}
-                  >
-                    <TableWrapper
-                      itemActions={tableActions}
-                      columns={[{ label: "Name", elementKey: "" }]}
-                      isLoading={loading}
-                      selectedItems={checkedGroups}
-                      onSelect={deleteGroup ? selectionChanged : undefined}
-                      records={filteredRecords}
-                      entityName="Groups"
-                      idField=""
-                    />
-                  </SecureComponent>
-                </Grid>
-                <Grid item xs={12} marginTop={"25px"}>
-                  <HelpBox
-                    title={"Groups"}
-                    iconComponent={<GroupsIcon />}
-                    help={
-                      <Fragment>
-                        A group can have one attached IAM policy, where all
-                        users with membership in that group inherit that policy.
-                        Groups support more simplified management of user
-                        permissions on the MinIO Tenant.
-                        <br />
-                        <br />
-                        You can learn more at our{" "}
-                        <a
-                          href="https://docs.min.io/minio/k8s/tutorials/group-management.html?ref=con"
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          documentation
-                        </a>
-                        .
-                      </Fragment>
-                    }
-                  />
-                </Grid>
-              </Fragment>
-            )}
-            {records.length === 0 && (
-              <Grid
-                container
-                justifyContent={"center"}
-                alignContent={"center"}
-                alignItems={"center"}
-              >
-                <Grid item xs={8}>
-                  <HelpBox
-                    title={"Groups"}
-                    iconComponent={<UsersIcon />}
-                    help={
-                      <Fragment>
-                        A group can have one attached IAM policy, where all
-                        users with membership in that group inherit that policy.
-                        Groups support more simplified management of user
-                        permissions on the MinIO Tenant.
-                        <SecureComponent
-                          resource={CONSOLE_UI_RESOURCE}
-                          scopes={[
-                            IAM_SCOPES.ADMIN_ADD_USER_TO_GROUP,
-                            IAM_SCOPES.ADMIN_LIST_USERS,
-                          ]}
-                          matchAll
-                        >
-                          <br />
-                          <br />
-                          To get started,{" "}
-                          <AButton
-                            onClick={() => {
-                              history.push(`${IAM_PAGES.GROUPS_ADD}`);
-                            }}
-                          >
-                            Create a Group
-                          </AButton>
-                          .
-                        </SecureComponent>
-                      </Fragment>
-                    }
-                  />
-                </Grid>
-              </Grid>
-            )}
-          </Fragment>
         )}
-      </PageLayout>
-    </React.Fragment>
+        {policyOpen && (
+            <SetPolicy
+                open={policyOpen}
+                selectedGroups={checkedGroups}
+                selectedUser={null}
+                closeModalAndRefresh={() => {
+                  setPolicyOpen(false);
+                }}
+            />
+        )}
+        <PageHeader label={"Groups"}/>
+
+        <PageLayout>
+          <Grid item xs={12} className={classes.actionsTray}>
+            <SecureComponent
+                resource={CONSOLE_UI_RESOURCE}
+                scopes={[IAM_SCOPES.ADMIN_LIST_GROUPS]}
+                errorProps={{disabled: true}}
+            >
+              <SearchBox
+                  placeholder={"Search Groups"}
+                  onChange={setFilter}
+                  overrideClass={classes.searchField}
+                  value={filter}
+              />
+            </SecureComponent>
+            <Box
+                sx={{
+                  display: "flex",
+                }}
+            >
+              <SecureComponent
+                  resource={CONSOLE_UI_RESOURCE}
+                  scopes={[IAM_SCOPES.ADMIN_ATTACH_USER_OR_GROUP_POLICY]}
+                  matchAll
+                  errorProps={{disabled: true}}
+              >
+                <RBIconButton
+                    tooltip={"Select Policy"}
+                    onClick={() => {
+                      setPolicyOpen(true);
+                    }}
+                    text={"Assign Policy"}
+                    icon={<IAMPoliciesIcon/>}
+                    color="primary"
+                    disabled={checkedGroups.length < 1}
+                    variant={"outlined"}
+                />
+              </SecureComponent>
+              <SecureComponent
+                  resource={CONSOLE_UI_RESOURCE}
+                  scopes={[IAM_SCOPES.ADMIN_REMOVE_USER_FROM_GROUP]}
+                  matchAll
+                  errorProps={{disabled: true}}
+              >
+                <RBIconButton
+                    tooltip={"Delete Selected"}
+                    onClick={() => {
+                      setDeleteOpen(true);
+                    }}
+                    text={"Delete Selected"}
+                    icon={<DeleteIcon/>}
+                    color="secondary"
+                    disabled={checkedGroups.length === 0}
+                    variant={"outlined"}
+                />
+              </SecureComponent>
+              <SecureComponent
+                  resource={CONSOLE_UI_RESOURCE}
+                  scopes={[
+                    IAM_SCOPES.ADMIN_ADD_USER_TO_GROUP,
+                    IAM_SCOPES.ADMIN_LIST_USERS,
+                  ]}
+                  matchAll
+                  errorProps={{disabled: true}}
+              >
+                <RBIconButton
+                    tooltip={"Create Group"}
+                    text={"Create Group"}
+                    variant="contained"
+                    color="primary"
+                    icon={<AddIcon/>}
+                    onClick={() => {
+                      navigate(`${IAM_PAGES.GROUPS_ADD}`);
+                    }}
+                />
+              </SecureComponent>
+            </Box>
+          </Grid>
+          {loading && <LinearProgress/>}
+          {!loading && (
+              <Fragment>
+                {records.length > 0 && (
+                    <Fragment>
+                      <Grid item xs={12} className={classes.tableBlock}>
+                        <SecureComponent
+                            resource={CONSOLE_UI_RESOURCE}
+                            scopes={[IAM_SCOPES.ADMIN_LIST_GROUPS]}
+                            errorProps={{disabled: true}}
+                        >
+                          <TableWrapper
+                              itemActions={tableActions}
+                              columns={[{label: "Name", elementKey: ""}]}
+                              isLoading={loading}
+                              selectedItems={checkedGroups}
+                              onSelect={deleteGroup ? selectionChanged : undefined}
+                              records={filteredRecords}
+                              entityName="Groups"
+                              idField=""
+                          />
+                        </SecureComponent>
+                      </Grid>
+                      <Grid item xs={12} marginTop={"25px"}>
+                        <HelpBox
+                            title={"Groups"}
+                            iconComponent={<GroupsIcon/>}
+                            help={
+                              <Fragment>
+                                A group can have one attached IAM policy, where all
+                                users with membership in that group inherit that policy.
+                                Groups support more simplified management of user
+                                permissions on the MinIO Tenant.
+                                <br/>
+                                <br/>
+                                You can learn more at our{" "}
+                                <a
+                                    href="https://docs.min.io/minio/k8s/tutorials/group-management.html?ref=con"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                  documentation
+                                </a>
+                                .
+                              </Fragment>
+                            }
+                        />
+                      </Grid>
+                    </Fragment>
+                )}
+                {records.length === 0 && (
+                    <Grid
+                        container
+                        justifyContent={"center"}
+                        alignContent={"center"}
+                        alignItems={"center"}
+                    >
+                      <Grid item xs={8}>
+                        <HelpBox
+                            title={"Groups"}
+                            iconComponent={<UsersIcon/>}
+                            help={
+                              <Fragment>
+                                A group can have one attached IAM policy, where all
+                                users with membership in that group inherit that policy.
+                                Groups support more simplified management of user
+                                permissions on the MinIO Tenant.
+                                <SecureComponent
+                                    resource={CONSOLE_UI_RESOURCE}
+                                    scopes={[
+                                      IAM_SCOPES.ADMIN_ADD_USER_TO_GROUP,
+                                      IAM_SCOPES.ADMIN_LIST_USERS,
+                                    ]}
+                                    matchAll
+                                >
+                                  <br/>
+                                  <br/>
+                                  To get started,{" "}
+                                  <AButton
+                                      onClick={() => {
+                                        navigate(`${IAM_PAGES.GROUPS_ADD}`);
+                                      }}
+                                  >
+                                    Create a Group
+                                  </AButton>
+                                  .
+                                </SecureComponent>
+                              </Fragment>
+                            }
+                        />
+                      </Grid>
+                    </Grid>
+                )}
+              </Fragment>
+          )}
+        </PageLayout>
+      </Fragment>
   );
 };
 

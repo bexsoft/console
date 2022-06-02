@@ -32,7 +32,7 @@ import Grid from "@mui/material/Grid";
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { Button, DialogContentText, Typography } from "@mui/material";
 import api from "../../../../common/api";
-import { connect, useDispatch } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../../../store";
 import { ErrorResponseHandler } from "../../../../common/types";
 import Loader from "../../Common/Loader/Loader";
@@ -52,8 +52,6 @@ import { setErrorSnackMessage } from "../../../../systemSlice";
 
 interface ITenantIdentityProvider {
   classes: any;
-  loadingTenant: boolean;
-  tenant: ITenant | null;
 }
 
 const styles = (theme: Theme) =>
@@ -83,12 +81,14 @@ const styles = (theme: Theme) =>
     ...wizardCommon,
   });
 
-const TenantIdentityProvider = ({
-  classes,
-  tenant,
-  loadingTenant,
-}: ITenantIdentityProvider) => {
+const TenantIdentityProvider = ({ classes }: ITenantIdentityProvider) => {
   const dispatch = useDispatch();
+
+  const tenant = useSelector((state: AppState) => state.tenants.tenantInfo);
+  const loadingTenant = useSelector(
+    (state: AppState) => state.tenants.loadingTenant
+  );
+
   const [isSending, setIsSending] = useState<boolean>(false);
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const [idpSelection, setIdpSelection] = useState<string>("Built-in");

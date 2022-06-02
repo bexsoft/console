@@ -22,7 +22,6 @@ import { setErrorSnackMessage } from "../../../../../../../systemSlice";
 import { generatePoolName } from "../../../../../../../common/utils";
 import { getDefaultAffinity, getNodeSelector } from "../../../utils";
 import { IEditPoolItem, IEditPoolRequest } from "../../../../ListTenants/types";
-import history from "../../../../../../../history";
 import { resetEditPoolForm } from "../editPoolSlice";
 import { setTenantDetailsLoad } from "../../../../tenantsSlice";
 
@@ -130,7 +129,7 @@ export const editPoolAsync = createAsyncThunk(
       .then(() => {
         dispatch(resetEditPoolForm());
         dispatch(setTenantDetailsLoad(true));
-        history.push(poolsURL);
+        //navigate(poolsURL);
       })
       .catch((err: ErrorResponseHandler) => {
         dispatch(setErrorSnackMessage(err));

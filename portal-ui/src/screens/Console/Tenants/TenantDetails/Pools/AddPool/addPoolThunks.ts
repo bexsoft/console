@@ -14,94 +14,93 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { AppState } from "../../../../../../store";
+import {createAsyncThunk} from "@reduxjs/toolkit";
+import {AppState} from "../../../../../../store";
+import {IAddPoolRequest} from "../../../ListTenants/types";
+import {generatePoolName} from "../../../../../../common/utils";
+import {ErrorResponseHandler} from "../../../../../../common/types";
+import {setErrorSnackMessage} from "../../../../../../systemSlice";
+import {getDefaultAffinity, getNodeSelector} from "../../utils";
+import {resetPoolForm} from "./addPoolSlice";
+import {getTenantAsync} from "../../../thunks/tenantDetailsAsync";
 import api from "../../../../../../common/api";
-import { IAddPoolRequest } from "../../../ListTenants/types";
-import { generatePoolName } from "../../../../../../common/utils";
-import { ErrorResponseHandler } from "../../../../../../common/types";
-import { setErrorSnackMessage } from "../../../../../../systemSlice";
-import { getDefaultAffinity, getNodeSelector } from "../../utils";
-import { resetPoolForm } from "./addPoolSlice";
-import { getTenantAsync } from "../../../thunks/tenantDetailsAsync";
-import history from "../../../../../../history";
 
 export const addPoolAsync = createAsyncThunk(
-  "addPool/addPoolAsync",
-  async (_, { getState, rejectWithValue, dispatch }) => {
-    const state = getState() as AppState;
+    "addPool/addPoolAsync",
+    async (_, {getState, rejectWithValue, dispatch}) => {
+        const state = getState() as AppState;
 
-    const tenant = state.tenants.tenantInfo;
-    const selectedStorageClass = state.addPool.setup.storageClass;
-    const numberOfNodes = state.addPool.setup.numberOfNodes;
-    const volumeSize = state.addPool.setup.volumeSize;
-    const volumesPerServer = state.addPool.setup.volumesPerServer;
-    const affinityType = state.addPool.affinity.podAffinity;
-    const nodeSelectorLabels = state.addPool.affinity.nodeSelectorLabels;
-    const withPodAntiAffinity = state.addPool.affinity.withPodAntiAffinity;
-    const tolerations = state.addPool.tolerations;
-    const securityContextEnabled =
-      state.addPool.configuration.securityContextEnabled;
-    const securityContext = state.addPool.configuration.securityContext;
-    if (tenant === null) {
-      return;
-    }
+        const tenant = state.tenants.tenantInfo;
+        const selectedStorageClass = state.addPool.setup.storageClass;
+        const numberOfNodes = state.addPool.setup.numberOfNodes;
+        const volumeSize = state.addPool.setup.volumeSize;
+        const volumesPerServer = state.addPool.setup.volumesPerServer;
+        const affinityType = state.addPool.affinity.podAffinity;
+        const nodeSelectorLabels = state.addPool.affinity.nodeSelectorLabels;
+        const withPodAntiAffinity = state.addPool.affinity.withPodAntiAffinity;
+        const tolerations = state.addPool.tolerations;
+        const securityContextEnabled =
+            state.addPool.configuration.securityContextEnabled;
+        const securityContext = state.addPool.configuration.securityContext;
+        if (tenant === null) {
+            return;
+        }
 
-    const poolName = generatePoolName(tenant.pools);
+        const poolName = generatePoolName(tenant.pools);
 
-    let affinityObject = {};
+        let affinityObject = {};
 
-    switch (affinityType) {
-      case "default":
-        affinityObject = {
-          affinity: getDefaultAffinity(tenant.name, poolName),
+        switch (affinityType) {
+            case "default":
+                affinityObject = {
+                    affinity: getDefaultAffinity(tenant.name, poolName),
+                };
+                break;
+            case "nodeSelector":
+                affinityObject = {
+                    affinity: getNodeSelector(
+                        nodeSelectorLabels,
+                        withPodAntiAffinity,
+                        tenant.name,
+                        poolName
+                    ),
+                };
+                break;
+        }
+
+        const tolerationValues = tolerations.filter(
+            (toleration) => toleration.key.trim() !== ""
+        );
+
+        const data: IAddPoolRequest = {
+            name: poolName,
+            servers: numberOfNodes,
+            volumes_per_server: volumesPerServer,
+            volume_configuration: {
+                size: volumeSize * 1073741824,
+                storage_class_name: selectedStorageClass,
+                labels: null,
+            },
+            tolerations: tolerationValues,
+            securityContext: securityContextEnabled ? securityContext : null,
+            ...affinityObject,
         };
-        break;
-      case "nodeSelector":
-        affinityObject = {
-          affinity: getNodeSelector(
-            nodeSelectorLabels,
-            withPodAntiAffinity,
-            tenant.name,
-            poolName
-          ),
-        };
-        break;
+        const poolsURL = `/namespaces/${tenant?.namespace || ""}/tenants/${
+            tenant?.name || ""
+        }/pools`;
+        return api
+            .invoke(
+                "POST",
+                `/api/v1/namespaces/${tenant.namespace}/tenants/${tenant.name}/pools`,
+                data
+            )
+            .then(() => {
+                dispatch(resetPoolForm());
+                dispatch(getTenantAsync());
+                //navigate(poolsURL);
+            })
+            .catch((err: ErrorResponseHandler) => {
+                dispatch(setErrorSnackMessage(err));
+            });
     }
-
-    const tolerationValues = tolerations.filter(
-      (toleration) => toleration.key.trim() !== ""
-    );
-
-    const data: IAddPoolRequest = {
-      name: poolName,
-      servers: numberOfNodes,
-      volumes_per_server: volumesPerServer,
-      volume_configuration: {
-        size: volumeSize * 1073741824,
-        storage_class_name: selectedStorageClass,
-        labels: null,
-      },
-      tolerations: tolerationValues,
-      securityContext: securityContextEnabled ? securityContext : null,
-      ...affinityObject,
-    };
-    const poolsURL = `/namespaces/${tenant?.namespace || ""}/tenants/${
-      tenant?.name || ""
-    }/pools`;
-    return api
-      .invoke(
-        "POST",
-        `/api/v1/namespaces/${tenant.namespace}/tenants/${tenant.name}/pools`,
-        data
-      )
-      .then(() => {
-        dispatch(resetPoolForm());
-        dispatch(getTenantAsync());
-        history.push(poolsURL);
-      })
-      .catch((err: ErrorResponseHandler) => {
-        dispatch(setErrorSnackMessage(err));
-      });
-  }
 );

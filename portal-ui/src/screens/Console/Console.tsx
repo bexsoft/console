@@ -21,19 +21,18 @@ import React, {
   useLayoutEffect,
   useState,
 } from "react";
-import { Theme } from "@mui/material/styles";
+import {Theme} from "@mui/material/styles";
 import debounce from "lodash/debounce";
 import createStyles from "@mui/styles/createStyles";
 import withStyles from "@mui/styles/withStyles";
-import { Button, LinearProgress } from "@mui/material";
+import {Button, LinearProgress} from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import Snackbar from "@mui/material/Snackbar";
-import history from "../../history";
-import { Redirect, Route, Router, Switch, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { AppState } from "../../store";
-import { snackBarCommon } from "./Common/FormComponents/common/styleLibrary";
-import { ErrorResponseHandler } from "../../common/types";
+import {Navigate, Route, Routes, useLocation} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {AppState} from "../../store";
+import {snackBarCommon} from "./Common/FormComponents/common/styleLibrary";
+import {ErrorResponseHandler} from "../../common/types";
 
 import Menu from "./Menu/Menu";
 import api from "../../common/api";
@@ -46,8 +45,8 @@ import {
   IAM_SCOPES,
   S3_ALL_RESOURCES,
 } from "../../common/SecureComponent/permissions";
-import { hasPermission } from "../../common/SecureComponent";
-import { IRouteRule } from "./Menu/types";
+import {hasPermission} from "../../common/SecureComponent";
+import {IRouteRule} from "./Menu/types";
 import LoadingComponent from "../../common/LoadingComponent";
 import EditPool from "./Tenants/TenantDetails/Pools/EditPool/EditPool";
 import ComponentsScreen from "./Common/ComponentsScreen";
@@ -59,7 +58,7 @@ import {
   setServerNeedsRestart,
   setSnackBarMessage,
 } from "../../systemSlice";
-import { selFeatures, selSession } from "./consoleSlice";
+import {selFeatures, selSession} from "./consoleSlice";
 
 const Trace = React.lazy(() => import("./Trace/Trace"));
 const Heal = React.lazy(() => import("./Heal/Heal"));
@@ -70,31 +69,31 @@ const Hop = React.lazy(() => import("./Tenants/TenantDetails/hop/Hop"));
 const AddTenant = React.lazy(() => import("./Tenants/AddTenant/AddTenant"));
 
 const NotificationEndpoints = React.lazy(
-  () => import("./NotificationEndpoints/NotificationEndpoints")
+    () => import("./NotificationEndpoints/NotificationEndpoints")
 );
 const AddNotificationEndpoint = React.lazy(
-  () => import("./NotificationEndpoints/AddNotificationEndpoint")
+    () => import("./NotificationEndpoints/AddNotificationEndpoint")
 );
 const NotificationTypeSelector = React.lazy(
-  () => import("./NotificationEndpoints/NotificationTypeSelector")
+    () => import("./NotificationEndpoints/NotificationTypeSelector")
 );
 
 const ListTiersConfiguration = React.lazy(
-  () => import("./Configurations/TiersConfiguration/ListTiersConfiguration")
+    () => import("./Configurations/TiersConfiguration/ListTiersConfiguration")
 );
 const TierTypeSelector = React.lazy(
-  () => import("./Configurations/TiersConfiguration/TierTypeSelector")
+    () => import("./Configurations/TiersConfiguration/TierTypeSelector")
 );
 const AddTierConfiguration = React.lazy(
-  () => import("./Configurations/TiersConfiguration/AddTierConfiguration")
+    () => import("./Configurations/TiersConfiguration/AddTierConfiguration")
 );
 const ListTenants = React.lazy(
-  () => import("./Tenants/ListTenants/ListTenants")
+    () => import("./Tenants/ListTenants/ListTenants")
 );
 
 const ErrorLogs = React.lazy(() => import("./Logs/ErrorLogs/ErrorLogs"));
 const LogsSearchMain = React.lazy(
-  () => import("./Logs/LogSearch/LogsSearchMain")
+    () => import("./Logs/LogSearch/LogsSearchMain")
 );
 const GroupsDetails = React.lazy(() => import("./Groups/GroupsDetails"));
 
@@ -105,7 +104,7 @@ const IconsScreen = React.lazy(() => import("./Common/IconsScreen"));
 const Speedtest = React.lazy(() => import("./Speedtest/Speedtest"));
 
 const ObjectManager = React.lazy(
-  () => import("./Common/ObjectManager/ObjectManager")
+    () => import("./Common/ObjectManager/ObjectManager")
 );
 
 const Buckets = React.lazy(() => import("./Buckets/Buckets"));
@@ -117,71 +116,69 @@ const Dashboard = React.lazy(() => import("./Dashboard/Dashboard"));
 const Account = React.lazy(() => import("./Account/Account"));
 
 const AccountCreate = React.lazy(
-  () => import("./Account/AddServiceAccountScreen")
+    () => import("./Account/AddServiceAccountScreen")
 );
-const UserSACreate = React.lazy(
-  () => import("./Users/AddUserServiceAccountScreen")
-);
+
 const Users = React.lazy(() => import("./Users/Users"));
 const Groups = React.lazy(() => import("./Groups/Groups"));
 
 const TenantDetails = React.lazy(
-  () => import("./Tenants/TenantDetails/TenantDetails")
+    () => import("./Tenants/TenantDetails/TenantDetails")
 );
 const License = React.lazy(() => import("./License/License"));
 const ConfigurationOptions = React.lazy(
-  () => import("./Configurations/ConfigurationPanels/ConfigurationOptions")
+    () => import("./Configurations/ConfigurationPanels/ConfigurationOptions")
 );
 const AddPool = React.lazy(
-  () => import("./Tenants/TenantDetails/Pools/AddPool/AddPool")
+    () => import("./Tenants/TenantDetails/Pools/AddPool/AddPool")
 );
 const AddGroupScreen = React.lazy(() => import("./Groups/AddGroupScreen"));
 const SiteReplication = React.lazy(
-  () => import("./Configurations/SiteReplication/SiteReplication")
+    () => import("./Configurations/SiteReplication/SiteReplication")
 );
 const SiteReplicationStatus = React.lazy(
-  () => import("./Configurations/SiteReplication/SiteReplicationStatus")
+    () => import("./Configurations/SiteReplication/SiteReplicationStatus")
 );
 
 const AddReplicationSites = React.lazy(
-  () => import("./Configurations/SiteReplication/AddReplicationSites")
+    () => import("./Configurations/SiteReplication/AddReplicationSites")
 );
 
 const styles = (theme: Theme) =>
-  createStyles({
-    root: {
-      display: "flex",
-      "& .MuiPaper-root.MuiSnackbarContent-root": {
-        borderRadius: "0px 0px 5px 5px",
-        boxShadow: "none",
+    createStyles({
+      root: {
+        display: "flex",
+        "& .MuiPaper-root.MuiSnackbarContent-root": {
+          borderRadius: "0px 0px 5px 5px",
+          boxShadow: "none",
+        },
       },
-    },
-    content: {
-      flexGrow: 1,
-      height: "100vh",
-      overflow: "auto",
-      position: "relative",
-    },
-    warningBar: {
-      background: theme.palette.primary.main,
-      color: "white",
-      heigh: "60px",
-      widht: "100%",
-      lineHeight: "60px",
-      textAlign: "center",
-    },
-    progress: {
-      height: "3px",
-      backgroundColor: "#eaeaea",
-    },
-    ...snackBarCommon,
-  });
+      content: {
+        flexGrow: 1,
+        height: "100vh",
+        overflow: "auto",
+        position: "relative",
+      },
+      warningBar: {
+        background: theme.palette.primary.main,
+        color: "white",
+        heigh: "60px",
+        widht: "100%",
+        lineHeight: "60px",
+        textAlign: "center",
+      },
+      progress: {
+        height: "3px",
+        backgroundColor: "#eaeaea",
+      },
+      ...snackBarCommon,
+    });
 
 interface IConsoleProps {
   classes: any;
 }
 
-const Console = ({ classes }: IConsoleProps) => {
+const Console = ({classes}: IConsoleProps) => {
   const dispatch = useDispatch();
   const open = useSelector((state: AppState) => state.system.sidebarOpen);
   const session = useSelector(selSession);
@@ -189,16 +186,16 @@ const Console = ({ classes }: IConsoleProps) => {
   const distributedSetup = useSelector(selDistSet);
   const operatorMode = useSelector(selOpMode);
   const snackBarMessage = useSelector(
-    (state: AppState) => state.system.snackBar
+      (state: AppState) => state.system.snackBar
   );
   const needsRestart = useSelector(
-    (state: AppState) => state.system.serverNeedsRestart
+      (state: AppState) => state.system.serverNeedsRestart
   );
   const isServerLoading = useSelector(
-    (state: AppState) => state.system.serverIsLoading
+      (state: AppState) => state.system.serverIsLoading
   );
   const loadingProgress = useSelector(
-    (state: AppState) => state.system.loadingProgress
+      (state: AppState) => state.system.loadingProgress
   );
 
   const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
@@ -207,20 +204,20 @@ const Console = ({ classes }: IConsoleProps) => {
   const restartServer = () => {
     dispatch(serverIsLoading(true));
     api
-      .invoke("POST", "/api/v1/service/restart", {})
-      .then((res) => {
-        console.log("success restarting service");
-        dispatch(serverIsLoading(false));
-        dispatch(setServerNeedsRestart(false));
-      })
-      .catch((err: ErrorResponseHandler) => {
-        if (err.errorMessage === "Error 502") {
+        .invoke("POST", "/api/v1/service/restart", {})
+        .then((res) => {
+          console.log("success restarting service");
+          dispatch(serverIsLoading(false));
           dispatch(setServerNeedsRestart(false));
-        }
-        dispatch(serverIsLoading(false));
-        console.log("failure restarting service");
-        console.error(err);
-      });
+        })
+        .catch((err: ErrorResponseHandler) => {
+          if (err.errorMessage === "Error 502") {
+            dispatch(setServerNeedsRestart(false));
+          }
+          dispatch(serverIsLoading(false));
+          console.log("failure restarting service");
+          console.error(err);
+        });
   };
 
   // Layout effect to be executed after last re-render for resizing only
@@ -263,12 +260,12 @@ const Console = ({ classes }: IConsoleProps) => {
         const path = window.location.pathname;
         const resource = path.match(/buckets\/(.*)\/admin*/);
         return (
-          resource &&
-          resource.length > 0 &&
-          hasPermission(
-            resource[1],
-            IAM_PAGES_PERMISSIONS[IAM_PAGES.BUCKETS_ADMIN_VIEW]
-          )
+            resource &&
+            resource.length > 0 &&
+            hasPermission(
+                resource[1],
+                IAM_PAGES_PERMISSIONS[IAM_PAGES.BUCKETS_ADMIN_VIEW]
+            )
         );
       },
     },
@@ -279,12 +276,12 @@ const Console = ({ classes }: IConsoleProps) => {
         const path = window.location.pathname;
         const resource = path.match(/buckets\/(.*)\/browse*/);
         return (
-          resource &&
-          resource.length > 0 &&
-          hasPermission(
-            resource[1],
-            IAM_PAGES_PERMISSIONS[IAM_PAGES.BUCKETS_BROWSE_VIEW]
-          )
+            resource &&
+            resource.length > 0 &&
+            hasPermission(
+                resource[1],
+                IAM_PAGES_PERMISSIONS[IAM_PAGES.BUCKETS_BROWSE_VIEW]
+            )
         );
       },
     },
@@ -298,19 +295,11 @@ const Console = ({ classes }: IConsoleProps) => {
     },
     {
       component: Users,
-      path: IAM_PAGES.USERS_VIEW,
-    },
-    {
-      component: Users,
-      path: IAM_PAGES.USER_ADD,
-    },
-    {
-      component: Users,
       path: IAM_PAGES.USERS,
       fsHidden: ldapIsEnabled,
       customPermissionFnc: () =>
-        hasPermission(CONSOLE_UI_RESOURCE, [IAM_SCOPES.ADMIN_LIST_USERS]) ||
-        hasPermission(S3_ALL_RESOURCES, [IAM_SCOPES.ADMIN_CREATE_USER]),
+          hasPermission(CONSOLE_UI_RESOURCE, [IAM_SCOPES.ADMIN_LIST_USERS]) ||
+          hasPermission(S3_ALL_RESOURCES, [IAM_SCOPES.ADMIN_CREATE_USER]),
     },
     {
       component: Groups,
@@ -363,31 +352,11 @@ const Console = ({ classes }: IConsoleProps) => {
     },
     {
       component: Tools,
-      path: IAM_PAGES.REGISTER_SUPPORT,
-    },
-    {
-      component: Tools,
-      path: IAM_PAGES.CALL_HOME,
-    },
-    {
-      component: Tools,
-      path: IAM_PAGES.TOOLS_WATCH,
-    },
-    {
-      component: Tools,
-      path: IAM_PAGES.PROFILE,
-    },
-    {
-      component: Tools,
-      path: IAM_PAGES.SUPPORT_INSPECT,
+      path: IAM_PAGES.TOOLS,
     },
     {
       component: ConfigurationOptions,
       path: IAM_PAGES.SETTINGS,
-    },
-    {
-      component: ConfigurationOptions,
-      path: IAM_PAGES.SETTINGS_VIEW,
     },
     {
       component: AddNotificationEndpoint,
@@ -436,11 +405,6 @@ const Console = ({ classes }: IConsoleProps) => {
     {
       component: AccountCreate,
       path: IAM_PAGES.ACCOUNT_ADD,
-      forceDisplay: true, // user has implicit access to service-accounts
-    },
-    {
-      component: UserSACreate,
-      path: IAM_PAGES.USER_SA_ACCOUNT_ADD,
       forceDisplay: true, // user has implicit access to service-accounts
     },
     {
@@ -574,17 +538,17 @@ const Console = ({ classes }: IConsoleProps) => {
   ];
 
   const allowedRoutes = (
-    operatorMode ? operatorConsoleRoutes : consoleAdminRoutes
+      operatorMode ? operatorConsoleRoutes : consoleAdminRoutes
   ).filter(
-    (route: any) =>
-      (route.forceDisplay ||
-        (route.customPermissionFnc
-          ? route.customPermissionFnc()
-          : hasPermission(
-              CONSOLE_UI_RESOURCE,
-              IAM_PAGES_PERMISSIONS[route.path]
-            ))) &&
-      !route.fsHidden
+      (route: any) =>
+          (route.forceDisplay ||
+              (route.customPermissionFnc
+                  ? route.customPermissionFnc()
+                  : hasPermission(
+                      CONSOLE_UI_RESOURCE,
+                      IAM_PAGES_PERMISSIONS[route.path]
+                  ))) &&
+          !route.fsHidden
   );
 
   const closeSnackBar = () => {
@@ -613,101 +577,100 @@ const Console = ({ classes }: IConsoleProps) => {
   }
 
   return (
-    <Fragment>
-      {session && session.status === "ok" ? (
-        <div className={classes.root}>
-          <CssBaseline />
-          {!hideMenu && <Menu />}
+      <Fragment>
+        {session && session.status === "ok" ? (
+            <div className={classes.root}>
+              <CssBaseline/>
+              {!hideMenu && <Menu/>}
 
-          <main className={classes.content}>
-            {needsRestart && (
-              <div className={classes.warningBar}>
-                {isServerLoading ? (
-                  <Fragment>
-                    The server is restarting.
-                    <LinearProgress className={classes.progress} />
-                  </Fragment>
-                ) : (
-                  <Fragment>
-                    The instance needs to be restarted for configuration changes
-                    to take effect.{" "}
-                    <Button
-                      color="secondary"
-                      size="small"
-                      onClick={() => {
-                        restartServer();
-                      }}
-                    >
-                      Restart
-                    </Button>
-                  </Fragment>
+              <main className={classes.content}>
+                {needsRestart && (
+                    <div className={classes.warningBar}>
+                      {isServerLoading ? (
+                          <Fragment>
+                            The server is restarting.
+                            <LinearProgress className={classes.progress}/>
+                          </Fragment>
+                      ) : (
+                          <Fragment>
+                            The instance needs to be restarted for configuration changes
+                            to take effect.{" "}
+                            <Button
+                                color="secondary"
+                                size="small"
+                                onClick={() => {
+                                  restartServer();
+                                }}
+                            >
+                              Restart
+                            </Button>
+                          </Fragment>
+                      )}
+                    </div>
                 )}
-              </div>
-            )}
-            {loadingProgress < 100 && (
-              <LinearProgress
-                className={classes.progress}
-                variant="determinate"
-                value={loadingProgress}
-              />
-            )}
-            <MainError />
-            <div className={classes.snackDiv}>
-              <Snackbar
-                open={openSnackbar}
-                onClose={() => {
-                  closeSnackBar();
-                }}
-                autoHideDuration={
-                  snackBarMessage.type === "error" ? 10000 : 5000
-                }
-                message={snackBarMessage.message}
-                className={classes.snackBarExternal}
-                ContentProps={{
-                  className: `${classes.snackBar} ${
-                    snackBarMessage.type === "error"
-                      ? classes.errorSnackBar
-                      : ""
-                  }`,
-                }}
-              />
-            </div>
-            <Suspense fallback={<LoadingComponent />}>
-              <ObjectManager />
-            </Suspense>
-            <Router history={history}>
-              <Switch>
-                {allowedRoutes.map((route: any) => (
-                  <Route
-                    key={route.path}
-                    exact
-                    path={route.path}
-                    children={(routerProps) => (
-                      <Suspense fallback={<LoadingComponent />}>
-                        <route.component {...routerProps} {...route.props} />
-                      </Suspense>
-                    )}
+                {loadingProgress < 100 && (
+                    <LinearProgress
+                        className={classes.progress}
+                        variant="determinate"
+                        value={loadingProgress}
+                    />
+                )}
+                <MainError/>
+                <div className={classes.snackDiv}>
+                  <Snackbar
+                      open={openSnackbar}
+                      onClose={() => {
+                        closeSnackBar();
+                      }}
+                      autoHideDuration={
+                        snackBarMessage.type === "error" ? 10000 : 5000
+                      }
+                      message={snackBarMessage.message}
+                      className={classes.snackBarExternal}
+                      ContentProps={{
+                        className: `${classes.snackBar} ${
+                            snackBarMessage.type === "error"
+                                ? classes.errorSnackBar
+                                : ""
+                        }`,
+                      }}
                   />
-                ))}
-                <Route key={"/icons"} exact path={"/icons"}>
-                  <Suspense fallback={<LoadingComponent />}>
-                    <IconsScreen />
-                  </Suspense>
-                </Route>
-                <Route key={"/components"} exact path={"/components"}>
-                  <Suspense fallback={<LoadingComponent />}>
-                    <ComponentsScreen />
-                  </Suspense>
-                </Route>
-                {allowedRoutes.length > 0 ? (
-                  <Redirect to={allowedRoutes[0].path} />
-                ) : null}
-              </Switch>
-            </Router>
-          </main>
-        </div>
-      ) : null}
-    </Fragment>
+                </div>
+                <Suspense fallback={<LoadingComponent/>}>
+                  <ObjectManager/>
+                </Suspense>
+                <Routes>
+                  {allowedRoutes.map((route: any) => (
+                      <Route
+                          key={route.path}
+                          path={`${route.path}/*`}
+                          element={
+                            <Suspense fallback={<LoadingComponent/>}>
+                              <route.component {...route.props} />
+                            </Suspense>
+                          }
+                      />
+                  ))}
+                  <Route key={"icons"} path={"icons"} element={
+                    <Suspense fallback={<LoadingComponent/>}>
+                      <IconsScreen/>
+                    </Suspense>
+                  }/>
+                  <Route key={"components"} path={"components"} element={
+                    <Suspense fallback={<LoadingComponent/>}>
+                      <ComponentsScreen/>
+                    </Suspense>
+                  }/>
+                  <Route path={"*"} element={<Fragment>
+                    {allowedRoutes.length > 0 ? (
+                        <Navigate to={allowedRoutes[0].path}/>
+                    ) : <Fragment/>}
+                  </Fragment>}/>
+                </Routes>
+              </main>
+            </div>
+        ) : null}
+      </Fragment>
   );
 };
 

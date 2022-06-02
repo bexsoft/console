@@ -14,25 +14,25 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import ModalWrapper from "../../../../Common/ModalWrapper/ModalWrapper";
-import { Button, Grid } from "@mui/material";
+import {Button, Grid} from "@mui/material";
 import InputBoxWrapper from "../../../../Common/FormComponents/InputBoxWrapper/InputBoxWrapper";
-import { Theme } from "@mui/material/styles";
+import {Theme} from "@mui/material/styles";
 import createStyles from "@mui/styles/createStyles";
 import withStyles from "@mui/styles/withStyles";
 import {
   formFieldStyles,
   modalStyleUtils,
 } from "../../../../Common/FormComponents/common/styleLibrary";
-import { connect, useDispatch } from "react-redux";
-import history from "../../../../../../history";
-import { encodeURLString } from "../../../../../../common/utils";
+import {connect, useDispatch} from "react-redux";
+import {encodeURLString} from "../../../../../../common/utils";
 
-import { BucketObjectItem } from "./types";
-import { CreateNewPathIcon } from "../../../../../../icons";
-import { AppState } from "../../../../../../store";
-import { setModalErrorSnackMessage } from "../../../../../../systemSlice";
+import {BucketObjectItem} from "./types";
+import {CreateNewPathIcon} from "../../../../../../icons";
+import {AppState} from "../../../../../../store";
+import {setModalErrorSnackMessage} from "../../../../../../systemSlice";
 
 interface ICreatePath {
   classes: any;
@@ -45,21 +45,23 @@ interface ICreatePath {
 }
 
 const styles = (theme: Theme) =>
-  createStyles({
-    ...modalStyleUtils,
-    ...formFieldStyles,
-  });
+    createStyles({
+      ...modalStyleUtils,
+      ...formFieldStyles,
+    });
 
 const CreatePathModal = ({
-  modalOpen,
-  folderName,
-  bucketName,
-  onClose,
-  classes,
-  existingFiles,
-  simplePath,
-}: ICreatePath) => {
+                           modalOpen,
+                           folderName,
+                           bucketName,
+                           onClose,
+                           classes,
+                           existingFiles,
+                           simplePath,
+                         }: ICreatePath) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [pathUrl, setPathUrl] = useState("");
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [currentPath, setCurrentPath] = useState(bucketName);
@@ -67,7 +69,7 @@ const CreatePathModal = ({
   useEffect(() => {
     if (simplePath) {
       const newPath = `${bucketName}${
-        !bucketName.endsWith("/") && !simplePath.startsWith("/") ? "/" : ""
+          !bucketName.endsWith("/") && !simplePath.startsWith("/") ? "/" : ""
       }${simplePath}`;
 
       setCurrentPath(newPath);
@@ -86,27 +88,27 @@ const CreatePathModal = ({
     }
 
     const sharesName = (record: BucketObjectItem) =>
-      record.name === folderPath + pathUrl;
+        record.name === folderPath + pathUrl;
 
     if (existingFiles.findIndex(sharesName) !== -1) {
       dispatch(
-        setModalErrorSnackMessage({
-          errorMessage: "Folder cannot have the same name as an existing file",
-          detailedError: "",
-        })
+          setModalErrorSnackMessage({
+            errorMessage: "Folder cannot have the same name as an existing file",
+            detailedError: "",
+          })
       );
       return;
     }
 
     const cleanPathURL = pathUrl
-      .split("/")
-      .filter((splitItem) => splitItem.trim() !== "")
-      .join("/");
+        .split("/")
+        .filter((splitItem) => splitItem.trim() !== "")
+        .join("/");
 
     const newPath = `/buckets/${bucketName}/browse/${encodeURLString(
-      `${folderPath}${cleanPathURL}/`
+        `${folderPath}${cleanPathURL}/`
     )}`;
-    history.push(newPath);
+    navigate(newPath);
     onClose();
   };
 
@@ -129,67 +131,67 @@ const CreatePathModal = ({
   };
 
   return (
-    <React.Fragment>
-      <ModalWrapper
-        modalOpen={modalOpen}
-        title="Choose or create a new path"
-        onClose={onClose}
-        titleIcon={<CreateNewPathIcon />}
-      >
-        <Grid container>
-          <Grid item xs={12} className={classes.formFieldRow}>
-            <strong>Current Path:</strong> <br />
-            <div
-              style={{
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                fontSize: 14,
-                textAlign: "left",
-              }}
-              dir={"rtl"}
-            >
-              {currentPath}
-            </div>
+      <React.Fragment>
+        <ModalWrapper
+            modalOpen={modalOpen}
+            title="Choose or create a new path"
+            onClose={onClose}
+            titleIcon={<CreateNewPathIcon/>}
+        >
+          <Grid container>
+            <Grid item xs={12} className={classes.formFieldRow}>
+              <strong>Current Path:</strong> <br/>
+              <div
+                  style={{
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    fontSize: 14,
+                    textAlign: "left",
+                  }}
+                  dir={"rtl"}
+              >
+                {currentPath}
+              </div>
+            </Grid>
+            <Grid item xs={12} className={classes.formFieldRow}>
+              <InputBoxWrapper
+                  value={pathUrl}
+                  label={"New Folder Path"}
+                  id={"folderPath"}
+                  name={"folderPath"}
+                  placeholder={"Enter the new Folder Path"}
+                  onChange={inputChange}
+                  onKeyPress={keyPressed}
+                  required
+              />
+            </Grid>
+            <Grid item xs={12} className={classes.modalButtonBar}>
+              <Button
+                  type="button"
+                  color="primary"
+                  variant="outlined"
+                  onClick={resetForm}
+              >
+                Clear
+              </Button>
+              <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={!isFormValid}
+                  onClick={createProcess}
+              >
+                Create
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item xs={12} className={classes.formFieldRow}>
-            <InputBoxWrapper
-              value={pathUrl}
-              label={"New Folder Path"}
-              id={"folderPath"}
-              name={"folderPath"}
-              placeholder={"Enter the new Folder Path"}
-              onChange={inputChange}
-              onKeyPress={keyPressed}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} className={classes.modalButtonBar}>
-            <Button
-              type="button"
-              color="primary"
-              variant="outlined"
-              onClick={resetForm}
-            >
-              Clear
-            </Button>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              disabled={!isFormValid}
-              onClick={createProcess}
-            >
-              Create
-            </Button>
-          </Grid>
-        </Grid>
-      </ModalWrapper>
-    </React.Fragment>
+        </ModalWrapper>
+      </React.Fragment>
   );
 };
 
-const mapStateToProps = ({ objectBrowser }: AppState) => ({
+const mapStateToProps = ({objectBrowser}: AppState) => ({
   simplePath: objectBrowser.simplePath,
 });
 

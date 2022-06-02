@@ -15,18 +15,16 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from "react";
+import {useLocation} from "react-router-dom";
 import get from "lodash/get";
 import Grid from "@mui/material/Grid";
 import { configurationElements } from "../utils";
 import EditConfiguration from "../../NotificationEndpoints/CustomForms/EditConfiguration";
 
-interface IConfigurationForm {
-  match: any;
-  history: any;
-}
+const ConfigurationsList = () => {
+  const location = useLocation();
 
-const ConfigurationsList = ({ match, history }: IConfigurationForm) => {
-  const activeConfRoute = get(match, "url", "");
+  const activeConfRoute = get(location, "pathname", "");
 
   const configName = activeConfRoute.substring(
     activeConfRoute.lastIndexOf("/") + 1
@@ -55,7 +53,6 @@ const ConfigurationsList = ({ match, history }: IConfigurationForm) => {
         <EditConfiguration
           className={`${containerClassName}`}
           selectedConfiguration={validActiveConfig}
-          history={history}
         />
       )}
     </Grid>

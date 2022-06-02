@@ -14,277 +14,279 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import React, { Fragment, useEffect, useState } from "react";
+import React, {Fragment, useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {Box, DialogContentText, Grid} from "@mui/material";
 import PageHeader from "../../Common/PageHeader/PageHeader";
 import PageLayout from "../../Common/Layout/PageLayout";
-import { Box, DialogContentText, Grid } from "@mui/material";
 import useApi from "../../Common/Hooks/useApi";
 import ReplicationSites from "./ReplicationSites";
 import TrashIcon from "../../../../icons/TrashIcon";
 import RBIconButton from "../../Buckets/BucketDetails/SummaryItems/RBIconButton";
 import Loader from "../../Common/Loader/Loader";
 import {
-  AddIcon,
-  ClustersIcon,
-  ConfirmDeleteIcon,
-  RecoverIcon,
+    AddIcon,
+    ClustersIcon,
+    ConfirmDeleteIcon,
+    RecoverIcon,
 } from "../../../../icons";
-import { useDispatch } from "react-redux";
-import { ErrorResponseHandler } from "../../../../common/types";
+import {ErrorResponseHandler} from "../../../../common/types";
 import HelpBox from "../../../../common/HelpBox";
 import ConfirmDialog from "../../Common/ModalWrapper/ConfirmDialog";
-import history from "../../../../history";
-import { IAM_PAGES } from "../../../../common/SecureComponent/permissions";
+import {IAM_PAGES} from "../../../../common/SecureComponent/permissions";
 import {
-  setErrorSnackMessage,
-  setSnackBarMessage,
+    setErrorSnackMessage,
+    setSnackBarMessage,
 } from "../../../../systemSlice";
 import AButton from "../../Common/AButton/AButton";
 
 export type ReplicationSite = {
-  deploymentID: string;
-  endpoint: string;
-  name: string;
-  isCurrent?: boolean;
+    deploymentID: string;
+    endpoint: string;
+    name: string;
+    isCurrent?: boolean;
 };
 
 const SiteReplication = () => {
-  const dispatch = useDispatch();
-  const [sites, setSites] = useState([]);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-  const [deleteAll, setIsDeleteAll] = useState(false);
-  const [isSiteInfoLoading, invokeSiteInfoApi] = useApi(
-    (res: any) => {
-      const { sites: siteList, name: curSiteName } = res;
-      // current site name to be the fist one.
-      const foundIdx = siteList.findIndex((el: any) => el.name === curSiteName);
-      if (foundIdx !== -1) {
-        let curSite = siteList[foundIdx];
-        curSite = {
-          ...curSite,
-          isCurrent: true,
-        };
-        siteList.splice(foundIdx, 1, curSite);
-      }
+    const [sites, setSites] = useState([]);
 
-      siteList.sort((x: any, y: any) => {
-        return x.name === curSiteName ? -1 : y.name === curSiteName ? 1 : 0;
-      });
-      setSites(siteList);
-    },
-    (err: any) => {
-      setSites([]);
-    }
-  );
+    const [deleteAll, setIsDeleteAll] = useState(false);
+    const [isSiteInfoLoading, invokeSiteInfoApi] = useApi(
+        (res: any) => {
+            const {sites: siteList, name: curSiteName} = res;
+            // current site name to be the fist one.
+            const foundIdx = siteList.findIndex((el: any) => el.name === curSiteName);
+            if (foundIdx !== -1) {
+                let curSite = siteList[foundIdx];
+                curSite = {
+                    ...curSite,
+                    isCurrent: true,
+                };
+                siteList.splice(foundIdx, 1, curSite);
+            }
 
-  const getSites = () => {
-    invokeSiteInfoApi("GET", `api/v1/admin/site-replication`);
-  };
+            siteList.sort((x: any, y: any) => {
+                return x.name === curSiteName ? -1 : y.name === curSiteName ? 1 : 0;
+            });
+            setSites(siteList);
+        },
+        (err: any) => {
+            setSites([]);
+        }
+    );
 
-  const [isRemoving, invokeSiteRemoveApi] = useApi(
-    (res: any) => {
-      setIsDeleteAll(false);
-      dispatch(setSnackBarMessage(`Successfully deleted.`));
-      getSites();
-    },
-    (err: ErrorResponseHandler) => {
-      dispatch(setErrorSnackMessage(err));
-    }
-  );
+    const getSites = () => {
+        invokeSiteInfoApi("GET", `api/v1/admin/site-replication`);
+    };
 
-  const removeSites = (isAll: boolean = false, delSites: string[] = []) => {
-    invokeSiteRemoveApi("DELETE", `api/v1/admin/site-replication`, {
-      all: isAll,
-      sites: delSites,
-    });
-  };
+    const [isRemoving, invokeSiteRemoveApi] = useApi(
+        (res: any) => {
+            setIsDeleteAll(false);
+            dispatch(setSnackBarMessage(`Successfully deleted.`));
+            getSites();
+        },
+        (err: ErrorResponseHandler) => {
+            dispatch(setErrorSnackMessage(err));
+        }
+    );
 
-  useEffect(() => {
-    getSites();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const removeSites = (isAll: boolean = false, delSites: string[] = []) => {
+        invokeSiteRemoveApi("DELETE", `api/v1/admin/site-replication`, {
+            all: isAll,
+            sites: delSites,
+        });
+    };
 
-  const hasSites = sites?.length;
+    useEffect(() => {
+        getSites();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-  return (
-    <Fragment>
-      <PageHeader label={"Site Replication"} />
-      <PageLayout>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-          }}
-        >
-          {hasSites ? (
-            <Box>
-              <RBIconButton
-                tooltip={"Delete All"}
-                text={"Delete All"}
-                variant="outlined"
-                color="secondary"
-                disabled={isRemoving}
-                icon={<TrashIcon />}
-                onClick={() => {
-                  setIsDeleteAll(true);
-                }}
-              />
-              <RBIconButton
-                tooltip={"Replication Status"}
-                text={"Replication Status"}
-                variant="outlined"
-                color="primary"
-                icon={<RecoverIcon />}
-                onClick={(e) => {
-                  e.preventDefault();
-                  history.push(IAM_PAGES.SITE_REPLICATION_STATUS);
-                }}
-              />
-            </Box>
-          ) : null}
-          <RBIconButton
-            tooltip={"Add Replication Sites"}
-            text={"Add Sites"}
-            variant="contained"
-            color="primary"
-            disabled={isRemoving}
-            icon={<AddIcon />}
-            onClick={() => {
-              history.push(IAM_PAGES.SITE_REPLICATION_ADD);
-            }}
-          />
-        </Box>
-        {hasSites ? (
-          <ReplicationSites
-            sites={sites}
-            onDeleteSite={removeSites}
-            onRefresh={getSites}
-          />
-        ) : null}
-        {isSiteInfoLoading ? (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "calc( 100vh - 450px )",
-            }}
-          >
-            <Loader style={{ width: 16, height: 16 }} />
-          </Box>
-        ) : null}
-        {!hasSites && !isSiteInfoLoading ? (
-          <Grid
-            container
-            justifyContent={"center"}
-            alignContent={"center"}
-            alignItems={"center"}
-          >
-            <Grid item xs={8}>
-              <HelpBox
-                title={"Site Replication"}
-                iconComponent={<ClustersIcon />}
-                help={
-                  <Fragment>
-                    This feature allows multiple independent MinIO sites (or
-                    clusters) that are using the same external IDentity Provider
-                    (IDP) to be configured as replicas.
-                    <br />
-                    <br />
-                    To get started,{" "}
-                    <AButton
-                      onClick={() => {
-                        history.push(IAM_PAGES.SITE_REPLICATION_ADD);
-                      }}
-                    >
-                      Add a Replication Site
-                    </AButton>
-                    .
-                    <br />
-                    You can learn more at our{" "}
-                    <a
-                      href="https://github.com/minio/minio/tree/master/docs/site-replication?ref=con"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      documentation
-                    </a>
-                    .
-                  </Fragment>
-                }
-              />
-            </Grid>
-          </Grid>
-        ) : null}
-        {hasSites && !isSiteInfoLoading ? (
-          <HelpBox
-            title={"Site Replication"}
-            iconComponent={<ClustersIcon />}
-            help={
-              <Fragment>
-                This feature allows multiple independent MinIO sites (or
-                clusters) that are using the same external IDentity Provider
-                (IDP) to be configured as replicas. In this situation the set of
-                replica sites are referred to as peer sites or just sites.
-                <br />
-                <br />
-                Initially, only one of the sites added for replication may have
-                data. After site-replication is successfully configured, this
-                data is replicated to the other (initially empty) sites.
-                Subsequently, objects may be written to any of the sites, and
-                they will be replicated to all other sites.
-                <br />
-                <br />
-                All sites must have the same deployment credentials (i.e.
-                MINIO_ROOT_USER, MINIO_ROOT_PASSWORD).
-                <br />
-                <br />
-                All sites must be using the same external IDP(s) if any.
-                <br />
-                <br />
-                For SSE-S3 or SSE-KMS encryption via KMS, all sites must have
-                access to a central KMS deployment server.
-                <br />
-                <br />
-                You can learn more at our{" "}
-                <a
-                  href="https://github.com/minio/minio/tree/master/docs/site-replication?ref=con"
-                  target="_blank"
-                  rel="noreferrer"
+    const hasSites = sites?.length;
+
+    return (
+        <Fragment>
+            <PageHeader label={"Site Replication"}/>
+            <PageLayout>
+                <Box
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "flex-end",
+                    }}
                 >
-                  documentation
-                </a>
-                .
-              </Fragment>
-            }
-          />
-        ) : null}
+                    {hasSites ? (
+                        <Box>
+                            <RBIconButton
+                                tooltip={"Delete All"}
+                                text={"Delete All"}
+                                variant="outlined"
+                                color="secondary"
+                                disabled={isRemoving}
+                                icon={<TrashIcon/>}
+                                onClick={() => {
+                                    setIsDeleteAll(true);
+                                }}
+                            />
+                            <RBIconButton
+                                tooltip={"Replication Status"}
+                                text={"Replication Status"}
+                                variant="outlined"
+                                color="primary"
+                                icon={<RecoverIcon/>}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    navigate(IAM_PAGES.SITE_REPLICATION_STATUS);
+                                }}
+                            />
+                        </Box>
+                    ) : null}
+                    <RBIconButton
+                        tooltip={"Add Replication Sites"}
+                        text={"Add Sites"}
+                        variant="contained"
+                        color="primary"
+                        disabled={isRemoving}
+                        icon={<AddIcon/>}
+                        onClick={() => {
+                            navigate(IAM_PAGES.SITE_REPLICATION_ADD);
+                        }}
+                    />
+                </Box>
+                {hasSites ? (
+                    <ReplicationSites
+                        sites={sites}
+                        onDeleteSite={removeSites}
+                        onRefresh={getSites}
+                    />
+                ) : null}
+                {isSiteInfoLoading ? (
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            height: "calc( 100vh - 450px )",
+                        }}
+                    >
+                        <Loader style={{width: 16, height: 16}}/>
+                    </Box>
+                ) : null}
+                {!hasSites && !isSiteInfoLoading ? (
+                    <Grid
+                        container
+                        justifyContent={"center"}
+                        alignContent={"center"}
+                        alignItems={"center"}
+                    >
+                        <Grid item xs={8}>
+                            <HelpBox
+                                title={"Site Replication"}
+                                iconComponent={<ClustersIcon/>}
+                                help={
+                                    <Fragment>
+                                        This feature allows multiple independent MinIO sites (or
+                                        clusters) that are using the same external IDentity Provider
+                                        (IDP) to be configured as replicas.
+                                        <br/>
+                                        <br/>
+                                        To get started,{" "}
+                                        <AButton
+                                            onClick={() => {
+                                                navigate(IAM_PAGES.SITE_REPLICATION_ADD);
+                                            }}
+                                        >
+                                            Add a Replication Site
+                                        </AButton>
+                                        .
+                                        <br/>
+                                        You can learn more at our{" "}
+                                        <a
+                                            href="https://github.com/minio/minio/tree/master/docs/site-replication?ref=con"
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            documentation
+                                        </a>
+                                        .
+                                    </Fragment>
+                                }
+                            />
+                        </Grid>
+                    </Grid>
+                ) : null}
+                {hasSites && !isSiteInfoLoading ? (
+                    <HelpBox
+                        title={"Site Replication"}
+                        iconComponent={<ClustersIcon/>}
+                        help={
+                            <Fragment>
+                                This feature allows multiple independent MinIO sites (or
+                                clusters) that are using the same external IDentity Provider
+                                (IDP) to be configured as replicas. In this situation the set of
+                                replica sites are referred to as peer sites or just sites.
+                                <br/>
+                                <br/>
+                                Initially, only one of the sites added for replication may have
+                                data. After site-replication is successfully configured, this
+                                data is replicated to the other (initially empty) sites.
+                                Subsequently, objects may be written to any of the sites, and
+                                they will be replicated to all other sites.
+                                <br/>
+                                <br/>
+                                All sites must have the same deployment credentials (i.e.
+                                MINIO_ROOT_USER, MINIO_ROOT_PASSWORD).
+                                <br/>
+                                <br/>
+                                All sites must be using the same external IDP(s) if any.
+                                <br/>
+                                <br/>
+                                For SSE-S3 or SSE-KMS encryption via KMS, all sites must have
+                                access to a central KMS deployment server.
+                                <br/>
+                                <br/>
+                                You can learn more at our{" "}
+                                <a
+                                    href="https://github.com/minio/minio/tree/master/docs/site-replication?ref=con"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    documentation
+                                </a>
+                                .
+                            </Fragment>
+                        }
+                    />
+                ) : null}
 
-        {deleteAll ? (
-          <ConfirmDialog
-            title={`Delete All`}
-            confirmText={"Delete"}
-            isOpen={true}
-            titleIcon={<ConfirmDeleteIcon />}
-            isLoading={false}
-            onConfirm={() => {
-              const siteNames = sites.map((s: any) => s.name);
-              removeSites(true, siteNames);
-            }}
-            onClose={() => {
-              setIsDeleteAll(false);
-            }}
-            confirmationContent={
-              <DialogContentText>
-                Are you sure you want to remove all the replication sites?.
-              </DialogContentText>
-            }
-          />
-        ) : null}
-      </PageLayout>
-    </Fragment>
-  );
+                {deleteAll ? (
+                    <ConfirmDialog
+                        title={`Delete All`}
+                        confirmText={"Delete"}
+                        isOpen={true}
+                        titleIcon={<ConfirmDeleteIcon/>}
+                        isLoading={false}
+                        onConfirm={() => {
+                            const siteNames = sites.map((s: any) => s.name);
+                            removeSites(true, siteNames);
+                        }}
+                        onClose={() => {
+                            setIsDeleteAll(false);
+                        }}
+                        confirmationContent={
+                            <DialogContentText>
+                                Are you sure you want to remove all the replication sites?.
+                            </DialogContentText>
+                        }
+                    />
+                ) : null}
+            </PageLayout>
+        </Fragment>
+    );
 };
 
 export default SiteReplication;

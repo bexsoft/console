@@ -16,7 +16,7 @@
 
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Redirect, Route, Router, Switch } from "react-router-dom";
+import {Link, Navigate, Route, Routes, useNavigate, useParams} from "react-router-dom";
 import { Theme } from "@mui/material/styles";
 import createStyles from "@mui/styles/createStyles";
 import withStyles from "@mui/styles/withStyles";
@@ -56,136 +56,136 @@ const TenantLogging = withSuspense(React.lazy(() => import("./TenantLogging")));
 const TenantEvents = withSuspense(React.lazy(() => import("./TenantEvents")));
 const TenantCSR = withSuspense(React.lazy(() => import("./TenantCSR")));
 const VolumesSummary = withSuspense(
-  React.lazy(() => import("./VolumesSummary"))
+    React.lazy(() => import("./VolumesSummary"))
 );
 const TenantMetrics = withSuspense(React.lazy(() => import("./TenantMetrics")));
 const TenantTrace = withSuspense(React.lazy(() => import("./TenantTrace")));
 const TenantVolumes = withSuspense(
-  React.lazy(() => import("./pvcs/TenantVolumes"))
+    React.lazy(() => import("./pvcs/TenantVolumes"))
 );
 const TenantIdentityProvider = withSuspense(
-  React.lazy(() => import("./TenantIdentityProvider"))
+    React.lazy(() => import("./TenantIdentityProvider"))
 );
 const TenantSecurity = withSuspense(
-  React.lazy(() => import("./TenantSecurity"))
+    React.lazy(() => import("./TenantSecurity"))
 );
 const TenantEncryption = withSuspense(
-  React.lazy(() => import("./TenantEncryption"))
+    React.lazy(() => import("./TenantEncryption"))
 );
 const DeleteTenant = withSuspense(
-  React.lazy(() => import("../ListTenants/DeleteTenant"))
+    React.lazy(() => import("../ListTenants/DeleteTenant"))
 );
 const PodDetails = withSuspense(React.lazy(() => import("./pods/PodDetails")));
 const TenantMonitoring = withSuspense(
-  React.lazy(() => import("./TenantMonitoring"))
+    React.lazy(() => import("./TenantMonitoring"))
 );
 
 interface ITenantDetailsProps {
   classes: any;
-  match: any;
-  history: any;
 }
 
 const styles = (theme: Theme) =>
-  createStyles({
-    ...tenantDetailsStyles,
-    pageContainer: {
-      border: "1px solid #EAEAEA",
-      width: "100%",
-      height: "100%",
-    },
-    contentSpacer: {
-      ...pageContentStyles.contentSpacer,
-      minHeight: 400,
-    },
-    redState: {
-      color: theme.palette.error.main,
-      "& .min-icon": {
-        width: 16,
-        height: 16,
+    createStyles({
+      ...tenantDetailsStyles,
+      pageContainer: {
+        border: "1px solid #EAEAEA",
+        width: "100%",
+        height: "100%",
       },
-    },
-    yellowState: {
-      color: theme.palette.warning.main,
-      "& .min-icon": {
-        width: 16,
-        height: 16,
+      contentSpacer: {
+        ...pageContentStyles.contentSpacer,
+        minHeight: 400,
       },
-    },
-    greenState: {
-      color: theme.palette.success.main,
-      "& .min-icon": {
-        width: 16,
-        height: 16,
-      },
-    },
-    greyState: {
-      color: "grey",
-      "& .min-icon": {
-        width: 16,
-        height: 16,
-      },
-    },
-    healthStatusIcon: {
-      position: "relative",
-      fontSize: 10,
-      left: 26,
-      height: 10,
-      top: 4,
-    },
-    ...containerForHeader(theme.spacing(4)),
-    tenantActionButton: {
-      "& span": {
-        fontSize: 14,
-        "@media (max-width: 900px)": {
-          display: "none",
-        },
-      },
-      "& .min-icon": {
-        width: 12,
-        marginLeft: 5,
-
-        "@media (max-width: 900px)": {
+      redState: {
+        color: theme.palette.error.main,
+        "& .min-icon": {
           width: 16,
-          marginLeft: 0,
+          height: 16,
         },
       },
-    },
-    deleteBtn: {
-      color: "#f44336",
-      border: "1px solid rgba(244, 67, 54, 0.5)",
-    },
-  });
+      yellowState: {
+        color: theme.palette.warning.main,
+        "& .min-icon": {
+          width: 16,
+          height: 16,
+        },
+      },
+      greenState: {
+        color: theme.palette.success.main,
+        "& .min-icon": {
+          width: 16,
+          height: 16,
+        },
+      },
+      greyState: {
+        color: "grey",
+        "& .min-icon": {
+          width: 16,
+          height: 16,
+        },
+      },
+      healthStatusIcon: {
+        position: "relative",
+        fontSize: 10,
+        left: 26,
+        height: 10,
+        top: 4,
+      },
+      ...containerForHeader(theme.spacing(4)),
+      tenantActionButton: {
+        "& span": {
+          fontSize: 14,
+          "@media (max-width: 900px)": {
+            display: "none",
+          },
+        },
+        "& .min-icon": {
+          width: 12,
+          marginLeft: 5,
 
-const TenantDetails = ({ classes, match, history }: ITenantDetailsProps) => {
+          "@media (max-width: 900px)": {
+            width: 16,
+            marginLeft: 0,
+          },
+        },
+      },
+      deleteBtn: {
+        color: "#f44336",
+        border: "1px solid rgba(244, 67, 54, 0.5)",
+      },
+    });
+
+const TenantDetails = ({ classes }: ITenantDetailsProps) => {
   const dispatch = useDispatch();
+  const params = useParams();
+  const navigate = useNavigate();
 
   const loadingTenant = useSelector(
-    (state: AppState) => state.tenants.loadingTenant
+      (state: AppState) => state.tenants.loadingTenant
   );
   const selectedTenant = useSelector(
-    (state: AppState) => state.tenants.currentTenant
+      (state: AppState) => state.tenants.currentTenant
   );
   const selectedNamespace = useSelector(
-    (state: AppState) => state.tenants.currentNamespace
+      (state: AppState) => state.tenants.currentNamespace
   );
   const tenantInfo = useSelector((state: AppState) => state.tenants.tenantInfo);
 
-  const tenantName = match.params["tenantName"];
-  const tenantNamespace = match.params["tenantNamespace"];
+  const tenantName = params.tenantName || "";
+  const tenantNamespace = params.tenantNamespace || "";
   const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
 
   // if the current tenant selected is not the one in the redux, reload it
   useEffect(() => {
     if (
-      selectedNamespace !== tenantNamespace ||
-      selectedTenant !== tenantName
+        selectedNamespace !== tenantNamespace ||
+        selectedTenant !== tenantName
     ) {
       dispatch(
-        setTenantName({
-          name: tenantName,
-          namespace: tenantNamespace,
-        })
+          setTenantName({
+            name: tenantName,
+            namespace: tenantNamespace,
+          })
       );
       dispatch(getTenantAsync());
     }
@@ -197,7 +197,8 @@ const TenantDetails = ({ classes, match, history }: ITenantDetailsProps) => {
     tenantNamespace,
   ]);
 
-  const path = get(match, "path", "/");
+  // TODO: Review this
+  const path = get(params, "path", "/");
   const splitSections = path.split("/");
 
   let highlightedTab = splitSections[splitSections.length - 1] || "summary";
@@ -212,7 +213,7 @@ const TenantDetails = ({ classes, match, history }: ITenantDetailsProps) => {
   }, [highlightedTab]);
 
   const editYaml = () => {
-    history.push(`${getRoutePath("summary")}/yaml`);
+    navigate(`${getRoutePath("summary")}/yaml`);
   };
 
   const getRoutePath = (newValue: string) => {
@@ -228,337 +229,335 @@ const TenantDetails = ({ classes, match, history }: ITenantDetailsProps) => {
 
     if (reloadData) {
       dispatch(setSnackBarMessage("Tenant Deleted"));
-      history.push(`/tenants`);
+      navigate(`/tenants`);
     }
   };
 
   const healthStatusToClass = (health_status: string) => {
     return health_status === "red"
-      ? classes.redState
-      : health_status === "yellow"
-      ? classes.yellowState
-      : health_status === "green"
-      ? classes.greenState
-      : classes.greyState;
+        ? classes.redState
+        : health_status === "yellow"
+            ? classes.yellowState
+            : health_status === "green"
+                ? classes.greenState
+                : classes.greyState;
   };
 
   return (
-    <Fragment>
-      {deleteOpen && tenantInfo !== null && (
-        <DeleteTenant
-          deleteOpen={deleteOpen}
-          selectedTenant={tenantInfo}
-          closeDeleteModalAndRefresh={closeDeleteModalAndRefresh}
-        />
-      )}
-
-      <PageHeader
-        label={
-          <Fragment>
-            <BackLink to={IAM_PAGES.TENANTS} label="Tenants" />
-          </Fragment>
-        }
-        actions={<React.Fragment />}
-      />
-
-      <PageLayout className={classes.pageContainer}>
-        {loadingTenant && (
-          <Grid item xs={12}>
-            <LinearProgress />
-          </Grid>
+      <Fragment>
+        {deleteOpen && tenantInfo !== null && (
+            <DeleteTenant
+                deleteOpen={deleteOpen}
+                selectedTenant={tenantInfo}
+                closeDeleteModalAndRefresh={closeDeleteModalAndRefresh}
+            />
         )}
-        <Grid item xs={12}>
-          <ScreenTitle
-            icon={
+
+        <PageHeader
+            label={
               <Fragment>
-                <div className={classes.healthStatusIcon}>
-                  {tenantInfo && tenantInfo.status && (
-                    <span
-                      className={healthStatusToClass(
-                        tenantInfo.status.health_status
-                      )}
-                    >
+                <BackLink to={IAM_PAGES.TENANTS} label="Tenants" />
+              </Fragment>
+            }
+            actions={<React.Fragment />}
+        />
+
+        <PageLayout className={classes.pageContainer}>
+          {loadingTenant && (
+              <Grid item xs={12}>
+                <LinearProgress />
+              </Grid>
+          )}
+          <Grid item xs={12}>
+            <ScreenTitle
+                icon={
+                  <Fragment>
+                    <div className={classes.healthStatusIcon}>
+                      {tenantInfo && tenantInfo.status && (
+                          <span
+                              className={healthStatusToClass(
+                                  tenantInfo.status.health_status
+                              )}
+                          >
                       <CircleIcon />
                     </span>
-                  )}
-                </div>
-                <TenantsIcon />
-              </Fragment>
-            }
-            title={match.params["tenantName"]}
-            subTitle={
-              <Fragment>
-                Namespace: {tenantNamespace} / Capacity:{" "}
-                {niceBytes((tenantInfo?.total_size || 0).toString(10))}
-              </Fragment>
-            }
-            actions={
-              <div>
-                <BoxIconButton
-                  id={"delete-tenant"}
-                  tooltip={"Delete"}
-                  variant="outlined"
-                  aria-label="Delete"
-                  onClick={() => {
-                    confirmDeleteTenant();
-                  }}
-                  color="secondary"
-                  classes={{
-                    root: `${classes.tenantActionButton} ${classes.deleteBtn}`,
-                  }}
-                  size="large"
-                >
-                  <span>Delete</span> <TrashIcon />
-                </BoxIconButton>
-                <BoxIconButton
-                  classes={{
-                    root: classes.tenantActionButton,
-                  }}
-                  tooltip={"Edit YAML"}
-                  color="primary"
-                  variant="outlined"
-                  aria-label="Edit YAML"
-                  onClick={() => {
-                    editYaml();
-                  }}
-                  size="large"
-                >
-                  <span>YAML</span>
-                  <EditIcon />
-                </BoxIconButton>
-                <BoxIconButton
-                  classes={{
-                    root: classes.tenantActionButton,
-                  }}
-                  tooltip={"Management Console"}
-                  onClick={() => {
-                    history.push(
-                      `/namespaces/${tenantNamespace}/tenants/${tenantName}/hop`
-                    );
-                  }}
-                  disabled={!tenantInfo || !tenantIsOnline(tenantInfo)}
-                  variant={"outlined"}
-                  color="primary"
-                >
-                  <span>Console</span>{" "}
-                  <MinIOTierIconXs style={{ height: 16 }} />
-                </BoxIconButton>
-                <BoxIconButton
-                  classes={{
-                    root: classes.tenantActionButton,
-                  }}
-                  tooltip={"Refresh"}
-                  color="primary"
-                  variant="outlined"
-                  aria-label="Refresh List"
-                  onClick={() => {
-                    dispatch(getTenantAsync());
-                  }}
-                >
-                  <span>Refresh</span> <RefreshIcon />
-                </BoxIconButton>
-              </div>
-            }
-          />
-        </Grid>
+                      )}
+                    </div>
+                    <TenantsIcon />
+                  </Fragment>
+                }
+                title={tenantName}
+                subTitle={
+                  <Fragment>
+                    Namespace: {tenantNamespace} / Capacity:{" "}
+                    {niceBytes((tenantInfo?.total_size || 0).toString(10))}
+                  </Fragment>
+                }
+                actions={
+                  <div>
+                    <BoxIconButton
+                        id={"delete-tenant"}
+                        tooltip={"Delete"}
+                        variant="outlined"
+                        aria-label="Delete"
+                        onClick={() => {
+                          confirmDeleteTenant();
+                        }}
+                        color="secondary"
+                        classes={{
+                          root: `${classes.tenantActionButton} ${classes.deleteBtn}`,
+                        }}
+                        size="large"
+                    >
+                      <span>Delete</span> <TrashIcon />
+                    </BoxIconButton>
+                    <BoxIconButton
+                        classes={{
+                          root: classes.tenantActionButton,
+                        }}
+                        tooltip={"Edit YAML"}
+                        color="primary"
+                        variant="outlined"
+                        aria-label="Edit YAML"
+                        onClick={() => {
+                          editYaml();
+                        }}
+                        size="large"
+                    >
+                      <span>YAML</span>
+                      <EditIcon />
+                    </BoxIconButton>
+                    <BoxIconButton
+                        classes={{
+                          root: classes.tenantActionButton,
+                        }}
+                        tooltip={"Management Console"}
+                        onClick={() => {
+                          navigate(
+                              `/namespaces/${tenantNamespace}/tenants/${tenantName}/hop`
+                          );
+                        }}
+                        disabled={!tenantInfo || !tenantIsOnline(tenantInfo)}
+                        variant={"outlined"}
+                        color="primary"
+                    >
+                      <span>Console</span>{" "}
+                      <MinIOTierIconXs style={{ height: 16 }} />
+                    </BoxIconButton>
+                    <BoxIconButton
+                        classes={{
+                          root: classes.tenantActionButton,
+                        }}
+                        tooltip={"Refresh"}
+                        color="primary"
+                        variant="outlined"
+                        aria-label="Refresh List"
+                        onClick={() => {
+                          dispatch(getTenantAsync());
+                        }}
+                    >
+                      <span>Refresh</span> <RefreshIcon />
+                    </BoxIconButton>
+                  </div>
+                }
+            />
+          </Grid>
 
-        <VerticalTabs
-          selectedTab={activeTab}
-          isRouteTabs
-          routes={
-            <div className={classes.contentSpacer}>
-              <Router history={history}>
-                <Switch>
-                  <Route
-                    path={`${IAM_PAGES.NAMESPACE_TENANT_SUMMARY}/yaml`}
-                    component={TenantYAML}
-                  />
-                  <Route
-                    path={IAM_PAGES.NAMESPACE_TENANT_SUMMARY}
-                    component={TenantSummary}
-                  />
-                  <Route
-                    path={IAM_PAGES.NAMESPACE_TENANT_METRICS}
-                    component={TenantMetrics}
-                  />
-                  <Route
-                    path={IAM_PAGES.NAMESPACE_TENANT_TRACE}
-                    component={TenantTrace}
-                  />
-                  <Route
-                    path={IAM_PAGES.NAMESPACE_TENANT_IDENTITY_PROVIDER}
-                    component={TenantIdentityProvider}
-                  />
-                  <Route
-                    path={IAM_PAGES.NAMESPACE_TENANT_SECURITY}
-                    component={TenantSecurity}
-                  />
-                  <Route
-                    path={IAM_PAGES.NAMESPACE_TENANT_ENCRYPTION}
-                    component={TenantEncryption}
-                  />
-                  <Route
-                    path={IAM_PAGES.NAMESPACE_TENANT_POOLS}
-                    component={PoolsSummary}
-                  />
-                  <Route
-                    path={IAM_PAGES.NAMESPACE_TENANT_PODS}
-                    component={PodDetails}
-                  />
-                  <Route
-                    path={IAM_PAGES.NAMESPACE_TENANT_PODS_LIST}
-                    component={PodsSummary}
-                  />
-                  <Route
-                    path={IAM_PAGES.NAMESPACE_TENANT_PVCS}
-                    component={TenantVolumes}
-                  />
-                  <Route
-                    path={IAM_PAGES.NAMESPACE_TENANT_VOLUMES}
-                    component={VolumesSummary}
-                  />
-                  <Route
-                    path={IAM_PAGES.NAMESPACE_TENANT_LICENSE}
-                    component={TenantLicense}
-                  />
-                  <Route
-                    path={IAM_PAGES.NAMESPACE_TENANT_MONITORING}
-                    component={TenantMonitoring}
-                  />
-                  <Route
-                    path={IAM_PAGES.NAMESPACE_TENANT_LOGGING}
-                    component={TenantLogging}
-                  />
-                  <Route
-                    path={IAM_PAGES.NAMESPACE_TENANT_EVENTS}
-                    component={TenantEvents}
-                  />
-                  <Route
-                    path={IAM_PAGES.NAMESPACE_TENANT_CSR}
-                    component={TenantCSR}
-                  />
-                  <Route
-                    path={IAM_PAGES.NAMESPACE_TENANT}
-                    component={() => (
-                      <Redirect
-                        to={`/namespaces/${tenantNamespace}/tenants/${tenantName}/summary`}
+          <VerticalTabs
+              selectedTab={activeTab}
+              isRouteTabs
+              routes={
+                <div className={classes.contentSpacer}>
+                  <Routes>
+                      <Route
+                          path={`${IAM_PAGES.NAMESPACE_TENANT_SUMMARY}/yaml`}
+                          element={<TenantYAML />}
                       />
-                    )}
-                  />
-                </Switch>
-              </Router>
-            </div>
-          }
-        >
-          {{
-            tabConfig: {
-              label: "Summary",
-              value: "summary",
-              component: Link,
-              to: getRoutePath("summary"),
-            },
-          }}
-          {{
-            tabConfig: {
-              label: "Metrics",
-              value: "metrics",
-              component: Link,
-              to: getRoutePath("metrics"),
-            },
-          }}
-          {{
-            tabConfig: {
-              label: "Identity Provider",
-              value: "identity-provider",
-              component: Link,
-              to: getRoutePath("identity-provider"),
-            },
-          }}
-          {{
-            tabConfig: {
-              label: "Security",
-              value: "security",
-              component: Link,
-              to: getRoutePath("security"),
-            },
-          }}
-          {{
-            tabConfig: {
-              label: "Encryption",
-              value: "encryption",
-              component: Link,
-              to: getRoutePath("encryption"),
-            },
-          }}
-          {{
-            tabConfig: {
-              label: "Pools",
-              value: "pools",
-              component: Link,
-              to: getRoutePath("pools"),
-            },
-          }}
-          {{
-            tabConfig: {
-              label: "Monitoring",
-              value: "monitoring",
-              component: Link,
-              to: getRoutePath("monitoring"),
-            },
-          }}
-          {{
-            tabConfig: {
-              label: "Audit Log",
-              value: "logging",
-              component: Link,
-              to: getRoutePath("logging"),
-            },
-          }}
-          {{
-            tabConfig: {
-              label: "Pods",
-              value: "pods",
-              component: Link,
-              id: "tenant-pod-tab",
-              to: getRoutePath("pods"),
-            },
-          }}
+                      <Route
+                          path={IAM_PAGES.NAMESPACE_TENANT_SUMMARY}
+                          element={<TenantSummary />}
+                      />
+                      <Route
+                          path={IAM_PAGES.NAMESPACE_TENANT_METRICS}
+                          element={<TenantMetrics />}
+                      />
+                      <Route
+                          path={IAM_PAGES.NAMESPACE_TENANT_TRACE}
+                          element={<TenantTrace />}
+                      />
+                      <Route
+                          path={IAM_PAGES.NAMESPACE_TENANT_IDENTITY_PROVIDER}
+                          element={<TenantIdentityProvider />}
+                      />
+                      <Route
+                          path={IAM_PAGES.NAMESPACE_TENANT_SECURITY}
+                          element={<TenantSecurity />}
+                      />
+                      <Route
+                          path={IAM_PAGES.NAMESPACE_TENANT_ENCRYPTION}
+                          element={<TenantEncryption />}
+                      />
+                      <Route
+                          path={IAM_PAGES.NAMESPACE_TENANT_POOLS}
+                          element={<PoolsSummary />}
+                      />
+                      <Route
+                          path={IAM_PAGES.NAMESPACE_TENANT_PODS}
+                          element={<PodDetails />}
+                      />
+                      <Route
+                          path={IAM_PAGES.NAMESPACE_TENANT_PODS_LIST}
+                          element={<PodsSummary />}
+                      />
+                      <Route
+                          path={IAM_PAGES.NAMESPACE_TENANT_PVCS}
+                          element={<TenantVolumes />}
+                      />
+                      <Route
+                          path={IAM_PAGES.NAMESPACE_TENANT_VOLUMES}
+                          element={<VolumesSummary />}
+                      />
+                      <Route
+                          path={IAM_PAGES.NAMESPACE_TENANT_LICENSE}
+                          element={<TenantLicense />}
+                      />
+                      <Route
+                          path={IAM_PAGES.NAMESPACE_TENANT_MONITORING}
+                          element={<TenantMonitoring />}
+                      />
+                      <Route
+                          path={IAM_PAGES.NAMESPACE_TENANT_LOGGING}
+                          element={<TenantLogging />}
+                      />
+                      <Route
+                          path={IAM_PAGES.NAMESPACE_TENANT_EVENTS}
+                          element={<TenantEvents />}
+                      />
+                      <Route
+                          path={IAM_PAGES.NAMESPACE_TENANT_CSR}
+                          element={<TenantCSR />}
+                      />
+                      <Route
+                          path={IAM_PAGES.NAMESPACE_TENANT}
+                          element={
+                              <Navigate
+                                  to={`/namespaces/${tenantNamespace}/tenants/${tenantName}/summary`}
+                              />
+                          }
+                      />
+                  </Routes>
+                </div>
+              }
+          >
+            {{
+              tabConfig: {
+                label: "Summary",
+                value: "summary",
+                component: Link,
+                to: getRoutePath("summary"),
+              },
+            }}
+            {{
+              tabConfig: {
+                label: "Metrics",
+                value: "metrics",
+                component: Link,
+                to: getRoutePath("metrics"),
+              },
+            }}
+            {{
+              tabConfig: {
+                label: "Identity Provider",
+                value: "identity-provider",
+                component: Link,
+                to: getRoutePath("identity-provider"),
+              },
+            }}
+            {{
+              tabConfig: {
+                label: "Security",
+                value: "security",
+                component: Link,
+                to: getRoutePath("security"),
+              },
+            }}
+            {{
+              tabConfig: {
+                label: "Encryption",
+                value: "encryption",
+                component: Link,
+                to: getRoutePath("encryption"),
+              },
+            }}
+            {{
+              tabConfig: {
+                label: "Pools",
+                value: "pools",
+                component: Link,
+                to: getRoutePath("pools"),
+              },
+            }}
+            {{
+              tabConfig: {
+                label: "Monitoring",
+                value: "monitoring",
+                component: Link,
+                to: getRoutePath("monitoring"),
+              },
+            }}
+            {{
+              tabConfig: {
+                label: "Audit Log",
+                value: "logging",
+                component: Link,
+                to: getRoutePath("logging"),
+              },
+            }}
+            {{
+              tabConfig: {
+                label: "Pods",
+                value: "pods",
+                component: Link,
+                id: "tenant-pod-tab",
+                to: getRoutePath("pods"),
+              },
+            }}
 
-          {{
-            tabConfig: {
-              label: "Volumes",
-              value: "volumes",
-              component: Link,
-              to: getRoutePath("volumes"),
-            },
-          }}
-          {{
-            tabConfig: {
-              label: "Events",
-              value: "events",
-              component: Link,
-              to: getRoutePath("events"),
-            },
-          }}
-          {{
-            tabConfig: {
-              label: "Certificate Requests",
-              value: "csr",
-              component: Link,
-              to: getRoutePath("csr"),
-            },
-          }}
-          {{
-            tabConfig: {
-              label: "License",
-              value: "license",
-              component: Link,
-              to: getRoutePath("license"),
-            },
-          }}
-        </VerticalTabs>
-      </PageLayout>
-    </Fragment>
+            {{
+              tabConfig: {
+                label: "Volumes",
+                value: "volumes",
+                component: Link,
+                to: getRoutePath("volumes"),
+              },
+            }}
+            {{
+              tabConfig: {
+                label: "Events",
+                value: "events",
+                component: Link,
+                to: getRoutePath("events"),
+              },
+            }}
+            {{
+              tabConfig: {
+                label: "Certificate Requests",
+                value: "csr",
+                component: Link,
+                to: getRoutePath("csr"),
+              },
+            }}
+            {{
+              tabConfig: {
+                label: "License",
+                value: "license",
+                component: Link,
+                to: getRoutePath("license"),
+              },
+            }}
+          </VerticalTabs>
+        </PageLayout>
+      </Fragment>
   );
 };
 

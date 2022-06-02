@@ -35,7 +35,7 @@ import { Button, DialogContentText } from "@mui/material";
 import { KeyPair } from "../ListTenants/utils";
 import FileSelector from "../../Common/FormComponents/FileSelector/FileSelector";
 import api from "../../../../common/api";
-import { connect, useDispatch } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../../../store";
 import { ErrorResponseHandler } from "../../../../common/types";
 import ConfirmDialog from "../../Common/ModalWrapper/ConfirmDialog";
@@ -47,8 +47,6 @@ import { setErrorSnackMessage } from "../../../../systemSlice";
 
 interface ITenantSecurity {
   classes: any;
-  loadingTenant: boolean;
-  tenant: ITenant | null;
 }
 
 const styles = (theme: Theme) =>
@@ -78,12 +76,14 @@ const styles = (theme: Theme) =>
     ...wizardCommon,
   });
 
-const TenantSecurity = ({
-  classes,
-  tenant,
-  loadingTenant,
-}: ITenantSecurity) => {
+const TenantSecurity = ({ classes }: ITenantSecurity) => {
   const dispatch = useDispatch();
+
+  const tenant = useSelector((state: AppState) => state.tenants.tenantInfo);
+  const loadingTenant = useSelector(
+    (state: AppState) => state.tenants.loadingTenant
+  );
+
   const [isSending, setIsSending] = useState<boolean>(false);
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const [enableAutoCert, setEnableAutoCert] = useState<boolean>(false);
