@@ -95,7 +95,7 @@ const AddGroupScreen = ({ classes }: IAddGroupProps) => {
 
       saveRecord();
     }
-  }, [saving, groupName, selectedUsers, dispatch]);
+  }, [saving, groupName, selectedUsers, dispatch, navigate]);
 
   //Fetch Actions
   const setSaving = (event: React.FormEvent) => {

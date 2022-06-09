@@ -98,7 +98,6 @@ const TenantCSR = ({ classes }: ITenantCSRProps) => {
     loading,
     tenantNamespace,
     tenantName,
-    setErrorSnackMessage,
     csrAnnotations,
     csrName,
     csrStatus,

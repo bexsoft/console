@@ -211,6 +211,7 @@ const AddTierConfiguration = ({
     dispatch,
     storageClass,
     type,
+      navigate,
   ]);
 
   useEffect(() => {

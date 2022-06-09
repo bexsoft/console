@@ -16,7 +16,6 @@
 
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { IAM_PAGES } from "../../../common/SecureComponent/permissions";
 import FeatureNotAvailablePage from "../Common/Components/FeatureNotAvailablePage";
 import { SupportMenuIcon } from "../../../icons/SidebarMenus";
 

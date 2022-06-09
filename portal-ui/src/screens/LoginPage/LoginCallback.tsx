@@ -152,7 +152,7 @@ const LoginCallback = ({classes}: ILoginCallBackProps) => {
                     });
             }
         }
-    }, [loading]);
+    }, [loading, navigate]);
     return error !== "" || errorDescription !== "" ? (
         <React.Fragment>
             <Paper className={classes.paper}>

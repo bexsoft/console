@@ -101,7 +101,7 @@ const EditPool = () => {
         navigate("/tenants");
       }
     }
-  }, [selectedPool, dispatch, tenant]);
+  }, [selectedPool, dispatch, tenant, navigate]);
 
   const cancelButton = {
     label: "Cancel",

@@ -17,7 +17,7 @@
 import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Theme } from "@mui/material/styles";
-import { useNavigate, useParams } from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import createStyles from "@mui/styles/createStyles";
 import withStyles from "@mui/styles/withStyles";
 import {
@@ -49,7 +49,7 @@ const styles = (theme: Theme) =>
 
 const PoolsSummary = ({ classes }: IPoolsSummary) => {
   const dispatch = useDispatch();
-  const params = useParams();
+  const {pathname = ""} = useLocation();
 
   const selectedPool = useSelector(
     (state: AppState) => state.tenants.selectedPool
@@ -58,7 +58,6 @@ const PoolsSummary = ({ classes }: IPoolsSummary) => {
     (state: AppState) => state.tenants.poolDetailsOpen
   );
 
-  // TODO: Review this
   return (
     <Fragment>
       {poolDetailsOpen && (
@@ -68,7 +67,7 @@ const PoolsSummary = ({ classes }: IPoolsSummary) => {
               dispatch(setOpenPoolDetails(false));
             }}
             label={"Pools list"}
-            to={params.url || ""}
+            to={pathname}
           />
         </Grid>
       )}

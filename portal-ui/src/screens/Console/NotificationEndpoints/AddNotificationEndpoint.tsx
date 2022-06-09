@@ -141,7 +141,7 @@ const AddNotificationEndpoint = ({
             dispatch(setErrorSnackMessage(err));
           });
     }
-  }, [saving, service, valuesArr, saveAndRefresh, dispatch]);
+  }, [saving, service, valuesArr, saveAndRefresh, dispatch, navigate]);
 
   //Fetch Actions
   const submitForm = (event: React.FormEvent) => {
