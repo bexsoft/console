@@ -116,7 +116,7 @@ export const editPoolAsync = createAsyncThunk(
         },
       ],
     };
-    const poolsURL = `/namespaces/${tenant?.namespace || ""}/tenants/${
+    const poolsURL: string = `/namespaces/${tenant?.namespace || ""}/tenants/${
       tenant?.name || ""
     }/pools`;
 
@@ -129,7 +129,7 @@ export const editPoolAsync = createAsyncThunk(
       .then(() => {
         dispatch(resetEditPoolForm());
         dispatch(setTenantDetailsLoad(true));
-        //navigate(poolsURL);
+        return poolsURL;
       })
       .catch((err: ErrorResponseHandler) => {
         dispatch(setErrorSnackMessage(err));

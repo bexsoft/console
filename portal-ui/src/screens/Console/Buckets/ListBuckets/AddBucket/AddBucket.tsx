@@ -146,10 +146,11 @@ const AddBucket = ({ classes }: IsetProps) => {
 
   useEffect(() => {
     if (navigateTo !== "") {
-      navigate(navigateTo);
+      const goTo = `${navigateTo}`;
       dispatch(resetForm());
+      navigate(goTo);
     }
-  }, [navigateTo, navigate]);
+  }, [navigateTo, navigate, dispatch]);
 
   return (
     <Fragment>
