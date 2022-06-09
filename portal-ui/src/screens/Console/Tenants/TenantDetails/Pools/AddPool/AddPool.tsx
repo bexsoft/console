@@ -88,7 +88,6 @@ const AddPool = () => {
       const goTo = `${navigateTo}`;
       dispatch(resetPoolForm());
       navigate(goTo);
-      navigate(navigateTo);
     }
   }, [navigateTo, navigate, dispatch]);
 
