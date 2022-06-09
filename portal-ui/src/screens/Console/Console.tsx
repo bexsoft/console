@@ -436,46 +436,6 @@ const Console = ({classes}: IConsoleProps) => {
       forceDisplay: true,
     },
     {
-      component: TenantDetails,
-      path: IAM_PAGES.NAMESPACE_TENANT_PODS,
-      forceDisplay: true,
-    },
-    {
-      component: TenantDetails,
-      path: IAM_PAGES.NAMESPACE_TENANT_PVCS,
-      forceDisplay: true,
-    },
-    {
-      component: TenantDetails,
-      path: `${IAM_PAGES.NAMESPACE_TENANT_SUMMARY}/yaml`,
-      forceDisplay: true,
-    },
-    {
-      component: TenantDetails,
-      path: IAM_PAGES.NAMESPACE_TENANT_SUMMARY,
-      forceDisplay: true,
-    },
-    {
-      component: TenantDetails,
-      path: IAM_PAGES.NAMESPACE_TENANT_METRICS,
-      forceDisplay: true,
-    },
-    {
-      component: TenantDetails,
-      path: IAM_PAGES.NAMESPACE_TENANT_TRACE,
-      forceDisplay: true,
-    },
-    {
-      component: TenantDetails,
-      path: IAM_PAGES.NAMESPACE_TENANT_PODS_LIST,
-      forceDisplay: true,
-    },
-    {
-      component: TenantDetails,
-      path: IAM_PAGES.NAMESPACE_TENANT_POOLS,
-      forceDisplay: true,
-    },
-    {
       component: AddPool,
       path: IAM_PAGES.NAMESPACE_TENANT_POOLS_ADD,
       forceDisplay: true,
@@ -483,51 +443,6 @@ const Console = ({classes}: IConsoleProps) => {
     {
       component: EditPool,
       path: IAM_PAGES.NAMESPACE_TENANT_POOLS_EDIT,
-      forceDisplay: true,
-    },
-    {
-      component: TenantDetails,
-      path: IAM_PAGES.NAMESPACE_TENANT_VOLUMES,
-      forceDisplay: true,
-    },
-    {
-      component: TenantDetails,
-      path: IAM_PAGES.NAMESPACE_TENANT_LICENSE,
-      forceDisplay: true,
-    },
-    {
-      component: TenantDetails,
-      path: IAM_PAGES.NAMESPACE_TENANT_IDENTITY_PROVIDER,
-      forceDisplay: true,
-    },
-    {
-      component: TenantDetails,
-      path: IAM_PAGES.NAMESPACE_TENANT_SECURITY,
-      forceDisplay: true,
-    },
-    {
-      component: TenantDetails,
-      path: IAM_PAGES.NAMESPACE_TENANT_ENCRYPTION,
-      forceDisplay: true,
-    },
-    {
-      component: TenantDetails,
-      path: IAM_PAGES.NAMESPACE_TENANT_MONITORING,
-      forceDisplay: true,
-    },
-    {
-      component: TenantDetails,
-      path: IAM_PAGES.NAMESPACE_TENANT_LOGGING,
-      forceDisplay: true,
-    },
-    {
-      component: TenantDetails,
-      path: IAM_PAGES.NAMESPACE_TENANT_EVENTS,
-      forceDisplay: true,
-    },
-    {
-      component: TenantDetails,
-      path: IAM_PAGES.NAMESPACE_TENANT_CSR,
       forceDisplay: true,
     },
     {

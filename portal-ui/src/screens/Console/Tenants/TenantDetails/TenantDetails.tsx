@@ -213,7 +213,7 @@ const TenantDetails = ({ classes }: ITenantDetailsProps) => {
   }, [highlightedTab]);
 
   const editYaml = () => {
-    navigate(`${getRoutePath("summary")}/yaml`);
+    navigate(getRoutePath("summary/yaml"));
   };
 
   const getRoutePath = (newValue: string) => {
@@ -370,75 +370,75 @@ const TenantDetails = ({ classes }: ITenantDetailsProps) => {
                 <div className={classes.contentSpacer}>
                   <Routes>
                       <Route
-                          path={`${IAM_PAGES.NAMESPACE_TENANT_SUMMARY}/yaml`}
-                          element={<TenantYAML />}
-                      />
-                      <Route
-                          path={IAM_PAGES.NAMESPACE_TENANT_SUMMARY}
+                          path={"summary"}
                           element={<TenantSummary />}
                       />
                       <Route
-                          path={IAM_PAGES.NAMESPACE_TENANT_METRICS}
+                          path={`summary/yaml`}
+                          element={<TenantYAML />}
+                      />
+                      <Route
+                          path={"metrics"}
                           element={<TenantMetrics />}
                       />
                       <Route
-                          path={IAM_PAGES.NAMESPACE_TENANT_TRACE}
+                          path={"trace"}
                           element={<TenantTrace />}
                       />
                       <Route
-                          path={IAM_PAGES.NAMESPACE_TENANT_IDENTITY_PROVIDER}
+                          path={"identity-provider"}
                           element={<TenantIdentityProvider />}
                       />
                       <Route
-                          path={IAM_PAGES.NAMESPACE_TENANT_SECURITY}
+                          path={"security"}
                           element={<TenantSecurity />}
                       />
                       <Route
-                          path={IAM_PAGES.NAMESPACE_TENANT_ENCRYPTION}
+                          path={"encryption"}
                           element={<TenantEncryption />}
                       />
                       <Route
-                          path={IAM_PAGES.NAMESPACE_TENANT_POOLS}
+                          path={"pools"}
                           element={<PoolsSummary />}
                       />
                       <Route
-                          path={IAM_PAGES.NAMESPACE_TENANT_PODS}
+                          path={"pods/:podName"}
                           element={<PodDetails />}
                       />
                       <Route
-                          path={IAM_PAGES.NAMESPACE_TENANT_PODS_LIST}
+                          path={"pods"}
                           element={<PodsSummary />}
                       />
                       <Route
-                          path={IAM_PAGES.NAMESPACE_TENANT_PVCS}
+                          path={"pvcs/:PVCName"}
                           element={<TenantVolumes />}
                       />
                       <Route
-                          path={IAM_PAGES.NAMESPACE_TENANT_VOLUMES}
+                          path={"volumes"}
                           element={<VolumesSummary />}
                       />
                       <Route
-                          path={IAM_PAGES.NAMESPACE_TENANT_LICENSE}
+                          path={"license"}
                           element={<TenantLicense />}
                       />
                       <Route
-                          path={IAM_PAGES.NAMESPACE_TENANT_MONITORING}
+                          path={"monitoring"}
                           element={<TenantMonitoring />}
                       />
                       <Route
-                          path={IAM_PAGES.NAMESPACE_TENANT_LOGGING}
+                          path={"logging"}
                           element={<TenantLogging />}
                       />
                       <Route
-                          path={IAM_PAGES.NAMESPACE_TENANT_EVENTS}
+                          path={"events"}
                           element={<TenantEvents />}
                       />
                       <Route
-                          path={IAM_PAGES.NAMESPACE_TENANT_CSR}
+                          path={"csr"}
                           element={<TenantCSR />}
                       />
                       <Route
-                          path={IAM_PAGES.NAMESPACE_TENANT}
+                          path={"/"}
                           element={
                               <Navigate
                                   to={`/namespaces/${tenantNamespace}/tenants/${tenantName}/summary`}
