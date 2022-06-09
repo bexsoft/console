@@ -74,7 +74,7 @@ export const addBucketAsync = createAsyncThunk(
       .then((res) => {
         const newBucketName = `${bucketName}`;
         dispatch(resetForm());
-        // navigate(`/buckets/${newBucketName}/browse`);
+        return newBucketName;
       })
       .catch((err: ErrorResponseHandler) => {
         dispatch(setErrorSnackMessage(err));
