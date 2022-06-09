@@ -180,6 +180,7 @@ interface IConsoleProps {
 
 const Console = ({classes}: IConsoleProps) => {
   const dispatch = useDispatch();
+  const {pathname = ""} = useLocation();
   const open = useSelector((state: AppState) => state.system.sidebarOpen);
   const session = useSelector(selSession);
   const features = useSelector(selFeatures);
@@ -482,12 +483,11 @@ const Console = ({classes}: IConsoleProps) => {
     }
   }, [snackBarMessage]);
 
-  const location = useLocation();
 
   let hideMenu = false;
   if (features?.includes("hide-menu")) {
     hideMenu = true;
-  } else if (location.pathname.endsWith("/hop")) {
+  } else if (pathname.endsWith("/hop")) {
     hideMenu = true;
   }
 

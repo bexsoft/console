@@ -14,137 +14,133 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import React, { Fragment } from "react";
-import { Theme } from "@mui/material/styles";
+import React, {Fragment} from "react";
+import {Theme} from "@mui/material/styles";
 import createStyles from "@mui/styles/createStyles";
 import withStyles from "@mui/styles/withStyles";
 import Grid from "@mui/material/Grid";
 
-import { configurationElements } from "../utils";
+import {configurationElements} from "../utils";
 import {
-  actionsTray,
-  containerForHeader,
-  searchField,
+    actionsTray,
+    containerForHeader,
+    searchField,
 } from "../../Common/FormComponents/common/styleLibrary";
 import PageHeader from "../../Common/PageHeader/PageHeader";
 import HelpBox from "../../../../common/HelpBox";
-import { SettingsIcon } from "../../../../icons";
-import { Link, Navigate, Route, Routes, useParams } from "react-router-dom";
+import {SettingsIcon} from "../../../../icons";
+import {Link, Navigate, Route, Routes, useLocation} from "react-router-dom";
 import VerticalTabs from "../../Common/VerticalTabs/VerticalTabs";
 import PageLayout from "../../Common/Layout/PageLayout";
-import get from "lodash/get";
 import ScreenTitle from "../../Common/ScreenTitle/ScreenTitle";
 
 import withSuspense from "../../Common/Components/withSuspense";
-import { IAM_PAGES } from "../../../../common/SecureComponent/permissions";
+import {IAM_PAGES} from "../../../../common/SecureComponent/permissions";
 
 const ConfigurationForm = withSuspense(
-  React.lazy(() => import("./ConfigurationForm"))
+    React.lazy(() => import("./ConfigurationForm"))
 );
 
 interface IConfigurationOptions {
-  classes: any;
+    classes: any;
 }
 
 const styles = (theme: Theme) =>
-  createStyles({
-    settingsOptionsContainer: {
-      display: "flex" as const,
-      flexDirection: "row" as const,
-      justifyContent: "flex-start" as const,
-      flexWrap: "wrap" as const,
-      border: "#E5E5E5 1px solid",
-      borderRadius: 2,
-      backgroundColor: "#fff",
-    },
-    ...searchField,
-    ...actionsTray,
-    ...containerForHeader(theme.spacing(4)),
-  });
+    createStyles({
+        settingsOptionsContainer: {
+            display: "flex" as const,
+            flexDirection: "row" as const,
+            justifyContent: "flex-start" as const,
+            flexWrap: "wrap" as const,
+            border: "#E5E5E5 1px solid",
+            borderRadius: 2,
+            backgroundColor: "#fff",
+        },
+        ...searchField,
+        ...actionsTray,
+        ...containerForHeader(theme.spacing(4)),
+    });
 
 const getRoutePath = (path: string) => {
-  return `${IAM_PAGES.SETTINGS}/${path}`;
+    return `${IAM_PAGES.SETTINGS}/${path}`;
 };
 
-const ConfigurationOptions = ({ classes }: IConfigurationOptions) => {
-  const params = useParams();
+const ConfigurationOptions = ({classes}: IConfigurationOptions) => {
+    const {pathname = ""} = useLocation();
 
-  // TODO: CHECK THIS
-  const configurationName = get(params, "url", "");
+    let selConfigTab = pathname.substring(
+        pathname.lastIndexOf("/") + 1
+    );
+    selConfigTab = selConfigTab === "settings" ? "region" : selConfigTab;
 
-  let selConfigTab = configurationName.substring(
-    configurationName.lastIndexOf("/") + 1
-  );
-  selConfigTab = selConfigTab === "settings" ? "region" : selConfigTab;
+    return (
+        <Fragment>
+            <PageHeader label={"Configurations"}/>
 
-  return (
-    <Fragment>
-      <PageHeader label={"Configurations"} />
-
-      <PageLayout>
-        <Grid item xs={12}>
-          <div
-            id="settings-container"
-            className={classes.settingsOptionsContainer}
-          >
-            <ScreenTitle icon={<SettingsIcon />} title={"Configuration:"} />
-            <VerticalTabs
-              selectedTab={selConfigTab}
-              isRouteTabs
-              routes={
-                <Routes>
-                  {configurationElements.map((element) => (
-                    <Route
-                      key={`configItem-${element.configuration_label}`}
-                      path={`${element.configuration_id}`}
-                      element={<ConfigurationForm />}
+            <PageLayout>
+                <Grid item xs={12}>
+                    <div
+                        id="settings-container"
+                        className={classes.settingsOptionsContainer}
+                    >
+                        <ScreenTitle icon={<SettingsIcon/>} title={"Configuration:"}/>
+                        <VerticalTabs
+                            selectedTab={selConfigTab}
+                            isRouteTabs
+                            routes={
+                                <Routes>
+                                    {configurationElements.map((element) => (
+                                        <Route
+                                            key={`configItem-${element.configuration_label}`}
+                                            path={`${element.configuration_id}`}
+                                            element={<ConfigurationForm/>}
+                                        />
+                                    ))}
+                                    <Route path={"/"} element={<Navigate to={`${IAM_PAGES.SETTINGS}/region`}/>}/>
+                                </Routes>
+                            }
+                        >
+                            {configurationElements.map((element) => {
+                                const {configuration_id, configuration_label, icon} = element;
+                                return {
+                                    tabConfig: {
+                                        label: configuration_label,
+                                        value: configuration_id,
+                                        icon: icon,
+                                        component: Link,
+                                        to: getRoutePath(configuration_id),
+                                    },
+                                };
+                            })}
+                        </VerticalTabs>
+                    </div>
+                </Grid>
+                <Grid item xs={12} sx={{paddingTop: "15px"}}>
+                    <HelpBox
+                        title={"Learn more about CONFIGURATIONS"}
+                        iconComponent={<SettingsIcon/>}
+                        help={
+                            <Fragment>
+                                MinIO supports a variety of configurations ranging from
+                                encryption, compression, region, notifications, etc.
+                                <br/>
+                                <br/>
+                                You can learn more at our{" "}
+                                <a
+                                    href="https://docs.min.io/minio/baremetal/reference/minio-cli/minio-mc-admin/mc-admin.config.html?ref=con#id4"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    documentation
+                                </a>
+                                .
+                            </Fragment>
+                        }
                     />
-                  ))}
-                  <Route path={"/"} element={<Navigate to={`${IAM_PAGES.SETTINGS}/region`} />} />
-                </Routes>
-              }
-            >
-              {configurationElements.map((element) => {
-                const { configuration_id, configuration_label, icon } = element;
-                return {
-                  tabConfig: {
-                    label: configuration_label,
-                    value: configuration_id,
-                    icon: icon,
-                    component: Link,
-                    to: getRoutePath(configuration_id),
-                  },
-                };
-              })}
-            </VerticalTabs>
-          </div>
-        </Grid>
-        <Grid item xs={12} sx={{ paddingTop: "15px" }}>
-          <HelpBox
-            title={"Learn more about CONFIGURATIONS"}
-            iconComponent={<SettingsIcon />}
-            help={
-              <Fragment>
-                MinIO supports a variety of configurations ranging from
-                encryption, compression, region, notifications, etc.
-                <br />
-                <br />
-                You can learn more at our{" "}
-                <a
-                  href="https://docs.min.io/minio/baremetal/reference/minio-cli/minio-mc-admin/mc-admin.config.html?ref=con#id4"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  documentation
-                </a>
-                .
-              </Fragment>
-            }
-          />
-        </Grid>
-      </PageLayout>
-    </Fragment>
-  );
+                </Grid>
+            </PageLayout>
+        </Fragment>
+    );
 };
 
 export default withStyles(styles)(ConfigurationOptions);

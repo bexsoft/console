@@ -16,47 +16,42 @@
 
 import React from "react";
 import {useLocation} from "react-router-dom";
-import get from "lodash/get";
 import Grid from "@mui/material/Grid";
-import { configurationElements } from "../utils";
+import {configurationElements} from "../utils";
 import EditConfiguration from "../../NotificationEndpoints/CustomForms/EditConfiguration";
 
 const ConfigurationsList = () => {
-  const location = useLocation();
+    const {pathname = ""} = useLocation();
 
-  const activeConfRoute = get(location, "pathname", "");
+    const configName = pathname.substring(pathname.lastIndexOf("/") + 1);
 
-  const configName = activeConfRoute.substring(
-    activeConfRoute.lastIndexOf("/") + 1
-  );
-
-  const validActiveConfig = configurationElements.find(
-    (element) => element.configuration_id === configName
-  );
-  const containerClassName = `${configName}`;
-  return (
-    <Grid
-      item
-      xs={12}
-      sx={{
-        height: "100%",
-        //LDAP and api forms have longer labels
-        "& .identity_ldap, .api": {
-          "& label": {
-            minWidth: 220,
-            marginRight: 0,
-          },
-        },
-      }}
-    >
-      {validActiveConfig && (
-        <EditConfiguration
-          className={`${containerClassName}`}
-          selectedConfiguration={validActiveConfig}
-        />
-      )}
-    </Grid>
-  );
+    const validActiveConfig = configurationElements.find(
+        (element) => element.configuration_id === configName
+    );
+    const containerClassName = `${configName}`;
+    return (
+        <Grid
+            item
+            xs={12}
+            sx={{
+                height: "100%",
+                //LDAP and api forms have longer labels
+                "& .identity_ldap, .api": {
+                    "& label": {
+                        minWidth: 220,
+                        marginRight: 0,
+                    },
+                },
+            }}
+        >
+            {validActiveConfig && (
+                <EditConfiguration
+                    className={`${containerClassName}`}
+                    selectedConfiguration={validActiveConfig}
+                />
+            )}
+        </Grid>
+    );
 };
 
 export default ConfigurationsList;
