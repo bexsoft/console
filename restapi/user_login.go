@@ -21,10 +21,10 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"net/http"
-	"strings"
-
 	"github.com/go-openapi/errors"
+	"net/http"
+	"runtime/debug"
+	"strings"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
@@ -64,6 +64,7 @@ func registerLoginHandlers(api *operations.ConsoleAPI) {
 	api.AuthLoginOauth2AuthHandler = authApi.LoginOauth2AuthHandlerFunc(func(params authApi.LoginOauth2AuthParams) middleware.Responder {
 		loginResponse, err := getLoginOauth2AuthResponse(params, GlobalMinIOConfig.OpenIDProviders)
 		if err != nil {
+			fmt.Println(fmt.Printf("ERROR IN OAUTH2 %+v", err))
 			return authApi.NewLoginOauth2AuthDefault(err.Code).WithPayload(err.APIError)
 		}
 		// Custom response writer to set the session cookies
@@ -243,6 +244,15 @@ func verifyUserAgainstIDP(ctx context.Context, provider auth.IdentityProviderI, 
 }
 
 func getLoginOauth2AuthResponse(params authApi.LoginOauth2AuthParams, openIDProviders oauth2.OpenIDPCfg) (*models.LoginResponse, *CodedAPIError) {
+	debug.PrintStack()
+
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Println("OAUTH2 PANIC:", err)
+			fmt.Println(string(debug.Stack()))
+		}
+	}()
+
 	ctx, cancel := context.WithCancel(params.HTTPRequest.Context())
 	defer cancel()
 	r := params.HTTPRequest

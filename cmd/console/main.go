@@ -18,8 +18,10 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
+	"runtime/debug"
 	"sort"
 	"time"
 
@@ -123,6 +125,12 @@ func newApp(name string) *cli.App {
 }
 
 func main() {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println(fmt.Printf("Main PANIC: \n %s", string(debug.Stack())))
+		}
+	}()
+
 	args := os.Args
 	// Set the orchestrator app name.
 	appName := filepath.Base(args[0])
