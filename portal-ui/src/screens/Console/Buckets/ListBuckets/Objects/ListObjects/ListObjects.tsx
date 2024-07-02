@@ -663,9 +663,9 @@ const ListObjects = () => {
           const file = files[i];
           uploadFilePromises.push(uploadPromise(file));
         }
-        Promise.allSettled(uploadFilePromises).then((results: Array<any>) => {
+        Promise.allSettled(uploadFilePromises).then((results: any) => {
           const errors = results.filter(
-            (result) => result.status === "rejected"
+            (result: any) => result.status === "rejected"
           );
           if (errors.length > 0) {
             const totalFiles = uploadFilePromises.length;

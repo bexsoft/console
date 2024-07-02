@@ -66,7 +66,7 @@
     "@types/luxon": "3.2.0",
     "@types/minio": "7.0.15",
     "@types/node": "18.11.18",
-    "@types/react": "18.0.27",
+    "@types/react": "^18.2.25",
     "@types/react-copy-to-clipboard": "5.0.2",
     "@types/react-dom": "18.0.10",
     "@types/react-grid-layout": "1.1.1",
@@ -97,5 +97,6 @@
     "react-scripts/**/debug": "^3.1.0",
     "recharts/**/d3-color": "^3.1.0",
     "websocket/debug": "^3.1.0"
-  }
+  },
+  "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72"
 }
