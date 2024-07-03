@@ -16,7 +16,6 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import ReactGridLayout from "react-grid-layout";
 import Grid from "@material-ui/core/Grid";
 import { createStyles, Theme, withStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
@@ -307,17 +306,9 @@ const PrDashboard = ({
               }
               const totalWidth = width > 1920 ? 1920 : width;
               return (
-                <ReactGridLayout
-                  width={totalWidth}
-                  cols={colsInGrid}
-                  containerPadding={[xSpacing, ySpacing]}
-                  onLayoutChange={saveDashboardDistribution}
-                  layout={dashboardDistr}
-                  rowHeight={hpanel / 6}
-                  style={{ margin: "0 auto", width: totalWidth }}
-                >
+                <div>
                   {panels(width, summaryPanels)}
-                </ReactGridLayout>
+                </div>
               );
             }}
           </AutoSizer>
@@ -331,17 +322,10 @@ const PrDashboard = ({
               }
               const totalWidth = width > 1920 ? 1920 : width;
               return (
-                <ReactGridLayout
-                  width={totalWidth}
-                  cols={colsInGrid}
-                  containerPadding={[xSpacing, ySpacing]}
-                  onLayoutChange={saveDashboardDistribution}
-                  layout={dashboardDistr}
-                  rowHeight={hpanel / 6}
-                  style={{ margin: "0 auto", width: totalWidth }}
+                <div style={{ margin: "0 auto", width: totalWidth }}
                 >
                   {panels(width, requestsPanels)}
-                </ReactGridLayout>
+                </div>
               );
             }}
           </AutoSizer>
@@ -355,17 +339,10 @@ const PrDashboard = ({
               }
               const totalWidth = width > 1920 ? 1920 : width;
               return (
-                <ReactGridLayout
-                  width={totalWidth}
-                  cols={colsInGrid}
-                  containerPadding={[xSpacing, ySpacing]}
-                  onLayoutChange={saveDashboardDistribution}
-                  layout={dashboardDistr}
-                  rowHeight={hpanel / 6}
-                  style={{ margin: "0 auto", width: totalWidth }}
+                <div
                 >
                   {panels(width, resourcesPanels)}
-                </ReactGridLayout>
+                </div>
               );
             }}
           </AutoSizer>

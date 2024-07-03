@@ -131,7 +131,7 @@ const EditConfiguration = ({
   };
 
   const onValueChange = useCallback(
-    (newValue) => {
+    (newValue: any) => {
       setValueObj(newValue);
     },
     [setValueObj]

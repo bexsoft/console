@@ -15,14 +15,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import Routes from "./Routes";
 import configureStore from "./store";
 import * as serviceWorker from "./serviceWorker";
 import { ThemeProvider, withStyles } from "@material-ui/core/styles";
 import "react-virtualized/styles.css";
-import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 
 import "./index.css";
@@ -60,14 +59,18 @@ const GlobalCss = withStyles({
   },
 })(() => null);
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
+
+root.render(
+  <React.StrictMode>
   <Provider store={configureStore()}>
     <GlobalCss />
     <ThemeProvider theme={theme}>
       <Routes />
     </ThemeProvider>
-  </Provider>,
-  document.getElementById("root")
+  </Provider></React.StrictMode>
 );
 
 // If you want your app to work offline and load faster, you can change

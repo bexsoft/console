@@ -97,7 +97,7 @@ const WebhookPanel = ({ match, classes }: IWebhookPanel) => {
 
   const pathIn = get(match, "path", "");
   const panelToDisplay = pathIn.split("/");
-  const panelData = get(panels, panelToDisplay[2], false);
+  const panelData: any = get(panels, panelToDisplay[2], false);
 
   if (!panelData) {
     return null;

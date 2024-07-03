@@ -124,7 +124,7 @@ const CSVMultiSelector = ({
     e.persist();
 
     let updatedElement = [...currentElements];
-    const index = get(e.target, "dataset.index", 0);
+    const index: any = get(e.target, "dataset.index", 0);
     updatedElement[index] = e.target.value;
 
     setCurrentElements(updatedElement);

@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import get from "lodash/get";
-import { Layout } from "react-grid-layout";
 import { IDashboardPanel, widgetType } from "./types";
 import {
   getTimeFromTimestamp,
@@ -25,6 +24,17 @@ import {
 } from "../../../../common/utils";
 
 const dLocalStorageV = "dashboardConfig";
+
+export interface Layout {
+  w: number,
+  h: number,
+  x: number,
+  y: number,
+  i: string
+  minW: number,
+  moved: boolean,
+  static: boolean
+}
 
 export const defaultWidgetsLayout: Layout[] = [
   {

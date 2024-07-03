@@ -120,7 +120,7 @@ const AddNotificationEndpoint = ({
   };
 
   const onValueChange = useCallback(
-    (newValue) => {
+    (newValue: any) => {
       setValueArr(newValue);
     },
     [setValueArr]
