@@ -270,7 +270,7 @@ clean:
 	@rm -vf console
 
 docker:
-	@docker buildx build --output=type=docker --platform linux/amd64 -t $(TAG) --build-arg build_version=$(BUILD_VERSION) --build-arg build_time='$(BUILD_TIME)' --build-arg NODE_VERSION='$(NODE_VERSION)' .
+	@docker buildx build --output=type=docker --platform linux/amd64 -t $(TAG) --push -t $(TAG) --build-arg build_version=$(BUILD_VERSION) --build-arg build_time='$(BUILD_TIME)' --build-arg NODE_VERSION='$(NODE_VERSION)' .
 
 release: swagger-gen
 	@echo "Generating Release: $(RELEASE)"
