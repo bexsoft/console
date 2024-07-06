@@ -706,3 +706,9 @@ export const setResourcesValidation = (
     cpuLimit: maxAllocatableResources.cpu_priority.max_allocatable_cpu,
   };
 };
+
+// replaces bad unicode characters
+export const replaceUnicodeChar = (inputString: string): string => {
+  let unicodeChar = "\u202E";
+  return inputString.split(unicodeChar).join("<�202e>");
+};
