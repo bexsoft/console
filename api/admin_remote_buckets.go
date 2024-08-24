@@ -562,10 +562,13 @@ func listExternalBucketsResponse(params bucketApi.ListExternalBucketsParams) (*m
 }
 
 func listExternalBuckets(ctx context.Context, client MinioAdmin) (*models.ListBucketsResponse, *CodedAPIError) {
-	buckets, err := getAccountBuckets(ctx, client)
+	// TODO: FIX THIS!!
+	/*buckets, err := getAccountBuckets(ctx, client)
 	if err != nil {
 		return nil, ErrorWithContext(ctx, err)
-	}
+	}*/
+
+	buckets := []*models.Bucket{}
 
 	return &models.ListBucketsResponse{
 		Buckets: buckets,

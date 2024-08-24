@@ -26,7 +26,6 @@ import (
 
 	"github.com/minio/minio-go/v7"
 
-	"github.com/minio/madmin-go/v3"
 	"github.com/minio/mc/cmd"
 	"github.com/minio/mc/pkg/probe"
 	"github.com/minio/minio-go/v7/pkg/sse"
@@ -374,32 +373,38 @@ func getBucketVersionedResponse(session *models.Principal, params bucketApi.GetB
 }
 
 // getAccountBuckets fetches a list of all buckets allowed to that particular client from MinIO Servers
-func getAccountBuckets(ctx context.Context, client MinioAdmin) ([]*models.Bucket, error) {
-	info, err := client.AccountInfo(ctx)
+func getAccountBuckets(ctx context.Context, client MinioAdmin, mAdminClient minioClient) ([]*models.Bucket, error) {
+	bucketInfos := []*models.Bucket{}
+
+	listBuckets, err := mAdminClient.listBucketsWithContext(ctx)
+
 	if err != nil {
 		return []*models.Bucket{}, err
 	}
-	bucketInfos := []*models.Bucket{}
-	for _, bucket := range info.Buckets {
+
+	for _, bucketElement := range listBuckets {
+		bucket, err := getBucketInfo(ctx, mAdminClient, client, bucketElement.Name)
+
+		if err != nil {
+			continue
+		}
+
 		bucketElem := &models.Bucket{
-			CreationDate: bucket.Created.Format(time.RFC3339),
+			CreationDate: bucketElement.CreationDate.Format(time.RFC3339),
 			Details: &models.BucketDetails{
 				Quota: nil,
 			},
 			RwAccess: &models.BucketRwAccess{
-				Read:  bucket.Access.Read,
-				Write: bucket.Access.Write,
+				Read:  bucket.RwAccess.Read,
+				Write: bucket.RwAccess.Write,
 			},
-			Name:    swag.String(bucket.Name),
+			Name:    swag.String(bucketElement.Name),
 			Objects: int64(bucket.Objects),
 			Size:    int64(bucket.Size),
 		}
 
 		if bucket.Details != nil {
-			if bucket.Details.Tagging != nil {
-				bucketElem.Details.Tags = bucket.Details.Tagging.ToMap()
-			}
-
+			bucketElem.Details.Tags = bucket.Details.Tags
 			bucketElem.Details.Locking = bucket.Details.Locking
 			bucketElem.Details.Replication = bucket.Details.Replication
 			bucketElem.Details.Versioning = bucket.Details.Versioning
@@ -414,6 +419,7 @@ func getAccountBuckets(ctx context.Context, client MinioAdmin) ([]*models.Bucket
 
 		bucketInfos = append(bucketInfos, bucketElem)
 	}
+
 	return bucketInfos, nil
 }
 
@@ -429,7 +435,16 @@ func getListBucketsResponse(session *models.Principal, params bucketApi.ListBuck
 	// create a minioClient interface implementation
 	// defining the client to be used
 	adminClient := AdminClient{Client: mAdmin}
-	buckets, err := getAccountBuckets(ctx, adminClient)
+
+	mClient, err := newMinioClient(session, getClientIP(params.HTTPRequest))
+	if err != nil {
+		return nil, ErrorWithContext(ctx, err)
+	}
+	// create a minioClient interface implementation
+	// defining the client to be used
+	minioClient := minioClient{client: mClient}
+
+	buckets, err := getAccountBuckets(ctx, adminClient, minioClient)
 	if err != nil {
 		return nil, ErrorWithContext(ctx, err)
 	}
@@ -442,7 +457,7 @@ func getListBucketsResponse(session *models.Principal, params bucketApi.ListBuck
 	return listBucketsResponse, nil
 }
 
-// makeBucket creates a bucket for an specific minio client
+// makeBucket creates a bucket for a specific minio client
 func makeBucket(ctx context.Context, client MinioClient, bucketName string, objectLocking bool) error {
 	// creates a new bucket with bucketName with a context to control cancellations and timeouts.
 	return client.makeBucketWithContext(ctx, bucketName, "", objectLocking)
@@ -670,6 +685,8 @@ func getDeleteBucketResponse(session *models.Principal, params bucketApi.DeleteB
 // getBucketInfo return bucket information including name, policy access, size and creation date
 func getBucketInfo(ctx context.Context, client MinioClient, adminClient MinioAdmin, bucketName string) (*models.Bucket, error) {
 	var bucketAccess models.BucketAccess
+	var bucketRW models.BucketRwAccess
+
 	policyStr, err := client.getBucketPolicy(context.Background(), bucketName)
 	if err != nil {
 		// we can tolerate this errors
@@ -684,6 +701,26 @@ func getBucketInfo(ctx context.Context, client MinioClient, adminClient MinioAdm
 			return nil, err
 		}
 		policyAccess := policy.GetPolicy(p.Statements, bucketName, "")
+
+		readAccess := false
+		writeAccess := false
+
+		for _, statement := range p.Statements {
+			for _, action := range statement.Actions.ToSlice() {
+				if string(action) == "s3:GetObject" {
+					readAccess = true
+				}
+				if action == "s3:PutObject" {
+					writeAccess = true
+				}
+			}
+		}
+
+		bucketRW = models.BucketRwAccess{
+			Read:  readAccess,
+			Write: writeAccess,
+		}
+
 		if len(p.Statements) > 0 && policyAccess == policy.BucketPolicyNone {
 			bucketAccess = models.BucketAccessCUSTOM
 		} else {
@@ -700,7 +737,7 @@ func getBucketInfo(ctx context.Context, client MinioClient, adminClient MinioAdm
 		bucketDetails.Tags = bucketTags.ToMap()
 	}
 
-	info, err := adminClient.AccountInfo(ctx)
+	/*info, err := adminClient.AccountInfo(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -712,7 +749,7 @@ func getBucketInfo(ctx context.Context, client MinioClient, adminClient MinioAdm
 			bucketInfo = bucket
 			break
 		}
-	}
+	}*/
 
 	return &models.Bucket{
 		Name:         &bucketName,
@@ -722,6 +759,7 @@ func getBucketInfo(ctx context.Context, client MinioClient, adminClient MinioAdm
 		Size:         int64(bucketInfo.Size),
 		Details:      bucketDetails,
 		Objects:      int64(bucketInfo.Objects),
+		RwAccess:     &bucketRW,
 	}, nil
 }
 
