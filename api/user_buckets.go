@@ -752,14 +752,14 @@ func getBucketInfo(ctx context.Context, client MinioClient, adminClient MinioAdm
 	}*/
 
 	return &models.Bucket{
-		Name:         &bucketName,
-		Access:       &bucketAccess,
-		Definition:   policyStr,
-		CreationDate: bucketInfo.Created.Format(time.RFC3339),
-		Size:         int64(bucketInfo.Size),
-		Details:      bucketDetails,
-		Objects:      int64(bucketInfo.Objects),
-		RwAccess:     &bucketRW,
+		Name:       &bucketName,
+		Access:     &bucketAccess,
+		Definition: policyStr,
+		//CreationDate: bucketInfo.Created.Format(time.RFC3339),
+		//Size:         int64(bucketInfo.Size),
+		Details: bucketDetails,
+		//Objects:      int64(bucketInfo.Objects),
+		RwAccess: &bucketRW,
 	}, nil
 }
 
