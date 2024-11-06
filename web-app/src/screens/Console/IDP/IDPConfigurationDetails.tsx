@@ -33,7 +33,7 @@ import {
   Tooltip,
   TrashIcon,
   ValuePair,
-  WarnIcon,
+  CircleAlertIcon,
 } from "mds";
 import { useNavigate, useParams } from "react-router-dom";
 import { modalStyleUtils } from "../Common/FormComponents/common/styleLibrary";
@@ -301,7 +301,7 @@ const IDPConfigurationDetails = ({
                       configurations
                     </Box>
                   }
-                  icon={<WarnIcon />}
+                  icon={<CircleAlertIcon />}
                   help={null}
                 />
               </Grid>

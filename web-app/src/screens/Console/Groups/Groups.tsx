@@ -20,7 +20,7 @@ import {
   PlusIcon,
   Button,
   DeleteIcon,
-  GroupsIcon,
+  UsersIcon,
   HelpBox,
   ShieldCheckIcon,
   PageLayout,
@@ -327,7 +327,7 @@ const Groups = () => {
                   <Grid item xs={12}>
                     <HelpBox
                       title={"Groups"}
-                      icon={<GroupsIcon />}
+                      icon={<UsersIcon />}
                       help={
                         <Fragment>
                           A group can have one attached IAM policy, where all

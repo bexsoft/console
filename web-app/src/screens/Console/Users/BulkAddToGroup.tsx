@@ -16,7 +16,7 @@
 
 import React, { useEffect, useState } from "react";
 import {
-  AddMembersToGroupIcon,
+  UserPlusIcon,
   Button,
   FormLayout,
   Grid,
@@ -107,7 +107,7 @@ const BulkAddToGroup = ({
           ? "The selected users were added to the following groups."
           : "Add Users to Group"
       }
-      titleIcon={<AddMembersToGroupIcon />}
+      titleIcon={<UserPlusIcon />}
     >
       {accepted ? (
         <React.Fragment>

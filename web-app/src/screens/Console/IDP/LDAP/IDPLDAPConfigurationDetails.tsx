@@ -31,7 +31,7 @@ import {
   Tabs,
   Tooltip,
   ValuePair,
-  WarnIcon,
+  CircleAlertIcon,
   ScreenTitle,
 } from "mds";
 import { api } from "api";
@@ -398,7 +398,7 @@ const IDPLDAPConfigurationDetails = () => {
                                       change LDAP configurations
                                     </Box>
                                   }
-                                  icon={<WarnIcon />}
+                                  icon={<CircleAlertIcon />}
                                   help={null}
                                 />
                               </Box>

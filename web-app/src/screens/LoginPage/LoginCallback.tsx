@@ -19,7 +19,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import api from "../../common/api";
 import { baseUrl } from "../../history";
-import { Box, Button, LoginWrapper, WarnIcon } from "mds";
+import { Box, Button, LoginWrapper, CircleAlertIcon } from "mds";
 import { getLogoApplicationVariant, getLogoVar } from "../../config";
 import get from "lodash/get";
 
@@ -115,7 +115,7 @@ const LoginCallback = () => {
           <CallBackContainer>
             <div className={"errorTitle"}>
               <span className={"messageIcon"}>
-                <WarnIcon />
+                <CircleAlertIcon />
               </span>
               <span className={"errorLabel"}>Error from IDP</span>
             </div>

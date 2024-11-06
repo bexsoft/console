@@ -133,9 +133,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.AddMembersToGroupIcon />
+          <cicons.UserPlusIcon />
           <br />
-          AddMembersToGroupIcon
+          UserPlusIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -157,9 +157,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.ArrowIcon />
+          <cicons.ArrowRightIcon />
           <br />
-          ArrowIcon
+          ArrowRightIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -577,9 +577,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.GroupsIcon />
+          <cicons.UsersIcon />
           <br />
-          GroupsIcon
+          UsersIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -679,9 +679,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.LogoutIcon />
+          <cicons.LogOutIcon />
           <br />
-          LogoutIcon
+          LogOutIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -739,9 +739,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.NextArrowIcon />
+          <cicons.NextArrowRightIcon />
           <br />
-          NextArrowIcon
+          NextArrowRightIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -1093,9 +1093,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.WarnIcon />
+          <cicons.CircleAlertIcon />
           <br />
-          WarnIcon
+          CircleAlertIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>

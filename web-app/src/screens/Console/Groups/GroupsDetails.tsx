@@ -23,7 +23,7 @@ import {
   Button,
   DataTable,
   Grid,
-  GroupsIcon,
+  UsersIcon,
   ShieldCheckIcon,
   PageLayout,
   ScreenTitle,
@@ -386,7 +386,7 @@ const GroupsDetails = () => {
           <ScreenTitle
             icon={
               <Fragment>
-                <GroupsIcon width={40} />
+                <UsersIcon width={40} />
               </Fragment>
             }
             title={params.groupName || ""}

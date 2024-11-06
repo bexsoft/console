@@ -20,7 +20,7 @@ import {
   PlusIcon,
   Button,
   DeleteIcon,
-  GroupsIcon,
+  UsersIcon,
   HelpBox,
   PageLayout,
   UsersIcon,
@@ -254,7 +254,7 @@ const ListUsers = () => {
                 <Button
                   id={"add-to-group"}
                   label={"Add to Group"}
-                  icon={<GroupsIcon />}
+                  icon={<UsersIcon />}
                   disabled={checkedUsers.length <= 0}
                   onClick={() => {
                     if (checkedUsers.length > 0) {

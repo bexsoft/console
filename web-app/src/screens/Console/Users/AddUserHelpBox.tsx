@@ -18,7 +18,7 @@ import React from "react";
 import {
   Box,
   PencilLineIcon,
-  GroupsIcon,
+  UsersIcon,
   CircleHelpIcon,
   UsersIcon,
 } from "mds";
@@ -100,7 +100,7 @@ const AddUserHelpBox = () => {
         }}
       >
         <FeatureItem icon={<UsersIcon />} description={`Create Users`} />
-        <FeatureItem icon={<GroupsIcon />} description={`Manage Groups`} />
+        <FeatureItem icon={<UsersIcon />} description={`Manage Groups`} />
         <FeatureItem
           icon={<PencilLineIcon />}
           description={`Assign Policies`}

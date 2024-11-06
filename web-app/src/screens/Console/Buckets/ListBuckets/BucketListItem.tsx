@@ -17,25 +17,9 @@ import React, { Fragment, useState } from "react";
 import get from "lodash/get";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  Box,
-  breakPoints,
-  BucketIcon,
-  Checkbox,
-  Grid,
-  HelpTip,
-  ReportedUsageIcon,
-  TotalObjectsIcon,
-} from "mds";
-import {
-  calculateBytes,
-  niceBytes,
-  prettyNumber,
-} from "../../../../common/utils";
-import {
-  IAM_PERMISSIONS,
-  IAM_ROLES,
-} from "../../../../common/SecureComponent/permissions";
+import { Box, breakPoints, BucketIcon, Checkbox, Grid, ReportedUsageIcon, Tooltip, TotalObjectsIcon } from "mds";
+import { calculateBytes, niceBytes, prettyNumber } from "../../../../common/utils";
+import { IAM_PERMISSIONS, IAM_ROLES } from "../../../../common/SecureComponent/permissions";
 import { hasPermission } from "../../../../common/SecureComponent";
 import { Bucket } from "../../../../api/consoleApi";
 import { usageClarifyingContent } from "screens/Console/Dashboard/BasicDashboard/ReportedUsage";
@@ -220,9 +204,9 @@ const BucketListItem = ({
           }
         >
           {bucket.details?.versioning && (
-            <HelpTip content={usageClarifyingContent} placement="top">
-              <ReportedUsageIcon />{" "}
-            </HelpTip>
+            <Tooltip tooltip={usageClarifyingContent} placement="top">
+              <ReportedUsageIcon />
+            </Tooltip>
           )}
           {!bucket.details?.versioning && <ReportedUsageIcon />}
           <span className={"metricLabel"}>Usage</span>

@@ -22,7 +22,7 @@ import {
   BucketIcon,
   Button,
   Grid,
-  GroupsIcon,
+  UsersIcon,
   ShieldCheckIcon,
   Loader,
   PageLayout,
@@ -206,7 +206,7 @@ const SiteReplicationStatus = () => {
               entityStatObj={groupStats}
               entityTextPlural={"Groups"}
               maxValue={maxGroups}
-              icon={<GroupsIcon />}
+              icon={<UsersIcon />}
             />
             <SREntityStatus
               entityStatObj={policyStats}

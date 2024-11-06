@@ -17,7 +17,7 @@
 import React, { Fragment } from "react";
 import get from "lodash/get";
 import styled from "styled-components";
-import { Box, HelpTip } from "mds";
+import { Box, Tooltip } from "mds";
 import { Cell, Pie, PieChart } from "recharts";
 
 const ReportedUsageMain = styled.div(({ theme }) => ({
@@ -104,17 +104,19 @@ const ReportedUsage = ({
           <span>Reported Usage</span>
         </div>
 
-        <HelpTip content={usageClarifyingContent} placement="left">
-          <label
-            className={"unit-value"}
-            style={{
-              fontWeight: 600,
-            }}
-          >
-            {total}
-          </label>
-          <label className={"unit-type"}>{unit}</label>
-        </HelpTip>
+        <Tooltip tooltip={usageClarifyingContent} placement="left">
+          <>
+            <label
+              className={"unit-value"}
+              style={{
+                fontWeight: 600,
+              }}
+            >
+              {total}
+            </label>
+            <label className={"unit-type"}>{unit}</label>
+          </>
+        </Tooltip>
       </Box>
 
       <Box>

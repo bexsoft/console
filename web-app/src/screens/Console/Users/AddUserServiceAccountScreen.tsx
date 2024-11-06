@@ -20,16 +20,15 @@ import {
   BackLink,
   Box,
   Button,
+  DateTimeInput,
   FormLayout,
   Grid,
   InputBox,
-  PageLayout,
   KeyRoundIcon,
+  PageLayout,
   SquareUserRoundIcon,
-  UserRoundCheckIcon,
   Toggle,
-  HelpTip,
-  DateTimeInput,
+  UserRoundCheckIcon,
 } from "mds";
 import { modalStyleUtils } from "../Common/FormComponents/common/styleLibrary";
 import { NewServiceAccount } from "../Common/CredentialsPrompt/types";
@@ -74,7 +73,7 @@ const AddServiceAccount = () => {
         .invoke(
           "POST",
           `/api/v1/user/${encodeURIComponent(
-            userName,
+            userName
           )}/service-account-credentials`,
           {
             policy: policyJSON,
@@ -84,7 +83,7 @@ const AddServiceAccount = () => {
             comment: comments,
             name: name,
             expiry: expiryDt,
-          },
+          }
         )
         .then((res) => {
           setAddSending(false);
@@ -226,24 +225,10 @@ const AddServiceAccount = () => {
               {isRestrictedByPolicy && (
                 <Grid item xs={12}>
                   <Box>
-                    <HelpTip
-                      content={
-                        <Fragment>
-                          <a
-                            target="blank"
-                            href="https://min.io/docs/minio/kubernetes/upstream/administration/identity-access-management/policy-based-access-control.html#policy-document-structure"
-                          >
-                            Guide to access policy structure
-                          </a>
-                        </Fragment>
-                      }
-                      placement="right"
-                    >
-                      <PanelTitle>
-                        Current User Policy - edit the JSON to remove
-                        permissions for this Access Key
-                      </PanelTitle>
-                    </HelpTip>
+                    <PanelTitle>
+                      Current User Policy - edit the JSON to remove permissions
+                      for this Access Key
+                    </PanelTitle>
                   </Box>
                   <Grid item xs={12} sx={{ ...modalStyleUtils.formScrollable }}>
                     <CodeMirrorWrapper

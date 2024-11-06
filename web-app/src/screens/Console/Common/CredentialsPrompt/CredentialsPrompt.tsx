@@ -22,7 +22,7 @@ import {
   Button,
   DownloadIcon,
   SquareUserRoundIcon,
-  WarnIcon,
+  CircleAlertIcon,
   Grid,
 } from "mds";
 import { NewServiceAccount } from "./types";
@@ -219,7 +219,7 @@ const CredentialsPrompt = ({
             </WarningBlock>
           ) : (
             <WarningBlock>
-              <WarnIcon />
+              <CircleAlertIcon />
               <span>
                 Write these down, as this is the only time the secret will be
                 displayed.

@@ -17,7 +17,7 @@
 import React, { useCallback, useEffect, useState, Fragment } from "react";
 
 import {
-  AddMembersToGroupIcon,
+  UserPlusIcon,
   Button,
   FormLayout,
   Grid,
@@ -139,7 +139,7 @@ const ChangeUserGroups = ({
       }}
       modalOpen={open}
       title={"Set Groups"}
-      titleIcon={<AddMembersToGroupIcon />}
+      titleIcon={<UserPlusIcon />}
     >
       <Fragment>
         <form

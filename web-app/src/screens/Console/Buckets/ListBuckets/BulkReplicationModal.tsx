@@ -24,7 +24,7 @@ import {
   Select,
   Toggle,
   Tooltip,
-  WarnIcon,
+  CircleAlertIcon,
   Wizard,
 } from "mds";
 import get from "lodash/get";
@@ -221,7 +221,7 @@ const AddBulkReplicationModal = ({
               }}
             >
               <Tooltip tooltip={errString} placement="top">
-                <WarnIcon />
+                <CircleAlertIcon />
               </Tooltip>
             </Box>
           );

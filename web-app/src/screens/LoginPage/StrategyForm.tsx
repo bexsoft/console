@@ -21,12 +21,12 @@ import {
   DropdownSelector,
   Grid,
   InputBox,
-  LockFilledIcon,
-  LogoutIcon,
+  LockKeyholeIcon,
+  LogOutIcon,
   KeyRoundIcon,
   ProgressBar,
   Select,
-  UserFilledIcon,
+  UserIcon,
 } from "mds";
 import {
   setAccessKey,
@@ -78,7 +78,7 @@ const StrategyForm = ({ redirectRules }: { redirectRules: RedirectRule[] }) => {
     ssoOptions = redirectRules.map((r) => ({
       label: `${r.displayName}${r.serviceType ? ` - ${r.serviceType}` : ""}`,
       value: r.redirect,
-      icon: <LogoutIcon />,
+      icon: <LogOutIcon />,
     }));
 
     selectOptions = [
@@ -181,7 +181,7 @@ const StrategyForm = ({ redirectRules }: { redirectRules: RedirectRule[] }) => {
                   name="accessKey"
                   autoComplete="username"
                   disabled={loginSending}
-                  startIcon={<UserFilledIcon />}
+                  startIcon={<UserIcon />}
                 />
               </Grid>
               <Grid item xs={12} sx={{ marginBottom: useSTS ? 14 : 0 }}>
@@ -197,7 +197,7 @@ const StrategyForm = ({ redirectRules }: { redirectRules: RedirectRule[] }) => {
                   autoComplete="current-password"
                   disabled={loginSending}
                   placeholder={useSTS ? "STS Secret" : "Password"}
-                  startIcon={<LockFilledIcon />}
+                  startIcon={<LockKeyholeIcon />}
                 />
               </Grid>
               {useSTS && (
