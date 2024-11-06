@@ -17,7 +17,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  AddIcon,
+  PlusIcon,
   BackLink,
   Box,
   Button,
@@ -205,7 +205,7 @@ const GroupsDetails = () => {
                   id={"add-user-group"}
                   label={memberActionText}
                   variant="callAction"
-                  icon={<AddIcon />}
+                  icon={<PlusIcon />}
                   onClick={() => {
                     setUsersOpen(true);
                   }}

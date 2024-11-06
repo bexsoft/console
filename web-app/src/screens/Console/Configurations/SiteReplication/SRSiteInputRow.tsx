@@ -16,7 +16,7 @@
 
 import React, { Fragment } from "react";
 import TooltipWrapper from "../../Common/TooltipWrapper/TooltipWrapper";
-import { AddIcon, Box, Button, Grid, InputBox, RemoveIcon } from "mds";
+import { PlusIcon, Box, Button, Grid, InputBox, RemoveIcon } from "mds";
 import { SiteInputRow } from "./Types";
 
 interface ISRSiteInputRowProps {
@@ -131,7 +131,7 @@ const SRSiteInputRow = ({
                   id={`add-row-${index}`}
                   variant="regular"
                   disabled={!canAdd}
-                  icon={<AddIcon />}
+                  icon={<PlusIcon />}
                   onClick={(e) => {
                     e.preventDefault();
                     onAddClick?.(index);

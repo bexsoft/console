@@ -17,7 +17,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 
 import {
-  AddIcon,
+  PlusIcon,
   Box,
   BucketEncryptionIcon,
   Button,
@@ -210,8 +210,8 @@ const EnableBucketEncryption = ({
                   <TooltipWrapper tooltip={"Add key"}>
                     <Button
                       id={"import-key"}
-                      variant={"regular"}
-                      icon={<AddIcon />}
+                      variant={"secondary"}
+                      icon={<PlusIcon />}
                       onClick={(e) => {
                         setAddOpen(true);
                         e.preventDefault();

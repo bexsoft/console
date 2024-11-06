@@ -17,7 +17,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  AddIcon,
+  PlusIcon,
   BucketsIcon,
   Button,
   HelpBox,
@@ -277,7 +277,7 @@ const ListBuckets = () => {
                       id={"select-all-buckets"}
                       onClick={selectAllBuckets}
                       icon={<SelectAllIcon />}
-                      variant={"regular"}
+                      variant={"secondary"}
                     />
                   </TooltipWrapper>
                 )}
@@ -304,7 +304,7 @@ const ListBuckets = () => {
                       setLifecycleModalOpen(true);
                     }}
                     icon={<LifecycleConfigIcon />}
-                    variant={"regular"}
+                    variant={"secondary"}
                     disabled={selectedBuckets.length === 0 || !canPutLifecycle}
                   />
                 </TooltipWrapper>
@@ -326,7 +326,7 @@ const ListBuckets = () => {
                       setReplicationModalOpen(true);
                     }}
                     icon={<MultipleBucketsIcon />}
-                    variant={"regular"}
+                    variant={"secondary"}
                     disabled={selectedBuckets.length === 0}
                   />
                 </TooltipWrapper>
@@ -340,7 +340,7 @@ const ListBuckets = () => {
                   setLoading(true);
                 }}
                 icon={<RefreshIcon />}
-                variant={"regular"}
+                variant={"secondary"}
               />
             </TooltipWrapper>
 
@@ -360,8 +360,8 @@ const ListBuckets = () => {
                   onClick={() => {
                     navigate(IAM_PAGES.ADD_BUCKETS);
                   }}
-                  icon={<AddIcon />}
-                  variant={"callAction"}
+                  icon={<PlusIcon />}
+                  variant={"primary"}
                   disabled={!canCreateBucket}
                   label={"Create Bucket"}
                 />

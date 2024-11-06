@@ -25,7 +25,7 @@ import React, {
 import get from "lodash/get";
 import debounce from "lodash/debounce";
 import {
-  AddIcon,
+  PlusIcon,
   Box,
   Grid,
   HelpIcon,
@@ -192,7 +192,7 @@ const QueryMultiSelector = ({
           onChange={onChangeValue}
           index={index}
           placeholder={valuePlaceholder}
-          overlayIcon={index === currentValues.length - 1 ? <AddIcon /> : null}
+          overlayIcon={index === currentValues.length - 1 ? <PlusIcon /> : null}
           overlayAction={() => {
             addEmptyLine();
           }}

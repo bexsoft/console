@@ -159,7 +159,7 @@ const OBListBuckets = () => {
                   setLoading(true);
                 }}
                 icon={<RefreshIcon />}
-                variant={"regular"}
+                variant={"secondary"}
               />
             </TooltipWrapper>
           </Grid>

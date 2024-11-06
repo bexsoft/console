@@ -16,7 +16,7 @@
 
 import React, { Fragment, useEffect, useState } from "react";
 import {
-  AddIcon,
+  PlusIcon,
   Button,
   DataTable,
   Grid,
@@ -207,7 +207,7 @@ const ListPolicies = () => {
                   id={"create-policy"}
                   label={"Create Policy"}
                   variant="callAction"
-                  icon={<AddIcon />}
+                  icon={<PlusIcon />}
                   onClick={() => {
                     navigate(`${IAM_PAGES.POLICY_ADD}`);
                   }}

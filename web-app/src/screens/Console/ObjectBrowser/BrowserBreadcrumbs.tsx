@@ -269,7 +269,7 @@ const BrowserBreadcrumbs = ({
                       }}
                     />
                   }
-                  variant={"regular"}
+                  variant={"secondary"}
                   onClick={() => {
                     dispatch(setSnackBarMessage("Path copied to clipboard"));
                   }}
@@ -309,7 +309,7 @@ const BrowserBreadcrumbs = ({
               style={{
                 whiteSpace: "nowrap",
               }}
-              variant={"regular"}
+              variant={"secondary"}
               label={"Create new path"}
             />
           </Tooltip>

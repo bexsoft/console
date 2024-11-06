@@ -18,7 +18,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   ActionLink,
-  AddIcon,
+  PlusIcon,
   Box,
   Button,
   ClustersIcon,
@@ -168,7 +168,7 @@ const SiteReplication = () => {
                   label={"Add Sites"}
                   variant="callAction"
                   disabled={isRemoving}
-                  icon={<AddIcon />}
+                  icon={<PlusIcon />}
                   onClick={() => {
                     navigate(IAM_PAGES.SITE_REPLICATION_ADD);
                   }}

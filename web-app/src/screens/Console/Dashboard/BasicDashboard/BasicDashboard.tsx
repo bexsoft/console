@@ -171,7 +171,7 @@ const BasicDashboard = ({ usage }: IDashboardProps) => {
                         onClick={() => {}}
                         label={"Browse"}
                         icon={<ArrowRightIcon />}
-                        variant={"regular"}
+                        variant={"secondary"}
                         style={{
                           padding: 5,
                           height: 30,

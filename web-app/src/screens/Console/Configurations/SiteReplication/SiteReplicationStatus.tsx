@@ -164,7 +164,7 @@ const SiteReplicationStatus = () => {
                   }}
                   label={"Refresh"}
                   icon={<RefreshIcon />}
-                  variant={"regular"}
+                  variant={"secondary"}
                   collapseOnSmall={false}
                 />
               </TooltipWrapper>

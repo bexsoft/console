@@ -17,7 +17,7 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  AddIcon,
+  PlusIcon,
   BackLink,
   Box,
   Button,
@@ -25,7 +25,7 @@ import {
   Grid,
   IAMPoliciesIcon,
   PageLayout,
-  PasswordKeyIcon,
+  KeyRoundIcon,
   ScreenTitle,
   SectionTitle,
   Switch,
@@ -348,8 +348,8 @@ const UserDetails = () => {
                     <Button
                       id={"change-user-password"}
                       onClick={changeUserPassword}
-                      icon={<PasswordKeyIcon />}
-                      variant={"regular"}
+                      icon={<KeyRoundIcon />}
+                      variant={"secondary"}
                       disabled={userLoggedIn === userName}
                     />
                   </TooltipWrapper>
@@ -397,8 +397,8 @@ const UserDetails = () => {
                                 onClick={() => {
                                   setAddGroupOpen(true);
                                 }}
-                                icon={<AddIcon />}
-                                variant={"callAction"}
+                                icon={<PlusIcon />}
+                                variant={"primary"}
                                 disabled={!canAssignGroup}
                               />
                             </TooltipWrapper>
@@ -476,7 +476,7 @@ const UserDetails = () => {
                                   setPolicyOpen(true);
                                 }}
                                 icon={<IAMPoliciesIcon />}
-                                variant={"callAction"}
+                                variant={"primary"}
                                 disabled={!canAssignPolicy}
                               />
                             </TooltipWrapper>

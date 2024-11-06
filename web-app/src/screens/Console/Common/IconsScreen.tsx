@@ -109,9 +109,9 @@ const IconsScreen = () => {
         }}
       >
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.AccountIcon />
+          <cicons.UserRoundIcon />
           <br />
-          AccountIcon
+          UserRoundIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -127,9 +127,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.AddIcon />
+          <cicons.PlusIcon />
           <br />
-          AddIcon
+          PlusIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -721,9 +721,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.NewAccountIcon />
+          <cicons.NewUserRoundIcon />
           <br />
-          NewAccountIcon
+          NewUserRoundIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -811,9 +811,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.PasswordKeyIcon />
+          <cicons.KeyRoundIcon />
           <br />
-          PasswordKeyIcon
+          KeyRoundIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -937,9 +937,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.ServiceAccountIcon />
+          <cicons.ServiceUserRoundIcon />
           <br />
-          ServiceAccountIcon
+          ServiceUserRoundIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>

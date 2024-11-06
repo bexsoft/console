@@ -17,7 +17,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import get from "lodash/get";
 import {
-  AddIcon,
+  PlusIcon,
   Button,
   DataTable,
   Grid,
@@ -312,8 +312,8 @@ const BucketLifecyclePanel = () => {
                   setAddLifecycleOpen(true);
                 }}
                 label={"Add Lifecycle Rule"}
-                icon={<AddIcon />}
-                variant={"callAction"}
+                icon={<PlusIcon />}
+                variant={"primary"}
               />
             </TooltipWrapper>
           </SecureComponent>

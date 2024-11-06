@@ -17,7 +17,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import {
   ActionLink,
-  AddIcon,
+  PlusIcon,
   Box,
   Button,
   CircleIcon,
@@ -189,7 +189,7 @@ const ListEventDestinations = () => {
                 id={"add-notification-target"}
                 label={"Add Event Destination"}
                 variant="callAction"
-                icon={<AddIcon />}
+                icon={<PlusIcon />}
                 onClick={() => {
                   navigate(IAM_PAGES.EVENT_DESTINATIONS_ADD);
                 }}

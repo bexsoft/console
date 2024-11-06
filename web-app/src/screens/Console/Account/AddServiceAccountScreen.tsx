@@ -20,14 +20,14 @@ import {
   BackLink,
   Button,
   PageLayout,
-  PasswordKeyIcon,
+  KeyRoundIcon,
   ServiceAccountCredentialsIcon,
   Grid,
   Box,
   FormLayout,
   InputBox,
   Switch,
-  ServiceAccountIcon,
+  ServiceUserRoundIcon,
   HelpTip,
   DateTimeInput,
 } from "mds";
@@ -183,7 +183,7 @@ const AddServiceAccount = () => {
                 onChange={(e) => {
                   setAccessKey(e.target.value);
                 }}
-                startIcon={<ServiceAccountIcon />}
+                startIcon={<ServiceUserRoundIcon />}
               />
               <InputBox
                 value={secretKey}
@@ -195,7 +195,7 @@ const AddServiceAccount = () => {
                 onChange={(e) => {
                   setSecretKey(e.target.value);
                 }}
-                startIcon={<PasswordKeyIcon />}
+                startIcon={<KeyRoundIcon />}
               />
               <Switch
                 value="serviceAccountPolicy"

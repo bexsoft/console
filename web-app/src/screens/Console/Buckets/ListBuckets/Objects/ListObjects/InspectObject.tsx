@@ -18,7 +18,7 @@ import React, { useState } from "react";
 import {
   Button,
   InspectMenuIcon,
-  PasswordKeyIcon,
+  KeyRoundIcon,
   Switch,
   Grid,
   Box,
@@ -152,7 +152,7 @@ const InspectObject = ({
           modalOpen={inspectOpen}
           title="Inspect Decryption Key"
           onClose={onCloseDecKeyModal}
-          titleIcon={<PasswordKeyIcon />}
+          titleIcon={<KeyRoundIcon />}
         >
           <Box>
             This will be displayed only once. It cannot be recovered.

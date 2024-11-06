@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { useEffect, useState } from "react";
-import { AddIcon, Button, DataTable, Grid, PageLayout, RefreshIcon } from "mds";
+import { PlusIcon, Button, DataTable, Grid, PageLayout, RefreshIcon } from "mds";
 import { useNavigate } from "react-router-dom";
 import api from "../../../common/api";
 import {
@@ -144,8 +144,8 @@ const ListKeys = () => {
                   <Button
                     id={"create-key"}
                     label={"Create Key"}
-                    variant={"callAction"}
-                    icon={<AddIcon />}
+                    variant={"primary"}
+                    icon={<PlusIcon />}
                     onClick={() => navigate(IAM_PAGES.KMS_KEYS_ADD)}
                   />
                 </TooltipWrapper>

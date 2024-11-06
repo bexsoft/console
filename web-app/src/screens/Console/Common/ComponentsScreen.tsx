@@ -47,7 +47,7 @@ const ComponentsScreen = () => {
             <Button
               id={"open-dialog-test"}
               type="button"
-              variant={"regular"}
+              variant={"secondary"}
               onClick={() => {
                 setDialogOpen(true);
               }}

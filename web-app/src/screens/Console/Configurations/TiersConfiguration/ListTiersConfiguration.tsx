@@ -20,7 +20,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   ActionLink,
-  AddIcon,
+  PlusIcon,
   Box,
   Button,
   DataTable,
@@ -345,7 +345,7 @@ const ListTiersConfiguration = () => {
                   >
                     <Button
                       id={"add-tier"}
-                      icon={<AddIcon />}
+                      icon={<PlusIcon />}
                       label={`Create Tier`}
                       onClick={addTier}
                       variant="callAction"

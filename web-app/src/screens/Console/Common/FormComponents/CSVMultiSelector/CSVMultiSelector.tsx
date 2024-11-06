@@ -23,7 +23,7 @@ import React, {
   Fragment,
 } from "react";
 import get from "lodash/get";
-import { AddIcon, Box, HelpIcon, InputBox, InputLabel, Tooltip } from "mds";
+import { PlusIcon, Box, HelpIcon, InputBox, InputLabel, Tooltip } from "mds";
 
 interface ICSVMultiSelector {
   elements: string;
@@ -129,7 +129,7 @@ const CSVMultiSelector = ({
         onChange={onChangeElement}
         index={index}
         placeholder={commonPlaceholder}
-        overlayIcon={index === currentElements.length - 1 ? <AddIcon /> : null}
+        overlayIcon={index === currentElements.length - 1 ? <PlusIcon /> : null}
         overlayAction={() => {
           addEmptyLine(currentElements);
         }}

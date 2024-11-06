@@ -317,7 +317,7 @@ const IDPLDAPConfigurationDetails = () => {
                             <Button
                               id={"edit"}
                               type="button"
-                              variant={"callAction"}
+                              variant={"primary"}
                               icon={<EditIcon />}
                               onClick={toggleEditMode}
                               label={"Edit Configuration"}

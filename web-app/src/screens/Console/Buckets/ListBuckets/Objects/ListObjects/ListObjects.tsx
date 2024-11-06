@@ -1084,7 +1084,7 @@ const ListObjects = () => {
                           />
                         </Badge>
                       }
-                      variant={"regular"}
+                      variant={"secondary"}
                       onClick={() => {
                         setRewindSelect(true);
                       }}
@@ -1097,7 +1097,7 @@ const ListObjects = () => {
                     id={"refresh-objects-list"}
                     label={"Refresh"}
                     icon={<RefreshIcon />}
-                    variant={"regular"}
+                    variant={"secondary"}
                     onClick={() => {
                       if (versionsMode) {
                         dispatch(setLoadingVersions(true));

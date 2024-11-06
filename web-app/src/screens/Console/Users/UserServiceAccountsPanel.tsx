@@ -16,7 +16,7 @@
 
 import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AddIcon, Box, Button, DataTable, DeleteIcon, SectionTitle } from "mds";
+import { PlusIcon, Box, Button, DataTable, DeleteIcon, SectionTitle } from "mds";
 import api from "../../../common/api";
 import { NewServiceAccount } from "../Common/CredentialsPrompt/types";
 import { ErrorResponseHandler } from "../../../common/types";
@@ -232,7 +232,7 @@ const UserServiceAccountsPanel = ({
                   id={"create-service-account"}
                   label={"Create Access Key"}
                   variant="callAction"
-                  icon={<AddIcon />}
+                  icon={<PlusIcon />}
                   onClick={() => {
                     navigate(
                       `/identity/users/new-user-sa/${encodeURIComponent(user)}`,

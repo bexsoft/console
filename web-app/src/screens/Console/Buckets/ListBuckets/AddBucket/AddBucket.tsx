@@ -662,7 +662,7 @@ const AddBucket = () => {
               <Button
                 id={"clear"}
                 type="button"
-                variant={"regular"}
+                variant={"secondary"}
                 className={"clearButton"}
                 onClick={resForm}
                 label={"Clear"}

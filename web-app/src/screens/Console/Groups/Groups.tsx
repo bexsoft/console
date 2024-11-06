@@ -17,7 +17,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  AddIcon,
+  PlusIcon,
   Button,
   DeleteIcon,
   GroupsIcon,
@@ -245,7 +245,7 @@ const Groups = () => {
                     label={"Assign Policy"}
                     icon={<IAMPoliciesIcon />}
                     disabled={checkedGroups.length < 1 || !applyPolicy}
-                    variant={"regular"}
+                    variant={"secondary"}
                   />
                 </TooltipWrapper>
               </SecureComponent>
@@ -290,7 +290,7 @@ const Groups = () => {
                     id={"create-group"}
                     label={"Create Group"}
                     variant="callAction"
-                    icon={<AddIcon />}
+                    icon={<PlusIcon />}
                     onClick={() => {
                       navigate(`${IAM_PAGES.GROUPS_ADD}`);
                     }}

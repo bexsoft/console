@@ -17,7 +17,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  AddIcon,
+  PlusIcon,
   Button,
   DeleteIcon,
   GroupsIcon,
@@ -261,7 +261,7 @@ const ListUsers = () => {
                       setAddGroupOpen(true);
                     }
                   }}
-                  variant={"regular"}
+                  variant={"secondary"}
                 />
               </TooltipWrapper>
             </SecureComponent>
@@ -302,11 +302,11 @@ const ListUsers = () => {
                 <Button
                   id={"create-user"}
                   label={"Create User"}
-                  icon={<AddIcon />}
+                  icon={<PlusIcon />}
                   onClick={() => {
                     navigate(`${IAM_PAGES.USER_ADD}`);
                   }}
-                  variant={"callAction"}
+                  variant={"primary"}
                   disabled={
                     !hasPermission(
                       "console-ui",

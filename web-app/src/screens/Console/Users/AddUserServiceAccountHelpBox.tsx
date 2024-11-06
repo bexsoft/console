@@ -18,8 +18,8 @@ import {
   Box,
   HelpIconFilled,
   IAMPoliciesIcon,
-  PasswordKeyIcon,
-  ServiceAccountIcon,
+  KeyRoundIcon,
+  ServiceUserRoundIcon,
 } from "mds";
 
 const FeatureItem = ({
@@ -83,7 +83,7 @@ const AddUserServiceAccountHelpBox = () => {
       <Box sx={{ fontSize: "14px", marginBottom: "15px" }}>
         <Box sx={{ paddingBottom: "20px" }}>
           <FeatureItem
-            icon={<ServiceAccountIcon />}
+            icon={<ServiceUserRoundIcon />}
             description={`Create Access Keys`}
           />
           <Box sx={{ paddingTop: "20px" }}>
@@ -94,7 +94,7 @@ const AddUserServiceAccountHelpBox = () => {
         </Box>
         <Box sx={{ paddingBottom: "20px" }}>
           <FeatureItem
-            icon={<PasswordKeyIcon />}
+            icon={<KeyRoundIcon />}
             description={`Assign Custom Credentials`}
           />
           <Box sx={{ paddingTop: "10px" }}>

@@ -19,7 +19,7 @@ import get from "lodash/get";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
-  AddIcon,
+  PlusIcon,
   Button,
   HelpBox,
   LambdaIcon,
@@ -170,8 +170,8 @@ const BucketEventsPanel = () => {
                   setAddEventScreenOpen(true);
                 }}
                 label={"Subscribe to Event"}
-                icon={<AddIcon />}
-                variant={"callAction"}
+                icon={<PlusIcon />}
+                variant={"primary"}
               />
             </TooltipWrapper>
           </SecureComponent>

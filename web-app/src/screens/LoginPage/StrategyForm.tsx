@@ -23,7 +23,7 @@ import {
   InputBox,
   LockFilledIcon,
   LogoutIcon,
-  PasswordKeyIcon,
+  KeyRoundIcon,
   ProgressBar,
   Select,
   UserFilledIcon,
@@ -213,7 +213,7 @@ const StrategyForm = ({ redirectRules }: { redirectRules: RedirectRule[] }) => {
                     name="STS"
                     autoComplete="sts"
                     disabled={loginSending}
-                    startIcon={<PasswordKeyIcon />}
+                    startIcon={<KeyRoundIcon />}
                   />
                 </Grid>
               )}

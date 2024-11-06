@@ -62,7 +62,7 @@ const PreviewPDF = ({
                 <Button
                   id={"download-preview"}
                   onClick={downloadFile}
-                  variant={"callAction"}
+                  variant={"primary"}
                 >
                   Download File
                 </Button>
@@ -91,7 +91,7 @@ const PreviewPDF = ({
                 <Button
                   id={"download-preview"}
                   onClick={downloadFile}
-                  variant={"callAction"}
+                  variant={"primary"}
                 >
                   Download File
                 </Button>

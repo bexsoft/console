@@ -24,9 +24,9 @@ import {
   Grid,
   InputBox,
   PageLayout,
-  PasswordKeyIcon,
+  KeyRoundIcon,
   ServiceAccountCredentialsIcon,
-  ServiceAccountIcon,
+  ServiceUserRoundIcon,
   Switch,
   HelpTip,
   DateTimeInput,
@@ -195,7 +195,7 @@ const AddServiceAccount = () => {
                 onChange={(e) => {
                   setAccessKey(e.target.value);
                 }}
-                startIcon={<ServiceAccountIcon />}
+                startIcon={<ServiceUserRoundIcon />}
               />
               <InputBox
                 value={secretKey}
@@ -207,7 +207,7 @@ const AddServiceAccount = () => {
                 onChange={(e) => {
                   setSecretKey(e.target.value);
                 }}
-                startIcon={<PasswordKeyIcon />}
+                startIcon={<KeyRoundIcon />}
               />
 
               <Switch

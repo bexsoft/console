@@ -242,7 +242,7 @@ const AddTagModal = ({
                             <Tag
                               id={`${tagKey} : ${tag}`}
                               label={`${tagKey} : ${tag}`}
-                              variant={"regular"}
+                              variant={"secondary"}
                               color={"default"}
                               onDelete={() => {
                                 onDeleteTag(tagKey, tag);

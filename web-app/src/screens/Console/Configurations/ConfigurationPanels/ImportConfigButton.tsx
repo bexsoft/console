@@ -96,7 +96,7 @@ const ImportConfigButton = () => {
           }}
           icon={<DownloadIcon />}
           label={"Import"}
-          variant={"regular"}
+          variant={"secondary"}
           disabled={isReqLoading}
         />
       </TooltipWrapper>

@@ -119,7 +119,7 @@ const UploadFilesButton = ({
           onClick={handleClick}
           label={"Upload"}
           icon={<UploadIcon />}
-          variant={"callAction"}
+          variant={"primary"}
           disabled={forceDisable || !uploadEnabled}
           sx={overrideStyles}
         />

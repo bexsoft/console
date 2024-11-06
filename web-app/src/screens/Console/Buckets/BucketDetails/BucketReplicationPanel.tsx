@@ -18,7 +18,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  AddIcon,
+  PlusIcon,
   Box,
   BucketsIcon,
   Button,
@@ -303,8 +303,8 @@ const BucketReplicationPanel = () => {
                     );
                   }}
                   label={"Add Replication Rule"}
-                  icon={<AddIcon />}
-                  variant={"callAction"}
+                  icon={<PlusIcon />}
+                  variant={"primary"}
                 />
               </TooltipWrapper>
             </SecureComponent>

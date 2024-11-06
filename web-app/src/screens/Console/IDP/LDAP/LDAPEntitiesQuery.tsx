@@ -16,7 +16,7 @@
 
 import React, { Fragment, useState } from "react";
 import {
-  AddIcon,
+  PlusIcon,
   Box,
   Button,
   Grid,
@@ -151,7 +151,7 @@ const LDAPEntitiesQuery = () => {
                       }}
                       overlayIcon={
                         users.length === index + 1 ? (
-                          <AddIcon />
+                          <PlusIcon />
                         ) : (
                           <RemoveIcon />
                         )
@@ -191,7 +191,7 @@ const LDAPEntitiesQuery = () => {
                       }}
                       overlayIcon={
                         groups.length === index + 1 ? (
-                          <AddIcon />
+                          <PlusIcon />
                         ) : (
                           <RemoveIcon />
                         )
@@ -314,7 +314,7 @@ const LDAPEntitiesQuery = () => {
           <Button
             id={"search-entity"}
             type={"button"}
-            variant={"callAction"}
+            variant={"primary"}
             onClick={searchEntities}
             icon={<SearchIcon />}
           >

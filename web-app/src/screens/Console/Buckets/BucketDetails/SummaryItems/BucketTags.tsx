@@ -16,7 +16,7 @@
 
 import React, { useEffect, useState } from "react";
 import get from "lodash/get";
-import { AddIcon, Box, Loader, Tag } from "mds";
+import { PlusIcon, Box, Loader, Tag } from "mds";
 import { ErrorResponseHandler } from "../../../../../common/types";
 import { IAM_SCOPES } from "../../../../../common/SecureComponent/permissions";
 import { SecureComponent } from "../../../../../common/SecureComponent";
@@ -157,7 +157,7 @@ const BucketTags = ({ bucketName }: BucketTagProps) => {
             >
               <Tag
                 label="Add tag"
-                icon={<AddIcon />}
+                icon={<PlusIcon />}
                 id={"create-tag"}
                 variant={"outlined"}
                 onClick={() => {

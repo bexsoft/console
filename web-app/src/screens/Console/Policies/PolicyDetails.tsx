@@ -588,7 +588,7 @@ const PolicyDetails = () => {
                             {!policy && (
                               <Button
                                 type="button"
-                                variant={"regular"}
+                                variant={"secondary"}
                                 id={"clear-policy"}
                                 onClick={() => {
                                   resetForm();
