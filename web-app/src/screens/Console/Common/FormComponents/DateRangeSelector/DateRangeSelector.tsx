@@ -160,7 +160,7 @@ const DateRangeSelector = ({
             <Button
               id={"sync"}
               type="button"
-              variant="callAction"
+              variant="primary"
               onClick={triggerSync}
               icon={<SyncIcon />}
               label={"Sync"}

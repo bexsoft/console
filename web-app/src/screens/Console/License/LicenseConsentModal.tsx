@@ -114,7 +114,7 @@ const LicenseConsentModal = ({
           <Button
             id={"confirm"}
             type="button"
-            variant="callAction"
+            variant="primary"
             onClick={recordAgplConsent}
             label={"Acknowledge"}
           />

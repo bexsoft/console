@@ -394,7 +394,7 @@ const ListBuckets = () => {
               <Grid container>
                 <Grid item xs={8}>
                   <HelpBox
-                    iconComponent={<BucketsIcon />}
+                    icon={<BucketsIcon />}
                     title={"No Results"}
                     help={
                       <Fragment>
@@ -409,7 +409,7 @@ const ListBuckets = () => {
               <Grid container>
                 <Grid item xs={8}>
                   <HelpBox
-                    iconComponent={<BucketsIcon />}
+                    icon={<BucketsIcon />}
                     title={"Buckets"}
                     help={
                       <Fragment>

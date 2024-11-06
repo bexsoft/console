@@ -82,7 +82,7 @@ const ConfirmDialog = ({
           disabled={isLoading}
           type="button"
           {...cancelButtonProps}
-          variant="regular"
+          variant="secondary"
           id={"confirm-cancel"}
           label={cancelText}
         />

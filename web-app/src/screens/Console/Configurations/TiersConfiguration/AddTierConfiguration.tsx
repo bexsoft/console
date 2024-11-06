@@ -471,7 +471,7 @@ const AddTierConfiguration = () => {
               <Button
                 id={"save-tier-configuration"}
                 type="submit"
-                variant="callAction"
+                variant="primary"
                 disabled={saving || !isFormValid}
                 label={"Save Tier Configuration"}
               />

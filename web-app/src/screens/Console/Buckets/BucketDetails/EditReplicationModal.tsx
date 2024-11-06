@@ -21,7 +21,7 @@ import {
   FormLayout,
   InputBox,
   ReadBox,
-  Switch,
+  Toggle,
   Grid,
 } from "mds";
 import ModalWrapper from "../../Common/ModalWrapper/ModalWrapper";
@@ -150,7 +150,7 @@ const EditReplicationModal = ({
         }}
       >
         <FormLayout containerPadding={false} withBorders={false}>
-          <Switch
+          <Toggle
             checked={ruleState}
             id="ruleState"
             name="ruleState"
@@ -212,7 +212,7 @@ const EditReplicationModal = ({
           <fieldset className={"inputItem"}>
             <legend>Replication Options</legend>
 
-            <Switch
+            <Toggle
               checked={repExisting}
               id="repExisting"
               name="repExisting"
@@ -223,7 +223,7 @@ const EditReplicationModal = ({
               description={"Replicate existing objects"}
             />
 
-            <Switch
+            <Toggle
               checked={metadataSync}
               id="metadatataSync"
               name="metadatataSync"
@@ -234,7 +234,7 @@ const EditReplicationModal = ({
               description={"Metadata Sync"}
             />
 
-            <Switch
+            <Toggle
               checked={repDeleteMarker}
               id="deleteMarker"
               name="deleteMarker"
@@ -244,7 +244,7 @@ const EditReplicationModal = ({
               }}
               description={"Replicate soft deletes"}
             />
-            <Switch
+            <Toggle
               checked={repDelete}
               id="repDelete"
               name="repDelete"
@@ -259,7 +259,7 @@ const EditReplicationModal = ({
             <Button
               id={"cancel-edit-replication"}
               type="button"
-              variant="regular"
+              variant="secondary"
               disabled={editLoading || saveEdit}
               onClick={() => {
                 closeModalAndRefresh(false);
@@ -269,7 +269,7 @@ const EditReplicationModal = ({
             <Button
               id={"save-replication"}
               type="submit"
-              variant="callAction"
+              variant="primary"
               disabled={editLoading || saveEdit}
               label={"Save"}
             />

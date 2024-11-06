@@ -20,7 +20,7 @@ import {
   Button,
   FormLayout,
   InputBox,
-  Switch,
+  Toggle,
   Grid,
   ProgressBar,
 } from "mds";
@@ -125,7 +125,7 @@ const EnableQuota = ({
         }}
       >
         <FormLayout withBorders={false} containerPadding={false}>
-          <Switch
+          <Toggle
             value="bucket_quota"
             id="bucket_quota"
             name="bucket_quota"
@@ -169,7 +169,7 @@ const EnableQuota = ({
             <Button
               id={"cancel"}
               type="button"
-              variant="regular"
+              variant="secondary"
               disabled={loading}
               onClick={() => {
                 closeModalAndRefresh();
@@ -180,7 +180,7 @@ const EnableQuota = ({
             <Button
               id={"save"}
               type="submit"
-              variant="callAction"
+              variant="primary"
               disabled={loading || !validInput}
               label={"Save"}
             />

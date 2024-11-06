@@ -259,7 +259,7 @@ const EditConfiguration = ({
                     <Button
                       id={"save"}
                       type="submit"
-                      variant="callAction"
+                      variant="primary"
                       disabled={saving}
                       label={"Save"}
                     />

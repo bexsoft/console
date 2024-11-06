@@ -191,7 +191,7 @@ const SetRetentionConfig = ({
               <Button
                 id={"cancel"}
                 type="button"
-                variant="regular"
+                variant="secondary"
                 disabled={addLoading}
                 onClick={() => {
                   closeModalAndRefresh();
@@ -201,7 +201,7 @@ const SetRetentionConfig = ({
               <Button
                 id={"set"}
                 type="submit"
-                variant="callAction"
+                variant="primary"
                 color="primary"
                 disabled={addLoading || !valid}
                 label={"Set"}

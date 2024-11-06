@@ -129,7 +129,7 @@ const SRSiteInputRow = ({
               <TooltipWrapper tooltip={"Add a Row"}>
                 <Button
                   id={`add-row-${index}`}
-                  variant="regular"
+                  variant="secondary"
                   disabled={!canAdd}
                   icon={<PlusIcon />}
                   onClick={(e) => {
@@ -146,7 +146,7 @@ const SRSiteInputRow = ({
               <TooltipWrapper tooltip={"Remove Row"}>
                 <Button
                   id={`remove-row-${index}`}
-                  variant="regular"
+                  variant="secondary"
                   disabled={!canRemove}
                   icon={<RemoveIcon />}
                   onClick={(e) => {

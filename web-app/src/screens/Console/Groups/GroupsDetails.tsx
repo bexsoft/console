@@ -24,11 +24,11 @@ import {
   DataTable,
   Grid,
   GroupsIcon,
-  IAMPoliciesIcon,
+  ShieldCheckIcon,
   PageLayout,
   ScreenTitle,
   SectionTitle,
-  Switch,
+  Toggle,
   Tabs,
   TrashIcon,
 } from "mds";
@@ -204,7 +204,7 @@ const GroupsDetails = () => {
                 <Button
                   id={"add-user-group"}
                   label={memberActionText}
-                  variant="callAction"
+                  variant="primary"
                   icon={<PlusIcon />}
                   onClick={() => {
                     setUsersOpen(true);
@@ -282,8 +282,8 @@ const GroupsDetails = () => {
               <Button
                 id={"set-policies"}
                 label={`Set Policies`}
-                variant="callAction"
-                icon={<IAMPoliciesIcon />}
+                variant="primary"
+                icon={<ShieldCheckIcon />}
                 onClick={() => {
                   setPolicyOpen(true);
                 }}
@@ -425,7 +425,7 @@ const GroupsDetails = () => {
                     errorProps={{ disabled: true }}
                     matchAll
                   >
-                    <Switch
+                    <Toggle
                       indicatorLabels={["Enabled", "Disabled"]}
                       checked={isGroupEnabled}
                       value={"group_enabled"}

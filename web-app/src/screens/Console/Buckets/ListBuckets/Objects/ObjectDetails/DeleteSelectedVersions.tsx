@@ -16,7 +16,7 @@
 
 import React, { Fragment, useEffect, useState } from "react";
 import ConfirmDialog from "../../../../Common/ModalWrapper/ConfirmDialog";
-import { ConfirmDeleteIcon, Switch } from "mds";
+import { ConfirmDeleteIcon, Toggle } from "mds";
 import { setErrorSnackMessage } from "../../../../../../systemSlice";
 import { AppState, useAppDispatch } from "../../../../../../store";
 import { hasPermission } from "../../../../../../common/SecureComponent";
@@ -119,7 +119,7 @@ const DeleteObject = ({
                   marginTop: 10,
                 }}
               >
-                <Switch
+                <Toggle
                   label={"Bypass Governance Mode"}
                   indicatorLabels={["Yes", "No"]}
                   checked={bypassGovernance}

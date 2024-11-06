@@ -299,7 +299,7 @@ const ListTiersConfiguration = () => {
         {!distributedSetup ? (
           <DistributedOnly
             entity={"Tiers"}
-            iconComponent={<TiersNotAvailableIcon />}
+            icon={<TiersNotAvailableIcon />}
           />
         ) : (
           <Fragment>
@@ -348,7 +348,7 @@ const ListTiersConfiguration = () => {
                       icon={<PlusIcon />}
                       label={`Create Tier`}
                       onClick={addTier}
-                      variant="callAction"
+                      variant="primary"
                     />
                   </SecureComponent>
                 </TooltipWrapper>
@@ -466,7 +466,7 @@ const ListTiersConfiguration = () => {
                     >
                       <HelpBox
                         title={"Learn more about TIERS"}
-                        iconComponent={<TiersIcon />}
+                        icon={<TiersIcon />}
                         help={
                           <Fragment>
                             Tiers are used by the MinIO Object Lifecycle
@@ -495,7 +495,7 @@ const ListTiersConfiguration = () => {
                 {records.length === 0 && (
                   <HelpBox
                     title={"Tiers"}
-                    iconComponent={<TiersIcon />}
+                    icon={<TiersIcon />}
                     help={
                       <Fragment>
                         Tiers are used by the MinIO Object Lifecycle Management

@@ -22,7 +22,7 @@ import {
   DeleteIcon,
   GroupsIcon,
   HelpBox,
-  IAMPoliciesIcon,
+  ShieldCheckIcon,
   PageLayout,
   UsersIcon,
   DataTable,
@@ -243,7 +243,7 @@ const Groups = () => {
                       setPolicyOpen(true);
                     }}
                     label={"Assign Policy"}
-                    icon={<IAMPoliciesIcon />}
+                    icon={<ShieldCheckIcon />}
                     disabled={checkedGroups.length < 1 || !applyPolicy}
                     variant={"secondary"}
                   />
@@ -289,7 +289,7 @@ const Groups = () => {
                   <Button
                     id={"create-group"}
                     label={"Create Group"}
-                    variant="callAction"
+                    variant="primary"
                     icon={<PlusIcon />}
                     onClick={() => {
                       navigate(`${IAM_PAGES.GROUPS_ADD}`);
@@ -327,7 +327,7 @@ const Groups = () => {
                   <Grid item xs={12}>
                     <HelpBox
                       title={"Groups"}
-                      iconComponent={<GroupsIcon />}
+                      icon={<GroupsIcon />}
                       help={
                         <Fragment>
                           A group can have one attached IAM policy, where all
@@ -356,7 +356,7 @@ const Groups = () => {
                   <Grid item xs={8}>
                     <HelpBox
                       title={"Groups"}
-                      iconComponent={<UsersIcon />}
+                      icon={<UsersIcon />}
                       help={
                         <Fragment>
                           A group can have one attached IAM policy, where all

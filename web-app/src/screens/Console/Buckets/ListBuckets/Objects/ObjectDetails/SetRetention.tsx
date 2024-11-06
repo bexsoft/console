@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { useEffect, useRef, useState } from "react";
-import { Box, Button, FormLayout, Grid, RadioGroup, Switch } from "mds";
+import { Box, Button, FormLayout, Grid, RadioGroup, Toggle } from "mds";
 import { useSelector } from "react-redux";
 import { BucketObject, ObjectRetentionMode } from "api/consoleApi";
 import { api } from "api";
@@ -183,7 +183,7 @@ const SetRetention = ({
             <strong>Selected Object</strong>: {objectName}
           </Box>
           {showSwitcher && (
-            <Switch
+            <Toggle
               value="status"
               id="status"
               name="status"
@@ -229,14 +229,14 @@ const SetRetention = ({
             <Button
               id={"reset"}
               type="button"
-              variant="regular"
+              variant="secondary"
               onClick={resetForm}
               label={"Reset"}
             />
             <Button
               id={"save"}
               type="submit"
-              variant="callAction"
+              variant="primary"
               disabled={
                 (statusEnabled && type === "") ||
                 (statusEnabled && !isDateValid) ||

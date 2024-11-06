@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { useState } from "react";
-import { Button, EditIcon, FormLayout, Grid, InputBox, Switch } from "mds";
+import { Button, EditIcon, FormLayout, Grid, InputBox, Toggle } from "mds";
 import { modalStyleUtils } from "../Common/FormComponents/common/styleLibrary";
 import { useAppDispatch } from "../../../store";
 import { downloadObject } from "./utils";
@@ -88,7 +88,7 @@ const RenameLongFileName = ({
                 : ""
             }
           />
-          <Switch
+          <Toggle
             value="acceptLongName"
             id="acceptLongName"
             name="acceptLongName"
@@ -105,7 +105,7 @@ const RenameLongFileName = ({
             <Button
               id={"download-file"}
               type="submit"
-              variant="callAction"
+              variant="primary"
               color="primary"
               disabled={newFileName.length > 200 && !acceptLongName}
               label={"Download File"}

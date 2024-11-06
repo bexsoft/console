@@ -25,9 +25,9 @@ import {
   InputBox,
   PageLayout,
   KeyRoundIcon,
-  ServiceAccountCredentialsIcon,
-  ServiceUserRoundIcon,
-  Switch,
+  SquareUserRoundIcon,
+  UserRoundCheckIcon,
+  Toggle,
   HelpTip,
   DateTimeInput,
 } from "mds";
@@ -175,7 +175,7 @@ const AddServiceAccount = () => {
         <PageLayout>
           <FormLayout
             helpBox={<AddUserServiceAccountHelpBox />}
-            icon={<ServiceAccountCredentialsIcon />}
+            icon={<SquareUserRoundIcon />}
             title={`Create Access Key for ${userName}`}
           >
             <form
@@ -195,7 +195,7 @@ const AddServiceAccount = () => {
                 onChange={(e) => {
                   setAccessKey(e.target.value);
                 }}
-                startIcon={<ServiceUserRoundIcon />}
+                startIcon={<UserRoundCheckIcon />}
               />
               <InputBox
                 value={secretKey}
@@ -210,7 +210,7 @@ const AddServiceAccount = () => {
                 startIcon={<KeyRoundIcon />}
               />
 
-              <Switch
+              <Toggle
                 value="serviceAccountPolicy"
                 id="serviceAccountPolicy"
                 name="serviceAccountPolicy"
@@ -325,7 +325,7 @@ const AddServiceAccount = () => {
                 <Button
                   id={"clear"}
                   type="button"
-                  variant="regular"
+                  variant="secondary"
                   onClick={resetForm}
                   label={"Clear"}
                 />
@@ -333,7 +333,7 @@ const AddServiceAccount = () => {
                 <Button
                   id={"create-sa"}
                   type="submit"
-                  variant="callAction"
+                  variant="primary"
                   color="primary"
                   label={"Create"}
                 />

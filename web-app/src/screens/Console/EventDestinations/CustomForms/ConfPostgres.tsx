@@ -24,7 +24,7 @@ import {
   RadioGroup,
   ReadBox,
   Select,
-  Switch,
+  Toggle,
 } from "mds";
 import { IElementValue } from "../../Configurations/types";
 
@@ -195,7 +195,7 @@ const ConfPostgres = ({ onChange }: IConfPostgresProps) => {
 
   return (
     <FormLayout containerPadding={false} withBorders={false}>
-      <Switch
+      <Toggle
         label={"Manually Configure String"}
         checked={useConnectionString}
         id="manualString"

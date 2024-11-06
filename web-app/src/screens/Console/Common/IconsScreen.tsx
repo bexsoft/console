@@ -601,9 +601,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.HelpIconFilled />
+          <cicons.CircleHelpIcon />
           <br />
-          HelpIconFilled
+          CircleHelpIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -613,9 +613,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.IAMPoliciesIcon />
+          <cicons.ShieldCheckIcon />
           <br />
-          IAMPoliciesIcon
+          ShieldCheckIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -931,15 +931,15 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.ServiceAccountCredentialsIcon />
+          <cicons.SquareUserRoundIcon />
           <br />
-          ServiceAccountCredentialsIcon
+          SquareUserRoundIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.ServiceUserRoundIcon />
+          <cicons.UserRoundCheckIcon />
           <br />
-          ServiceUserRoundIcon
+          UserRoundCheckIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>

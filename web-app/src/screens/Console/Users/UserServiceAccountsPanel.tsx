@@ -231,7 +231,7 @@ const UserServiceAccountsPanel = ({
                 <Button
                   id={"create-service-account"}
                   label={"Create Access Key"}
-                  variant="callAction"
+                  variant="primary"
                   icon={<PlusIcon />}
                   onClick={() => {
                     navigate(

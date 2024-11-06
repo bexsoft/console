@@ -31,7 +31,7 @@ import {
   InputBox,
   PageLayout,
   RadioGroup,
-  Switch,
+  Toggle,
   SectionTitle,
   ProgressBar,
 } from "mds";
@@ -237,7 +237,7 @@ const AddBucket = () => {
           icon={<BucketsIcon />}
           helpBox={
             <HelpBox
-              iconComponent={<BucketsIcon />}
+              icon={<BucketsIcon />}
               title={"Buckets"}
               help={
                 <Fragment>
@@ -329,7 +329,7 @@ const AddBucket = () => {
                     <br />
                   </Fragment>
                 )}
-                <Switch
+                <Toggle
                   value="versioned"
                   id="versioned"
                   name="versioned"
@@ -394,7 +394,7 @@ const AddBucket = () => {
                 />
                 {versioningEnabled && distributedSetup && !lockingEnabled && (
                   <Fragment>
-                    <Switch
+                    <Toggle
                       id={"excludeFolders"}
                       label={"Exclude Folders"}
                       checked={excludeFolders}
@@ -436,7 +436,7 @@ const AddBucket = () => {
                     />
                   </Fragment>
                 )}
-                <Switch
+                <Toggle
                   value="locking"
                   id="locking"
                   name="locking"
@@ -490,7 +490,7 @@ const AddBucket = () => {
                   }
                   helpTipPlacement="right"
                 />
-                <Switch
+                <Toggle
                   value="bucket_quota"
                   id="bucket_quota"
                   name="bucket_quota"
@@ -548,7 +548,7 @@ const AddBucket = () => {
                   </Fragment>
                 )}
                 {versioningEnabled && distributedSetup && lockingAllowed && (
-                  <Switch
+                  <Toggle
                     value="bucket_retention"
                     id="bucket_retention"
                     name="bucket_retention"
@@ -677,7 +677,7 @@ const AddBucket = () => {
                 <Button
                   id={"create-bucket"}
                   type="submit"
-                  variant="callAction"
+                  variant="primary"
                   color="primary"
                   disabled={
                     addLoading ||

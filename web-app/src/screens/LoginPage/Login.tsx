@@ -123,7 +123,7 @@ const Login = () => {
                   }}
                   icon={<RefreshIcon />}
                   iconLocation={"end"}
-                  variant="regular"
+                  variant="secondary"
                   id="retry"
                   label={"Retry"}
                 />

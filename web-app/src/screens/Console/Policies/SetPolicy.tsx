@@ -153,14 +153,14 @@ const SetPolicy = ({
         <Button
           id={"reset"}
           type="button"
-          variant="regular"
+          variant="secondary"
           onClick={resetSelection}
           label={"Reset"}
         />
         <Button
           id={"save"}
           type="button"
-          variant="callAction"
+          variant="primary"
           color="primary"
           disabled={loading}
           onClick={setPolicyAction}

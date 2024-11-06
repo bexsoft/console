@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment } from "react";
-import { HelpBox, HelpIconFilled, Box } from "mds";
+import { HelpBox, CircleHelpIcon, Box } from "mds";
 
 interface IKMSHelpBoxProps {
   helpText: string;
@@ -25,7 +25,7 @@ interface IKMSHelpBoxProps {
 const KMSHelpBox = ({ helpText, contents }: IKMSHelpBoxProps) => {
   return (
     <HelpBox
-      iconComponent={<HelpIconFilled />}
+      icon={<CircleHelpIcon />}
       title={helpText}
       help={
         <Fragment>

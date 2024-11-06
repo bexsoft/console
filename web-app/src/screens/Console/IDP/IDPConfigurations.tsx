@@ -166,7 +166,7 @@ const IDPConfigurations = ({ idpType }: IDPConfigurationsProps) => {
               <TooltipWrapper tooltip={"Refresh"}>
                 <Button
                   id={"refresh-keys"}
-                  variant="regular"
+                  variant="secondary"
                   icon={<RefreshIcon />}
                   onClick={() => setLoading(true)}
                 />

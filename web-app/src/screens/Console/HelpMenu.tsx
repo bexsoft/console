@@ -23,7 +23,7 @@ import {
   Box,
   Button,
   HelpIcon,
-  HelpIconFilled,
+  CircleHelpIcon,
   IconButton,
   MinIOTierIcon,
   TabItemProps,
@@ -292,7 +292,7 @@ const HelpMenu = () => {
             onTabClick={(item) => dispatch(setHelpTabName(item))}
             optionsInitialComponent={
               <Box sx={{ margin: "10px 10px 10px 15px" }}>
-                <HelpIconFilled
+                <CircleHelpIcon
                   style={{ color: "#3874A6", width: 16, height: 16 }}
                 />
               </Box>

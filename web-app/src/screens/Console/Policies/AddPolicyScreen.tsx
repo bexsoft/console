@@ -165,7 +165,7 @@ const AddPolicyScreen = () => {
                     <Button
                       id={"clear"}
                       type="button"
-                      variant="regular"
+                      variant="secondary"
                       onClick={resetForm}
                       label={"Clear"}
                     />
@@ -173,7 +173,7 @@ const AddPolicyScreen = () => {
                     <Button
                       id={"save-policy"}
                       type="submit"
-                      variant="callAction"
+                      variant="primary"
                       color="primary"
                       disabled={addLoading || !validSave}
                       label={"Save"}

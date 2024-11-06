@@ -365,7 +365,7 @@ const BucketLifecyclePanel = () => {
             <br />
             <HelpBox
               title={"Lifecycle Rules"}
-              iconComponent={<TiersIcon />}
+              icon={<TiersIcon />}
               help={
                 <Fragment>
                   MinIO Object Lifecycle Management allows creating rules for

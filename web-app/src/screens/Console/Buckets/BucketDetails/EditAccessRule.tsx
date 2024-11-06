@@ -91,14 +91,14 @@ const EditAccessRule = ({
           <Button
             id={"clear"}
             type="button"
-            variant="regular"
+            variant="secondary"
             onClick={resetForm}
             label={"Clear"}
           />
           <Button
             id={"save"}
             type="submit"
-            variant="callAction"
+            variant="primary"
             onClick={createProcess}
             label={"Save"}
           />

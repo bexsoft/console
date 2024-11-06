@@ -21,7 +21,7 @@ import {
   DataTable,
   Grid,
   HelpBox,
-  IAMPoliciesIcon,
+  ShieldCheckIcon,
   PageLayout,
 } from "mds";
 import { useNavigate } from "react-router-dom";
@@ -206,7 +206,7 @@ const ListPolicies = () => {
                 <Button
                   id={"create-policy"}
                   label={"Create Policy"}
-                  variant="callAction"
+                  variant="primary"
                   icon={<PlusIcon />}
                   onClick={() => {
                     navigate(`${IAM_PAGES.POLICY_ADD}`);
@@ -246,7 +246,7 @@ const ListPolicies = () => {
           <Grid item xs={12} sx={{ marginTop: 15 }}>
             <HelpBox
               title={"Learn more about IAM POLICIES"}
-              iconComponent={<IAMPoliciesIcon />}
+              icon={<ShieldCheckIcon />}
               help={
                 <Fragment>
                   MinIO uses Policy-Based Access Control (PBAC) to define the

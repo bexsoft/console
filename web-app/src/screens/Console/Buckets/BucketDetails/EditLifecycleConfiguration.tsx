@@ -27,7 +27,7 @@ import {
   ProgressBar,
   RadioGroup,
   Select,
-  Switch,
+  Toggle,
 } from "mds";
 import { api } from "api";
 import { ApiError } from "api/consoleApi";
@@ -341,7 +341,7 @@ const EditLifecycleConfiguration = ({
           }}
         >
           <FormLayout containerPadding={false} withBorders={false}>
-            <Switch
+            <Toggle
               label="Status"
               indicatorLabels={["Enabled", "Disabled"]}
               checked={enabled}
@@ -500,7 +500,7 @@ const EditLifecycleConfiguration = ({
                     onTitleClick={() => setExpandedAdv(!expandedAdv)}
                     sx={{ marginTop: 15 }}
                   >
-                    <Switch
+                    <Toggle
                       value="expired_delete_marker"
                       id="expired_delete_marker"
                       name="expired_delete_marker"
@@ -512,7 +512,7 @@ const EditLifecycleConfiguration = ({
                       }}
                       label={"Expired Object Delete Marker"}
                     />
-                    <Switch
+                    <Toggle
                       value="expired_delete_all"
                       id="expired_delete_all"
                       name="expired_delete_all"
@@ -531,7 +531,7 @@ const EditLifecycleConfiguration = ({
               <Button
                 id={"cancel"}
                 type="button"
-                variant="regular"
+                variant="secondary"
                 disabled={addLoading}
                 onClick={() => {
                   closeModalAndRefresh(false);
@@ -541,7 +541,7 @@ const EditLifecycleConfiguration = ({
               <Button
                 id={"save"}
                 type="submit"
-                variant="callAction"
+                variant="primary"
                 color="primary"
                 disabled={addLoading || !isFormValid}
                 label={"Save"}

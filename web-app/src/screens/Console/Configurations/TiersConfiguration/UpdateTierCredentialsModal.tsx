@@ -204,7 +204,7 @@ const UpdateTierCredentialsModal = ({
           <Button
             id={"save-credentials"}
             type="submit"
-            variant="callAction"
+            variant="primary"
             disabled={savingTiers || !isFormValid}
             label={"Save"}
           />

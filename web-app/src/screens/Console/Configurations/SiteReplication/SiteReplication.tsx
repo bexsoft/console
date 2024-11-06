@@ -152,7 +152,7 @@ const SiteReplication = () => {
                     <Button
                       id={"replication-status"}
                       label={"Replication Status"}
-                      variant="regular"
+                      variant="secondary"
                       icon={<RecoverIcon />}
                       onClick={(e) => {
                         e.preventDefault();
@@ -166,7 +166,7 @@ const SiteReplication = () => {
                 <Button
                   id={"add-replication-site"}
                   label={"Add Sites"}
-                  variant="callAction"
+                  variant="primary"
                   disabled={isRemoving}
                   icon={<PlusIcon />}
                   onClick={() => {
@@ -203,7 +203,7 @@ const SiteReplication = () => {
             <Grid item xs={8}>
               <HelpBox
                 title={"Site Replication"}
-                iconComponent={<ClustersIcon />}
+                icon={<ClustersIcon />}
                 help={
                   <Fragment>
                     This feature allows multiple independent MinIO sites (or
@@ -241,7 +241,7 @@ const SiteReplication = () => {
         {hasSites && !isSiteInfoLoading ? (
           <HelpBox
             title={"Site Replication"}
-            iconComponent={<ClustersIcon />}
+            icon={<ClustersIcon />}
             help={
               <Fragment>
                 This feature allows multiple independent MinIO sites (or

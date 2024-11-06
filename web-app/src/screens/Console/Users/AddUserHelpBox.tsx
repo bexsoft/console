@@ -19,7 +19,7 @@ import {
   Box,
   ChangeAccessPolicyIcon,
   GroupsIcon,
-  HelpIconFilled,
+  CircleHelpIcon,
   UsersIcon,
 } from "mds";
 
@@ -77,7 +77,7 @@ const AddUserHelpBox = () => {
           },
         }}
       >
-        <HelpIconFilled />
+        <CircleHelpIcon />
         <div>Learn more about the Users feature</div>
       </Box>
       <Box sx={{ fontSize: "14px", marginBottom: "15px" }}>

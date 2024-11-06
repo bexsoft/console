@@ -24,7 +24,7 @@ import {
   PendingItemsIcon,
   ProgressBar,
   ReadBox,
-  Switch,
+  Toggle,
   Tooltip,
   WebhookIcon,
 } from "mds";
@@ -299,7 +299,7 @@ const EditEndpointModal = ({
             </Fragment>
           ) : (
             <Fragment>
-              <Switch
+              <Toggle
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   const value = e.target.checked ? "on" : "off";
                   setEndpointState(value);
@@ -353,7 +353,7 @@ const EditEndpointModal = ({
                 <Button
                   id={"reset"}
                   type="button"
-                  variant="regular"
+                  variant="secondary"
                   disabled={saving}
                   onClick={onCloseEndpoint}
                   label={"Cancel"}
@@ -361,7 +361,7 @@ const EditEndpointModal = ({
                 <Button
                   id={"save-lifecycle"}
                   type="submit"
-                  variant="callAction"
+                  variant="primary"
                   color="primary"
                   disabled={saving || invalidInputs.length !== 0}
                   label={"Update"}

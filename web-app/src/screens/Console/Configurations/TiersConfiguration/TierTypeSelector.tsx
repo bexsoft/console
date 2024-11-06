@@ -65,7 +65,7 @@ const TierTypeSelector = () => {
           icon={<TiersIcon />}
           helpBox={
             <HelpBox
-              iconComponent={<TiersIcon />}
+              icon={<TiersIcon />}
               title={"Tier Types"}
               help={
                 <Fragment>

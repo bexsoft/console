@@ -143,14 +143,14 @@ const EditSiteEndPoint = ({
         <Button
           id={"close"}
           type="button"
-          variant="regular"
+          variant="secondary"
           onClick={onClose}
           label={"Cancel"}
         />
         <Button
           id={"update"}
           type="button"
-          variant="callAction"
+          variant="primary"
           disabled={isEditing || !isValidEndPointUrl}
           onClick={updatePeerSite}
           label={"Update"}

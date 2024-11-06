@@ -24,7 +24,7 @@ import {
   InputBox,
   RadioGroup,
   ReadBox,
-  Switch,
+  Toggle,
 } from "mds";
 
 interface IConfMySqlProps {
@@ -128,7 +128,7 @@ const ConfMySql = ({ onChange }: IConfMySqlProps) => {
 
   return (
     <FormLayout withBorders={false} containerPadding={false}>
-      <Switch
+      <Toggle
         label={"Enter DNS String"}
         checked={useDsnString}
         id="checkedB"

@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment, useState } from "react";
-import { Box, Button, FormLayout, ModalBox, Switch } from "mds";
+import { Box, Button, FormLayout, ModalBox, Toggle } from "mds";
 import { BucketVersioningResponse } from "api/consoleApi";
 import { api } from "api";
 import { errorToHandler } from "api/errors";
@@ -101,7 +101,7 @@ const EnableVersioningModal = ({
       title={`Versioning on Bucket`}
     >
       <FormLayout withBorders={false} containerPadding={false}>
-        <Switch
+        <Toggle
           id={"activateVersioning"}
           label={"Versioning Status"}
           checked={versionState}
@@ -112,7 +112,7 @@ const EnableVersioningModal = ({
         />
         {versionState && !objectLockingEnabled && (
           <Fragment>
-            <Switch
+            <Toggle
               id={"excludeFolders"}
               label={"Exclude Folders"}
               checked={excludeFolders}
@@ -143,14 +143,14 @@ const EnableVersioningModal = ({
           <Button
             id={"clear"}
             type="button"
-            variant="regular"
+            variant="secondary"
             color="primary"
             onClick={resetForm}
             label={"Clear"}
           />
           <Button
             type="submit"
-            variant="callAction"
+            variant="primary"
             onClick={enableVersioning}
             id="saveTag"
             label={"Save"}

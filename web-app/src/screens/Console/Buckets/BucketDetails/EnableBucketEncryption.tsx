@@ -225,7 +225,7 @@ const EnableBucketEncryption = ({
               <Button
                 id={"cancel"}
                 type="submit"
-                variant="regular"
+                variant="secondary"
                 onClick={() => {
                   closeModalAndRefresh();
                 }}
@@ -235,7 +235,7 @@ const EnableBucketEncryption = ({
               <Button
                 id={"save"}
                 type="submit"
-                variant="callAction"
+                variant="primary"
                 disabled={loading}
                 label={"Save"}
               />

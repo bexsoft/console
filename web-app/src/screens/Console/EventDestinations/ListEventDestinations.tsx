@@ -177,7 +177,7 @@ const ListEventDestinations = () => {
               <Button
                 id={"reload-event-destinations"}
                 label={"Refresh"}
-                variant="regular"
+                variant="secondary"
                 icon={<RefreshIcon />}
                 onClick={() => {
                   dispatch(setDestinationLoading(true));
@@ -188,7 +188,7 @@ const ListEventDestinations = () => {
               <Button
                 id={"add-notification-target"}
                 label={"Add Event Destination"}
-                variant="callAction"
+                variant="primary"
                 icon={<PlusIcon />}
                 onClick={() => {
                   navigate(IAM_PAGES.EVENT_DESTINATIONS_ADD);
@@ -224,7 +224,7 @@ const ListEventDestinations = () => {
                 <Grid item xs={12} sx={{ marginTop: 15 }}>
                   <HelpBox
                     title={"Event Destinations"}
-                    iconComponent={<LambdaIcon />}
+                    icon={<LambdaIcon />}
                     help={
                       <Fragment>
                         MinIO bucket notifications allow administrators to send
@@ -261,7 +261,7 @@ const ListEventDestinations = () => {
                 <Grid item xs={8}>
                   <HelpBox
                     title={"Event Destinations"}
-                    iconComponent={<LambdaIcon />}
+                    icon={<LambdaIcon />}
                     help={
                       <Fragment>
                         MinIO bucket notifications allow administrators to send

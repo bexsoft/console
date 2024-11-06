@@ -21,7 +21,7 @@ import {
   Box,
   Button,
   DownloadIcon,
-  ServiceAccountCredentialsIcon,
+  SquareUserRoundIcon,
   WarnIcon,
   Grid,
 } from "mds";
@@ -147,7 +147,7 @@ const CredentialsPrompt = ({
         closeModal();
       }}
       title={`New ${entity} Created`}
-      titleIcon={<ServiceAccountCredentialsIcon />}
+      titleIcon={<SquareUserRoundIcon />}
     >
       <Grid container>
         <Grid item xs={12}>
@@ -240,7 +240,7 @@ const CredentialsPrompt = ({
                   label={"Download for import"}
                   onClick={downloadImport}
                   icon={<DownloadIcon />}
-                  variant="callAction"
+                  variant="primary"
                 />
               </TooltipWrapper>
 
@@ -255,7 +255,7 @@ const CredentialsPrompt = ({
                     label={"Download all access credentials"}
                     onClick={downloaddAllCredentials}
                     icon={<DownloadIcon />}
-                    variant="callAction"
+                    variant="primary"
                     color="primary"
                   />
                 </TooltipWrapper>

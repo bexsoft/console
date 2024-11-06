@@ -120,7 +120,7 @@ const StrategyForm = ({ redirectRules }: { redirectRules: RedirectRule[] }) => {
           <Box sx={{ marginBottom: 40 }}>
             <Button
               id={"SSOSelector"}
-              variant={"subAction"}
+              variant={"secondary-lighter"}
               label={
                 redirectRules.length === 1
                   ? `${redirectRules[0].displayName}${
@@ -229,7 +229,7 @@ const StrategyForm = ({ redirectRules }: { redirectRules: RedirectRule[] }) => {
             >
               <Button
                 type="submit"
-                variant="callAction"
+                variant="primary"
                 color="primary"
                 id="do-login"
                 disabled={

@@ -203,7 +203,7 @@ const WebhookSettings = ({
       <Grid item xs={12} sx={{ display: "flex", justifyContent: "flex-end" }}>
         <Button
           id={"newWebhook"}
-          variant="callAction"
+          variant="primary"
           onClick={() => {
             setNewEndpointOpen(true);
           }}

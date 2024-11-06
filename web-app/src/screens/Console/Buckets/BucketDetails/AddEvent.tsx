@@ -226,7 +226,7 @@ const AddEvent = ({
             <Button
               id={"cancel-add-event"}
               type="button"
-              variant="regular"
+              variant="secondary"
               disabled={addLoading}
               onClick={() => {
                 closeModalAndRefresh();
@@ -236,7 +236,7 @@ const AddEvent = ({
             <Button
               id={"save-event"}
               type="submit"
-              variant="callAction"
+              variant="primary"
               disabled={addLoading || arn === "" || selectedEvents.length === 0}
               label={"Save"}
             />

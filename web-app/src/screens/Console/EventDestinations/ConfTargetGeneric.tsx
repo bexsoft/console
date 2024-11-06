@@ -22,7 +22,7 @@ import {
   Grid,
   InputBox,
   ReadBox,
-  Switch,
+  Toggle,
   Tooltip,
 } from "mds";
 import { IElementValue, IOverrideEnv, KVField } from "../Configurations/types";
@@ -129,7 +129,7 @@ const ConfTargetGeneric = ({
         const value = holderItem ? holderItem.value : "off";
 
         return (
-          <Switch
+          <Toggle
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               const value = e.target.checked ? "on" : "off";
               setValueElement(field.name, value, item);

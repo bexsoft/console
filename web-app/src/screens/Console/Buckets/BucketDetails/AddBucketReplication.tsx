@@ -27,7 +27,7 @@ import {
   InputBox,
   PageLayout,
   Select,
-  Switch,
+  Toggle,
 } from "mds";
 import { IAM_PAGES } from "../../../../common/SecureComponent/permissions";
 import { setErrorSnackMessage, setHelpName } from "../../../../systemSlice";
@@ -186,7 +186,7 @@ const AddBucketReplication = () => {
           icon={<BucketReplicationIcon />}
           helpBox={
             <HelpBox
-              iconComponent={<BucketReplicationIcon />}
+              icon={<BucketReplicationIcon />}
               title="Bucket Replication Configuration"
               help={
                 <Fragment>
@@ -250,7 +250,7 @@ const AddBucketReplication = () => {
               value={targetURL}
             />
 
-            <Switch
+            <Toggle
               checked={useTLS}
               id="useTLS"
               name="useTLS"
@@ -392,7 +392,7 @@ const AddBucketReplication = () => {
             </fieldset>
             <fieldset className={"inputItem"}>
               <legend>Replication Options</legend>
-              <Switch
+              <Toggle
                 checked={repExisting}
                 id="repExisting"
                 name="repExisting"
@@ -402,7 +402,7 @@ const AddBucketReplication = () => {
                 }}
                 description={"Replicate existing objects"}
               />
-              <Switch
+              <Toggle
                 checked={metadataSync}
                 id="metadatataSync"
                 name="metadatataSync"
@@ -412,7 +412,7 @@ const AddBucketReplication = () => {
                 }}
                 description={"Metadata Sync"}
               />
-              <Switch
+              <Toggle
                 checked={repDeleteMarker}
                 id="deleteMarker"
                 name="deleteMarker"
@@ -422,7 +422,7 @@ const AddBucketReplication = () => {
                 }}
                 description={"Replicate soft deletes"}
               />
-              <Switch
+              <Toggle
                 checked={repDelete}
                 id="repDelete"
                 name="repDelete"
@@ -447,7 +447,7 @@ const AddBucketReplication = () => {
               <Button
                 id={"cancel"}
                 type="button"
-                variant="regular"
+                variant="secondary"
                 disabled={addLoading}
                 onClick={() => {
                   navigate(backLink);
@@ -457,7 +457,7 @@ const AddBucketReplication = () => {
               <Button
                 id={"submit"}
                 type="submit"
-                variant="callAction"
+                variant="primary"
                 color="primary"
                 disabled={addLoading || !validated}
                 label={"Save"}

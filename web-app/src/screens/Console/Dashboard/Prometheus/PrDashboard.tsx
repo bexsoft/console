@@ -175,7 +175,7 @@ const PrDashboard = ({ apiPrefix = "admin", usage }: IPrDashboard) => {
                 <Button
                   id={"sync"}
                   type="button"
-                  variant="callAction"
+                  variant="primary"
                   onClick={() => {
                     dispatch(getUsageAsync());
                   }}
@@ -227,7 +227,7 @@ const PrDashboard = ({ apiPrefix = "admin", usage }: IPrDashboard) => {
           <RowPanelLayout>
             {usage?.advancedMetricsStatus === "unavailable" && (
               <HelpBox
-                iconComponent={<PrometheusErrorIcon />}
+                icon={<PrometheusErrorIcon />}
                 title={"We can’t retrieve advanced metrics at this time."}
                 help={
                   <Box
@@ -258,7 +258,7 @@ const PrDashboard = ({ apiPrefix = "admin", usage }: IPrDashboard) => {
           <RowPanelLayout>
             {usage?.advancedMetricsStatus === "unavailable" && (
               <HelpBox
-                iconComponent={<PrometheusErrorIcon />}
+                icon={<PrometheusErrorIcon />}
                 title={"We can’t retrieve advanced metrics at this time."}
                 help={
                   <Box
@@ -289,7 +289,7 @@ const PrDashboard = ({ apiPrefix = "admin", usage }: IPrDashboard) => {
           <RowPanelLayout>
             {usage?.advancedMetricsStatus === "unavailable" && (
               <HelpBox
-                iconComponent={<PrometheusErrorIcon />}
+                icon={<PrometheusErrorIcon />}
                 title={"We can’t retrieve advanced metrics at this time."}
                 help={
                   <Box

@@ -355,7 +355,7 @@ const ListUsers = () => {
                   </Grid>
                   <HelpBox
                     title={"Users"}
-                    iconComponent={<UsersIcon />}
+                    icon={<UsersIcon />}
                     help={
                       <Fragment>
                         A MinIO user consists of a unique access key (username)
@@ -404,7 +404,7 @@ const ListUsers = () => {
                   <Grid item xs={8}>
                     <HelpBox
                       title={"Users"}
-                      iconComponent={<UsersIcon />}
+                      icon={<UsersIcon />}
                       help={
                         <Fragment>
                           A MinIO user consists of a unique access key

@@ -24,7 +24,7 @@ import {
   RadioGroup,
   ReadBox,
   Select,
-  Switch,
+  Toggle,
   Tooltip,
   WarnIcon,
   Wizard,
@@ -332,7 +332,7 @@ const AddBulkReplicationModal = ({
                       valuePlaceholder="Tag Value"
                       withBorder
                     />
-                    <Switch
+                    <Toggle
                       value="expired_delete_marker"
                       id="expired_delete_marker"
                       name="expired_delete_marker"
@@ -344,7 +344,7 @@ const AddBulkReplicationModal = ({
                       }}
                       label={"Expired Object Delete Marker"}
                     />
-                    <Switch
+                    <Toggle
                       value="expired_delete_all"
                       id="expired_delete_all"
                       name="expired_delete_all"

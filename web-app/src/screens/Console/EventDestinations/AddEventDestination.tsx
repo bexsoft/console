@@ -192,7 +192,7 @@ const AddEventDestination = ({
                   <Button
                     id={"save-notification-target"}
                     type="submit"
-                    variant="callAction"
+                    variant="primary"
                     disabled={saving || identifier.trim() === ""}
                     label={"Save Event Destination"}
                   />

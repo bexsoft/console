@@ -23,7 +23,7 @@ import {
   InputBox,
   PageLayout,
   SectionTitle,
-  Switch,
+  Toggle,
 } from "mds";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../store";
@@ -124,7 +124,7 @@ const AddIDPConfiguration = ({
     switch (value.type) {
       case "toggle":
         return (
-          <Switch
+          <Toggle
             indicatorLabels={["Enabled", "Disabled"]}
             checked={fields[key] === "on" ? true : false}
             value={"is-field-enabled"}
@@ -188,7 +188,7 @@ const AddIDPConfiguration = ({
                   <Button
                     id={"clear"}
                     type="button"
-                    variant="regular"
+                    variant="secondary"
                     onClick={resetForm}
                     label={"Clear"}
                   />
@@ -196,7 +196,7 @@ const AddIDPConfiguration = ({
                   <Button
                     id={"save-key"}
                     type="submit"
-                    variant="callAction"
+                    variant="primary"
                     color="primary"
                     disabled={loadingCreate || !validSave()}
                     label={"Save"}

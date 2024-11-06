@@ -29,7 +29,7 @@ import {
   PageLayout,
   RefreshIcon,
   ScreenTitle,
-  Switch,
+  Toggle,
   Tooltip,
   TrashIcon,
   ValuePair,
@@ -238,7 +238,7 @@ const IDPConfigurationDetails = ({
     switch (value.type) {
       case "toggle":
         return (
-          <Switch
+          <Toggle
             indicatorLabels={["Enabled", "Disabled"]}
             checked={fields[key] === "on"}
             value={"is-field-enabled"}
@@ -301,7 +301,7 @@ const IDPConfigurationDetails = ({
                       configurations
                     </Box>
                   }
-                  iconComponent={<WarnIcon />}
+                  icon={<WarnIcon />}
                   help={null}
                 />
               </Grid>
@@ -315,7 +315,7 @@ const IDPConfigurationDetails = ({
                   <Button
                     id={"clear"}
                     type="button"
-                    variant="regular"
+                    variant="secondary"
                     onClick={resetForm}
                     label={"Clear"}
                   />
@@ -324,7 +324,7 @@ const IDPConfigurationDetails = ({
                   <Button
                     id={"cancel"}
                     type="button"
-                    variant="regular"
+                    variant="secondary"
                     onClick={toggleEditMode}
                     label={"Cancel"}
                   />
@@ -333,7 +333,7 @@ const IDPConfigurationDetails = ({
                   <Button
                     id={"save-key"}
                     type="submit"
-                    variant="callAction"
+                    variant="primary"
                     color="primary"
                     disabled={loadingDetails || loadingSave || !validSave()}
                     label={"Save"}

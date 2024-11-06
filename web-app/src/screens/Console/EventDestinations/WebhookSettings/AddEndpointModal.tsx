@@ -219,7 +219,7 @@ const AddEndpointModal = ({ open, type, onCloseEndpoint }: IEndpointModal) => {
           <Button
             id={"reset"}
             type="button"
-            variant="regular"
+            variant="secondary"
             disabled={saving}
             onClick={onCloseEndpoint}
             label={"Cancel"}
@@ -230,7 +230,7 @@ const AddEndpointModal = ({ open, type, onCloseEndpoint }: IEndpointModal) => {
           <Button
             id={"save-lifecycle"}
             type="submit"
-            variant="callAction"
+            variant="primary"
             color="primary"
             disabled={saving || invalidInputs.length !== 0}
             label={"Save"}

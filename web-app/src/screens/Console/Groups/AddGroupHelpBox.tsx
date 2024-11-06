@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import React from "react";
 
-import { Box, GroupsIcon, HelpIconFilled, IAMPoliciesIcon } from "mds";
+import { Box, GroupsIcon, CircleHelpIcon, ShieldCheckIcon } from "mds";
 
 const FeatureItem = ({
   icon,
@@ -71,7 +71,7 @@ const AddGroupHelpBox = () => {
           },
         }}
       >
-        <HelpIconFilled />
+        <CircleHelpIcon />
         <div>Learn more about Groups</div>
       </Box>
       <Box sx={{ fontSize: "14px", marginBottom: "15px" }}>
@@ -103,7 +103,7 @@ const AddGroupHelpBox = () => {
           group.
         </Box>
         <FeatureItem
-          icon={<IAMPoliciesIcon />}
+          icon={<ShieldCheckIcon />}
           description={`Assign Custom IAM Policies for Group`}
         />
         <Box sx={{ paddingTop: "10px", paddingBottom: "10px" }}>

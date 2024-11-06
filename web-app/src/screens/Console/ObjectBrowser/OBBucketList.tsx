@@ -261,7 +261,7 @@ const OBListBuckets = () => {
               >
                 <Grid item xs={8}>
                   <HelpBox
-                    iconComponent={<BucketsIcon />}
+                    icon={<BucketsIcon />}
                     title={"No Results"}
                     help={
                       <Fragment>
@@ -283,7 +283,7 @@ const OBListBuckets = () => {
               >
                 <Grid item xs={8}>
                   <HelpBox
-                    iconComponent={<BucketsIcon />}
+                    icon={<BucketsIcon />}
                     title={"Buckets"}
                     help={
                       <Fragment>

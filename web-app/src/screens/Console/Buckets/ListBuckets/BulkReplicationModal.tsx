@@ -22,7 +22,7 @@ import {
   InputBox,
   ReadBox,
   Select,
-  Switch,
+  Toggle,
   Tooltip,
   WarnIcon,
   Wizard,
@@ -349,7 +349,7 @@ const AddBulkReplicationModal = ({
                     label="Target URL"
                     value={targetURL}
                   />
-                  <Switch
+                  <Toggle
                     checked={useTLS}
                     id="useTLS"
                     name="useTLS"

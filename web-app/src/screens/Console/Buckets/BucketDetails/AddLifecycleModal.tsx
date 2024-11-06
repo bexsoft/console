@@ -29,7 +29,7 @@ import {
   ProgressBar,
   RadioGroup,
   Select,
-  Switch,
+  Toggle,
 } from "mds";
 import { useSelector } from "react-redux";
 import { api } from "api";
@@ -423,7 +423,7 @@ const AddLifecycleModal = ({
                   sx={{ marginTop: 15 }}
                 >
                   <Grid item xs={12}>
-                    <Switch
+                    <Toggle
                       value="expired_delete_marker"
                       id="expired_delete_marker"
                       name="expired_delete_marker"
@@ -438,7 +438,7 @@ const AddLifecycleModal = ({
                         "Remove the reference to the object if no versions are left"
                       }
                     />
-                    <Switch
+                    <Toggle
                       value="expired_delete_all"
                       id="expired_delete_all"
                       name="expired_delete_all"
@@ -462,7 +462,7 @@ const AddLifecycleModal = ({
               <Button
                 id={"reset"}
                 type="button"
-                variant="regular"
+                variant="secondary"
                 disabled={addLoading}
                 onClick={() => {
                   closeModalAndRefresh(false);
@@ -472,7 +472,7 @@ const AddLifecycleModal = ({
               <Button
                 id={"save-lifecycle"}
                 type="submit"
-                variant="callAction"
+                variant="primary"
                 color="primary"
                 disabled={addLoading || !isFormValid}
                 label={"Save"}

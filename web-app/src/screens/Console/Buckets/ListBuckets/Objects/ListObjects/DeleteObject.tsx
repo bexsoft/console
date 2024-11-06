@@ -18,7 +18,7 @@ import React, { Fragment, useState } from "react";
 import { ErrorResponseHandler } from "../../../../../../common/types";
 import ConfirmDialog from "../../../../Common/ModalWrapper/ConfirmDialog";
 import useApi from "../../../../Common/Hooks/useApi";
-import { ConfirmDeleteIcon, Switch } from "mds";
+import { ConfirmDeleteIcon, Toggle } from "mds";
 import { setErrorSnackMessage } from "../../../../../../systemSlice";
 import { AppState, useAppDispatch } from "../../../../../../store";
 import { hasPermission } from "../../../../../../common/SecureComponent";
@@ -115,7 +115,7 @@ const DeleteObject = ({
           {isVersionedMode(versioningInfo?.status) &&
             selectedVersion === "" && (
               <Fragment>
-                <Switch
+                <Toggle
                   label={"Delete All Versions"}
                   indicatorLabels={["Yes", "No"]}
                   checked={deleteVersions}
@@ -136,7 +136,7 @@ const DeleteObject = ({
                   marginTop: 10,
                 }}
               >
-                <Switch
+                <Toggle
                   label={"Bypass Governance Mode"}
                   indicatorLabels={["Yes", "No"]}
                   checked={bypassGovernance}

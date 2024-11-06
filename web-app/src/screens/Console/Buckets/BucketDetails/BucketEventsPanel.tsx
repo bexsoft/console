@@ -232,7 +232,7 @@ const BucketEventsPanel = () => {
             <br />
             <HelpBox
               title={"Event Notifications"}
-              iconComponent={<LambdaIcon />}
+              icon={<LambdaIcon />}
               help={
                 <Fragment>
                   MinIO bucket notifications allow administrators to send

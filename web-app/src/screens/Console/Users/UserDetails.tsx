@@ -23,12 +23,12 @@ import {
   Button,
   DataTable,
   Grid,
-  IAMPoliciesIcon,
+  ShieldCheckIcon,
   PageLayout,
   KeyRoundIcon,
   ScreenTitle,
   SectionTitle,
-  Switch,
+  Toggle,
   Tabs,
   TrashIcon,
   UsersIcon,
@@ -304,7 +304,7 @@ const UserDetails = () => {
                               )
                     }
                   >
-                    <Switch
+                    <Toggle
                       indicatorLabels={["Enabled", "Disabled"]}
                       checked={enabled}
                       value={"group_enabled"}
@@ -475,7 +475,7 @@ const UserDetails = () => {
                                 onClick={() => {
                                   setPolicyOpen(true);
                                 }}
-                                icon={<IAMPoliciesIcon />}
+                                icon={<ShieldCheckIcon />}
                                 variant={"primary"}
                                 disabled={!canAssignPolicy}
                               />

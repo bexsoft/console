@@ -185,7 +185,7 @@ const ChangePassword = ({ open, closeModal }: IChangePasswordProps) => {
             <Button
               id={"save-password-modal"}
               type="submit"
-              variant="callAction"
+              variant="primary"
               color="primary"
               disabled={
                 loading ||

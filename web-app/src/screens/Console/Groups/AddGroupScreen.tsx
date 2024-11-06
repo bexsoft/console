@@ -126,7 +126,7 @@ const AddGroupScreen = () => {
               <Button
                 id={"clear-group"}
                 type="button"
-                variant="regular"
+                variant="secondary"
                 onClick={resetForm}
                 label={"Clear"}
               />
@@ -134,7 +134,7 @@ const AddGroupScreen = () => {
               <Button
                 id={"save-group"}
                 type="submit"
-                variant="callAction"
+                variant="primary"
                 disabled={saving || !validGroup}
                 label={"Save"}
               />

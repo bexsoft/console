@@ -143,7 +143,7 @@ const ChangeUserPassword = ({
             <Button
               id={"save-user-password"}
               type="submit"
-              variant="callAction"
+              variant="primary"
               color="primary"
               disabled={
                 loading ||

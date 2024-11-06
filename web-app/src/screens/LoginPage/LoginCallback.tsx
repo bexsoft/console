@@ -127,7 +127,7 @@ const LoginCallback = () => {
                 window.location.href = `${baseUrl}login`;
               }}
               type="submit"
-              variant="callAction"
+              variant="primary"
               fullWidth
             >
               Back to Login

@@ -19,7 +19,7 @@ import {
   Button,
   InspectMenuIcon,
   KeyRoundIcon,
-  Switch,
+  Toggle,
   Grid,
   Box,
 } from "mds";
@@ -122,7 +122,7 @@ const InspectObject = ({
             }}
           >
             Would you like to encrypt <b>{inspectPath}</b>? <br />
-            <Switch
+            <Toggle
               label={"Encrypt"}
               indicatorLabels={["Yes", "No"]}
               checked={isEncrypt}
@@ -138,7 +138,7 @@ const InspectObject = ({
               <Button
                 id={"inspect"}
                 type="submit"
-                variant="callAction"
+                variant="primary"
                 color="primary"
                 onClick={performInspect}
                 label={"Inspect"}

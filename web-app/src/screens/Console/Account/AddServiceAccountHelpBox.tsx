@@ -16,10 +16,10 @@
 import React from "react";
 import {
   Box,
-  HelpIconFilled,
-  IAMPoliciesIcon,
+  CircleHelpIcon,
+  ShieldCheckIcon,
   KeyRoundIcon,
-  ServiceUserRoundIcon,
+  UserRoundCheckIcon,
 } from "mds";
 
 const FeatureItem = ({
@@ -77,13 +77,13 @@ const AddServiceAccountHelpBox = () => {
           },
         }}
       >
-        <HelpIconFilled />
+        <CircleHelpIcon />
         <div>Learn more about Access Keys</div>
       </Box>
       <Box sx={{ fontSize: "14px", marginBottom: "15px" }}>
         <Box sx={{ paddingBottom: "20px" }}>
           <FeatureItem
-            icon={<ServiceUserRoundIcon />}
+            icon={<UserRoundCheckIcon />}
             description={`Create Access Keys`}
           />
           <Box sx={{ paddingTop: "20px" }}>
@@ -111,7 +111,7 @@ const AddServiceAccountHelpBox = () => {
         </Box>
         <Box sx={{ paddingBottom: "20px" }}>
           <FeatureItem
-            icon={<IAMPoliciesIcon />}
+            icon={<ShieldCheckIcon />}
             description={`Assign Access Policies`}
           />
           <Box sx={{ paddingTop: "10px" }}>

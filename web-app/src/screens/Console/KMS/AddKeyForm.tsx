@@ -106,7 +106,7 @@ const AddKeyForm = () => {
               <Button
                 id={"clear"}
                 type="button"
-                variant="regular"
+                variant="secondary"
                 onClick={resetForm}
                 label={"Clear"}
               />
@@ -114,7 +114,7 @@ const AddKeyForm = () => {
               <Button
                 id={"save-key"}
                 type="submit"
-                variant="callAction"
+                variant="primary"
                 color="primary"
                 disabled={loadingCreate || !validSave}
                 label={"Save"}

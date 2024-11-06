@@ -161,7 +161,7 @@ const ChangeUserGroups = ({
             <Button
               id={"clear-change-user-groups"}
               type="button"
-              variant="regular"
+              variant="secondary"
               onClick={resetForm}
               label={"Clear"}
             />
@@ -169,7 +169,7 @@ const ChangeUserGroups = ({
             <Button
               id={"save-user-groups"}
               type="submit"
-              variant="callAction"
+              variant="primary"
               disabled={addLoading || !sendEnabled}
               label={"Save"}
             />

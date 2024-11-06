@@ -71,7 +71,7 @@ const LogSearchFullModal = ({
           >
             <Button
               id={"close-log-search"}
-              variant="callAction"
+              variant="primary"
               color="primary"
               onClick={onClose}
               label={"Close"}

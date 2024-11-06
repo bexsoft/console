@@ -140,7 +140,7 @@ const BulkAddToGroup = ({
             <Button
               id={"clear-bulk-add-group"}
               type="button"
-              variant="regular"
+              variant="secondary"
               color="primary"
               onClick={resetForm}
               label={"Clear"}
@@ -148,7 +148,7 @@ const BulkAddToGroup = ({
             <Button
               id={"save-add-group"}
               type="submit"
-              variant="callAction"
+              variant="primary"
               disabled={saving || selectedGroups.length < 1}
               label={"Save"}
             />

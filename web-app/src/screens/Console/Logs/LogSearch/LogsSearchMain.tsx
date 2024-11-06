@@ -235,7 +235,7 @@ const LogsSearchMain = () => {
         {!logSearchEnabled ? (
           <MissingIntegration
             entity={"Audit Logs"}
-            iconComponent={<SearchIcon />}
+            icon={<SearchIcon />}
             documentationLink="https://min.io/docs/minio/windows/operations/monitoring/minio-logging.html?ref=con"
           />
         ) : (
@@ -362,7 +362,7 @@ const LogsSearchMain = () => {
                 <Button
                   id={"get-information"}
                   type="button"
-                  variant="callAction"
+                  variant="primary"
                   onClick={triggerLoad}
                   label={"Get Information"}
                 />

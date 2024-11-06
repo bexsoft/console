@@ -104,14 +104,14 @@ const AddBucketTagModal = ({
           <Button
             id={"clear"}
             type="button"
-            variant="regular"
+            variant="secondary"
             onClick={resetForm}
             label={"Clear"}
           />
           <Button
             id={"save-add-bucket-tag"}
             type="submit"
-            variant="callAction"
+            variant="primary"
             color="primary"
             disabled={
               newLabel.trim() === "" || newKey.trim() === "" || isSending

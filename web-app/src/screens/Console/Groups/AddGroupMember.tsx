@@ -81,7 +81,7 @@ const AddGroupMember = ({
         <Button
           id={"reset-add-group-member"}
           type="button"
-          variant="regular"
+          variant="secondary"
           onClick={() => {
             setSelectedUsers(preSelectedUsers);
           }}
@@ -91,7 +91,7 @@ const AddGroupMember = ({
         <Button
           id={"save-add-group-member"}
           type="button"
-          variant="callAction"
+          variant="primary"
           onClick={() => {
             addMembersToGroup();
           }}

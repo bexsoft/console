@@ -248,7 +248,7 @@ const ErrorLogs = () => {
               <Button
                 id={"start-logs"}
                 type="submit"
-                variant="callAction"
+                variant="primary"
                 disabled={false}
                 onClick={startLogs}
                 label={"Start Logs"}
@@ -258,7 +258,7 @@ const ErrorLogs = () => {
               <Button
                 id={"stop-logs"}
                 type="button"
-                variant="callAction"
+                variant="primary"
                 onClick={stopLogs}
                 label={"Stop Logs"}
               />

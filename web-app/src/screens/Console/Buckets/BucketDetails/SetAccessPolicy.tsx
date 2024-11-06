@@ -153,7 +153,7 @@ const SetAccessPolicy = ({
           <Button
             id={"cancel"}
             type="button"
-            variant="regular"
+            variant="secondary"
             onClick={() => {
               closeModalAndRefresh();
             }}
@@ -163,7 +163,7 @@ const SetAccessPolicy = ({
           <Button
             id={"set"}
             type="submit"
-            variant="callAction"
+            variant="primary"
             disabled={
               addLoading || (accessPolicy === "CUSTOM" && !policyDefinition)
             }

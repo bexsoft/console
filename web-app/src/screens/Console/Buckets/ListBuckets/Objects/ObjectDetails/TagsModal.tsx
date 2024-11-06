@@ -179,7 +179,7 @@ const AddTagModal = ({
                 <Button
                   id={"cancel"}
                   type="button"
-                  variant="regular"
+                  variant="secondary"
                   onClick={cancelDelete}
                   label={"Cancel"}
                 />
@@ -294,14 +294,14 @@ const AddTagModal = ({
                     <Button
                       id={"clear"}
                       type="button"
-                      variant="regular"
+                      variant="secondary"
                       color="primary"
                       onClick={resetForm}
                       label={"Clear"}
                     />
                     <Button
                       type="submit"
-                      variant="callAction"
+                      variant="primary"
                       disabled={
                         newLabel.trim() === "" ||
                         newKey.trim() === "" ||

@@ -27,7 +27,7 @@ import {
   Loader,
   PageLayout,
   RefreshIcon,
-  Switch,
+  Toggle,
   Tabs,
   Tooltip,
   ValuePair,
@@ -240,7 +240,7 @@ const IDPLDAPConfigurationDetails = () => {
     switch (value.type) {
       case "toggle":
         return (
-          <Switch
+          <Toggle
             key={key}
             indicatorLabels={["Enabled", "Disabled"]}
             checked={fields[key] === "on"}
@@ -398,7 +398,7 @@ const IDPLDAPConfigurationDetails = () => {
                                       change LDAP configurations
                                     </Box>
                                   }
-                                  iconComponent={<WarnIcon />}
+                                  icon={<WarnIcon />}
                                   help={null}
                                 />
                               </Box>
@@ -427,14 +427,14 @@ const IDPLDAPConfigurationDetails = () => {
                               <Button
                                 id={"cancel"}
                                 type="button"
-                                variant="regular"
+                                variant="secondary"
                                 onClick={toggleEditMode}
                                 label={"Cancel"}
                               />
                               <Button
                                 id={"save-key"}
                                 type="submit"
-                                variant="callAction"
+                                variant="primary"
                                 color="primary"
                                 disabled={loading || !validSave()}
                                 label={"Save"}

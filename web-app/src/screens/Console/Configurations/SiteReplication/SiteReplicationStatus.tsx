@@ -23,7 +23,7 @@ import {
   Button,
   Grid,
   GroupsIcon,
-  IAMPoliciesIcon,
+  ShieldCheckIcon,
   Loader,
   PageLayout,
   RefreshIcon,
@@ -212,7 +212,7 @@ const SiteReplicationStatus = () => {
               entityStatObj={policyStats}
               entityTextPlural={"Policies"}
               maxValue={maxPolicies}
-              icon={<IAMPoliciesIcon />}
+              icon={<ShieldCheckIcon />}
             />
           </Box>
         ) : (

@@ -23,7 +23,7 @@ import {
   Button,
   DataTable,
   Grid,
-  IAMPoliciesIcon,
+  ShieldCheckIcon,
   PageLayout,
   ProgressBar,
   RefreshIcon,
@@ -346,7 +346,7 @@ const PolicyDetails = () => {
       />
       <PageLayout>
         <ScreenTitle
-          icon={<IAMPoliciesIcon width={40} />}
+          icon={<ShieldCheckIcon width={40} />}
           title={policyName}
           subTitle={<Fragment>IAM Policy</Fragment>}
           actions={
@@ -381,7 +381,7 @@ const PolicyDetails = () => {
                 <Button
                   id={"refresh-policy"}
                   label={"Refresh"}
-                  variant="regular"
+                  variant="secondary"
                   icon={<RefreshIcon />}
                   onClick={() => {
                     refreshPolicyDetails();
@@ -615,7 +615,7 @@ const PolicyDetails = () => {
                                 <Button
                                   id={"save"}
                                   type="submit"
-                                  variant="callAction"
+                                  variant="primary"
                                   color="primary"
                                   disabled={
                                     addLoading || !validSave || !canEditPolicy

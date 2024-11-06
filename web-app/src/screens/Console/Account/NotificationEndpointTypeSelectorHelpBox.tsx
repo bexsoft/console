@@ -20,7 +20,7 @@ import { HelpBox, LambdaNotificationsIcon, Box } from "mds";
 const NotificationEndpointTypeSelectorHelpBox = () => {
   return (
     <HelpBox
-      iconComponent={<LambdaNotificationsIcon />}
+      icon={<LambdaNotificationsIcon />}
       title={"What are Event Destinations?"}
       help={
         <Box sx={{ paddingTop: "20px" }}>

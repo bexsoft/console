@@ -170,14 +170,14 @@ const CreatePathModal = ({
               id={"clear"}
               type="button"
               color="primary"
-              variant="regular"
+              variant="secondary"
               onClick={resetForm}
               label={"Clear"}
             />
             <Button
               id={"create"}
               type="submit"
-              variant="callAction"
+              variant="primary"
               disabled={!isFormValid}
               onClick={createProcess}
               label={"Create"}

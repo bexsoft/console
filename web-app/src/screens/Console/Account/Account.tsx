@@ -292,7 +292,7 @@ const Account = () => {
           <Grid item xs={12} sx={{ marginTop: 15 }}>
             <HelpBox
               title={"Learn more about ACCESS KEYS"}
-              iconComponent={<UserRoundIcon />}
+              icon={<UserRoundIcon />}
               help={
                 <Fragment>
                   MinIO access keys are child identities of an authenticated

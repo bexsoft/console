@@ -127,7 +127,7 @@ const AddAccessRule = ({
           <Button
             id={"clear"}
             type="button"
-            variant="regular"
+            variant="secondary"
             onClick={resetForm}
             label={"Clear"}
           />
@@ -135,7 +135,7 @@ const AddAccessRule = ({
           <Button
             id={"add-access-save"}
             type="submit"
-            variant="callAction"
+            variant="primary"
             disabled={prefix.trim() === ""}
             onClick={createProcess}
             label={"Save"}

@@ -135,7 +135,7 @@ const AddUser = () => {
                 <Button
                   id={"clear-add-user"}
                   type="button"
-                  variant="regular"
+                  variant="secondary"
                   onClick={(e) => {
                     dispatch(resetFormAsync());
                   }}
@@ -145,7 +145,7 @@ const AddUser = () => {
                 <Button
                   id={"save-user"}
                   type="submit"
-                  variant="callAction"
+                  variant="primary"
                   color="primary"
                   disabled={addLoading || !sendEnabled}
                   label={"Save"}

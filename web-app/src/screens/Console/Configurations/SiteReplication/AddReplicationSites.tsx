@@ -472,7 +472,7 @@ const AddReplicationSites = () => {
                   <Button
                     id={"clear"}
                     type="button"
-                    variant="regular"
+                    variant="secondary"
                     disabled={isAdding}
                     onClick={resetForm}
                     label={"Clear"}
@@ -481,7 +481,7 @@ const AddReplicationSites = () => {
                   <Button
                     id={"save"}
                     type="submit"
-                    variant="callAction"
+                    variant="primary"
                     disabled={isAdding || !isAllFieldsValid}
                     label={"Save"}
                   />
@@ -492,7 +492,7 @@ const AddReplicationSites = () => {
 
           <HelpBox
             title={""}
-            iconComponent={null}
+            icon={null}
             help={
               <Fragment>
                 <Box

@@ -24,7 +24,7 @@ import {
   Grid,
   InputBox,
   Select,
-  Switch,
+  Toggle,
 } from "mds";
 import { api } from "api";
 import { errorToHandler } from "api/errors";
@@ -205,7 +205,7 @@ const AddReplicationModal = ({
             value={targetURL}
           />
 
-          <Switch
+          <Toggle
             checked={useTLS}
             id="useTLS"
             name="useTLS"
@@ -347,7 +347,7 @@ const AddReplicationModal = ({
           </fieldset>
           <fieldset className={"inputItem"}>
             <legend>Replication Options</legend>
-            <Switch
+            <Toggle
               checked={metadataSync}
               id="metadatataSync"
               name="metadatataSync"
@@ -357,7 +357,7 @@ const AddReplicationModal = ({
               }}
               description={"Metadata Sync"}
             />
-            <Switch
+            <Toggle
               checked={repDeleteMarker}
               id="deleteMarker"
               name="deleteMarker"
@@ -367,7 +367,7 @@ const AddReplicationModal = ({
               }}
               description={"Replicate soft deletes"}
             />
-            <Switch
+            <Toggle
               checked={repDelete}
               id="repDelete"
               name="repDelete"
@@ -382,7 +382,7 @@ const AddReplicationModal = ({
             <Button
               id={"cancel"}
               type="button"
-              variant="regular"
+              variant="secondary"
               disabled={addLoading}
               onClick={() => {
                 closeModalAndRefresh();
@@ -392,7 +392,7 @@ const AddReplicationModal = ({
             <Button
               id={"submit"}
               type="submit"
-              variant="callAction"
+              variant="primary"
               color="primary"
               disabled={addLoading}
               label={"Save"}
