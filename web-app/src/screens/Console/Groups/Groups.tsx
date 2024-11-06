@@ -17,19 +17,18 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  AddIcon,
+  PlusIcon,
   Button,
   DeleteIcon,
-  GroupsIcon,
-  HelpBox,
-  IAMPoliciesIcon,
-  PageLayout,
   UsersIcon,
+  HelpBox,
+  ShieldCheckIcon,
+  PageLayout,
   DataTable,
   Grid,
   Box,
   ProgressBar,
-  ActionLink,
+  LinkButton,
 } from "mds";
 
 import { api } from "api";
@@ -243,9 +242,9 @@ const Groups = () => {
                       setPolicyOpen(true);
                     }}
                     label={"Assign Policy"}
-                    icon={<IAMPoliciesIcon />}
+                    icon={<ShieldCheckIcon />}
                     disabled={checkedGroups.length < 1 || !applyPolicy}
-                    variant={"regular"}
+                    variant={"secondary"}
                   />
                 </TooltipWrapper>
               </SecureComponent>
@@ -289,8 +288,8 @@ const Groups = () => {
                   <Button
                     id={"create-group"}
                     label={"Create Group"}
-                    variant="callAction"
-                    icon={<AddIcon />}
+                    variant="primary"
+                    icon={<PlusIcon />}
                     onClick={() => {
                       navigate(`${IAM_PAGES.GROUPS_ADD}`);
                     }}
@@ -327,7 +326,7 @@ const Groups = () => {
                   <Grid item xs={12}>
                     <HelpBox
                       title={"Groups"}
-                      iconComponent={<GroupsIcon />}
+                      icon={<UsersIcon />}
                       help={
                         <Fragment>
                           A group can have one attached IAM policy, where all
@@ -356,7 +355,7 @@ const Groups = () => {
                   <Grid item xs={8}>
                     <HelpBox
                       title={"Groups"}
-                      iconComponent={<UsersIcon />}
+                      icon={<UsersIcon />}
                       help={
                         <Fragment>
                           A group can have one attached IAM policy, where all
@@ -371,13 +370,13 @@ const Groups = () => {
                             <br />
                             <br />
                             To get started,{" "}
-                            <ActionLink
+                            <LinkButton
                               onClick={() => {
                                 navigate(`${IAM_PAGES.GROUPS_ADD}`);
                               }}
                             >
                               Create a Group
-                            </ActionLink>
+                            </LinkButton>
                             .
                           </SecureComponent>
                         </Fragment>

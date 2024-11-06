@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment, useState } from "react";
-import { ConfirmDeleteIcon, Grid, InputBox } from "mds";
+import { CircleXIcon, Grid, InputBox } from "mds";
 import { ErrorResponseHandler } from "../../../../common/types";
 import { setErrorSnackMessage } from "../../../../systemSlice";
 import { useAppDispatch } from "../../../../store";
@@ -84,11 +84,12 @@ const DeleteReplicationRule = ({
       }
       confirmText={"Delete"}
       isOpen={deleteOpen}
-      titleIcon={<ConfirmDeleteIcon />}
+      titleIcon={<CircleXIcon />}
       isLoading={deleteLoading}
       onConfirm={onConfirmDelete}
       onClose={onClose}
       confirmButtonProps={{
+        id: "delete-replication-rule",
         disabled: deleteSelectedRules && confirmationText !== "Yes, I am sure",
       }}
       confirmationContent={

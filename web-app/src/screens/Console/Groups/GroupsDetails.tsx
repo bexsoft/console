@@ -17,20 +17,21 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  AddIcon,
+  PlusIcon,
   BackLink,
   Box,
   Button,
   DataTable,
   Grid,
-  GroupsIcon,
-  IAMPoliciesIcon,
+  UsersIcon,
+  ShieldCheckIcon,
   PageLayout,
   ScreenTitle,
   SectionTitle,
-  Switch,
+  Toggle,
   Tabs,
   TrashIcon,
+  IColumns,
 } from "mds";
 import { api } from "api";
 import { errorToHandler } from "api/errors";
@@ -204,8 +205,8 @@ const GroupsDetails = () => {
                 <Button
                   id={"add-user-group"}
                   label={memberActionText}
-                  variant="callAction"
-                  icon={<AddIcon />}
+                  variant="primary"
+                  icon={<PlusIcon />}
                   onClick={() => {
                     setUsersOpen(true);
                   }}
@@ -246,7 +247,7 @@ const GroupsDetails = () => {
                   isDisabled: !viewUser,
                 },
               ]}
-              columns={[{ label: "Access Key" }]}
+              columns={["Access Key"]}
               selectedItems={[]}
               isLoading={false}
               records={filteredMembers}
@@ -282,8 +283,8 @@ const GroupsDetails = () => {
               <Button
                 id={"set-policies"}
                 label={`Set Policies`}
-                variant="callAction"
-                icon={<IAMPoliciesIcon />}
+                variant="primary"
+                icon={<ShieldCheckIcon />}
                 onClick={() => {
                   setPolicyOpen(true);
                 }}
@@ -318,7 +319,7 @@ const GroupsDetails = () => {
                 isDisabled: !canViewPolicy,
               },
             ]}
-            columns={[{ label: "Policy" }]}
+            columns={["Policy"]}
             isLoading={false}
             records={groupPolicies}
             entityName="Policies"
@@ -386,12 +387,11 @@ const GroupsDetails = () => {
           <ScreenTitle
             icon={
               <Fragment>
-                <GroupsIcon width={40} />
+                <UsersIcon width={40} />
               </Fragment>
             }
             title={params.groupName || ""}
             subTitle={null}
-            bottomBorder
             actions={
               <Box
                 sx={{
@@ -425,7 +425,7 @@ const GroupsDetails = () => {
                     errorProps={{ disabled: true }}
                     matchAll
                   >
-                    <Switch
+                    <Toggle
                       indicatorLabels={["Enabled", "Disabled"]}
                       checked={isGroupEnabled}
                       value={"group_enabled"}
@@ -434,7 +434,7 @@ const GroupsDetails = () => {
                       onChange={() => {
                         toggleGroupStatus(!isGroupEnabled);
                       }}
-                      switchOnly
+                      toggleOnly
                     />
                   </SecureComponent>
                 </TooltipWrapper>

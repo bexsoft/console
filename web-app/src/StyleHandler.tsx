@@ -18,7 +18,6 @@ import React, { Fragment } from "react";
 import { GlobalStyles, ThemeHandler } from "mds";
 import "react-virtualized/styles.css";
 
-import { generateOverrideTheme } from "./utils/stylesUtils";
 import "./index.css";
 import { useSelector } from "react-redux";
 import { AppState } from "./store";
@@ -33,16 +32,16 @@ const StyleHandler = ({ children }: IStyleHandler) => {
   );
   const darkMode = useSelector((state: AppState) => state.system.darkMode);
 
-  let thm = undefined;
+  /*let thm = undefined;
 
   if (colorVariants) {
     thm = generateOverrideTheme(colorVariants);
-  }
+  }*/
 
   return (
     <Fragment>
-      <GlobalStyles />
-      <ThemeHandler darkMode={darkMode} customTheme={thm}>
+      <ThemeHandler darkMode={darkMode}>
+        <GlobalStyles />
         {children}
       </ThemeHandler>
     </Fragment>

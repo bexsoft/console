@@ -16,18 +16,17 @@
 
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import styled from "styled-components";
 import get from "lodash/get";
 import {
-  AlertCloseIcon,
+  XIcon,
   Box,
   Button,
-  HelpIcon,
-  HelpIconFilled,
+  CircleHelpIcon,
   IconButton,
-  MinIOTierIcon,
+  MinIOIcon,
   TabItemProps,
   Tabs,
+  styled,
 } from "mds";
 import { useSelector } from "react-redux";
 import { AppState, useAppDispatch } from "../../store";
@@ -35,6 +34,7 @@ import { setHelpTabName } from "../../systemSlice";
 import { DocItem } from "./HelpMenu.types";
 import HelpItem from "./HelpItem";
 import MoreLink from "../../common/MoreLink";
+import TopNavigatorButton from "./Menu/TopNavigationButton";
 
 const HelpMenuContainer = styled.div(({ theme }) => ({
   backgroundColor: get(theme, "bgColor", "#FFF"),
@@ -194,7 +194,7 @@ const HelpMenu = () => {
         ))}
       <div style={{ padding: 16 }}>
         <MoreLink
-          LeadingIcon={MinIOTierIcon}
+          LeadingIcon={MinIOIcon}
           text={"Visit MinIO Documentation"}
           link={"https://docs.min.io/?ref=con"}
           color={"#C5293F"}
@@ -220,7 +220,7 @@ const HelpMenu = () => {
         ))}
       <div style={{ padding: 16 }}>
         <MoreLink
-          LeadingIcon={MinIOTierIcon}
+          LeadingIcon={MinIOIcon}
           text={"Visit MinIO Videos"}
           link={"https://resources.min.io/l/library?contentType=video"}
           color={"#C5293F"}
@@ -246,7 +246,7 @@ const HelpMenu = () => {
         ))}
       <div style={{ padding: 16 }}>
         <MoreLink
-          LeadingIcon={MinIOTierIcon}
+          LeadingIcon={MinIOIcon}
           text={"Visit MinIO Blog"}
           link={"https://blog.min.io/?ref=con"}
           color={"#C5293F"}
@@ -292,7 +292,7 @@ const HelpMenu = () => {
             onTabClick={(item) => dispatch(setHelpTabName(item))}
             optionsInitialComponent={
               <Box sx={{ margin: "10px 10px 10px 15px" }}>
-                <HelpIconFilled
+                <CircleHelpIcon
                   style={{ color: "#3874A6", width: 16, height: 16 }}
                 />
               </Box>
@@ -300,25 +300,26 @@ const HelpMenu = () => {
             optionsEndComponent={
               <Box sx={{ marginRight: 15 }}>
                 <IconButton
+                  id={"help-menu"}
                   onClick={() => {
                     setHelpMenuOpen(false);
                   }}
                   size="small"
                 >
-                  <AlertCloseIcon style={{ color: "#919191", width: 12 }} />
+                  <XIcon style={{ color: "#919191", width: 12 }} />
                 </IconButton>
               </Box>
             }
-            horizontalBarBackground
             horizontal
           />
         </HelpMenuContainer>
       )}
-      <Button
+      <TopNavigatorButton
         id={systemHelpName ?? "help_button"}
-        icon={<HelpIcon />}
         onClick={toggleHelpMenu}
-      ></Button>
+      >
+        <CircleHelpIcon />
+      </TopNavigatorButton>
     </Fragment>
   );
 };

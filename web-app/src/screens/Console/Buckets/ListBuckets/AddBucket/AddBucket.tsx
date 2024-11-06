@@ -15,14 +15,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment, useEffect, useState } from "react";
-import styled from "styled-components";
 import get from "lodash/get";
 
 import { useNavigate } from "react-router-dom";
 import {
   BackLink,
   Box,
-  BucketsIcon,
+  BucketIcon,
   Button,
   FormLayout,
   Grid,
@@ -31,9 +30,10 @@ import {
   InputBox,
   PageLayout,
   RadioGroup,
-  Switch,
+  Toggle,
   SectionTitle,
   ProgressBar,
+  styled,
 } from "mds";
 import { k8sScalarUnitsExcluding } from "../../../../../common/utils";
 import { AppState, useAppDispatch } from "../../../../../store";
@@ -234,10 +234,10 @@ const AddBucket = () => {
       <PageLayout>
         <FormLayout
           title={"Create Bucket"}
-          icon={<BucketsIcon />}
+          icon={<BucketIcon />}
           helpBox={
             <HelpBox
-              iconComponent={<BucketsIcon />}
+              icon={<BucketIcon />}
               title={"Buckets"}
               help={
                 <Fragment>
@@ -329,7 +329,7 @@ const AddBucket = () => {
                     <br />
                   </Fragment>
                 )}
-                <Switch
+                <Toggle
                   value="versioned"
                   id="versioned"
                   name="versioned"
@@ -355,46 +355,10 @@ const AddBucket = () => {
                           "Versioning",
                         )
                   }
-                  helpTip={
-                    <Fragment>
-                      {lockingEnabled && versioningEnabled && (
-                        <strong>
-                          {" "}
-                          You must disable Object Locking before Versioning can
-                          be disabled <br />
-                        </strong>
-                      )}
-                      MinIO supports keeping multiple{" "}
-                      <a
-                        href="https://min.io/docs/minio/kubernetes/upstream/administration/object-management/object-versioning.html#minio-bucket-versioning"
-                        target="blank"
-                      >
-                        versions
-                      </a>{" "}
-                      of an object in a single bucket.
-                      <br />
-                      Versioning is required to enable{" "}
-                      <a
-                        href="https://min.io/docs/minio/macos/administration/object-management.html#object-retention"
-                        target="blank"
-                      >
-                        Object Locking
-                      </a>{" "}
-                      and{" "}
-                      <a
-                        href="https://min.io/docs/minio/macos/administration/object-management/object-retention.html#object-retention-modes"
-                        target="blank"
-                      >
-                        Retention
-                      </a>
-                      .
-                    </Fragment>
-                  }
-                  helpTipPlacement="right"
                 />
                 {versioningEnabled && distributedSetup && !lockingEnabled && (
                   <Fragment>
-                    <Switch
+                    <Toggle
                       id={"excludeFolders"}
                       label={"Exclude Folders"}
                       checked={excludeFolders}
@@ -402,21 +366,6 @@ const AddBucket = () => {
                         dispatch(setExcludeFolders(e.target.checked));
                       }}
                       indicatorLabels={["Enabled", "Disabled"]}
-                      helpTip={
-                        <Fragment>
-                          You can choose to{" "}
-                          <a href="https://min.io/docs/minio/windows/administration/object-management/object-versioning.html#exclude-folders-from-versioning">
-                            exclude folders and prefixes
-                          </a>{" "}
-                          from versioning if Object Locking is not enabled.
-                          <br />
-                          MinIO requires versioning to support replication.
-                          <br />
-                          Objects in excluded prefixes do not replicate to any
-                          peer site or remote site.
-                        </Fragment>
-                      }
-                      helpTipPlacement="right"
                     />
                     <CSVMultiSelector
                       elements={excludedPrefixes}
@@ -436,7 +385,7 @@ const AddBucket = () => {
                     />
                   </Fragment>
                 )}
-                <Switch
+                <Toggle
                   value="locking"
                   id="locking"
                   name="locking"
@@ -463,34 +412,8 @@ const AddBucket = () => {
                           "Locking",
                         )
                   }
-                  helpTip={
-                    <Fragment>
-                      {retentionEnabled && (
-                        <strong>
-                          {" "}
-                          You must disable Retention before Object Locking can
-                          be disabled <br />
-                        </strong>
-                      )}
-                      You can only enable{" "}
-                      <a
-                        href="https://min.io/docs/minio/macos/administration/object-management.html#object-retention"
-                        target="blank"
-                      >
-                        Object Locking
-                      </a>{" "}
-                      when first creating a bucket.
-                      <br />
-                      <br />
-                      <a href="https://min.io/docs/minio/windows/administration/object-management/object-versioning.html#exclude-folders-from-versioning">
-                        Exclude folders and prefixes
-                      </a>{" "}
-                      options will not be available if this option is enabled.
-                    </Fragment>
-                  }
-                  helpTipPlacement="right"
                 />
-                <Switch
+                <Toggle
                   value="bucket_quota"
                   id="bucket_quota"
                   name="bucket_quota"
@@ -500,20 +423,6 @@ const AddBucket = () => {
                   }}
                   label={"Quota"}
                   disabled={!distributedSetup}
-                  helpTip={
-                    <Fragment>
-                      Setting a{" "}
-                      <a
-                        href="https://min.io/docs/minio/linux/reference/minio-mc/mc-quota-set.html"
-                        target="blank"
-                      >
-                        quota
-                      </a>{" "}
-                      assigns a hard limit to a bucket beyond which MinIO does
-                      not allow writes.
-                    </Fragment>
-                  }
-                  helpTipPlacement="right"
                 />
                 {quotaEnabled && distributedSetup && (
                   <Fragment>
@@ -539,7 +448,10 @@ const AddBucket = () => {
                           disabled={false}
                         />
                       }
-                      error={
+                      state={
+                        invalidFields.includes("quotaSize") ? "error" : "normal"
+                      }
+                      helper={
                         invalidFields.includes("quotaSize")
                           ? "Please enter a valid quota"
                           : ""
@@ -548,7 +460,7 @@ const AddBucket = () => {
                   </Fragment>
                 )}
                 {versioningEnabled && distributedSetup && lockingAllowed && (
-                  <Switch
+                  <Toggle
                     value="bucket_retention"
                     id="bucket_retention"
                     name="bucket_retention"
@@ -557,23 +469,6 @@ const AddBucket = () => {
                       dispatch(setRetention(event.target.checked));
                     }}
                     label={"Retention"}
-                    helpTip={
-                      <Fragment>
-                        MinIO supports setting both{" "}
-                        <a
-                          href="https://min.io/docs/minio/macos/administration/object-management/object-retention.html#configure-bucket-default-object-retention"
-                          target="blank"
-                        >
-                          bucket-default
-                        </a>{" "}
-                        and per-object retention rules.
-                        <br />
-                        <br /> For per-object retention settings, defer to the
-                        documentation for the PUT operation used by your
-                        preferred SDK.
-                      </Fragment>
-                    }
-                    helpTipPlacement="right"
                   />
                 )}
                 {retentionEnabled && distributedSetup && (
@@ -594,30 +489,6 @@ const AddBucket = () => {
                         { value: "compliance", label: "Compliance" },
                         { value: "governance", label: "Governance" },
                       ]}
-                      helpTip={
-                        <Fragment>
-                          {" "}
-                          <a
-                            href="https://min.io/docs/minio/macos/administration/object-management/object-retention.html#minio-object-locking-compliance"
-                            target="blank"
-                          >
-                            Compliance
-                          </a>{" "}
-                          lock protects Objects from write operations by all
-                          users, including the MinIO root user.
-                          <br />
-                          <br />
-                          <a
-                            href="https://min.io/docs/minio/macos/administration/object-management/object-retention.html#minio-object-locking-governance"
-                            target="blank"
-                          >
-                            Governance
-                          </a>{" "}
-                          lock protects Objects from write operations by
-                          non-privileged users.
-                        </Fragment>
-                      }
-                      helpTipPlacement="right"
                     />
                     <InputBox
                       type="number"
@@ -662,7 +533,7 @@ const AddBucket = () => {
               <Button
                 id={"clear"}
                 type="button"
-                variant={"regular"}
+                variant={"secondary"}
                 className={"clearButton"}
                 onClick={resForm}
                 label={"Clear"}
@@ -677,7 +548,7 @@ const AddBucket = () => {
                 <Button
                   id={"create-bucket"}
                   type="submit"
-                  variant="callAction"
+                  variant="primary"
                   color="primary"
                   disabled={
                     addLoading ||

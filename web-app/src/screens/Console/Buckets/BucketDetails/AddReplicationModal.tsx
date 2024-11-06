@@ -18,13 +18,13 @@ import React, { useEffect, useState } from "react";
 import get from "lodash/get";
 import {
   Box,
-  BucketReplicationIcon,
+  BucketCopyIcon,
   Button,
   FormLayout,
   Grid,
   InputBox,
   Select,
-  Switch,
+  Toggle,
 } from "mds";
 import { api } from "api";
 import { errorToHandler } from "api/errors";
@@ -169,7 +169,7 @@ const AddReplicationModal = ({
         closeModalAndRefresh();
       }}
       title="Set Bucket Replication"
-      titleIcon={<BucketReplicationIcon />}
+      titleIcon={<BucketCopyIcon />}
     >
       <form
         noValidate
@@ -205,7 +205,7 @@ const AddReplicationModal = ({
             value={targetURL}
           />
 
-          <Switch
+          <Toggle
             checked={useTLS}
             id="useTLS"
             name="useTLS"
@@ -347,7 +347,7 @@ const AddReplicationModal = ({
           </fieldset>
           <fieldset className={"inputItem"}>
             <legend>Replication Options</legend>
-            <Switch
+            <Toggle
               checked={metadataSync}
               id="metadatataSync"
               name="metadatataSync"
@@ -355,9 +355,9 @@ const AddReplicationModal = ({
               onChange={(e) => {
                 setMetadataSync(e.target.checked);
               }}
-              description={"Metadata Sync"}
+              helper={"Metadata Sync"}
             />
-            <Switch
+            <Toggle
               checked={repDeleteMarker}
               id="deleteMarker"
               name="deleteMarker"
@@ -365,9 +365,9 @@ const AddReplicationModal = ({
               onChange={(e) => {
                 setRepDeleteMarker(e.target.checked);
               }}
-              description={"Replicate soft deletes"}
+              helper={"Replicate soft deletes"}
             />
-            <Switch
+            <Toggle
               checked={repDelete}
               id="repDelete"
               name="repDelete"
@@ -375,14 +375,14 @@ const AddReplicationModal = ({
               onChange={(e) => {
                 setRepDelete(e.target.checked);
               }}
-              description={"Replicate versioned deletes"}
+              helper={"Replicate versioned deletes"}
             />
           </fieldset>
           <Grid item xs={12} sx={modalStyleUtils.modalButtonBar}>
             <Button
               id={"cancel"}
               type="button"
-              variant="regular"
+              variant="secondary"
               disabled={addLoading}
               onClick={() => {
                 closeModalAndRefresh();
@@ -392,7 +392,7 @@ const AddReplicationModal = ({
             <Button
               id={"submit"}
               type="submit"
-              variant="callAction"
+              variant="primary"
               color="primary"
               disabled={addLoading}
               label={"Save"}

@@ -17,23 +17,21 @@
 import React from "react";
 
 import {
-  FileBookIcon,
+  FileTextIcon,
   FileCodeIcon,
-  FileConfigIcon,
-  FileDbIcon,
-  FileFontIcon,
+  FileCogIcon,
+  FileHeartIcon,
+  FileType2Icon,
   FileImageIcon,
   FileLockIcon,
-  FileMissingIcon,
+  FileQuestionIcon,
   FileMusicIcon,
-  FileNonType,
-  FilePdfIcon,
-  FilePptIcon,
-  FileTxtIcon,
+  FileIcon,
+  FileClockIcon,
   FileVideoIcon,
-  FileXlsIcon,
-  FileZipIcon,
-  FolderBrowserIcon,
+  FileBarChart2Icon,
+  FileArchiveIcon,
+  FolderIcon,
 } from "mds";
 import IconWithLabel from "./IconWithLabel";
 
@@ -52,15 +50,15 @@ const extensionToIcon: IExtToIcon[] = [
     extensions: ["mp3", "m4a", "aac"],
   },
   {
-    icon: <FilePdfIcon />,
+    icon: <FileType2Icon />,
     extensions: ["pdf"],
   },
   {
-    icon: <FilePptIcon />,
+    icon: <FileClockIcon />,
     extensions: ["ppt", "pptx"],
   },
   {
-    icon: <FileXlsIcon />,
+    icon: <FileBarChart2Icon />,
     extensions: ["xls", "xlsx"],
   },
   {
@@ -72,27 +70,27 @@ const extensionToIcon: IExtToIcon[] = [
     extensions: ["html", "xml", "css", "py", "go", "php", "cpp", "h", "java"],
   },
   {
-    icon: <FileConfigIcon />,
+    icon: <FileCogIcon />,
     extensions: ["cfg", "yaml"],
   },
   {
-    icon: <FileDbIcon />,
+    icon: <FileHeartIcon />,
     extensions: ["sql"],
   },
   {
-    icon: <FileFontIcon />,
+    icon: <FileType2Icon />,
     extensions: ["ttf", "otf"],
   },
   {
-    icon: <FileTxtIcon />,
+    icon: <FileTextIcon />,
     extensions: ["doc", "docx", "txt", "rtf"],
   },
   {
-    icon: <FileZipIcon />,
+    icon: <FileArchiveIcon />,
     extensions: ["zip", "rar", "tar", "gz"],
   },
   {
-    icon: <FileBookIcon />,
+    icon: <FileTextIcon />,
     extensions: ["epub", "mobi", "azw", "azw3"],
   },
   {
@@ -102,35 +100,35 @@ const extensionToIcon: IExtToIcon[] = [
 ];
 
 export const displayFileIconName = (
-  element: string,
+  element: string | undefined,
   returnOnlyIcon: boolean = false,
 ) => {
   let elementString = element;
-  let icon = <FileNonType />;
+  let icon = <FileIcon />;
   // Element is a folder
-  if (element.endsWith("/")) {
-    icon = <FolderBrowserIcon />;
-    elementString = element.slice(0, -1);
+  if (element?.endsWith("/")) {
+    icon = <FolderIcon />;
+    elementString = element?.slice(0, -1);
   }
 
-  const lowercaseElement = element.toLowerCase();
+  const lowercaseElement = element?.toLowerCase();
   for (const etc of extensionToIcon) {
     for (const ext of etc.extensions) {
-      if (lowercaseElement.endsWith(`.${ext}`)) {
+      if (lowercaseElement?.endsWith(`.${ext}`)) {
         icon = etc.icon;
       }
     }
   }
 
-  if (!element.endsWith("/") && element.indexOf(".") < 0) {
-    icon = <FileMissingIcon />;
+  if (element && !element.endsWith("/") && element.indexOf(".") < 0) {
+    icon = <FileQuestionIcon />;
   }
 
-  const splitItem = elementString.split("/");
+  const splitItem = elementString?.split("/");
 
   if (returnOnlyIcon) {
     return icon;
   }
 
-  return <IconWithLabel icon={icon} strings={splitItem} />;
+  return <IconWithLabel icon={icon} strings={splitItem ?? []} />;
 };

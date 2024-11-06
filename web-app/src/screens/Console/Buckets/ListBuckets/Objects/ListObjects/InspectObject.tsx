@@ -15,14 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { useState } from "react";
-import {
-  Button,
-  InspectMenuIcon,
-  PasswordKeyIcon,
-  Switch,
-  Grid,
-  Box,
-} from "mds";
+import { Button, FeatherIcon, KeyRoundIcon, Toggle, Grid, Box } from "mds";
 import {
   deleteCookie,
   getCookieValue,
@@ -110,7 +103,7 @@ const InspectObject = ({
       {!decryptionKey && (
         <ModalWrapper
           modalOpen={inspectOpen}
-          titleIcon={<InspectMenuIcon />}
+          titleIcon={<FeatherIcon />}
           title={`Inspect Object`}
           onClose={onClose}
         >
@@ -122,7 +115,7 @@ const InspectObject = ({
             }}
           >
             Would you like to encrypt <b>{inspectPath}</b>? <br />
-            <Switch
+            <Toggle
               label={"Encrypt"}
               indicatorLabels={["Yes", "No"]}
               checked={isEncrypt}
@@ -132,13 +125,13 @@ const InspectObject = ({
               onChange={(e) => {
                 setIsEncrypt(!isEncrypt);
               }}
-              description=""
+              helper=""
             />
             <Grid item xs={12} sx={modalStyleUtils.modalButtonBar}>
               <Button
                 id={"inspect"}
                 type="submit"
-                variant="callAction"
+                variant="primary"
                 color="primary"
                 onClick={performInspect}
                 label={"Inspect"}
@@ -152,7 +145,7 @@ const InspectObject = ({
           modalOpen={inspectOpen}
           title="Inspect Decryption Key"
           onClose={onCloseDecKeyModal}
-          titleIcon={<PasswordKeyIcon />}
+          titleIcon={<KeyRoundIcon />}
         >
           <Box>
             This will be displayed only once. It cannot be recovered.

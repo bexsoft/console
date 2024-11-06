@@ -18,7 +18,6 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { Grid } from "mds";
 import { configurationElements } from "../utils";
-import EditConfiguration from "../../EventDestinations/CustomForms/EditConfiguration";
 
 const ConfigurationsList = () => {
   const { pathname = "" } = useLocation();
@@ -43,14 +42,7 @@ const ConfigurationsList = () => {
           },
         },
       }}
-    >
-      {validActiveConfig && (
-        <EditConfiguration
-          className={`${containerClassName}`}
-          selectedConfiguration={validActiveConfig}
-        />
-      )}
-    </Grid>
+    ></Grid>
   );
 };
 

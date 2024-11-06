@@ -16,12 +16,12 @@
 
 import React, { useEffect, useState } from "react";
 import {
-  BucketReplicationIcon,
+  BucketCopyIcon,
   Button,
   FormLayout,
   InputBox,
-  ReadBox,
-  Switch,
+  CodeSnippet,
+  Toggle,
   Grid,
 } from "mds";
 import ModalWrapper from "../../Common/ModalWrapper/ModalWrapper";
@@ -139,7 +139,7 @@ const EditReplicationModal = ({
         closeModalAndRefresh(false);
       }}
       title="Edit Bucket Replication"
-      titleIcon={<BucketReplicationIcon />}
+      titleIcon={<BucketCopyIcon />}
     >
       <form
         noValidate
@@ -150,7 +150,7 @@ const EditReplicationModal = ({
         }}
       >
         <FormLayout containerPadding={false} withBorders={false}>
-          <Switch
+          <Toggle
             checked={ruleState}
             id="ruleState"
             name="ruleState"
@@ -159,9 +159,9 @@ const EditReplicationModal = ({
               setRuleState(e.target.checked);
             }}
           />
-          <ReadBox label={"Destination"} sx={{ width: "100%" }}>
+          <CodeSnippet label={"Destination"} sx={{ width: "100%" }}>
             {destination}
-          </ReadBox>
+          </CodeSnippet>
 
           <InputBox
             id="priority"
@@ -212,7 +212,7 @@ const EditReplicationModal = ({
           <fieldset className={"inputItem"}>
             <legend>Replication Options</legend>
 
-            <Switch
+            <Toggle
               checked={repExisting}
               id="repExisting"
               name="repExisting"
@@ -220,10 +220,10 @@ const EditReplicationModal = ({
               onChange={(e) => {
                 setRepExisting(e.target.checked);
               }}
-              description={"Replicate existing objects"}
+              helper={"Replicate existing objects"}
             />
 
-            <Switch
+            <Toggle
               checked={metadataSync}
               id="metadatataSync"
               name="metadatataSync"
@@ -231,10 +231,10 @@ const EditReplicationModal = ({
               onChange={(e) => {
                 setMetadataSync(e.target.checked);
               }}
-              description={"Metadata Sync"}
+              helper={"Metadata Sync"}
             />
 
-            <Switch
+            <Toggle
               checked={repDeleteMarker}
               id="deleteMarker"
               name="deleteMarker"
@@ -242,9 +242,9 @@ const EditReplicationModal = ({
               onChange={(e) => {
                 setRepDeleteMarker(e.target.checked);
               }}
-              description={"Replicate soft deletes"}
+              helper={"Replicate soft deletes"}
             />
-            <Switch
+            <Toggle
               checked={repDelete}
               id="repDelete"
               name="repDelete"
@@ -252,14 +252,14 @@ const EditReplicationModal = ({
               onChange={(e) => {
                 setRepDelete(e.target.checked);
               }}
-              description={"Replicate versioned deletes"}
+              helper={"Replicate versioned deletes"}
             />
           </fieldset>
           <Grid item xs={12} sx={modalStyleUtils.modalButtonBar}>
             <Button
               id={"cancel-edit-replication"}
               type="button"
-              variant="regular"
+              variant="secondary"
               disabled={editLoading || saveEdit}
               onClick={() => {
                 closeModalAndRefresh(false);
@@ -269,7 +269,7 @@ const EditReplicationModal = ({
             <Button
               id={"save-replication"}
               type="submit"
-              variant="callAction"
+              variant="primary"
               disabled={editLoading || saveEdit}
               label={"Save"}
             />

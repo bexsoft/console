@@ -14,15 +14,15 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
-  Loader,
-  Grid,
   FormLayout,
-  RadioGroup,
+  Grid,
   InputBox,
+  Loader,
   ProgressBar,
+  RadioGroup,
 } from "mds";
 import { api } from "api";
 import { ObjectRetentionMode, ObjectRetentionUnit } from "api/consoleApi";
@@ -137,30 +137,9 @@ const SetRetentionConfig = ({
                 { value: "compliance", label: "Compliance" },
                 { value: "governance", label: "Governance" },
               ]}
-              helpTip={
-                <Fragment>
-                  {" "}
-                  <a
-                    href="https://min.io/docs/minio/macos/administration/object-management/object-retention.html#minio-object-locking-compliance"
-                    target="blank"
-                  >
-                    Compliance
-                  </a>{" "}
-                  lock protects Objects from write operations by all users,
-                  including the MinIO root user.
-                  <br />
-                  <br />
-                  <a
-                    href="https://min.io/docs/minio/macos/administration/object-management/object-retention.html#minio-object-locking-governance"
-                    target="blank"
-                  >
-                    Governance
-                  </a>{" "}
-                  lock protects Objects from write operations by non-privileged
-                  users.
-                </Fragment>
+              tooltip={
+                "Compliance lock protects Objects from write operations by all users, including the MinIO root user. Governance lock protects Objects from write operations by non-privileged users."
               }
-              helpTipPlacement="right"
             />
             <RadioGroup
               currentValue={retentionUnit as string}
@@ -191,7 +170,7 @@ const SetRetentionConfig = ({
               <Button
                 id={"cancel"}
                 type="button"
-                variant="regular"
+                variant="secondary"
                 disabled={addLoading}
                 onClick={() => {
                   closeModalAndRefresh();
@@ -201,7 +180,7 @@ const SetRetentionConfig = ({
               <Button
                 id={"set"}
                 type="submit"
-                variant="callAction"
+                variant="primary"
                 color="primary"
                 disabled={addLoading || !valid}
                 label={"Set"}

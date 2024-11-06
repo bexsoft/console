@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from "react";
-import { DisabledIcon, EnabledIcon, Box } from "mds";
+import { CircleOffIcon, CircleCheckBigIcon, Box } from "mds";
 import { BucketVersioningResponse } from "api/consoleApi";
 import LabelWithIcon from "./BucketDetails/SummaryItems/LabelWithIcon";
 
@@ -37,9 +37,9 @@ const VersioningInfo = ({
           <LabelWithIcon
             icon={
               versioningState.excludeFolders ? (
-                <EnabledIcon style={{ color: "green" }} />
+                <CircleCheckBigIcon style={{ color: "green" }} />
               ) : (
-                <DisabledIcon />
+                <CircleOffIcon />
               )
             }
             label={

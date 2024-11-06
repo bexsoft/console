@@ -16,7 +16,7 @@
 
 import React, { useEffect, useState } from "react";
 import get from "lodash/get";
-import { Box, Button, FormLayout, Grid, Switch } from "mds";
+import { Box, Button, FormLayout, Grid, Toggle } from "mds";
 import { BucketObject, ObjectLegalHoldStatus } from "api/consoleApi";
 import { api } from "api";
 import { errorToHandler } from "api/errors";
@@ -101,7 +101,7 @@ const SetLegalHoldModal = ({
           <Box className={"inputItem"}>
             <strong>Object</strong>: {bucketName + "/" + objectName}
           </Box>
-          <Switch
+          <Toggle
             value="legalhold"
             id="legalhold"
             name="legalhold"
@@ -119,14 +119,14 @@ const SetLegalHoldModal = ({
             <Button
               id={"clear"}
               type="button"
-              variant="regular"
+              variant="secondary"
               onClick={resetForm}
               label={"Clear"}
             />
             <Button
               id={"save"}
               type="submit"
-              variant="callAction"
+              variant="primary"
               disabled={isSaving}
               label={" Save"}
             />

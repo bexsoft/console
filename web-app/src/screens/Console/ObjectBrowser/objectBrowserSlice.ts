@@ -23,6 +23,8 @@ import {
 import {
   BucketVersioningResponse,
   GetBucketRetentionConfig,
+  BucketObject,
+  Metadata,
 } from "api/consoleApi";
 import { AppState } from "store";
 
@@ -78,6 +80,21 @@ const initialState: ObjectBrowserState = {
   },
   longFileOpen: false,
   maxShareLinkExpTime: 0,
+  objectData: {
+    selectedObjectMetadata: null,
+    selectedObjectInfo: null,
+  },
+  singleObjectModals: {
+    deleteObjectOpen: false,
+    inspectOpen: false,
+    legalHoldOpen: false,
+    retentionOpen: false,
+    promptOpen: false,
+  },
+  multiObjectModals: {
+    deleteMultiple: false,
+  },
+  selectedTab: "information",
 };
 
 const objectBrowserSlice = createSlice({
@@ -384,6 +401,30 @@ const objectBrowserSlice = createSlice({
         state.objectDetailsOpen = false;
       }
     },
+    setObjectInfo: (state, action: PayloadAction<BucketObject | null>) => {
+      state.objectData.selectedObjectInfo = action.payload;
+    },
+    setObjectMetadata: (state, action: PayloadAction<Metadata | null>) => {
+      state.objectData.selectedObjectMetadata = action.payload;
+    },
+    setDeleteObjectOpen: (state, action: PayloadAction<boolean>) => {
+      state.singleObjectModals.deleteObjectOpen = action.payload;
+    },
+    setInspectOpen: (state, action: PayloadAction<boolean>) => {
+      state.singleObjectModals.inspectOpen = action.payload;
+    },
+    setLegalHoldOpen: (state, action: PayloadAction<boolean>) => {
+      state.singleObjectModals.legalHoldOpen = action.payload;
+    },
+    setRetentionOpen: (state, action: PayloadAction<boolean>) => {
+      state.singleObjectModals.retentionOpen = action.payload;
+    },
+    setDeleteMultipleOpen: (state, action: PayloadAction<boolean>) => {
+      state.multiObjectModals.deleteMultiple = action.payload;
+    },
+    setSelectedTab: (state, action: PayloadAction<string>) => {
+      state.selectedTab = action.payload;
+    },
   },
 });
 export const {
@@ -431,6 +472,14 @@ export const {
   setAnonymousAccessOpen,
   setMaxShareLinkExpTime,
   errorInConnection,
+  setObjectInfo,
+  setObjectMetadata,
+  setDeleteObjectOpen,
+  setInspectOpen,
+  setLegalHoldOpen,
+  setRetentionOpen,
+  setDeleteMultipleOpen,
+  setSelectedTab,
 } = objectBrowserSlice.actions;
 
 export const maxShareLinkExpTime = (state: AppState) =>

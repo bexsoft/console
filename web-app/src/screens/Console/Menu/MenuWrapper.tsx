@@ -16,10 +16,9 @@
 
 import React from "react";
 import { useSelector } from "react-redux";
-import { Menu } from "mds";
 import { AppState, useAppDispatch } from "../../../store";
 import { validRoutes } from "../valid-routes";
-import { menuOpen } from "../../../systemSlice";
+//import { menuOpen } from "../../../systemSlice";
 import { selFeatures } from "../consoleSlice";
 import {
   getLogoApplicationVariant,
@@ -28,6 +27,12 @@ import {
 } from "../../../config";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getLicenseConsent } from "../License/utils";
+import TopBar from "./TopBar";
+import { Box, Breadcrumbs, LogOutIcon, ThemedLogo } from "mds";
+import ObjectManagerButton from "../Common/ObjectManager/ObjectManagerButton";
+import HelpMenu from "../HelpMenu";
+import TopNavigatorButton from "./TopNavigationButton";
+import DarkModeActivator from "../Common/DarkModeActivator/DarkModeActivator";
 
 const MenuWrapper = () => {
   const dispatch = useAppDispatch();
@@ -54,7 +59,7 @@ const MenuWrapper = () => {
 
   const allowedMenuItems = validRoutes(features, licenseNotification);
 
-  return (
+  /*return (
     <Menu
       isOpen={sidebarOpen}
       displayGroupTitles
@@ -67,7 +72,7 @@ const MenuWrapper = () => {
         navigate(path);
       }}
       signOutAction={() => {
-        navigate("/logout");
+
       }}
       collapseAction={() => {
         dispatch(menuOpen(!sidebarOpen));
@@ -75,7 +80,20 @@ const MenuWrapper = () => {
       currentPath={pathname}
       mobileModeAuto={false}
     />
-  );
+  );*/
+
+  return <TopBar>
+    <Box sx={{ flexGrow: 1, "& svg": {width: 56}, }}>
+      <ThemedLogo />
+    </Box>
+    <HelpMenu />
+    <ObjectManagerButton />
+    {/*isK8s && <MainDropOptions />*/}
+    <DarkModeActivator />
+    <TopNavigatorButton id={"sign-out"} onClick={() => navigate("/logout")}>
+      <LogOutIcon style={{ width: 16, marginLeft: 0 }} />
+    </TopNavigatorButton>
+  </TopBar>;
 };
 
 export default MenuWrapper;

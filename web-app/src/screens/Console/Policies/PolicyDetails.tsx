@@ -23,15 +23,14 @@ import {
   Button,
   DataTable,
   Grid,
-  IAMPoliciesIcon,
   PageLayout,
   ProgressBar,
-  RefreshIcon,
+  RefreshCWIcon,
   ScreenTitle,
   SectionTitle,
+  ShieldCheckIcon,
   Tabs,
   TrashIcon,
-  HelpTip,
 } from "mds";
 import { actionsTray } from "../Common/FormComponents/common/styleLibrary";
 
@@ -346,7 +345,7 @@ const PolicyDetails = () => {
       />
       <PageLayout>
         <ScreenTitle
-          icon={<IAMPoliciesIcon width={40} />}
+          icon={<ShieldCheckIcon width={40} />}
           title={policyName}
           subTitle={<Fragment>IAM Policy</Fragment>}
           actions={
@@ -381,8 +380,8 @@ const PolicyDetails = () => {
                 <Button
                   id={"refresh-policy"}
                   label={"Refresh"}
-                  variant="regular"
-                  icon={<RefreshIcon />}
+                  variant="secondary"
+                  icon={<RefreshCWIcon />}
                   onClick={() => {
                     refreshPolicyDetails();
                   }}
@@ -531,21 +530,7 @@ const PolicyDetails = () => {
                         dispatch(setHelpName("policy_details_policy"))
                       }
                     >
-                      <HelpTip
-                        content={
-                          <Fragment>
-                            <a
-                              target="blank"
-                              href="https://min.io/docs/minio/kubernetes/upstream/administration/identity-access-management/policy-based-access-control.html#policy-document-structure"
-                            >
-                              Guide to access policy structure
-                            </a>
-                          </Fragment>
-                        }
-                        placement="right"
-                      >
-                        <SectionTitle>Raw Policy</SectionTitle>
-                      </HelpTip>
+                      <SectionTitle>Raw Policy</SectionTitle>
                       <form
                         noValidate
                         autoComplete="off"
@@ -588,7 +573,7 @@ const PolicyDetails = () => {
                             {!policy && (
                               <Button
                                 type="button"
-                                variant={"regular"}
+                                variant={"secondary"}
                                 id={"clear-policy"}
                                 onClick={() => {
                                   resetForm();
@@ -615,7 +600,7 @@ const PolicyDetails = () => {
                                 <Button
                                   id={"save"}
                                   type="submit"
-                                  variant="callAction"
+                                  variant="primary"
                                   color="primary"
                                   disabled={
                                     addLoading || !validSave || !canEditPolicy

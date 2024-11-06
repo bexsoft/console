@@ -17,12 +17,12 @@
 import React, { Fragment, useState } from "react";
 import {
   Button,
-  ChangePasswordIcon,
+  KeyRoundIcon,
   InputBox,
   Grid,
   FormLayout,
   ProgressBar,
-  InformativeMessage,
+  NotificationAlert,
 } from "mds";
 import ModalWrapper from "../Common/ModalWrapper/ModalWrapper";
 
@@ -114,31 +114,30 @@ const ChangePassword = ({ open, closeModal }: IChangePasswordProps) => {
         setCurrentPassword("");
         closeModal();
       }}
-      titleIcon={<ChangePasswordIcon />}
+      titleIcon={<KeyRoundIcon />}
     >
       <div>
         This will change your Console password. Please note your new password
         down, as it will be required to log into Console after this session.
       </div>
-      <InformativeMessage
+      <NotificationAlert
         variant={"warning"}
         title={"Warning"}
-        message={
-          <Fragment>
-            If you are looking to change MINIO_ROOT_USER credentials, <br />
-            Please refer to{" "}
-            <a
-              target="_blank"
-              rel="noopener"
-              href="https://min.io/docs/minio/linux/administration/identity-access-management/minio-user-management.html#id4?ref=con"
-            >
-              rotating
-            </a>{" "}
-            credentials.
-          </Fragment>
-        }
         sx={{ margin: "15px 0" }}
-      />
+      >
+        <Fragment>
+          If you are looking to change MINIO_ROOT_USER credentials, <br />
+          Please refer to{" "}
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://min.io/docs/minio/linux/administration/identity-access-management/minio-user-management.html#id4?ref=con"
+          >
+            rotating
+          </a>{" "}
+          credentials.
+        </Fragment>
+      </NotificationAlert>
       <form
         noValidate
         autoComplete="off"
@@ -185,7 +184,7 @@ const ChangePassword = ({ open, closeModal }: IChangePasswordProps) => {
             <Button
               id={"save-password-modal"}
               type="submit"
-              variant="callAction"
+              variant="primary"
               color="primary"
               disabled={
                 loading ||

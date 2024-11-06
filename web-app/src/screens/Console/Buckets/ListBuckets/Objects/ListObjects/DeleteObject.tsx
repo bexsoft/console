@@ -18,7 +18,7 @@ import React, { Fragment, useState } from "react";
 import { ErrorResponseHandler } from "../../../../../../common/types";
 import ConfirmDialog from "../../../../Common/ModalWrapper/ConfirmDialog";
 import useApi from "../../../../Common/Hooks/useApi";
-import { ConfirmDeleteIcon, Switch } from "mds";
+import { CircleXIcon, Toggle } from "mds";
 import { setErrorSnackMessage } from "../../../../../../systemSlice";
 import { AppState, useAppDispatch } from "../../../../../../store";
 import { hasPermission } from "../../../../../../common/SecureComponent";
@@ -91,7 +91,7 @@ const DeleteObject = ({
       title={`Delete Object`}
       confirmText={"Delete"}
       isOpen={deleteOpen}
-      titleIcon={<ConfirmDeleteIcon />}
+      titleIcon={<CircleXIcon />}
       isLoading={deleteLoading}
       onConfirm={onConfirmDelete}
       onClose={onClose}
@@ -115,7 +115,7 @@ const DeleteObject = ({
           {isVersionedMode(versioningInfo?.status) &&
             selectedVersion === "" && (
               <Fragment>
-                <Switch
+                <Toggle
                   label={"Delete All Versions"}
                   indicatorLabels={["Yes", "No"]}
                   checked={deleteVersions}
@@ -125,7 +125,7 @@ const DeleteObject = ({
                   onChange={(e) => {
                     setDeleteVersions(!deleteVersions);
                   }}
-                  description=""
+                  helper=""
                 />
               </Fragment>
             )}
@@ -136,7 +136,7 @@ const DeleteObject = ({
                   marginTop: 10,
                 }}
               >
-                <Switch
+                <Toggle
                   label={"Bypass Governance Mode"}
                   indicatorLabels={["Yes", "No"]}
                   checked={bypassGovernance}
@@ -146,7 +146,7 @@ const DeleteObject = ({
                   onChange={(e) => {
                     setBypassGovernance(!bypassGovernance);
                   }}
-                  description=""
+                  helper=""
                 />
               </div>
             </Fragment>

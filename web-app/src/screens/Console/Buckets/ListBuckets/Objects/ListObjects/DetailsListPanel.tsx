@@ -15,18 +15,16 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from "react";
-import { Box, Button, ClosePanelIcon } from "mds";
+import { Box, Button, ArrowRightToLineIcon } from "mds";
 
 interface IDetailsListPanel {
   open: boolean;
   className?: string;
-  closePanel: () => void;
   children: React.ReactNode;
 }
 
 const DetailsListPanel = ({
   open,
-  closePanel,
   className = "",
   children,
 }: IDetailsListPanel) => {
@@ -34,12 +32,6 @@ const DetailsListPanel = ({
     <Box
       id={"details-panel"}
       sx={{
-        borderColor: "#EAEDEE",
-        borderWidth: 0,
-        borderStyle: "solid",
-        borderRadius: 3,
-        borderBottomLeftRadius: 0,
-        borderBottomRightRadius: 0,
         width: 0,
         transitionDuration: "0.3s",
         overflowX: "hidden",
@@ -50,7 +42,6 @@ const DetailsListPanel = ({
         "&.open": {
           width: 300,
           minWidth: 300,
-          borderLeftWidth: 1,
           opacity: 1,
         },
         "@media (max-width: 799px)": {
@@ -63,22 +54,6 @@ const DetailsListPanel = ({
       }}
       className={`${open ? "open" : ""} ${className}`}
     >
-      <Button
-        variant={"text"}
-        id={"close-details-list"}
-        onClick={closePanel}
-        icon={<ClosePanelIcon />}
-        sx={{
-          position: "absolute",
-          right: 5,
-          top: 18,
-          padding: 0,
-          height: 14,
-          "&:hover:not(:disabled)": {
-            backgroundColor: "transparent",
-          },
-        }}
-      />
       {children}
     </Box>
   );

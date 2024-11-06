@@ -15,12 +15,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from "react";
-import { Button, DarkModeIcon, LightModeIcon } from "mds";
+import { MoonIcon, SunIcon } from "mds";
 import TooltipWrapper from "../TooltipWrapper/TooltipWrapper";
 import { useSelector } from "react-redux";
 import { AppState, useAppDispatch } from "../../../../store";
 import { setDarkMode } from "../../../../systemSlice";
 import { storeDarkMode } from "../../../../utils/stylesUtils";
+import TopNavigatorButton from "../../Menu/TopNavigationButton";
 
 const DarkModeActivator = () => {
   const dispatch = useAppDispatch();
@@ -36,11 +37,12 @@ const DarkModeActivator = () => {
 
   return (
     <TooltipWrapper tooltip={`${darkMode ? "Light" : "Dark"} Mode`}>
-      <Button
+      <TopNavigatorButton
         id={"dark-mode-activator"}
-        icon={darkMode ? <LightModeIcon /> : <DarkModeIcon />}
         onClick={darkModeActivator}
-      />
+      >
+        {darkMode ? <SunIcon style={{ width: 16, height: 16 }} /> : <MoonIcon style={{ width: 16, height: 16 }} />}
+      </TopNavigatorButton>
     </TooltipWrapper>
   );
 };

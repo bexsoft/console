@@ -18,11 +18,11 @@ import React, { useEffect, useState, Fragment } from "react";
 import {
   Box,
   Button,
-  ChangeAccessPolicyIcon,
+  PencilLineIcon,
   DateTimeInput,
   Grid,
   InputBox,
-  Switch,
+  Toggle,
 } from "mds";
 import { api } from "api";
 import { errorToHandler } from "api/errors";
@@ -108,7 +108,7 @@ const EditServiceAccount = ({
       onClose={() => {
         closeModalAndRefresh();
       }}
-      titleIcon={<ChangeAccessPolicyIcon />}
+      titleIcon={<PencilLineIcon />}
     >
       <form
         noValidate
@@ -215,7 +215,7 @@ const EditServiceAccount = ({
                 padding: "2px",
               }}
             >
-              <Switch
+              <Toggle
                 style={{
                   gap: "115px",
                 }}
@@ -235,7 +235,7 @@ const EditServiceAccount = ({
             <Button
               id={"cancel-sa-policy"}
               type="button"
-              variant="regular"
+              variant="secondary"
               onClick={() => {
                 closeModalAndRefresh();
               }}
@@ -245,7 +245,7 @@ const EditServiceAccount = ({
             <Button
               id={"save-sa-policy"}
               type="submit"
-              variant="callAction"
+              variant="primary"
               color="primary"
               disabled={loading}
               label={"Update"}

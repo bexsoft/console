@@ -20,7 +20,7 @@ import {
   Button,
   FormLayout,
   InputBox,
-  Switch,
+  Toggle,
   Grid,
   ProgressBar,
 } from "mds";
@@ -125,7 +125,7 @@ const EnableQuota = ({
         }}
       >
         <FormLayout withBorders={false} containerPadding={false}>
-          <Switch
+          <Toggle
             value="bucket_quota"
             id="bucket_quota"
             name="bucket_quota"
@@ -162,14 +162,15 @@ const EnableQuota = ({
                   disabled={false}
                 />
               }
-              error={!validInput ? "Please enter a valid quota" : ""}
+              state={validInput ? "normal" : "error"}
+              helper={!validInput ? "Please enter a valid quota" : ""}
             />
           )}
           <Grid item xs={12} sx={modalStyleUtils.modalButtonBar}>
             <Button
               id={"cancel"}
               type="button"
-              variant="regular"
+              variant="secondary"
               disabled={loading}
               onClick={() => {
                 closeModalAndRefresh();
@@ -180,7 +181,7 @@ const EnableQuota = ({
             <Button
               id={"save"}
               type="submit"
-              variant="callAction"
+              variant="primary"
               disabled={loading || !validInput}
               label={"Save"}
             />

@@ -55,14 +55,12 @@ const CodeMirrorWrapper = ({
                 id={"copy-code-mirror"}
                 icon={<CopyIcon />}
                 color={"primary"}
-                variant={"regular"}
+                variant={"secondary"}
               />
             </CopyToClipboard>
           </TooltipWrapper>
         </Fragment>
       }
-      helpTip={helptip}
-      helpTipPlacement="right"
     />
   );
 };

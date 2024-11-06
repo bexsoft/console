@@ -15,8 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { ModalBox, Snackbar } from "mds";
-import { CSSObject } from "styled-components";
+import { ModalBox, NotificationAlert, OverrideTheme } from "mds";
 import { AppState, useAppDispatch } from "../../../../store";
 import { setModalSnackMessage } from "../../../../systemSlice";
 import MainError from "../MainError/MainError";
@@ -29,7 +28,7 @@ interface IModalProps {
   wideLimit?: boolean;
   titleIcon?: React.ReactNode;
   iconColor?: "default" | "delete" | "accept";
-  sx?: CSSObject;
+  sx?: OverrideTheme;
 }
 
 const ModalWrapper = ({
@@ -88,18 +87,14 @@ const ModalWrapper = ({
       titleIcon={titleIcon}
       widthLimit={wideLimit}
       sx={sx}
-      iconColor={iconColor}
     >
       <MainError isModal={true} />
-      <Snackbar
+      <NotificationAlert
         onClose={closeSnackBar}
-        open={openSnackbar}
-        message={message}
-        mode={"inline"}
-        variant={modalSnackMessage.type === "error" ? "error" : "default"}
-        autoHideDuration={modalSnackMessage.type === "error" ? 10 : 5}
-        condensed
-      />
+        color={modalSnackMessage.type === "error" ? "error" : "default"}
+      >
+        {message}
+      </NotificationAlert>
       {children}
     </ModalBox>
   );

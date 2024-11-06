@@ -16,8 +16,10 @@
 
 import { BucketObjectItem } from "../Buckets/ListBuckets/Objects/ListObjects/types";
 import {
+  BucketObject,
   BucketVersioningResponse,
   GetBucketRetentionConfig,
+  Metadata,
 } from "api/consoleApi";
 
 interface RewindItem {
@@ -58,6 +60,10 @@ export interface ObjectBrowserState {
   anonymousAccessOpen: boolean;
   connectionError: boolean;
   maxShareLinkExpTime: number;
+  objectData: ObjectData;
+  singleObjectModals: SingleObjectSubActionsModals;
+  multiObjectModals: MultiObjectsActionModals;
+  selectedTab: string;
 }
 
 interface ObjectManager {
@@ -81,4 +87,21 @@ export interface IFileItem {
   failed: boolean;
   cancelled: boolean;
   errorMessage: string;
+}
+
+export interface ObjectData {
+  selectedObjectInfo: BucketObject | null;
+  selectedObjectMetadata: Metadata | null;
+}
+
+interface SingleObjectSubActionsModals {
+  legalHoldOpen: boolean;
+  inspectOpen: boolean;
+  retentionOpen: boolean;
+  deleteObjectOpen: boolean;
+  promptOpen: boolean;
+}
+
+interface MultiObjectsActionModals {
+  deleteMultiple: boolean;
 }

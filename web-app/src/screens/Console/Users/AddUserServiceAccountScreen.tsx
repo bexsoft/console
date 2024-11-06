@@ -20,16 +20,15 @@ import {
   BackLink,
   Box,
   Button,
+  DateTimeInput,
   FormLayout,
   Grid,
   InputBox,
+  KeyRoundIcon,
   PageLayout,
-  PasswordKeyIcon,
-  ServiceAccountCredentialsIcon,
-  ServiceAccountIcon,
-  Switch,
-  HelpTip,
-  DateTimeInput,
+  SquareUserRoundIcon,
+  Toggle,
+  UserRoundCheckIcon,
 } from "mds";
 import { modalStyleUtils } from "../Common/FormComponents/common/styleLibrary";
 import { NewServiceAccount } from "../Common/CredentialsPrompt/types";
@@ -175,7 +174,7 @@ const AddServiceAccount = () => {
         <PageLayout>
           <FormLayout
             helpBox={<AddUserServiceAccountHelpBox />}
-            icon={<ServiceAccountCredentialsIcon />}
+            icon={<SquareUserRoundIcon />}
             title={`Create Access Key for ${userName}`}
           >
             <form
@@ -195,7 +194,7 @@ const AddServiceAccount = () => {
                 onChange={(e) => {
                   setAccessKey(e.target.value);
                 }}
-                startIcon={<ServiceAccountIcon />}
+                startIcon={<UserRoundCheckIcon />}
               />
               <InputBox
                 value={secretKey}
@@ -207,10 +206,10 @@ const AddServiceAccount = () => {
                 onChange={(e) => {
                   setSecretKey(e.target.value);
                 }}
-                startIcon={<PasswordKeyIcon />}
+                startIcon={<KeyRoundIcon />}
               />
 
-              <Switch
+              <Toggle
                 value="serviceAccountPolicy"
                 id="serviceAccountPolicy"
                 name="serviceAccountPolicy"
@@ -219,31 +218,17 @@ const AddServiceAccount = () => {
                   setIsRestrictedByPolicy(event.target.checked);
                 }}
                 label={"Restrict beyond user policy"}
-                description={
+                helper={
                   "You can specify an optional JSON-formatted IAM policy to further restrict Access Key access to a subset of the actions and resources explicitly allowed for the parent user. Additional access beyond that of the parent user cannot be implemented through these policies."
                 }
               />
               {isRestrictedByPolicy && (
                 <Grid item xs={12}>
                   <Box>
-                    <HelpTip
-                      content={
-                        <Fragment>
-                          <a
-                            target="blank"
-                            href="https://min.io/docs/minio/kubernetes/upstream/administration/identity-access-management/policy-based-access-control.html#policy-document-structure"
-                          >
-                            Guide to access policy structure
-                          </a>
-                        </Fragment>
-                      }
-                      placement="right"
-                    >
-                      <PanelTitle>
-                        Current User Policy - edit the JSON to remove
-                        permissions for this Access Key
-                      </PanelTitle>
-                    </HelpTip>
+                    <PanelTitle>
+                      Current User Policy - edit the JSON to remove permissions
+                      for this Access Key
+                    </PanelTitle>
                   </Box>
                   <Grid item xs={12} sx={{ ...modalStyleUtils.formScrollable }}>
                     <CodeMirrorWrapper
@@ -325,7 +310,7 @@ const AddServiceAccount = () => {
                 <Button
                   id={"clear"}
                   type="button"
-                  variant="regular"
+                  variant="secondary"
                   onClick={resetForm}
                   label={"Clear"}
                 />
@@ -333,7 +318,7 @@ const AddServiceAccount = () => {
                 <Button
                   id={"create-sa"}
                   type="submit"
-                  variant="callAction"
+                  variant="primary"
                   color="primary"
                   label={"Create"}
                 />

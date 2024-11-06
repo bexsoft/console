@@ -17,9 +17,9 @@
 import React, { Fragment, useEffect, useState } from "react";
 
 import {
-  AddIcon,
+  PlusIcon,
   Box,
-  BucketEncryptionIcon,
+  LockKeyholeIcon,
   Button,
   FormLayout,
   Grid,
@@ -43,7 +43,6 @@ import {
 } from "../../../../common/SecureComponent/permissions";
 import { SecureComponent } from "../../../../common/SecureComponent";
 import TooltipWrapper from "../../Common/TooltipWrapper/TooltipWrapper";
-import AddKeyModal from "./AddKeyModal";
 import ModalWrapper from "../../Common/ModalWrapper/ModalWrapper";
 
 interface IEnableBucketEncryptionProps {
@@ -134,23 +133,13 @@ const EnableBucketEncryption = ({
 
   return (
     <Fragment>
-      {addOpen && (
-        <AddKeyModal
-          addOpen={addOpen}
-          closeAddModalAndRefresh={(refresh: boolean) => {
-            setAddOpen(false);
-            setLoadingKeys(true);
-          }}
-        />
-      )}
-
       <ModalWrapper
         modalOpen={open}
         onClose={() => {
           closeModalAndRefresh();
         }}
         title="Enable Bucket Encryption"
-        titleIcon={<BucketEncryptionIcon />}
+        titleIcon={<LockKeyholeIcon />}
       >
         <form
           noValidate
@@ -210,8 +199,8 @@ const EnableBucketEncryption = ({
                   <TooltipWrapper tooltip={"Add key"}>
                     <Button
                       id={"import-key"}
-                      variant={"regular"}
-                      icon={<AddIcon />}
+                      variant={"secondary"}
+                      icon={<PlusIcon />}
                       onClick={(e) => {
                         setAddOpen(true);
                         e.preventDefault();
@@ -225,7 +214,7 @@ const EnableBucketEncryption = ({
               <Button
                 id={"cancel"}
                 type="submit"
-                variant="regular"
+                variant="secondary"
                 onClick={() => {
                   closeModalAndRefresh();
                 }}
@@ -235,7 +224,7 @@ const EnableBucketEncryption = ({
               <Button
                 id={"save"}
                 type="submit"
-                variant="callAction"
+                variant="primary"
                 disabled={loading}
                 label={"Save"}
               />

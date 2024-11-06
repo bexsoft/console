@@ -19,17 +19,16 @@ import get from "lodash/get";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
-  AddIcon,
+  PlusIcon,
   Button,
   HelpBox,
   LambdaIcon,
   DataTable,
   Grid,
   SectionTitle,
-  HelpTip,
 } from "mds";
 import { api } from "api";
-import { NotificationConfig } from "api/consoleApi";
+import { NotificationConfig, NotificationEventType } from "api/consoleApi";
 import { errorToHandler } from "api/errors";
 import {
   hasPermission,
@@ -97,7 +96,7 @@ const BucketEventsPanel = () => {
     }
   }, [loadingEvents, dispatch, bucketName, displayEvents]);
 
-  const eventsDisplay = (events: string[] | null) => {
+  const eventsDisplay = (events: NotificationEventType[] | undefined) => {
     if (!events) {
       return "other";
     }
@@ -170,31 +169,14 @@ const BucketEventsPanel = () => {
                   setAddEventScreenOpen(true);
                 }}
                 label={"Subscribe to Event"}
-                icon={<AddIcon />}
-                variant={"callAction"}
+                icon={<PlusIcon />}
+                variant={"primary"}
               />
             </TooltipWrapper>
           </SecureComponent>
         }
       >
-        <HelpTip
-          content={
-            <Fragment>
-              MinIO{" "}
-              <a
-                target="blank"
-                href="https://min.io/docs/minio/kubernetes/upstream/administration/monitoring.html"
-              >
-                bucket notifications
-              </a>{" "}
-              allow administrators to send notifications to supported external
-              services on certain object or bucket events.
-            </Fragment>
-          }
-          placement="right"
-        >
-          Events
-        </HelpTip>
+        Events
       </SectionTitle>
 
       <Grid container>
@@ -232,7 +214,7 @@ const BucketEventsPanel = () => {
             <br />
             <HelpBox
               title={"Event Notifications"}
-              iconComponent={<LambdaIcon />}
+              icon={<LambdaIcon />}
               help={
                 <Fragment>
                   MinIO bucket notifications allow administrators to send

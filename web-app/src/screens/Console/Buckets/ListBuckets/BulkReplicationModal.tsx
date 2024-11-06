@@ -17,14 +17,14 @@
 import React, { Fragment, useEffect, useState } from "react";
 import {
   Box,
-  CheckCircleIcon,
+  CircleCheckIcon,
   FormLayout,
   InputBox,
-  ReadBox,
+  CodeSnippet,
   Select,
-  Switch,
+  Toggle,
   Tooltip,
-  WarnIcon,
+  CircleAlertIcon,
   Wizard,
 } from "mds";
 import get from "lodash/get";
@@ -207,7 +207,7 @@ const AddBulkReplicationModal = ({
               color: "#42C91A",
             }}
           >
-            <CheckCircleIcon />
+            <CircleCheckIcon />
           </Box>
         );
       case "n/a":
@@ -221,7 +221,7 @@ const AddBulkReplicationModal = ({
               }}
             >
               <Tooltip tooltip={errString} placement="top">
-                <WarnIcon />
+                <CircleAlertIcon />
               </Tooltip>
             </Box>
           );
@@ -309,12 +309,12 @@ const AddBulkReplicationModal = ({
             componentRender: (
               <Fragment>
                 <FormLayout containerPadding={false} withBorders={false}>
-                  <ReadBox
+                  <CodeSnippet
                     label="Local Buckets to replicate"
                     sx={{ maxWidth: "440px", width: "100%" }}
                   >
                     {bucketsToAlter.join(", ")}
-                  </ReadBox>
+                  </CodeSnippet>
                   <h4>Remote Endpoint Configuration</h4>
                   <span style={{ fontSize: 14 }}>
                     Please avoid the use of root credentials for this feature
@@ -349,7 +349,7 @@ const AddBulkReplicationModal = ({
                     label="Target URL"
                     value={targetURL}
                   />
-                  <Switch
+                  <Toggle
                     checked={useTLS}
                     id="useTLS"
                     name="useTLS"

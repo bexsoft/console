@@ -19,15 +19,15 @@ import { useNavigate } from "react-router-dom";
 import {
   BackLink,
   Box,
-  BucketReplicationIcon,
+  BucketCopyIcon,
   Button,
   FormLayout,
   Grid,
   HelpBox,
   InputBox,
   PageLayout,
-  ReadBox,
-  Switch,
+  CodeSnippet,
+  Toggle,
 } from "mds";
 import { IAM_PAGES } from "../../../../common/SecureComponent/permissions";
 import { setErrorSnackMessage, setHelpName } from "../../../../systemSlice";
@@ -164,7 +164,7 @@ const EditBucketReplication = () => {
             withBorders={false}
             helpBox={
               <HelpBox
-                iconComponent={<BucketReplicationIcon />}
+                icon={<BucketCopyIcon />}
                 title="Bucket Replication Configuration"
                 help={
                   <Fragment>
@@ -195,7 +195,7 @@ const EditBucketReplication = () => {
               />
             }
           >
-            <Switch
+            <Toggle
               checked={ruleState}
               id="ruleState"
               name="ruleState"
@@ -204,9 +204,9 @@ const EditBucketReplication = () => {
                 setRuleState(e.target.checked);
               }}
             />
-            <ReadBox label={"Destination"} sx={{ width: "100%" }}>
+            <CodeSnippet label={"Destination"} sx={{ width: "100%" }}>
               {destination}
-            </ReadBox>
+            </CodeSnippet>
             <InputBox
               id="priority"
               name="priority"
@@ -255,7 +255,7 @@ const EditBucketReplication = () => {
             </fieldset>
             <fieldset className={"inputItem"}>
               <legend>Replication Options</legend>
-              <Switch
+              <Toggle
                 checked={repExisting}
                 id="repExisting"
                 name="repExisting"
@@ -263,9 +263,9 @@ const EditBucketReplication = () => {
                 onChange={(e) => {
                   setRepExisting(e.target.checked);
                 }}
-                description={"Replicate existing objects"}
+                helper={"Replicate existing objects"}
               />
-              <Switch
+              <Toggle
                 checked={metadataSync}
                 id="metadatataSync"
                 name="metadatataSync"
@@ -273,9 +273,9 @@ const EditBucketReplication = () => {
                 onChange={(e) => {
                   setMetadataSync(e.target.checked);
                 }}
-                description={"Metadata Sync"}
+                helper={"Metadata Sync"}
               />
-              <Switch
+              <Toggle
                 checked={repDeleteMarker}
                 id="deleteMarker"
                 name="deleteMarker"
@@ -283,9 +283,9 @@ const EditBucketReplication = () => {
                 onChange={(e) => {
                   setRepDeleteMarker(e.target.checked);
                 }}
-                description={"Replicate soft deletes"}
+                helper={"Replicate soft deletes"}
               />
-              <Switch
+              <Toggle
                 checked={repDelete}
                 id="repDelete"
                 name="repDelete"
@@ -293,7 +293,7 @@ const EditBucketReplication = () => {
                 onChange={(e) => {
                   setRepDelete(e.target.checked);
                 }}
-                description={"Replicate versioned deletes"}
+                helper={"Replicate versioned deletes"}
               />
             </fieldset>
             <Grid
@@ -310,7 +310,7 @@ const EditBucketReplication = () => {
               <Button
                 id={"cancel-edit-replication"}
                 type="button"
-                variant="regular"
+                variant="secondary"
                 disabled={editLoading || saveEdit}
                 onClick={() => {
                   navigate(backLink);
@@ -320,7 +320,7 @@ const EditBucketReplication = () => {
               <Button
                 id={"save-replication"}
                 type="submit"
-                variant="callAction"
+                variant="primary"
                 disabled={editLoading || saveEdit}
                 label={"Save"}
               />

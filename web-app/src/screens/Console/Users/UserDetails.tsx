@@ -17,18 +17,18 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  AddIcon,
+  PlusIcon,
   BackLink,
   Box,
   Button,
   DataTable,
   Grid,
-  IAMPoliciesIcon,
+  ShieldCheckIcon,
   PageLayout,
-  PasswordKeyIcon,
+  KeyRoundIcon,
   ScreenTitle,
   SectionTitle,
-  Switch,
+  Toggle,
   Tabs,
   TrashIcon,
   UsersIcon,
@@ -304,7 +304,7 @@ const UserDetails = () => {
                               )
                     }
                   >
-                    <Switch
+                    <Toggle
                       indicatorLabels={["Enabled", "Disabled"]}
                       checked={enabled}
                       value={"group_enabled"}
@@ -314,7 +314,7 @@ const UserDetails = () => {
                         setEnabled(!enabled);
                         saveRecord(!enabled);
                       }}
-                      switchOnly
+                      toggleOnly
                       disabled={!enableEnabled && !disableEnabled}
                     />
                   </TooltipWrapper>
@@ -348,8 +348,8 @@ const UserDetails = () => {
                     <Button
                       id={"change-user-password"}
                       onClick={changeUserPassword}
-                      icon={<PasswordKeyIcon />}
-                      variant={"regular"}
+                      icon={<KeyRoundIcon />}
+                      variant={"secondary"}
                       disabled={userLoggedIn === userName}
                     />
                   </TooltipWrapper>
@@ -397,8 +397,8 @@ const UserDetails = () => {
                                 onClick={() => {
                                   setAddGroupOpen(true);
                                 }}
-                                icon={<AddIcon />}
-                                variant={"callAction"}
+                                icon={<PlusIcon />}
+                                variant={"primary"}
                                 disabled={!canAssignGroup}
                               />
                             </TooltipWrapper>
@@ -475,8 +475,8 @@ const UserDetails = () => {
                                 onClick={() => {
                                   setPolicyOpen(true);
                                 }}
-                                icon={<IAMPoliciesIcon />}
-                                variant={"callAction"}
+                                icon={<ShieldCheckIcon />}
+                                variant={"primary"}
                                 disabled={!canAssignPolicy}
                               />
                             </TooltipWrapper>

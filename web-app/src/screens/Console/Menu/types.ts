@@ -14,7 +14,21 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import { MenuItemProps } from "mds";
+import React from "react";
+
+export interface MenuItemProps {
+  group?: string;
+  path?: string;
+  name: string;
+  id?: string;
+  icon: React.ReactNode;
+  onClick?: (path: string) => void;
+  children?: MenuItemProps[];
+  badge?: boolean;
+  currentPath?: string;
+  visibleTooltip?: boolean;
+  isVisible?: boolean;
+}
 
 export interface IMenuItem extends MenuItemProps {
   forceDisplay?: boolean;

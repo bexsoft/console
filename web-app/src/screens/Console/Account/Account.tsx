@@ -16,8 +16,8 @@
 
 import React, { Fragment, useEffect, useState } from "react";
 import {
-  AccountIcon,
-  AddIcon,
+  UserRoundIcon,
+  PlusIcon,
   Box,
   Button,
   DataTable,
@@ -25,7 +25,7 @@ import {
   Grid,
   HelpBox,
   PageLayout,
-  PasswordKeyIcon,
+  KeyRoundIcon,
 } from "mds";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -253,8 +253,8 @@ const Account = () => {
                   id={"change-password"}
                   onClick={() => setChangePasswordModalOpen(true)}
                   label={`Change Password`}
-                  icon={<PasswordKeyIcon />}
-                  variant={"regular"}
+                  icon={<KeyRoundIcon />}
+                  variant={"secondary"}
                   disabled={userIDP}
                 />
               </SecureComponent>
@@ -270,8 +270,8 @@ const Account = () => {
                     navigate(`${IAM_PAGES.ACCOUNT_ADD}`);
                   }}
                   label={`Create access key`}
-                  icon={<AddIcon />}
-                  variant={"callAction"}
+                  icon={<PlusIcon />}
+                  variant={"primary"}
                 />
               </SecureComponent>
             </Box>
@@ -292,7 +292,7 @@ const Account = () => {
           <Grid item xs={12} sx={{ marginTop: 15 }}>
             <HelpBox
               title={"Learn more about ACCESS KEYS"}
-              iconComponent={<AccountIcon />}
+              icon={<UserRoundIcon />}
               help={
                 <Fragment>
                   MinIO access keys are child identities of an authenticated

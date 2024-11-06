@@ -17,24 +17,22 @@ import React from "react";
 import { IElement, IElementValue, IOverrideEnv, OverrideValue } from "./types";
 import {
   CodeIcon,
-  CompressIcon,
-  ConsoleIcon,
-  FindReplaceIcon,
-  FirstAidIcon,
+  SquareTerminalIcon,
+  SearchCodeIcon,
+  HospitalIcon,
   KeyIcon,
-  LogsIcon,
-  PendingItemsIcon,
-  PublicIcon,
+  NotebookTextIcon,
+  FeatherIcon,
 } from "mds";
 
 export const configurationElements: IElement[] = [
   {
-    icon: <PublicIcon />,
+    icon: <FeatherIcon />,
     configuration_id: "region",
     configuration_label: "Region",
   },
   {
-    icon: <CompressIcon />,
+    icon: <FeatherIcon />,
     configuration_id: "compression",
     configuration_label: "Compression",
   },
@@ -44,12 +42,12 @@ export const configurationElements: IElement[] = [
     configuration_label: "API",
   },
   {
-    icon: <FirstAidIcon />,
+    icon: <HospitalIcon />,
     configuration_id: "heal",
     configuration_label: "Heal",
   },
   {
-    icon: <FindReplaceIcon />,
+    icon: <SearchCodeIcon />,
     configuration_id: "scanner",
     configuration_label: "Scanner",
   },
@@ -59,17 +57,17 @@ export const configurationElements: IElement[] = [
     configuration_label: "Etcd",
   },
   {
-    icon: <ConsoleIcon />,
+    icon: <SquareTerminalIcon />,
     configuration_id: "logger_webhook",
     configuration_label: "Logger Webhook",
   },
   {
-    icon: <PendingItemsIcon />,
+    icon: <FeatherIcon />,
     configuration_id: "audit_webhook",
     configuration_label: "Audit Webhook",
   },
   {
-    icon: <LogsIcon />,
+    icon: <NotebookTextIcon />,
     configuration_id: "audit_kafka",
     configuration_label: "Audit Kafka",
   },

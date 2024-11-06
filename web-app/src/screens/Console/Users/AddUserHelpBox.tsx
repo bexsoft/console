@@ -15,13 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import React from "react";
 
-import {
-  Box,
-  ChangeAccessPolicyIcon,
-  GroupsIcon,
-  HelpIconFilled,
-  UsersIcon,
-} from "mds";
+import { Box, PencilLineIcon, UsersIcon, CircleHelpIcon } from "mds";
 
 const FeatureItem = ({
   icon,
@@ -77,7 +71,7 @@ const AddUserHelpBox = () => {
           },
         }}
       >
-        <HelpIconFilled />
+        <CircleHelpIcon />
         <div>Learn more about the Users feature</div>
       </Box>
       <Box sx={{ fontSize: "14px", marginBottom: "15px" }}>
@@ -100,9 +94,9 @@ const AddUserHelpBox = () => {
         }}
       >
         <FeatureItem icon={<UsersIcon />} description={`Create Users`} />
-        <FeatureItem icon={<GroupsIcon />} description={`Manage Groups`} />
+        <FeatureItem icon={<UsersIcon />} description={`Manage Groups`} />
         <FeatureItem
-          icon={<ChangeAccessPolicyIcon />}
+          icon={<PencilLineIcon />}
           description={`Assign Policies`}
         />
       </Box>

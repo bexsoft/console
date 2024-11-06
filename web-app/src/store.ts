@@ -19,15 +19,12 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 import systemReducer from "./systemSlice";
 import loginReducer from "./screens/LoginPage/loginSlice";
-import logReducer from "./screens/Console/Logs/logsSlice";
 import consoleReducer from "./screens/Console/consoleSlice";
 import addBucketsReducer from "./screens/Console/Buckets/ListBuckets/AddBucket/addBucketsSlice";
 import bucketDetailsReducer from "./screens/Console/Buckets/BucketDetails/bucketDetailsSlice";
 import objectBrowserReducer from "./screens/Console/ObjectBrowser/objectBrowserSlice";
-import dashboardReducer from "./screens/Console/Dashboard/dashboardSlice";
 import createUserReducer from "./screens/Console/Users/AddUsersSlice";
 import licenseReducer from "./screens/Console/License/licenseSlice";
-import destinationSlice from "./screens/Console/EventDestinations/destinationsSlice";
 import { objectBrowserWSMiddleware } from "./websockets/objectBrowserWSMiddleware";
 
 let objectsWS: WebSocket;
@@ -35,15 +32,12 @@ let objectsWS: WebSocket;
 const rootReducer = combineReducers({
   system: systemReducer,
   login: loginReducer,
-  logs: logReducer,
   console: consoleReducer,
   addBucket: addBucketsReducer,
   bucketDetails: bucketDetailsReducer,
   objectBrowser: objectBrowserReducer,
-  dashboard: dashboardReducer,
   createUser: createUserReducer,
   license: licenseReducer,
-  destination: destinationSlice,
 });
 
 export const store = configureStore({

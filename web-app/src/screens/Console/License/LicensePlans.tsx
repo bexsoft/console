@@ -15,10 +15,9 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment } from "react";
-import { Box, Button } from "mds";
+import { Box, Button, styled } from "mds";
 import { SubnetInfo } from "./types";
 import { FEATURE_ITEMS, FeatureItem, LICENSE_PLANS_INFORMATION } from "./utils";
-import styled from "styled-components";
 import get from "lodash/get";
 import CheckIcon from "./CheckIcon";
 

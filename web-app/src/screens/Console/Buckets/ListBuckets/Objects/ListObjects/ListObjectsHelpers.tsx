@@ -18,16 +18,18 @@ import { DateTime } from "luxon";
 import { BucketObjectItem } from "./types";
 import { niceBytes } from "../../../../../../common/utils";
 import { displayFileIconName } from "./utils";
+import { IColumns } from "mds";
+import { BucketObject } from "../../../../../../api/consoleApi";
 
 // Functions
 
-const displayParsedDate = (object: BucketObjectItem) => {
-  if (object.name.endsWith("/")) {
+const displayParsedDate = (object: BucketObject) => {
+  if (!object.name || object.name.endsWith("/")) {
     return "";
   }
 
   const currTime = DateTime.now();
-  const objectTime = DateTime.fromISO(object.last_modified);
+  const objectTime = DateTime.fromISO(object.last_modified || "");
 
   const isToday =
     currTime.hasSame(objectTime, "day") &&
@@ -41,20 +43,20 @@ const displayParsedDate = (object: BucketObjectItem) => {
   return objectTime.toFormat("ccc, LLL dd yyyy HH:mm (ZZZZ)");
 };
 
-const displayNiceBytes = (object: BucketObjectItem) => {
-  if (object.name.endsWith("/") || !object.size) {
+const displayNiceBytes = (object: BucketObject) => {
+  if (!object.name || object.name.endsWith("/") || !object.size) {
     return "-";
   }
   return niceBytes(String(object.size));
 };
 
-const displayDeleteFlag = (state: boolean) => {
+const displayDeleteFlag = (state?: boolean) => {
   return state ? "Yes" : "No";
 };
 
 // Table Props
 
-export const listModeColumns = [
+export const listModeColumns: IColumns<BucketObject>[] = [
   {
     label: "Name",
     elementKey: "name",
@@ -64,21 +66,21 @@ export const listModeColumns = [
   {
     label: "Last Modified",
     elementKey: "last_modified",
-    renderFunction: displayParsedDate,
-    renderFullObject: true,
+    renderFullObjectFunction: displayParsedDate,
+
     enableSort: true,
   },
   {
     label: "Size",
     elementKey: "size",
-    renderFunction: displayNiceBytes,
-    renderFullObject: true,
+    renderFullObjectFunction: displayNiceBytes,
+
     width: 100,
     enableSort: true,
   },
 ];
 
-export const rewindModeColumns = [
+export const rewindModeColumns: IColumns<BucketObject>[] = [
   {
     label: "Name",
     elementKey: "name",
@@ -88,21 +90,21 @@ export const rewindModeColumns = [
   {
     label: "Object Date",
     elementKey: "last_modified",
-    renderFunction: displayParsedDate,
-    renderFullObject: true,
+    renderFullObjectFunction: displayParsedDate,
+
     enableSort: true,
   },
   {
     label: "Size",
     elementKey: "size",
-    renderFunction: displayNiceBytes,
-    renderFullObject: true,
+    renderFullObjectFunction: displayNiceBytes,
+
     width: 100,
     enableSort: true,
   },
   {
     label: "Deleted",
-    elementKey: "delete_flag",
+    elementKey: "is_delete_marker",
     renderFunction: displayDeleteFlag,
     width: 60,
   },

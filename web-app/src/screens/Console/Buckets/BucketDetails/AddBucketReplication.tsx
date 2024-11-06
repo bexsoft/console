@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 import {
   BackLink,
   Box,
-  BucketReplicationIcon,
+  BucketCopyIcon,
   Button,
   FormLayout,
   Grid,
@@ -27,7 +27,7 @@ import {
   InputBox,
   PageLayout,
   Select,
-  Switch,
+  Toggle,
 } from "mds";
 import { IAM_PAGES } from "../../../../common/SecureComponent/permissions";
 import { setErrorSnackMessage, setHelpName } from "../../../../systemSlice";
@@ -183,10 +183,10 @@ const AddBucketReplication = () => {
       <PageLayout>
         <FormLayout
           title="Add Replication Rule"
-          icon={<BucketReplicationIcon />}
+          icon={<BucketCopyIcon />}
           helpBox={
             <HelpBox
-              iconComponent={<BucketReplicationIcon />}
+              icon={<BucketCopyIcon />}
               title="Bucket Replication Configuration"
               help={
                 <Fragment>
@@ -250,7 +250,7 @@ const AddBucketReplication = () => {
               value={targetURL}
             />
 
-            <Switch
+            <Toggle
               checked={useTLS}
               id="useTLS"
               name="useTLS"
@@ -392,7 +392,7 @@ const AddBucketReplication = () => {
             </fieldset>
             <fieldset className={"inputItem"}>
               <legend>Replication Options</legend>
-              <Switch
+              <Toggle
                 checked={repExisting}
                 id="repExisting"
                 name="repExisting"
@@ -400,9 +400,9 @@ const AddBucketReplication = () => {
                 onChange={(e) => {
                   setRepExisting(e.target.checked);
                 }}
-                description={"Replicate existing objects"}
+                helper={"Replicate existing objects"}
               />
-              <Switch
+              <Toggle
                 checked={metadataSync}
                 id="metadatataSync"
                 name="metadatataSync"
@@ -410,9 +410,9 @@ const AddBucketReplication = () => {
                 onChange={(e) => {
                   setMetadataSync(e.target.checked);
                 }}
-                description={"Metadata Sync"}
+                helper={"Metadata Sync"}
               />
-              <Switch
+              <Toggle
                 checked={repDeleteMarker}
                 id="deleteMarker"
                 name="deleteMarker"
@@ -420,9 +420,9 @@ const AddBucketReplication = () => {
                 onChange={(e) => {
                   setRepDeleteMarker(e.target.checked);
                 }}
-                description={"Replicate soft deletes"}
+                helper={"Replicate soft deletes"}
               />
-              <Switch
+              <Toggle
                 checked={repDelete}
                 id="repDelete"
                 name="repDelete"
@@ -430,7 +430,7 @@ const AddBucketReplication = () => {
                 onChange={(e) => {
                   setRepDelete(e.target.checked);
                 }}
-                description={"Replicate versioned deletes"}
+                helper={"Replicate versioned deletes"}
               />
             </fieldset>
             <Grid
@@ -447,7 +447,7 @@ const AddBucketReplication = () => {
               <Button
                 id={"cancel"}
                 type="button"
-                variant="regular"
+                variant="secondary"
                 disabled={addLoading}
                 onClick={() => {
                   navigate(backLink);
@@ -457,7 +457,7 @@ const AddBucketReplication = () => {
               <Button
                 id={"submit"}
                 type="submit"
-                variant="callAction"
+                variant="primary"
                 color="primary"
                 disabled={addLoading || !validated}
                 label={"Save"}

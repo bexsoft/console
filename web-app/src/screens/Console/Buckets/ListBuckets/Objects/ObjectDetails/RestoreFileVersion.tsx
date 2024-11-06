@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { useState } from "react";
-import { Box, RecoverIcon } from "mds";
+import { Box, ArchiveRestoreIcon } from "mds";
 import { BucketObject } from "api/consoleApi";
 import { api } from "api";
 import { errorToHandler } from "api/errors";
@@ -72,9 +72,10 @@ const RestoreFileVersion = ({
       confirmText={"Restore"}
       isOpen={restoreOpen}
       isLoading={restoreLoading}
-      titleIcon={<RecoverIcon />}
+      titleIcon={<ArchiveRestoreIcon />}
       onConfirm={restoreVersion}
       confirmButtonProps={{
+        id: "restore-file-version",
         variant: "secondary",
         disabled: restoreLoading,
       }}

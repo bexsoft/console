@@ -49,7 +49,7 @@ const KeyRevealer = ({ value }: { value: string }) => {
         style={{
           marginLeft: "10px",
         }}
-        variant="callAction"
+        variant="primary"
         onClick={() => setShown(!shown)}
         label={"Show/Hide"}
       />

@@ -21,12 +21,12 @@ import {
   DropdownSelector,
   Grid,
   InputBox,
-  LockFilledIcon,
-  LogoutIcon,
-  PasswordKeyIcon,
+  LockKeyholeIcon,
+  LogOutIcon,
+  KeyRoundIcon,
   ProgressBar,
   Select,
-  UserFilledIcon,
+  UserIcon,
 } from "mds";
 import {
   setAccessKey,
@@ -78,7 +78,7 @@ const StrategyForm = ({ redirectRules }: { redirectRules: RedirectRule[] }) => {
     ssoOptions = redirectRules.map((r) => ({
       label: `${r.displayName}${r.serviceType ? ` - ${r.serviceType}` : ""}`,
       value: r.redirect,
-      icon: <LogoutIcon />,
+      icon: <LogOutIcon />,
     }));
 
     selectOptions = [
@@ -120,7 +120,7 @@ const StrategyForm = ({ redirectRules }: { redirectRules: RedirectRule[] }) => {
           <Box sx={{ marginBottom: 40 }}>
             <Button
               id={"SSOSelector"}
-              variant={"subAction"}
+              variant={"secondary-lighter"}
               label={
                 redirectRules.length === 1
                   ? `${redirectRules[0].displayName}${
@@ -181,7 +181,7 @@ const StrategyForm = ({ redirectRules }: { redirectRules: RedirectRule[] }) => {
                   name="accessKey"
                   autoComplete="username"
                   disabled={loginSending}
-                  startIcon={<UserFilledIcon />}
+                  startIcon={<UserIcon />}
                 />
               </Grid>
               <Grid item xs={12} sx={{ marginBottom: useSTS ? 14 : 0 }}>
@@ -197,7 +197,7 @@ const StrategyForm = ({ redirectRules }: { redirectRules: RedirectRule[] }) => {
                   autoComplete="current-password"
                   disabled={loginSending}
                   placeholder={useSTS ? "STS Secret" : "Password"}
-                  startIcon={<LockFilledIcon />}
+                  startIcon={<LockKeyholeIcon />}
                 />
               </Grid>
               {useSTS && (
@@ -213,7 +213,7 @@ const StrategyForm = ({ redirectRules }: { redirectRules: RedirectRule[] }) => {
                     name="STS"
                     autoComplete="sts"
                     disabled={loginSending}
-                    startIcon={<PasswordKeyIcon />}
+                    startIcon={<KeyRoundIcon />}
                   />
                 </Grid>
               )}
@@ -229,7 +229,7 @@ const StrategyForm = ({ redirectRules }: { redirectRules: RedirectRule[] }) => {
             >
               <Button
                 type="submit"
-                variant="callAction"
+                variant="primary"
                 color="primary"
                 id="do-login"
                 disabled={
@@ -264,7 +264,7 @@ const StrategyForm = ({ redirectRules }: { redirectRules: RedirectRule[] }) => {
           <Select
             id="alternativeMethods"
             name="alternativeMethods"
-            fixedLabel="Other Authentication Methods"
+            placeholder="Other Authentication Methods"
             options={selectOptions}
             onChange={extraActionSelector}
             value={""}
