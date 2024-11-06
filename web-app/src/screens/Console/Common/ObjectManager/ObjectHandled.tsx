@@ -19,10 +19,10 @@ import { IFileItem } from "../../ObjectBrowser/types";
 import ProgressBarWrapper from "../ProgressBarWrapper/ProgressBarWrapper";
 import {
   Box,
-  CancelledIcon,
-  DisabledIcon,
-  DownloadStatIcon,
-  EnabledIcon,
+  CircleXIcon,
+  CircleOffIcon,
+  CloudDownloadIcon,
+  CircleCheckBigIcon,
   UploadStatIcon,
   Tooltip,
 } from "mds";
@@ -189,19 +189,19 @@ const ObjectHandled = ({ objectToDisplay, deleteFromList }: IObjectHandled) => {
                   })}
                 >
                   {objectToDisplay.cancelled ? (
-                    <CancelledIcon />
+                    <CircleXIcon />
                   ) : (
                     <Fragment>
                       {objectToDisplay.failed ? (
-                        <DisabledIcon />
+                        <CircleOffIcon />
                       ) : (
                         <Fragment>
                           {objectToDisplay.done ? (
-                            <EnabledIcon />
+                            <CircleCheckBigIcon />
                           ) : (
                             <Fragment>
                               {objectToDisplay.type === "download" ? (
-                                <DownloadStatIcon />
+                                <CloudDownloadIcon />
                               ) : (
                                 <UploadStatIcon />
                               )}

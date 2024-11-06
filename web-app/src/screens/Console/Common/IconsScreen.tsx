@@ -121,9 +121,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.AddFolderIcon />
+          <cicons.FolderPlusIcon />
           <br />
-          AddFolderIcon
+          FolderPlusIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -151,9 +151,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.AllBucketIcon />
+          <cicons.BucketIcon />
           <br />
-          AllBucketIcon
+          BucketIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -169,21 +169,21 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.AzureTierIcon />
+          <cicons.AzureAksSiteIcon />
           <br />
-          AzureTierIcon
+          AzureAksSiteIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.AzureTierIconXs />
+          <cicons.AzureAksSiteIcon />
           <br />
-          AzureTierIconXs
+          AzureAksSiteIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.BackSettingsIcon />
+          <cicons.ArrowLeftIcon />
           <br />
-          BackSettingsIcon
+          ArrowLeftIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -217,15 +217,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.CallHomeFeatureIcon />
+          <cicons.CircleXIcon />
           <br />
-          CallHomeFeatureIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.CancelledIcon />
-          <br />
-          CancelledIcon
+          CircleXIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -247,9 +241,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.ClosePanelIcon />
+          <cicons.ArrowRightToLineIcon />
           <br />
-          ClosePanelIcon
+          ArrowRightToLineIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -265,33 +259,21 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.ComputerLineIcon />
-          <br />
-          ComputerLineIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.ConfigurationsListIcon />
-          <br />
-          ConfigurationsListIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
           <cicons.CircleXIcon />
           <br />
           CircleXIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.ConfirmModalIcon />
+          <cicons.CircleCheckBigIcon />
           <br />
-          ConfirmModalIcon
+          CircleCheckBigIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.ConsoleIcon />
+          <cicons.SquareTerminalIcon />
           <br />
-          ConsoleIcon
+          SquareTerminalIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -301,33 +283,21 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.CreateGroupIcon />
+          <cicons.UserRoundPlusIcon />
           <br />
-          CreateGroupIcon
+          UserRoundPlusIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.CreateIcon />
+          <cicons.FolderPlusIcon />
           <br />
-          CreateIcon
+          FolderPlusIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.CreateNewPathIcon />
+          <cicons.UserPlusIcon />
           <br />
-          CreateNewPathIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.CreateUserIcon />
-          <br />
-          CreateUserIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.DashboardIcon />
-          <br />
-          DashboardIcon
+          UserPlusIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -337,33 +307,27 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.DeleteNonCurrentIcon />
+          <cicons.TrashIcon />
           <br />
-          DeleteNonCurrentIcon
+          TrashIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.DiagnosticsFeatureIcon />
+          <cicons.ActivityIcon />
           <br />
-          DiagnosticsFeatureIcon
+          ActivityIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.DiagnosticsIcon />
+          <cicons.CircleOffIcon />
           <br />
-          DiagnosticsIcon
+          CircleOffIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.DisabledIcon />
+          <cicons.BookTextIcon />
           <br />
-          DisabledIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.DocumentationIcon />
-          <br />
-          DocumentationIcon
+          BookTextIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -373,21 +337,15 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.DownloadStatIcon />
+          <cicons.CloudDownloadIcon />
           <br />
-          DownloadStatIcon
+          CloudDownloadIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.DriveFormatErrorsIcon />
+          <cicons.HardDriveIcon />
           <br />
-          DriveFormatErrorsIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.DrivesIcon />
-          <br />
-          DrivesIcon
+          HardDriveIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -397,39 +355,15 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.EditTagIcon />
+          <cicons.TagIcon />
           <br />
-          EditTagIcon
+          TagIcon
         </Grid>
-
+        
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.EditTenantIcon />
+          <cicons.CircleCheckBigIcon />
           <br />
-          EditTenantIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.EditYamlIcon />
-          <br />
-          EditYamlIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.EditorThemeSwitchIcon />
-          <br />
-          EditorThemeSwitchIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.EgressIcon />
-          <br />
-          EgressIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.EnabledIcon />
-          <br />
-          EnabledIcon
+          CircleCheckBigIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -438,22 +372,11 @@ const IconsScreen = () => {
           MessageCirclePlusIcon
         </Grid>
 
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.ExtraFeaturesIcon />
-          <br />
-          ExtraFeaturesIcon
-        </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.FileBookIcon />
+          <cicons.FileTextIcon />
           <br />
-          FileBookIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.FileCloudIcon />
-          <br />
-          FileCloudIcon
+          FileTextIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -463,21 +386,21 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.FileConfigIcon />
+          <cicons.FileCogIcon />
           <br />
-          FileConfigIcon
+          FileCogIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.FileDbIcon />
+          <cicons.FileHeartIcon />
           <br />
-          FileDbIcon
+          FileHeartIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.FileFontIcon />
+          <cicons.FileType2Icon />
           <br />
-          FileFontIcon
+          FileType2Icon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -487,9 +410,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.FileLinkIcon />
+          <cicons.FileBoxIcon />
           <br />
-          FileLinkIcon
+          FileBoxIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -499,9 +422,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.FileMissingIcon />
+          <cicons.FileQuestionIcon />
           <br />
-          FileMissingIcon
+          FileQuestionIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -511,21 +434,21 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.FilePdfIcon />
+          <cicons.FileType2Icon />
           <br />
-          FilePdfIcon
+          FileType2Icon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.FilePptIcon />
+          <cicons.FileClockIcon />
           <br />
-          FilePptIcon
+          FileClockIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.FileTxtIcon />
+          <cicons.FileTextIcon />
           <br />
-          FileTxtIcon
+          FileTextIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -535,21 +458,21 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.FileWorldIcon />
+          <cicons.FileTextIcon />
           <br />
-          FileWorldIcon
+          FileTextIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.FileXlsIcon />
+          <cicons.FileBarChart2Icon />
           <br />
-          FileXlsIcon
+          FileBarChart2Icon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.FileZipIcon />
+          <cicons.FileArchiveIcon />
           <br />
-          FileZipIcon
+          FileArchiveIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -559,21 +482,21 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.FormatDrivesIcon />
+          <cicons.HardDriveDownloadIcon />
           <br />
-          FormatDrivesIcon
+          HardDriveDownloadIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.GoogleTierIcon />
+          <cicons.GoogleGkeSiteIcon />
           <br />
-          GoogleTierIcon
+          GoogleGkeSiteIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.GoogleTierIconXs />
+          <cicons.GoogleGkeSiteIcon />
           <br />
-          GoogleTierIconXs
+          GoogleGkeSiteIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -589,15 +512,15 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.HealIcon />
+          <cicons.HospitalIcon />
           <br />
-          HealIcon
+          HospitalIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.HelpIcon />
+          <cicons.CircleHelpIcon />
           <br />
-          HelpIcon
+          CircleHelpIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -625,15 +548,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.JSONIcon />
+          <cicons.BracesIcon />
           <br />
-          JSONIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.LambdaBalloonIcon />
-          <br />
-          LambdaBalloonIcon
+          BracesIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -649,15 +566,15 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.LegalHoldIcon />
+          <cicons.BalancerIcon />
           <br />
-          LegalHoldIcon
+          BalancerIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.LicenseIcon />
+          <cicons.BookOpenTextIcon />
           <br />
-          LicenseIcon
+          BookOpenTextIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -685,129 +602,70 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.LogsIcon />
+          <cicons.NotebookTextIcon />
           <br />
-          LogsIcon
+          NotebookTextIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.MetadataIcon />
+          <cicons.DataIcon />
           <br />
-          MetadataIcon
+          DataIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.MinIOTierIcon />
+          <cicons.MinIOIcon />
           <br />
-          MinIOTierIcon
+          MinIOIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.MinIOTierIconXs />
+          <cicons.MinIOIcon />
           <br />
-          MinIOTierIconXs
+          MinIOIcon
+        </Grid>
+
+
+        <Grid item xs={3} sm={2} md={1}>
+          <cicons.BucketCopyIcon />
+          <br />
+          BucketCopyIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.MirroringIcon />
+          <cicons.UserPlusIcon />
           <br />
-          MirroringIcon
+          UserPlusIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.MultipleBucketIcon />
+          <cicons.FolderPlusIcon />
           <br />
-          MultipleBucketIcon
+          FolderPlusIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.NewUserRoundIcon />
+          <cicons.BucketIcon />
           <br />
-          NewUserRoundIcon
+          BucketIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.NewPathIcon />
+          <cicons.InfoIcon />
           <br />
-          NewPathIcon
+          InfoIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.NewPoolIcon />
+          <cicons.BucketIcon />
           <br />
-          NewPoolIcon
+          BucketIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.NextArrowRightIcon />
+          <cicons.GlassesIcon />
           <br />
-          NextArrowRightIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.ObjectBrowser1Icon />
-          <br />
-          ObjectBrowser1Icon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.ObjectBrowserFolderIcon />
-          <br />
-          ObjectBrowserFolderIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.ObjectBrowserIcon />
-          <br />
-          ObjectBrowserIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.ObjectInfoIcon />
-          <br />
-          ObjectInfoIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.ObjectManagerIcon />
-          <br />
-          ObjectManagerIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.ObjectPreviewIcon />
-          <br />
-          ObjectPreviewIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.OfflineRegistrationBackIcon />
-          <br />
-          OfflineRegistrationBackIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.OfflineRegistrationIcon />
-          <br />
-          OfflineRegistrationIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.OnlineRegistrationBackIcon />
-          <br />
-          OnlineRegistrationBackIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.OnlineRegistrationIcon />
-          <br />
-          OnlineRegistrationIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.OpenListIcon />
-          <br />
-          OpenListIcon
+          GlassesIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -817,39 +675,21 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.PerformanceFeatureIcon />
+          <cicons.EyeIcon />
           <br />
-          PerformanceFeatureIcon
+          EyeIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.PermissionIcon />
+          <cicons.BookXIcon />
           <br />
-          PermissionIcon
+          BookXIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.PreviewIcon />
+          <cicons.ArchiveRestoreIcon />
           <br />
-          PreviewIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.PrometheusErrorIcon />
-          <br />
-          PrometheusErrorIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.PrometheusIcon />
-          <br />
-          PrometheusIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.RecoverIcon />
-          <br />
-          RecoverIcon
+          ArchiveRestoreIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -865,15 +705,15 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.RemoveAllIcon />
+          <cicons.DeleteIcon />
           <br />
-          RemoveAllIcon
+          DeleteIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.RemoveIcon />
+          <cicons.TrashIcon />
           <br />
-          RemoveIcon
+          TrashIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -883,27 +723,27 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.ReportedUsageIcon />
+          <cicons.PieChartIcon />
           <br />
-          ReportedUsageIcon
+          PieChartIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.RetentionIcon />
+          <cicons.WineIcon />
           <br />
-          RetentionIcon
+          WineIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.S3TierIcon />
+          <cicons.FeatherIcon />
           <br />
-          S3TierIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.S3TierIconXs />
+          <cicons.FeatherIcon />
           <br />
-          S3TierIconXs
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -913,21 +753,21 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.SelectAllIcon />
+          <cicons.CheckCheckIcon />
           <br />
-          SelectAllIcon
+          CheckCheckIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.SelectMultipleIcon />
+          <cicons.SquareStackIcon />
           <br />
-          SelectMultipleIcon
+          SquareStackIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.ServersIcon />
+          <cicons.ServerIcon />
           <br />
-          ServersIcon
+          ServerIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -943,9 +783,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.ServiceAccountsIcon />
+          <cicons.SquareUserIcon />
           <br />
-          ServiceAccountsIcon
+          SquareUserIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -961,9 +801,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.SpeedtestIcon />
+          <cicons.GaugeIcon />
           <br />
-          SpeedtestIcon
+          GaugeIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -973,15 +813,15 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.StorageIcon />
+          <cicons.HardDriveIcon />
           <br />
-          StorageIcon
+          HardDriveIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.SyncIcon />
+          <cicons.FolderSyncIcon />
           <br />
-          SyncIcon
+          FolderSyncIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -991,21 +831,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.TenantsIcon />
+          <cicons.UsersRoundIcon />
           <br />
-          TenantsIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.TenantsOutlineIcon />
-          <br />
-          TenantsOutlineIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.TiersIcon />
-          <br />
-          TiersIcon
+          UsersRoundIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>

@@ -18,11 +18,11 @@ import { IElement, IElementValue, IOverrideEnv, OverrideValue } from "./types";
 import {
   CodeIcon,
   CompressIcon,
-  ConsoleIcon,
+  SquareTerminalIcon,
   FindReplaceIcon,
   FirstAidIcon,
   KeyIcon,
-  LogsIcon,
+  NotebookTextIcon,
   PendingItemsIcon,
   PublicIcon,
 } from "mds";
@@ -59,7 +59,7 @@ export const configurationElements: IElement[] = [
     configuration_label: "Etcd",
   },
   {
-    icon: <ConsoleIcon />,
+    icon: <SquareTerminalIcon />,
     configuration_id: "logger_webhook",
     configuration_label: "Logger Webhook",
   },
@@ -69,7 +69,7 @@ export const configurationElements: IElement[] = [
     configuration_label: "Audit Webhook",
   },
   {
-    icon: <LogsIcon />,
+    icon: <NotebookTextIcon />,
     configuration_id: "audit_kafka",
     configuration_label: "Audit Kafka",
   },

@@ -17,7 +17,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import {
   Button,
-  ConsoleIcon,
+  SquareTerminalIcon,
   FormLayout,
   Grid,
   InputBox,
@@ -186,7 +186,7 @@ const EditEndpointModal = ({
   switch (type) {
     case "logger_webhook":
       title = `Edit ${defaultWH ? " the Default " : ""}Logger Webhook`;
-      icon = <ConsoleIcon />;
+      icon = <SquareTerminalIcon />;
       break;
     case "audit_webhook":
       title = `Edit ${defaultWH ? " the Default " : ""}Audit Webhook`;
@@ -231,7 +231,7 @@ const EditEndpointModal = ({
                       }
                       placement={"left"}
                     >
-                      <ConsoleIcon style={{ width: 20 }} />
+                      <SquareTerminalIcon style={{ width: 20 }} />
                     </Tooltip>
                   </Grid>
                 }
@@ -260,7 +260,7 @@ const EditEndpointModal = ({
                       }
                       placement={"left"}
                     >
-                      <ConsoleIcon style={{ width: 20 }} />
+                      <SquareTerminalIcon style={{ width: 20 }} />
                     </Tooltip>
                   </Grid>
                 }
@@ -289,7 +289,7 @@ const EditEndpointModal = ({
                       }
                       placement={"left"}
                     >
-                      <ConsoleIcon style={{ width: 20 }} />
+                      <SquareTerminalIcon style={{ width: 20 }} />
                     </Tooltip>
                   </Grid>
                 }

@@ -17,7 +17,7 @@
 import React, { Fragment, useState } from "react";
 import {
   Button,
-  ConsoleIcon,
+  SquareTerminalIcon,
   FormLayout,
   Grid,
   InputBox,
@@ -137,7 +137,7 @@ const AddEndpointModal = ({ open, type, onCloseEndpoint }: IEndpointModal) => {
   switch (type) {
     case "logger_webhook":
       title = "New Logger Webhook";
-      icon = <ConsoleIcon />;
+      icon = <SquareTerminalIcon />;
       break;
     case "audit_webhook":
       title = "New Audit Webhook";

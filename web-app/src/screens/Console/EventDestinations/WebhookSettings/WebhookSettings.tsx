@@ -18,7 +18,7 @@ import React, { Fragment, useState } from "react";
 import { IConfigurationSys, IElementValue } from "../../Configurations/types";
 import {
   Button,
-  ConsoleIcon,
+  SquareTerminalIcon,
   DataTable,
   Grid,
   TierOfflineIcon,
@@ -82,7 +82,7 @@ const WebhookSettings = ({
             fontSize: "8px",
           }}
         >
-          <ConsoleIcon style={{ fill: "#052F51", width: "14px" }} />
+          <SquareTerminalIcon style={{ fill: "#052F51", width: "14px" }} />
           {overrideEnabled ? "Enabled" : "Disabled"}
         </Grid>
       );

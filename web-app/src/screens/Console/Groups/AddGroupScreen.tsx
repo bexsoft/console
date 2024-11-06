@@ -21,7 +21,7 @@ import { modalStyleUtils } from "../Common/FormComponents/common/styleLibrary";
 import {
   BackLink,
   Button,
-  CreateGroupIcon,
+  UserRoundPlusIcon,
   FormLayout,
   Grid,
   InputBox,
@@ -103,7 +103,7 @@ const AddGroupScreen = () => {
       <PageLayout>
         <FormLayout
           title={"Create Group"}
-          icon={<CreateGroupIcon />}
+          icon={<UserRoundPlusIcon />}
           helpBox={<AddGroupHelpBox />}
         >
           <form noValidate autoComplete="off" onSubmit={setSaving}>

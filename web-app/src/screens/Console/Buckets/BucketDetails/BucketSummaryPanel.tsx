@@ -29,8 +29,8 @@ import {
 import { errorToHandler } from "api/errors";
 import {
   Box,
-  DisabledIcon,
-  EnabledIcon,
+  CircleOffIcon,
+  CircleCheckBigIcon,
   Grid,
   SectionTitle,
   ValuePair,
@@ -518,7 +518,7 @@ const BucketSummary = () => {
                     value={
                       <LabelWithIcon
                         icon={
-                          replicationRules ? <EnabledIcon /> : <DisabledIcon />
+                          replicationRules ? <CircleCheckBigIcon /> : <CircleOffIcon />
                         }
                         label={
                           <label className={"muted"}>
@@ -542,7 +542,7 @@ const BucketSummary = () => {
                     value={
                       <LabelWithIcon
                         icon={
-                          hasObjectLocking ? <EnabledIcon /> : <DisabledIcon />
+                          hasObjectLocking ? <CircleCheckBigIcon /> : <CircleOffIcon />
                         }
                         label={
                           <label className={"muted"}>

@@ -28,7 +28,7 @@ import {
   PlusIcon,
   Box,
   Grid,
-  HelpIcon,
+  CircleHelpIcon,
   InputBox,
   InputLabel,
   Tooltip,
@@ -232,7 +232,7 @@ const QueryMultiSelector = ({
               }}
             >
               <Tooltip tooltip={tooltip} placement="top">
-                <HelpIcon style={{ width: 13, height: 13 }} />
+                <CircleHelpIcon style={{ width: 13, height: 13 }} />
               </Tooltip>
             </Box>
           )}

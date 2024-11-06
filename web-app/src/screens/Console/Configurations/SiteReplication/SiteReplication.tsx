@@ -27,7 +27,7 @@ import {
   HelpBox,
   Loader,
   PageLayout,
-  RecoverIcon,
+  ArchiveRestoreIcon,
   SectionTitle,
   TrashIcon,
 } from "mds";
@@ -153,7 +153,7 @@ const SiteReplication = () => {
                       id={"replication-status"}
                       label={"Replication Status"}
                       variant="secondary"
-                      icon={<RecoverIcon />}
+                      icon={<ArchiveRestoreIcon />}
                       onClick={(e) => {
                         e.preventDefault();
                         navigate(IAM_PAGES.SITE_REPLICATION_STATUS);

@@ -17,7 +17,7 @@
 import React from "react";
 import styled from "styled-components";
 import get from "lodash/get";
-import { Box, breakPoints, SpeedtestIcon } from "mds";
+import { Box, breakPoints, GaugeIcon } from "mds";
 import { IDashboardPanel } from "../types";
 import SingleValueWidget from "./SingleValueWidget";
 import NetworkGetItem from "./NetworkGetItem";
@@ -167,7 +167,7 @@ const NetworkItem = ({
           },
         }}
       >
-        <SpeedtestIcon />
+        <GaugeIcon />
       </Box>
     </NetworkItemBase>
   );

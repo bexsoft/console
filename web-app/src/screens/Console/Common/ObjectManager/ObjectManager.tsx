@@ -17,7 +17,7 @@
 import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { AppState, useAppDispatch } from "../../../../store";
-import { Box, RemoveAllIcon, IconButton, Tooltip } from "mds";
+import { Box, DeleteIcon, IconButton, Tooltip } from "mds";
 import ObjectHandled from "./ObjectHandled";
 import {
   cleanList,
@@ -91,7 +91,7 @@ const ObjectManager = () => {
                 aria-label={"Clear Completed List"}
                 onClick={() => dispatch(cleanList())}
               >
-                <RemoveAllIcon />
+                <DeleteIcon />
               </IconButton>
             </Tooltip>
           </Box>

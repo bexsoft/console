@@ -18,8 +18,8 @@ import React, { Fragment, useEffect, useState } from "react";
 import {
   Box,
   breakPoints,
-  DisabledIcon,
-  EnabledIcon,
+  CircleOffIcon,
+  CircleCheckBigIcon,
   Grid,
   PageLayout,
   SectionTitle,
@@ -209,9 +209,9 @@ const Status = () => {
                             key={i}
                             icon={
                               e.status === "online" ? (
-                                <EnabledIcon />
+                                <CircleCheckBigIcon />
                               ) : (
-                                <DisabledIcon />
+                                <CircleOffIcon />
                               )
                             }
                             label={e.url}
@@ -253,7 +253,7 @@ const Status = () => {
                   {apis.results.map((e: any, i: number) => (
                     <LabelWithIcon
                       key={i}
-                      icon={<EnabledIcon />}
+                      icon={<CircleCheckBigIcon />}
                       label={`${e.path} - ${e.method}`}
                     />
                   ))}

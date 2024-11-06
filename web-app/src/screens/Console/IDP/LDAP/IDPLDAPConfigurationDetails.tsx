@@ -18,7 +18,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import {
   Box,
   Button,
-  ConsoleIcon,
+  SquareTerminalIcon,
   PencilIcon,
   FormLayout,
   Grid,
@@ -497,7 +497,7 @@ const IDPLDAPConfigurationDetails = () => {
                                               placement={"right"}
                                             >
                                               <span className={"muted"}>
-                                                <ConsoleIcon />
+                                                <SquareTerminalIcon />
                                               </span>
                                             </Tooltip>
                                           </Box>

@@ -22,10 +22,10 @@ import {
   AlertCloseIcon,
   Box,
   Button,
-  HelpIcon,
+  CircleHelpIcon,
   CircleHelpIcon,
   IconButton,
-  MinIOTierIcon,
+  MinIOIcon,
   TabItemProps,
   Tabs,
 } from "mds";
@@ -194,7 +194,7 @@ const HelpMenu = () => {
         ))}
       <div style={{ padding: 16 }}>
         <MoreLink
-          LeadingIcon={MinIOTierIcon}
+          LeadingIcon={MinIOIcon}
           text={"Visit MinIO Documentation"}
           link={"https://docs.min.io/?ref=con"}
           color={"#C5293F"}
@@ -220,7 +220,7 @@ const HelpMenu = () => {
         ))}
       <div style={{ padding: 16 }}>
         <MoreLink
-          LeadingIcon={MinIOTierIcon}
+          LeadingIcon={MinIOIcon}
           text={"Visit MinIO Videos"}
           link={"https://resources.min.io/l/library?contentType=video"}
           color={"#C5293F"}
@@ -246,7 +246,7 @@ const HelpMenu = () => {
         ))}
       <div style={{ padding: 16 }}>
         <MoreLink
-          LeadingIcon={MinIOTierIcon}
+          LeadingIcon={MinIOIcon}
           text={"Visit MinIO Blog"}
           link={"https://blog.min.io/?ref=con"}
           color={"#C5293F"}
@@ -316,7 +316,7 @@ const HelpMenu = () => {
       )}
       <Button
         id={systemHelpName ?? "help_button"}
-        icon={<HelpIcon />}
+        icon={<CircleHelpIcon />}
         onClick={toggleHelpMenu}
       ></Button>
     </Fragment>

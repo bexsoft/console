@@ -17,7 +17,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import get from "lodash/get";
-import { Box, breakPoints, Loader, ReportedUsageIcon } from "mds";
+import { Box, breakPoints, Loader, PieChartIcon } from "mds";
 import { Cell, Pie, PieChart } from "recharts";
 import { useSelector } from "react-redux";
 import api from "../../../../../common/api";
@@ -272,7 +272,7 @@ const CapacityItem = ({
             {loading ? (
               <Loader style={{ width: "26px", height: "26px" }} />
             ) : (
-              <ReportedUsageIcon />
+              <PieChartIcon />
             )}
           </Box>
         </Box>

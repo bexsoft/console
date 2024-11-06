@@ -17,7 +17,7 @@
 import React from "react";
 import styled from "styled-components";
 import get from "lodash/get";
-import { CircleIcon, DrivesIcon, ServersIcon, Box } from "mds";
+import { CircleIcon, HardDriveIcon, ServerIcon, Box } from "mds";
 import EntityStateStatItem from "./EntityStateStatItem";
 import DualStatCard from "./DualStatCard";
 import { IDashboardPanel } from "../types";
@@ -91,10 +91,10 @@ const EntityStateItemRenderer = ({
   let statIcon = null;
   let statLabel = "";
   if (id === 500) {
-    statIcon = <ServersIcon />;
+    statIcon = <ServerIcon />;
     statLabel = "Servers";
   } else if (id === 501) {
-    statIcon = <DrivesIcon />;
+    statIcon = <HardDriveIcon />;
     statLabel = "Drives";
   }
 

@@ -16,7 +16,7 @@
 
 import React, { Fragment } from "react";
 import TooltipWrapper from "../../Common/TooltipWrapper/TooltipWrapper";
-import { PlusIcon, Box, Button, Grid, InputBox, RemoveIcon } from "mds";
+import { PlusIcon, Box, Button, Grid, InputBox, TrashIcon } from "mds";
 import { SiteInputRow } from "./Types";
 
 interface ISRSiteInputRowProps {
@@ -148,7 +148,7 @@ const SRSiteInputRow = ({
                   id={`remove-row-${index}`}
                   variant="secondary"
                   disabled={!canRemove}
-                  icon={<RemoveIcon />}
+                  icon={<TrashIcon />}
                   onClick={(e) => {
                     e.preventDefault();
                     onRemoveClick?.(index);

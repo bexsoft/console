@@ -23,7 +23,7 @@ import {
   HelpBox,
   PlusIcon,
   SectionTitle,
-  TiersIcon,
+  UsersRoundIcon,
 } from "mds";
 import { useSelector } from "react-redux";
 import { api } from "api";
@@ -347,7 +347,7 @@ const BucketLifecyclePanel = () => {
             <br />
             <HelpBox
               title={"Lifecycle Rules"}
-              icon={<TiersIcon />}
+              icon={<UsersRoundIcon />}
               help={
                 <Fragment>
                   MinIO Object Lifecycle Management allows creating rules for

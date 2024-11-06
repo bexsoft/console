@@ -23,7 +23,7 @@ import { safeDecodeURIComponent } from "../../../common/utils";
 import {
   Button,
   CopyIcon,
-  NewPathIcon,
+  FolderPlusIcon,
   Tooltip,
   Breadcrumbs,
   breakPoints,
@@ -305,7 +305,7 @@ const BrowserBreadcrumbs = ({
                 setCreateFolderOpen(true);
               }}
               disabled={anonymousMode ? false : rewindEnabled || !canCreatePath}
-              icon={<NewPathIcon style={{ fill: "#969FA8" }} />}
+              icon={<FolderPlusIcon style={{ fill: "#969FA8" }} />}
               style={{
                 whiteSpace: "nowrap",
               }}

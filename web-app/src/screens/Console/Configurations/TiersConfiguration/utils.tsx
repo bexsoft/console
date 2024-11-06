@@ -15,14 +15,14 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import {
-  AzureTierIcon,
-  AzureTierIconXs,
-  GoogleTierIcon,
-  GoogleTierIconXs,
-  MinIOTierIcon,
-  MinIOTierIconXs,
-  S3TierIcon,
-  S3TierIconXs,
+  AzureAksSiteIcon,
+  AzureAksSiteIcon,
+  GoogleGkeSiteIcon,
+  GoogleGkeSiteIcon,
+  MinIOIcon,
+  MinIOIcon,
+  FeatherIcon,
+  FeatherIcon,
 } from "mds";
 
 export const minioServiceName = "minio";
@@ -34,25 +34,25 @@ export const tierTypes = [
   {
     serviceName: minioServiceName,
     targetTitle: "MinIO",
-    logo: <MinIOTierIcon />,
-    logoXs: <MinIOTierIconXs />,
+    logo: <MinIOIcon />,
+    logoXs: <MinIOIcon />,
   },
   {
     serviceName: gcsServiceName,
     targetTitle: "Google Cloud Storage",
-    logo: <GoogleTierIcon />,
-    logoXs: <GoogleTierIconXs />,
+    logo: <GoogleGkeSiteIcon />,
+    logoXs: <GoogleGkeSiteIcon />,
   },
   {
     serviceName: s3ServiceName,
     targetTitle: "AWS S3",
-    logo: <S3TierIcon />,
-    logoXs: <S3TierIconXs />,
+    logo: <FeatherIcon />,
+    logoXs: <FeatherIcon />,
   },
   {
     serviceName: azureServiceName,
     targetTitle: "Azure",
-    logo: <AzureTierIcon />,
-    logoXs: <AzureTierIconXs />,
+    logo: <AzureAksSiteIcon />,
+    logoXs: <AzureAksSiteIcon />,
   },
 ];

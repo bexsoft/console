@@ -36,7 +36,7 @@ import {
   Grid,
   HistoryIcon,
   PageLayout,
-  PreviewIcon,
+  EyeIcon,
   RefreshCWIcon,
   ScreenTitle,
   ShareIcon,
@@ -883,7 +883,7 @@ const ListObjects = () => {
       label: "Preview",
       disabled:
         selectedObjects.length !== 1 || !canPreviewFile || isSelObjectDelMarker,
-      icon: <PreviewIcon />,
+      icon: <EyeIcon />,
       tooltip: canPreviewFile ? "Preview Selected File" : "Preview unavailable",
     },
     {

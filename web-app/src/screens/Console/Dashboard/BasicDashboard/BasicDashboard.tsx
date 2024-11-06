@@ -22,13 +22,13 @@ import {
   BucketIcon,
   Button,
   DiagnosticsMenuIcon,
-  DrivesIcon,
-  FormatDrivesIcon,
-  HealIcon,
+  HardDriveIcon,
+  HardDriveDownloadIcon,
+  HospitalIcon,
   HelpBox,
-  PrometheusErrorIcon,
-  ServersIcon,
-  StorageIcon,
+  BookXIcon,
+  ServerIcon,
+  HardDriveIcon,
   TotalObjectsIcon,
   UptimeIcon,
 } from "mds";
@@ -197,7 +197,7 @@ const BasicDashboard = ({ usage }: IDashboardProps) => {
                 onlineCount={onlineServers.length}
                 offlineCount={offlineServers.length}
                 label={"Servers"}
-                icon={<ServersIcon />}
+                icon={<ServerIcon />}
               />
             </BoxItem>
             <BoxItem>
@@ -209,7 +209,7 @@ const BasicDashboard = ({ usage }: IDashboardProps) => {
                   usage?.backend?.onlineDrives || onlineDrives.length
                 }
                 label={"Drives"}
-                icon={<DrivesIcon />}
+                icon={<HardDriveIcon />}
               />
             </BoxItem>
 
@@ -238,7 +238,7 @@ const BasicDashboard = ({ usage }: IDashboardProps) => {
                 }}
               >
                 <TimeStatItem
-                  icon={<HealIcon />}
+                  icon={<HospitalIcon />}
                   label={
                     <Box>
                       <Box
@@ -294,17 +294,17 @@ const BasicDashboard = ({ usage }: IDashboardProps) => {
             }}
           >
             <TimeStatItem
-              icon={<StorageIcon />}
+              icon={<HardDriveIcon />}
               label={"Backend type"}
               value={usage?.backend?.backendType ?? "Unknown"}
             />
             <TimeStatItem
-              icon={<FormatDrivesIcon />}
+              icon={<HardDriveDownloadIcon />}
               label={"Standard storage class parity"}
               value={usage?.backend?.standardSCParity?.toString() ?? "n/a"}
             />
             <TimeStatItem
-              icon={<FormatDrivesIcon />}
+              icon={<HardDriveDownloadIcon />}
               label={"Reduced redundancy storage class parity"}
               value={usage?.backend?.rrSCParity?.toString() ?? "n/a"}
             />
@@ -324,7 +324,7 @@ const BasicDashboard = ({ usage }: IDashboardProps) => {
         {usage?.advancedMetricsStatus === "not configured" && (
           <Box>
             <HelpBox
-              icon={<PrometheusErrorIcon />}
+              icon={<BookXIcon />}
               title={"We can’t retrieve advanced metrics at this time."}
               help={
                 <Box>

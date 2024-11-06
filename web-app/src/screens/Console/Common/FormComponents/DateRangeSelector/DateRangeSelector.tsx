@@ -17,7 +17,7 @@
 import React, { Fragment } from "react";
 import {
   Button,
-  SyncIcon,
+  FolderSyncIcon,
   Grid,
   Box,
   breakPoints,
@@ -162,7 +162,7 @@ const DateRangeSelector = ({
               type="button"
               variant="primary"
               onClick={triggerSync}
-              icon={<SyncIcon />}
+              icon={<FolderSyncIcon />}
               label={"Sync"}
             />
           </Box>

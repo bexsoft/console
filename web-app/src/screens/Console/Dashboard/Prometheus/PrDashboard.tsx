@@ -22,8 +22,8 @@ import {
   HelpBox,
   PageLayout,
   ProgressBar,
-  PrometheusErrorIcon,
-  SyncIcon,
+  BookXIcon,
+  FolderSyncIcon,
   TabItemProps,
   Tabs,
 } from "mds";
@@ -180,7 +180,7 @@ const PrDashboard = ({ apiPrefix = "admin", usage }: IPrDashboard) => {
                     dispatch(getUsageAsync());
                   }}
                   disabled={status === "loading"}
-                  icon={<SyncIcon />}
+                  icon={<FolderSyncIcon />}
                   label={"Sync"}
                 />
               </Grid>
@@ -227,7 +227,7 @@ const PrDashboard = ({ apiPrefix = "admin", usage }: IPrDashboard) => {
           <RowPanelLayout>
             {usage?.advancedMetricsStatus === "unavailable" && (
               <HelpBox
-                icon={<PrometheusErrorIcon />}
+                icon={<BookXIcon />}
                 title={"We can’t retrieve advanced metrics at this time."}
                 help={
                   <Box
@@ -258,7 +258,7 @@ const PrDashboard = ({ apiPrefix = "admin", usage }: IPrDashboard) => {
           <RowPanelLayout>
             {usage?.advancedMetricsStatus === "unavailable" && (
               <HelpBox
-                icon={<PrometheusErrorIcon />}
+                icon={<BookXIcon />}
                 title={"We can’t retrieve advanced metrics at this time."}
                 help={
                   <Box
@@ -289,7 +289,7 @@ const PrDashboard = ({ apiPrefix = "admin", usage }: IPrDashboard) => {
           <RowPanelLayout>
             {usage?.advancedMetricsStatus === "unavailable" && (
               <HelpBox
-                icon={<PrometheusErrorIcon />}
+                icon={<BookXIcon />}
                 title={"We can’t retrieve advanced metrics at this time."}
                 help={
                   <Box

@@ -31,7 +31,7 @@ import {
   RefreshCWIcon,
   TierOfflineIcon,
   TierOnlineIcon,
-  TiersIcon,
+  UsersRoundIcon,
   TiersNotAvailableIcon,
 } from "mds";
 import { api } from "api";
@@ -466,7 +466,7 @@ const ListTiersConfiguration = () => {
                     >
                       <HelpBox
                         title={"Learn more about TIERS"}
-                        icon={<TiersIcon />}
+                        icon={<UsersRoundIcon />}
                         help={
                           <Fragment>
                             Tiers are used by the MinIO Object Lifecycle
@@ -495,7 +495,7 @@ const ListTiersConfiguration = () => {
                 {records.length === 0 && (
                   <HelpBox
                     title={"Tiers"}
-                    icon={<TiersIcon />}
+                    icon={<UsersRoundIcon />}
                     help={
                       <Fragment>
                         Tiers are used by the MinIO Object Lifecycle Management

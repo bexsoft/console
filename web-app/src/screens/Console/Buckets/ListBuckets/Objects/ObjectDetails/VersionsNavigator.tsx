@@ -21,12 +21,12 @@ import {
   breakPoints,
   Button,
   DeleteIcon,
-  DeleteNonCurrentIcon,
+  TrashIcon,
   Grid,
   ProgressBar,
   ScreenTitle,
   Select,
-  SelectMultipleIcon,
+  SquareStackIcon,
   VersionsIcon,
 } from "mds";
 import ShareFile from "./ShareFile";
@@ -440,7 +440,7 @@ const VersionsNavigator = ({
                         onClick={() => {
                           setSelectEnabled(!selectEnabled);
                         }}
-                        icon={<SelectMultipleIcon />}
+                        icon={<SquareStackIcon />}
                         variant={selectEnabled ? "callAction" : "regular"}
                         style={{ marginRight: 8 }}
                       />
@@ -465,7 +465,7 @@ const VersionsNavigator = ({
                         onClick={() => {
                           setDeleteNonCurrentOpen(true);
                         }}
-                        icon={<DeleteNonCurrentIcon />}
+                        icon={<TrashIcon />}
                         variant={"secondary"}
                         style={{ marginRight: 15 }}
                         disabled={versions.length <= 1}

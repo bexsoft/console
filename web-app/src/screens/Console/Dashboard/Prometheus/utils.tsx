@@ -25,7 +25,7 @@ import {
   textToRGBColor,
   units,
 } from "../../../../common/utils";
-import { DiagnosticsIcon, HealIcon, UptimeIcon } from "mds";
+import { ActivityIcon, HospitalIcon, UptimeIcon } from "mds";
 
 const colorsMain = [
   "#C4D4E9",
@@ -308,7 +308,7 @@ export const panelsConfiguration: IDashboardPanel[] = [
     title: "Time Since Last Heal Activity",
     data: "N/A",
     type: widgetType.simpleWidget,
-    widgetIcon: <HealIcon />,
+    widgetIcon: <HospitalIcon />,
     labelDisplayFunction: niceDaysFromNS,
   },
   {
@@ -316,7 +316,7 @@ export const panelsConfiguration: IDashboardPanel[] = [
     title: "Time Since Last Scan Activity",
     data: "N/A",
     type: widgetType.simpleWidget,
-    widgetIcon: <DiagnosticsIcon />,
+    widgetIcon: <ActivityIcon />,
     labelDisplayFunction: niceDaysFromNS,
   },
   {

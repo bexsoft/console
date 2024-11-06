@@ -17,7 +17,7 @@ import React, { Fragment, useState } from "react";
 import get from "lodash/get";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { Box, breakPoints, BucketIcon, Checkbox, Grid, ReportedUsageIcon, Tooltip, TotalObjectsIcon } from "mds";
+import { Box, breakPoints, BucketIcon, Checkbox, Grid, PieChartIcon, Tooltip, TotalObjectsIcon } from "mds";
 import { calculateBytes, niceBytes, prettyNumber } from "../../../../common/utils";
 import { IAM_PERMISSIONS, IAM_ROLES } from "../../../../common/SecureComponent/permissions";
 import { hasPermission } from "../../../../common/SecureComponent";
@@ -205,10 +205,10 @@ const BucketListItem = ({
         >
           {bucket.details?.versioning && (
             <Tooltip tooltip={usageClarifyingContent} placement="top">
-              <ReportedUsageIcon />
+              <PieChartIcon />
             </Tooltip>
           )}
-          {!bucket.details?.versioning && <ReportedUsageIcon />}
+          {!bucket.details?.versioning && <PieChartIcon />}
           <span className={"metricLabel"}>Usage</span>
           <div className={"metricText"}>
             {usageScalar}

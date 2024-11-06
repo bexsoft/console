@@ -25,12 +25,12 @@ import {
   DownloadIcon,
   Grid,
   InspectMenuIcon,
-  LegalHoldIcon,
+  BalancerIcon,
   Loader,
-  MetadataIcon,
-  ObjectInfoIcon,
-  PreviewIcon,
-  RetentionIcon,
+  DataIcon,
+  InfoIcon,
+  EyeIcon,
+  WineIcon,
   ShareIcon,
   SimpleHeader,
   TagsIcon,
@@ -394,7 +394,7 @@ const ObjectDetailPanel = ({
       disabled:
         !!actualInfo.is_delete_marker ||
         (objectType === "none" && !canGetObject),
-      icon: <PreviewIcon />,
+      icon: <EyeIcon />,
       tooltip: canGetObject
         ? "Preview this File"
         : permissionTooltipHelper(
@@ -413,7 +413,7 @@ const ObjectDetailPanel = ({
         !!actualInfo.is_delete_marker ||
         !canSetLegalHold ||
         selectedVersion !== "",
-      icon: <LegalHoldIcon />,
+      icon: <BalancerIcon />,
       tooltip: canSetLegalHold
         ? locking
           ? "Change Legal Hold rules for this File"
@@ -432,7 +432,7 @@ const ObjectDetailPanel = ({
         !canChangeRetention ||
         selectedVersion !== "" ||
         !locking,
-      icon: <RetentionIcon />,
+      icon: <WineIcon />,
       tooltip: canChangeRetention
         ? locking
           ? "Change Retention rules for this File"
@@ -689,7 +689,7 @@ const ObjectDetailPanel = ({
               </SecureComponent>
             </Grid>
           </TooltipWrapper>
-          <SimpleHeader icon={<ObjectInfoIcon />} label={"Object Info"} />
+          <SimpleHeader icon={<InfoIcon />} label={"Object Info"} />
           <Box className={"detailContainer"}>
             <strong>Name:</strong>
             <br />
@@ -789,7 +789,7 @@ const ObjectDetailPanel = ({
           </Box>
           {!actualInfo.is_delete_marker && (
             <Fragment>
-              <SimpleHeader label={"Metadata"} icon={<MetadataIcon />} />
+              <SimpleHeader label={"Metadata"} icon={<DataIcon />} />
               <Box className={"detailContainer"}>
                 {actualInfo && metaData ? (
                   <ObjectMetaData metaData={metaData} />

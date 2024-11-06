@@ -20,8 +20,8 @@ import styled from "styled-components";
 import {
   TagIcon,
   Button,
-  DisabledIcon,
-  EditTagIcon,
+  CircleOffIcon,
+  TagIcon,
   InputBox,
   SectionTitle,
   Box,
@@ -164,7 +164,7 @@ const AddTagModal = ({
           onCloseAndUpdate(true);
         }}
         iconColor={deleteEnabled ? "delete" : "default"}
-        titleIcon={deleteEnabled ? <DisabledIcon /> : <EditTagIcon />}
+        titleIcon={deleteEnabled ? <CircleOffIcon /> : <TagIcon />}
       >
         {deleteEnabled ? (
           <Fragment>

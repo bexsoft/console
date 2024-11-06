@@ -17,22 +17,22 @@
 import React from "react";
 
 import {
-  FileBookIcon,
+  FileTextIcon,
   FileCodeIcon,
-  FileConfigIcon,
-  FileDbIcon,
-  FileFontIcon,
+  FileCogIcon,
+  FileHeartIcon,
+  FileType2Icon,
   FileImageIcon,
   FileLockIcon,
-  FileMissingIcon,
+  FileQuestionIcon,
   FileMusicIcon,
   FileNonType,
-  FilePdfIcon,
-  FilePptIcon,
-  FileTxtIcon,
+  FileType2Icon,
+  FileClockIcon,
+  FileTextIcon,
   FileVideoIcon,
-  FileXlsIcon,
-  FileZipIcon,
+  FileBarChart2Icon,
+  FileArchiveIcon,
   FolderBrowserIcon,
 } from "mds";
 import IconWithLabel from "./IconWithLabel";
@@ -52,15 +52,15 @@ const extensionToIcon: IExtToIcon[] = [
     extensions: ["mp3", "m4a", "aac"],
   },
   {
-    icon: <FilePdfIcon />,
+    icon: <FileType2Icon />,
     extensions: ["pdf"],
   },
   {
-    icon: <FilePptIcon />,
+    icon: <FileClockIcon />,
     extensions: ["ppt", "pptx"],
   },
   {
-    icon: <FileXlsIcon />,
+    icon: <FileBarChart2Icon />,
     extensions: ["xls", "xlsx"],
   },
   {
@@ -72,27 +72,27 @@ const extensionToIcon: IExtToIcon[] = [
     extensions: ["html", "xml", "css", "py", "go", "php", "cpp", "h", "java"],
   },
   {
-    icon: <FileConfigIcon />,
+    icon: <FileCogIcon />,
     extensions: ["cfg", "yaml"],
   },
   {
-    icon: <FileDbIcon />,
+    icon: <FileHeartIcon />,
     extensions: ["sql"],
   },
   {
-    icon: <FileFontIcon />,
+    icon: <FileType2Icon />,
     extensions: ["ttf", "otf"],
   },
   {
-    icon: <FileTxtIcon />,
+    icon: <FileTextIcon />,
     extensions: ["doc", "docx", "txt", "rtf"],
   },
   {
-    icon: <FileZipIcon />,
+    icon: <FileArchiveIcon />,
     extensions: ["zip", "rar", "tar", "gz"],
   },
   {
-    icon: <FileBookIcon />,
+    icon: <FileTextIcon />,
     extensions: ["epub", "mobi", "azw", "azw3"],
   },
   {
@@ -123,7 +123,7 @@ export const displayFileIconName = (
   }
 
   if (!element.endsWith("/") && element.indexOf(".") < 0) {
-    icon = <FileMissingIcon />;
+    icon = <FileQuestionIcon />;
   }
 
   const splitItem = elementString.split("/");

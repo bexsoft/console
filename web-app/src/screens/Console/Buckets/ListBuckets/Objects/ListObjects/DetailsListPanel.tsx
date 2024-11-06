@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from "react";
-import { Box, Button, ClosePanelIcon } from "mds";
+import { Box, Button, ArrowRightToLineIcon } from "mds";
 
 interface IDetailsListPanel {
   open: boolean;
@@ -67,7 +67,7 @@ const DetailsListPanel = ({
         variant={"text"}
         id={"close-details-list"}
         onClick={closePanel}
-        icon={<ClosePanelIcon />}
+        icon={<ArrowRightToLineIcon />}
         sx={{
           position: "absolute",
           right: 5,

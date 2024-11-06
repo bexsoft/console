@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
 import {
   Button,
-  CreateNewPathIcon,
+  FolderPlusIcon,
   InputBox,
   Grid,
   FormLayout,
@@ -132,7 +132,7 @@ const CreatePathModal = ({
         modalOpen={modalOpen}
         title="Choose or create a new path"
         onClose={onClose}
-        titleIcon={<CreateNewPathIcon />}
+        titleIcon={<FolderPlusIcon />}
       >
         <FormLayout withBorders={false} containerPadding={false}>
           <Box className={"inputItem"} sx={{ display: "flex", gap: 8 }}>

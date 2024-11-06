@@ -22,7 +22,7 @@ import {
   Grid,
   InputBox,
   Loader,
-  RemoveIcon,
+  TrashIcon,
   SearchIcon,
   SectionTitle,
   TimeIcon,
@@ -153,7 +153,7 @@ const LDAPEntitiesQuery = () => {
                         users.length === index + 1 ? (
                           <PlusIcon />
                         ) : (
-                          <RemoveIcon />
+                          <TrashIcon />
                         )
                       }
                       overlayAction={() => {
@@ -193,7 +193,7 @@ const LDAPEntitiesQuery = () => {
                         groups.length === index + 1 ? (
                           <PlusIcon />
                         ) : (
-                          <RemoveIcon />
+                          <TrashIcon />
                         )
                       }
                       overlayAction={() => {

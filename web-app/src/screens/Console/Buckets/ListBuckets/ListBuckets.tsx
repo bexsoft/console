@@ -22,11 +22,11 @@ import {
   Button,
   HelpBox,
   RefreshCCWDotIcon,
-  MultipleBucketIcon,
+  BucketCopyIcon,
   PageLayout,
   RefreshCWIcon,
-  SelectAllIcon,
-  SelectMultipleIcon,
+  CheckCheckIcon,
+  SquareStackIcon,
   Grid,
   breakPoints,
   ProgressBar,
@@ -257,7 +257,7 @@ const ListBuckets = () => {
                       setBulkSelect(!bulkSelect);
                       setSelectedBuckets([]);
                     }}
-                    icon={<SelectMultipleIcon />}
+                    icon={<SquareStackIcon />}
                     variant={bulkSelect ? "callAction" : "regular"}
                     disabled={!hasBuckets}
                   />
@@ -276,7 +276,7 @@ const ListBuckets = () => {
                     <Button
                       id={"select-all-buckets"}
                       onClick={selectAllBuckets}
-                      icon={<SelectAllIcon />}
+                      icon={<CheckCheckIcon />}
                       variant={"secondary"}
                     />
                   </TooltipWrapper>
@@ -325,7 +325,7 @@ const ListBuckets = () => {
                     onClick={() => {
                       setReplicationModalOpen(true);
                     }}
-                    icon={<MultipleBucketIcon />}
+                    icon={<BucketCopyIcon />}
                     variant={"secondary"}
                     disabled={selectedBuckets.length === 0}
                   />

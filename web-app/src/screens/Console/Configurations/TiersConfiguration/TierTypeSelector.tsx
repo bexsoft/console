@@ -27,7 +27,7 @@ import {
   FormLayout,
   HelpBox,
   PageLayout,
-  TiersIcon,
+  UsersRoundIcon,
 } from "mds";
 import PageHeaderWrapper from "../../Common/PageHeaderWrapper/PageHeaderWrapper";
 import HelpMenu from "../../HelpMenu";
@@ -62,10 +62,10 @@ const TierTypeSelector = () => {
       <PageLayout>
         <FormLayout
           title={"Select Tier Type"}
-          icon={<TiersIcon />}
+          icon={<UsersRoundIcon />}
           helpBox={
             <HelpBox
-              icon={<TiersIcon />}
+              icon={<UsersRoundIcon />}
               title={"Tier Types"}
               help={
                 <Fragment>

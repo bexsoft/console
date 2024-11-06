@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from "react";
-import { ConfirmModalIcon } from "mds";
+import { CircleCheckBigIcon } from "mds";
 import { api } from "api";
 import { setErrorSnackMessage } from "../../../../systemSlice";
 import { useAppDispatch } from "../../../../store";
@@ -65,7 +65,7 @@ const DeleteTierConfirmModal = ({
       title={`Delete Tier`}
       confirmText={"Delete"}
       isOpen={open}
-      titleIcon={<ConfirmModalIcon />}
+      titleIcon={<CircleCheckBigIcon />}
       isLoading={false}
       onConfirm={() => deleteTier()}
       onClose={() => closeModalAndRefresh(false)}

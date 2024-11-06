@@ -20,7 +20,7 @@ import {
   Box,
   breakPoints,
   Button,
-  ConsoleIcon,
+  SquareTerminalIcon,
   PencilIcon,
   FormLayout,
   Grid,
@@ -399,7 +399,7 @@ const IDPConfigurationDetails = ({
                     placement={"right"}
                   >
                     <span className={"muted"}>
-                      <ConsoleIcon />
+                      <SquareTerminalIcon />
                     </span>
                   </Tooltip>
                 </Box>

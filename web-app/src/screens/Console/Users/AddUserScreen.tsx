@@ -18,7 +18,7 @@ import React, { Fragment, useEffect } from "react";
 import {
   BackLink,
   Button,
-  CreateUserIcon,
+  UserPlusIcon,
   FormLayout,
   Grid,
   PageLayout,
@@ -106,7 +106,7 @@ const AddUser = () => {
         <PageLayout>
           <FormLayout
             title={"Create User"}
-            icon={<CreateUserIcon />}
+            icon={<UserPlusIcon />}
             helpBox={<AddUserHelpBox />}
           >
             <form

@@ -23,7 +23,7 @@ import React, {
   Fragment,
 } from "react";
 import get from "lodash/get";
-import { PlusIcon, Box, HelpIcon, InputBox, InputLabel, Tooltip } from "mds";
+import { PlusIcon, Box, CircleHelpIcon, InputBox, InputLabel, Tooltip } from "mds";
 
 interface ICSVMultiSelector {
   elements: string;
@@ -159,7 +159,7 @@ const CSVMultiSelector = ({
             >
               <Tooltip tooltip={tooltip} placement="top">
                 <Box className={tooltip}>
-                  <HelpIcon />
+                  <CircleHelpIcon />
                 </Box>
               </Tooltip>
             </Box>

@@ -16,7 +16,7 @@
 
 import React from "react";
 import ConfirmDialog from "../Common/ModalWrapper/ConfirmDialog";
-import { ConfirmModalIcon } from "mds";
+import { CircleCheckBigIcon } from "mds";
 
 const ConfirmDeleteDestinationModal = ({
   onConfirm,
@@ -34,7 +34,7 @@ const ConfirmDeleteDestinationModal = ({
       title={`Delete Endpoint`}
       confirmText={"Delete"}
       isOpen={true}
-      titleIcon={<ConfirmModalIcon />}
+      titleIcon={<CircleCheckBigIcon />}
       isLoading={false}
       onConfirm={onConfirm}
       onClose={onClose}
