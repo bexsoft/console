@@ -23,7 +23,7 @@ import {
   Grid,
   InputBox,
   RadioGroup,
-  ReadBox,
+  CodeSnippet,
   Toggle,
 } from "mds";
 
@@ -216,9 +216,9 @@ const ConfMySql = ({ onChange }: IConfMySqlProps) => {
             </Box>
           </Box>
           <Grid item xs={12} sx={{ margin: "12px 0" }}>
-            <ReadBox label={"Connection String"} multiLine>
+            <CodeSnippet label={"Connection String"} multiLine>
               {dsnString}
-            </ReadBox>
+            </CodeSnippet>
           </Grid>
         </React.Fragment>
       )}

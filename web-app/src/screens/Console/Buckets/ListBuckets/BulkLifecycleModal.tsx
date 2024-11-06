@@ -22,7 +22,7 @@ import {
   Grid,
   InputBox,
   RadioGroup,
-  ReadBox,
+  CodeSnippet,
   Select,
   Toggle,
   Tooltip,
@@ -205,12 +205,12 @@ const AddBulkReplicationModal = ({
               <Fragment>
                 <FormLayout withBorders={false} containerPadding={false}>
                   <Grid item xs={12}>
-                    <ReadBox
+                    <CodeSnippet
                       label="Local Buckets to replicate"
                       sx={{ maxWidth: "440px", width: "100%" }}
                     >
                       {buckets.join(", ")}
-                    </ReadBox>
+                    </CodeSnippet>
                   </Grid>
                   <h4>Remote Endpoint Configuration</h4>
                   <fieldset className={"inputItem"}>

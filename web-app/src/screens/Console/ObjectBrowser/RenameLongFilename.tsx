@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { useState } from "react";
-import { Button, EditIcon, FormLayout, Grid, InputBox, Toggle } from "mds";
+import { Button, PencilIcon, FormLayout, Grid, InputBox, Toggle } from "mds";
 import { modalStyleUtils } from "../Common/FormComponents/common/styleLibrary";
 import { useAppDispatch } from "../../../store";
 import { downloadObject } from "./utils";
@@ -55,7 +55,7 @@ const RenameLongFileName = ({
       title={`Rename Download`}
       modalOpen={open}
       onClose={closeModal}
-      titleIcon={<EditIcon />}
+      titleIcon={<PencilIcon />}
     >
       <div>
         The file you are trying to download has a long name.

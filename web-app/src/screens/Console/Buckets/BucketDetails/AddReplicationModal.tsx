@@ -18,7 +18,7 @@ import React, { useEffect, useState } from "react";
 import get from "lodash/get";
 import {
   Box,
-  BucketReplicationIcon,
+  BucketCopyIcon,
   Button,
   FormLayout,
   Grid,
@@ -169,7 +169,7 @@ const AddReplicationModal = ({
         closeModalAndRefresh();
       }}
       title="Set Bucket Replication"
-      titleIcon={<BucketReplicationIcon />}
+      titleIcon={<BucketCopyIcon />}
     >
       <form
         noValidate
@@ -355,7 +355,7 @@ const AddReplicationModal = ({
               onChange={(e) => {
                 setMetadataSync(e.target.checked);
               }}
-              description={"Metadata Sync"}
+              helper={"Metadata Sync"}
             />
             <Toggle
               checked={repDeleteMarker}
@@ -365,7 +365,7 @@ const AddReplicationModal = ({
               onChange={(e) => {
                 setRepDeleteMarker(e.target.checked);
               }}
-              description={"Replicate soft deletes"}
+              helper={"Replicate soft deletes"}
             />
             <Toggle
               checked={repDelete}
@@ -375,7 +375,7 @@ const AddReplicationModal = ({
               onChange={(e) => {
                 setRepDelete(e.target.checked);
               }}
-              description={"Replicate versioned deletes"}
+              helper={"Replicate versioned deletes"}
             />
           </fieldset>
           <Grid item xs={12} sx={modalStyleUtils.modalButtonBar}>

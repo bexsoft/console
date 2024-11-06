@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment, useEffect, useState } from "react";
-import { PlusIcon, Button, PageLayout, RefreshIcon, Grid, DataTable } from "mds";
+import { PlusIcon, Button, PageLayout, RefreshCWIcon, Grid, DataTable } from "mds";
 import { useNavigate } from "react-router-dom";
 import { api } from "api";
 import { errorToHandler } from "api/errors";
@@ -167,7 +167,7 @@ const IDPConfigurations = ({ idpType }: IDPConfigurationsProps) => {
                 <Button
                   id={"refresh-keys"}
                   variant="secondary"
-                  icon={<RefreshIcon />}
+                  icon={<RefreshCWIcon />}
                   onClick={() => setLoading(true)}
                 />
               </TooltipWrapper>

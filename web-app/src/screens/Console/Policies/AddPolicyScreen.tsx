@@ -16,7 +16,7 @@
 
 import React, { Fragment, useEffect, useState } from "react";
 import {
-  AddAccessRuleIcon,
+  CirclePlusIcon,
   BackLink,
   Box,
   Button,
@@ -108,7 +108,7 @@ const AddPolicyScreen = () => {
         <PageLayout>
           <FormLayout
             title={"Create Policy"}
-            icon={<AddAccessRuleIcon />}
+            icon={<CirclePlusIcon />}
             helpBox={<AddPolicyHelpBox />}
           >
             <form

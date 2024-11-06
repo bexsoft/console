@@ -27,7 +27,7 @@ import {
   DataTable,
   Grid,
   ProgressBar,
-  ActionLink,
+  LinkButton,
 } from "mds";
 
 import { User, UsersList } from "./types";
@@ -445,13 +445,13 @@ const ListUsers = () => {
                             <br />
                             <br />
                             To get started,{" "}
-                            <ActionLink
+                            <LinkButton
                               onClick={() => {
                                 navigate(`${IAM_PAGES.USER_ADD}`);
                               }}
                             >
                               Create a User
-                            </ActionLink>
+                            </LinkButton>
                             .
                           </SecureComponent>
                         </Fragment>

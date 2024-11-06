@@ -19,14 +19,14 @@ import {
   Box,
   Button,
   ConsoleIcon,
-  EditIcon,
+  PencilIcon,
   FormLayout,
   Grid,
   HelpBox,
   InputBox,
   Loader,
   PageLayout,
-  RefreshIcon,
+  RefreshCWIcon,
   Toggle,
   Tabs,
   Tooltip,
@@ -318,7 +318,7 @@ const IDPLDAPConfigurationDetails = () => {
                               id={"edit"}
                               type="button"
                               variant={"primary"}
-                              icon={<EditIcon />}
+                              icon={<PencilIcon />}
                               onClick={toggleEditMode}
                               label={"Edit Configuration"}
                               disabled={loading || envOverride}
@@ -347,7 +347,7 @@ const IDPLDAPConfigurationDetails = () => {
                             id={"refresh-idp-config"}
                             onClick={() => setLoading(true)}
                             label={"Refresh"}
-                            icon={<RefreshIcon />}
+                            icon={<RefreshCWIcon />}
                           />
                         </Fragment>
                       ) : null

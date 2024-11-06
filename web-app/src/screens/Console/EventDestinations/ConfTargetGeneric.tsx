@@ -21,7 +21,7 @@ import {
   FormLayout,
   Grid,
   InputBox,
-  ReadBox,
+  CodeSnippet,
   Toggle,
   Tooltip,
 } from "mds";
@@ -97,7 +97,7 @@ const ConfTargetGeneric = ({
 
       if (override) {
         return (
-          <ReadBox
+          <CodeSnippet
             label={field.label}
             actionButton={
               <Grid
@@ -119,7 +119,7 @@ const ConfTargetGeneric = ({
             sx={{ width: "100%" }}
           >
             {override.value}
-          </ReadBox>
+          </CodeSnippet>
         );
       }
     }

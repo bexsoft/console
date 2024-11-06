@@ -20,7 +20,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   Box,
   breakPoints,
-  BucketsIcon,
+  BucketIcon,
   Checkbox,
   Grid,
   HelpTip,
@@ -200,7 +200,7 @@ const BucketListItem = ({
       </Box>
       <Box className={"bucketMetrics"}>
         <Link to={`/buckets/${bucket.name}/admin`}>
-          <BucketsIcon
+          <BucketIcon
             className={"bucketIcon"}
             style={{
               height: 48,

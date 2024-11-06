@@ -26,7 +26,6 @@ import {
   DataTable,
   Grid,
   SectionTitle,
-  HelpTip,
 } from "mds";
 import { api } from "api";
 import { NotificationConfig } from "api/consoleApi";
@@ -177,24 +176,7 @@ const BucketEventsPanel = () => {
           </SecureComponent>
         }
       >
-        <HelpTip
-          content={
-            <Fragment>
-              MinIO{" "}
-              <a
-                target="blank"
-                href="https://min.io/docs/minio/kubernetes/upstream/administration/monitoring.html"
-              >
-                bucket notifications
-              </a>{" "}
-              allow administrators to send notifications to supported external
-              services on certain object or bucket events.
-            </Fragment>
-          }
-          placement="right"
-        >
           Events
-        </HelpTip>
       </SectionTitle>
 
       <Grid container>

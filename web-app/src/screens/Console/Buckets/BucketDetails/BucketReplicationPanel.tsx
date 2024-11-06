@@ -18,16 +18,15 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  PlusIcon,
   Box,
-  BucketsIcon,
+  BucketIcon,
   Button,
   DataTable,
   Grid,
   HelpBox,
+  PlusIcon,
   SectionTitle,
   TrashIcon,
-  HelpTip,
 } from "mds";
 import api from "../../../../common/api";
 import {
@@ -51,13 +50,13 @@ import TooltipWrapper from "../../Common/TooltipWrapper/TooltipWrapper";
 import withSuspense from "../../Common/Components/withSuspense";
 
 const EditReplicationModal = withSuspense(
-  React.lazy(() => import("./EditReplicationModal")),
+  React.lazy(() => import("./EditReplicationModal"))
 );
 const AddReplicationModal = withSuspense(
-  React.lazy(() => import("./AddReplicationModal")),
+  React.lazy(() => import("./AddReplicationModal"))
 );
 const DeleteReplicationRule = withSuspense(
-  React.lazy(() => import("./DeleteReplicationRule")),
+  React.lazy(() => import("./DeleteReplicationRule"))
 );
 
 const BucketReplicationPanel = () => {
@@ -160,7 +159,7 @@ const BucketReplicationPanel = () => {
   const editReplicationRule = (replication: BucketReplicationRule) => {
     setSelectedRRule(replication.id);
     navigate(
-      `/buckets/edit-replication?bucketName=${bucketName}&ruleID=${replication.id}`,
+      `/buckets/edit-replication?bucketName=${bucketName}&ruleID=${replication.id}`
     );
   };
 
@@ -211,7 +210,7 @@ const BucketReplicationPanel = () => {
           IAM_SCOPES.S3_PUT_REPLICATION_CONFIGURATION,
           IAM_SCOPES.S3_PUT_ACTIONS,
         ],
-        true,
+        true
       ),
     },
   ];
@@ -299,7 +298,7 @@ const BucketReplicationPanel = () => {
                       IAM_PAGES.BUCKETS_ADD_REPLICATION +
                         `?bucketName=${bucketName}&nextPriority=${
                           replicationRules.length + 1
-                        }`,
+                        }`
                     );
                   }}
                   label={"Add Replication Rule"}
@@ -311,24 +310,7 @@ const BucketReplicationPanel = () => {
           </Box>
         }
       >
-        <HelpTip
-          content={
-            <Fragment>
-              MinIO{" "}
-              <a
-                target="blank"
-                href="https://min.io/docs/minio/kubernetes/upstream/administration/bucket-replication.html"
-              >
-                server-side bucket replication
-              </a>{" "}
-              is an automatic bucket-level configuration that synchronizes
-              objects between a source and destination bucket.
-            </Fragment>
-          }
-          placement="right"
-        >
-          Replication
-        </HelpTip>
+        Replication
       </SectionTitle>
       <Grid container>
         <Grid item xs={12}>
@@ -383,7 +365,7 @@ const BucketReplicationPanel = () => {
           <br />
           <HelpBox
             title={"Replication"}
-            icon={<BucketsIcon />}
+            icon={<BucketIcon />}
             help={
               <Fragment>
                 MinIO supports server-side and client-side replication of

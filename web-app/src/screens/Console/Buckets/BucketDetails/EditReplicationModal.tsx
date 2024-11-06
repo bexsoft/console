@@ -16,11 +16,11 @@
 
 import React, { useEffect, useState } from "react";
 import {
-  BucketReplicationIcon,
+  BucketCopyIcon,
   Button,
   FormLayout,
   InputBox,
-  ReadBox,
+  CodeSnippet,
   Toggle,
   Grid,
 } from "mds";
@@ -139,7 +139,7 @@ const EditReplicationModal = ({
         closeModalAndRefresh(false);
       }}
       title="Edit Bucket Replication"
-      titleIcon={<BucketReplicationIcon />}
+      titleIcon={<BucketCopyIcon />}
     >
       <form
         noValidate
@@ -159,9 +159,9 @@ const EditReplicationModal = ({
               setRuleState(e.target.checked);
             }}
           />
-          <ReadBox label={"Destination"} sx={{ width: "100%" }}>
+          <CodeSnippet label={"Destination"} sx={{ width: "100%" }}>
             {destination}
-          </ReadBox>
+          </CodeSnippet>
 
           <InputBox
             id="priority"
@@ -220,7 +220,7 @@ const EditReplicationModal = ({
               onChange={(e) => {
                 setRepExisting(e.target.checked);
               }}
-              description={"Replicate existing objects"}
+              helper={"Replicate existing objects"}
             />
 
             <Toggle
@@ -231,7 +231,7 @@ const EditReplicationModal = ({
               onChange={(e) => {
                 setMetadataSync(e.target.checked);
               }}
-              description={"Metadata Sync"}
+              helper={"Metadata Sync"}
             />
 
             <Toggle
@@ -242,7 +242,7 @@ const EditReplicationModal = ({
               onChange={(e) => {
                 setRepDeleteMarker(e.target.checked);
               }}
-              description={"Replicate soft deletes"}
+              helper={"Replicate soft deletes"}
             />
             <Toggle
               checked={repDelete}
@@ -252,7 +252,7 @@ const EditReplicationModal = ({
               onChange={(e) => {
                 setRepDelete(e.target.checked);
               }}
-              description={"Replicate versioned deletes"}
+              helper={"Replicate versioned deletes"}
             />
           </fieldset>
           <Grid item xs={12} sx={modalStyleUtils.modalButtonBar}>

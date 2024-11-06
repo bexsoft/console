@@ -162,7 +162,8 @@ const EnableQuota = ({
                   disabled={false}
                 />
               }
-              error={!validInput ? "Please enter a valid quota" : ""}
+              state={validInput ? "normal" : "error"}
+              helper={!validInput ? "Please enter a valid quota" : ""}
             />
           )}
           <Grid item xs={12} sx={modalStyleUtils.modalButtonBar}>

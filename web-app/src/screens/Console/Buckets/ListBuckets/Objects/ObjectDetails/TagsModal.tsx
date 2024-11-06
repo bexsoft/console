@@ -18,7 +18,7 @@ import React, { Fragment, useState } from "react";
 import get from "lodash/get";
 import styled from "styled-components";
 import {
-  AddNewTagIcon,
+  TagIcon,
   Button,
   DisabledIcon,
   EditTagIcon,
@@ -266,7 +266,7 @@ const AddTagModal = ({
               errorProps={{ disabled: true, onClick: null }}
             >
               <Box>
-                <SectionTitle icon={<AddNewTagIcon />} separator={false}>
+                <SectionTitle icon={<TagIcon />} separator={false}>
                   Add New Tag
                 </SectionTitle>
                 <FormLayout containerPadding={false} withBorders={false}>

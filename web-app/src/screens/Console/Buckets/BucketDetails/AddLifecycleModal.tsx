@@ -19,17 +19,16 @@ import React, { Fragment, useEffect, useState } from "react";
 import get from "lodash/get";
 import {
   Accordion,
-  AlertIcon,
   Button,
   FormLayout,
   Grid,
-  HelpTip,
   InputBox,
-  LifecycleConfigIcon,
+  PlusIcon,
   ProgressBar,
   RadioGroup,
   Select,
   Toggle,
+  Tooltip,
 } from "mds";
 import { useSelector } from "react-redux";
 import { api } from "api";
@@ -42,7 +41,6 @@ import { ITiersDropDown } from "../types";
 import ModalWrapper from "../../Common/ModalWrapper/ModalWrapper";
 import QueryMultiSelector from "../../Common/FormComponents/QueryMultiSelector/QueryMultiSelector";
 import InputUnitMenu from "../../Common/FormComponents/InputUnitMenu/InputUnitMenu";
-import { IAM_PAGES } from "common/SecureComponent/permissions";
 
 interface IReplicationModal {
   open: boolean;
@@ -68,7 +66,7 @@ const AddLifecycleModal = ({
 
   const [ilmType, setIlmType] = useState<"expiry" | "transition">("expiry");
   const [targetVersion, setTargetVersion] = useState<"current" | "noncurrent">(
-    "current",
+    "current"
   );
   const [lifecycleDays, setLifecycleDays] = useState<string>("");
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
@@ -205,7 +203,7 @@ const AddLifecycleModal = ({
         closeModalAndRefresh(false);
       }}
       title="Add Lifecycle Rule"
-      titleIcon={<LifecycleConfigIcon />}
+      titleIcon={<PlusIcon />}
     >
       {loadingTiers && (
         <Grid container>
@@ -238,33 +236,6 @@ const AddLifecycleModal = ({
                 { value: "expiry", label: "Expiry" },
                 { value: "transition", label: "Transition" },
               ]}
-              helpTip={
-                <Fragment>
-                  Select{" "}
-                  <a
-                    target="blank"
-                    href="https://min.io/docs/minio/kubernetes/upstream/administration/object-management/create-lifecycle-management-expiration-rule.html"
-                  >
-                    Expiry
-                  </a>{" "}
-                  to delete Objects per this rule. Select{" "}
-                  <a
-                    target="blank"
-                    href="https://min.io/docs/minio/kubernetes/upstream/administration/object-management/transition-objects-to-minio.html"
-                  >
-                    Transition
-                  </a>{" "}
-                  to move Objects to a remote storage{" "}
-                  <a
-                    target="blank"
-                    href="https://min.io/docs/minio/windows/administration/object-management/transition-objects-to-minio.html#configure-the-remote-storage-tier"
-                  >
-                    Tier
-                  </a>{" "}
-                  per this rule.
-                </Fragment>
-              }
-              helpTipPlacement="right"
             />
             {versioningInfo?.status === "Enabled" && (
               <Select
@@ -279,31 +250,18 @@ const AddLifecycleModal = ({
                   { value: "current", label: "Current Version" },
                   { value: "noncurrent", label: "Non-Current Version" },
                 ]}
-                helpTip={
-                  <Fragment>
-                    Select whether to apply the rule to current or non-current
-                    Object
-                    <a
-                      target="blank"
-                      href="https://min.io/docs/minio/kubernetes/upstream/administration/object-management/create-lifecycle-management-expiration-rule.html#expire-versioned-objects"
-                    >
-                      {" "}
-                      Versions
-                    </a>
-                  </Fragment>
-                }
-                helpTipPlacement="right"
               />
             )}
 
             <InputBox
-              error={
+              state={lifecycleDays && !isFormValid ? "error" : "normal"}
+              helper={
                 lifecycleDays && !isFormValid
                   ? parseInt(lifecycleDays) <= 0
                     ? `Number of ${expiryUnit} to retain must be greater than zero`
                     : parseInt(lifecycleDays) > 2147483647
-                      ? `Number of ${expiryUnit} must be less than or equal to 2147483647`
-                      : ""
+                    ? `Number of ${expiryUnit} must be less than or equal to 2147483647`
+                    : ""
                   : ""
               }
               id="expiry_days"
@@ -319,34 +277,28 @@ const AddLifecycleModal = ({
               overlayObject={
                 <Fragment>
                   <Grid container sx={{ justifyContent: "center" }}>
-                    <InputUnitMenu
-                      id={"expire-current-unit"}
-                      unitSelected={expiryUnit}
-                      unitsList={[
-                        { label: "Days", value: "days" },
-                        { label: "Versions", value: "versions" },
-                      ]}
-                      disabled={
-                        targetVersion !== "noncurrent" || ilmType !== "expiry"
+                    <Tooltip
+                      tooltip={
+                        targetVersion === "noncurrent" && ilmType === "expiry"
+                          ? ""
+                          : "Select to set expiry by days or newer noncurrent versions"
                       }
-                      onUnitChange={(newValue) => {
-                        setExpiryUnit(newValue);
-                      }}
-                    />
-                    {ilmType === "expiry" && targetVersion === "noncurrent" && (
-                      <HelpTip
-                        content={
-                          <Fragment>
-                            Select to set expiry by days or newer noncurrent
-                            versions
-                          </Fragment>
+                    >
+                      <InputUnitMenu
+                        id={"expire-current-unit"}
+                        unitSelected={expiryUnit}
+                        unitsList={[
+                          { label: "Days", value: "days" },
+                          { label: "Versions", value: "versions" },
+                        ]}
+                        disabled={
+                          targetVersion !== "noncurrent" || ilmType !== "expiry"
                         }
-                        placement="right"
-                      >
-                        {" "}
-                        <AlertIcon style={{ width: 15, height: 15 }} />
-                      </HelpTip>
-                    )}
+                        onUnitChange={(newValue) => {
+                          setExpiryUnit(newValue);
+                        }}
+                      />
+                    </Tooltip>
                   </Grid>
                 </Fragment>
               }
@@ -364,20 +316,6 @@ const AddLifecycleModal = ({
                   setStorageClass(value as string);
                 }}
                 options={tiersList}
-                helpTip={
-                  <Fragment>
-                    Configure a{" "}
-                    <a
-                      href={IAM_PAGES.TIERS_ADD}
-                      color="secondary"
-                      style={{ textDecoration: "underline" }}
-                    >
-                      remote tier
-                    </a>{" "}
-                    to receive transitioned Objects
-                  </Fragment>
-                }
-                helpTipPlacement="right"
               />
             )}
             <Grid item xs={12} sx={formFieldRowFilter}>
@@ -429,12 +367,12 @@ const AddLifecycleModal = ({
                       name="expired_delete_marker"
                       checked={expiredObjectDM}
                       onChange={(
-                        event: React.ChangeEvent<HTMLInputElement>,
+                        event: React.ChangeEvent<HTMLInputElement>
                       ) => {
                         setExpiredObjectDM(event.target.checked);
                       }}
                       label={"Expire Delete Marker"}
-                      description={
+                      helper={
                         "Remove the reference to the object if no versions are left"
                       }
                     />
@@ -444,12 +382,12 @@ const AddLifecycleModal = ({
                       name="expired_delete_all"
                       checked={expiredAllVersionsDM}
                       onChange={(
-                        event: React.ChangeEvent<HTMLInputElement>,
+                        event: React.ChangeEvent<HTMLInputElement>
                       ) => {
                         setExpiredAllVersionsDM(event.target.checked);
                       }}
                       label={"Expire All Versions"}
-                      description={
+                      helper={
                         "Removes all the versions of the object already expired"
                       }
                     />

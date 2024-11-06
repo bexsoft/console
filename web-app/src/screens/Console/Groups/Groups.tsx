@@ -29,7 +29,7 @@ import {
   Grid,
   Box,
   ProgressBar,
-  ActionLink,
+  LinkButton,
 } from "mds";
 
 import { api } from "api";
@@ -371,13 +371,13 @@ const Groups = () => {
                             <br />
                             <br />
                             To get started,{" "}
-                            <ActionLink
+                            <LinkButton
                               onClick={() => {
                                 navigate(`${IAM_PAGES.GROUPS_ADD}`);
                               }}
                             >
                               Create a Group
-                            </ActionLink>
+                            </LinkButton>
                             .
                           </SecureComponent>
                         </Fragment>

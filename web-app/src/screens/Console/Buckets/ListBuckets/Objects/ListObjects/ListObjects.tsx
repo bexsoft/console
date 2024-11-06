@@ -28,7 +28,7 @@ import {
   ActionsList,
   Badge,
   Box,
-  BucketsIcon,
+  BucketIcon,
   Button,
   Checkbox,
   DeleteIcon,
@@ -37,7 +37,7 @@ import {
   HistoryIcon,
   PageLayout,
   PreviewIcon,
-  RefreshIcon,
+  RefreshCWIcon,
   ScreenTitle,
   ShareIcon,
 } from "mds";
@@ -994,7 +994,7 @@ const ListObjects = () => {
           <ScreenTitle
             icon={
               <span>
-                <BucketsIcon style={{ width: 30 }} />
+                <BucketIcon style={{ width: 30 }} />
               </span>
             }
             title={bucketName}
@@ -1096,7 +1096,7 @@ const ListObjects = () => {
                   <Button
                     id={"refresh-objects-list"}
                     label={"Refresh"}
-                    icon={<RefreshIcon />}
+                    icon={<RefreshCWIcon />}
                     variant={"secondary"}
                     onClick={() => {
                       if (versionsMode) {

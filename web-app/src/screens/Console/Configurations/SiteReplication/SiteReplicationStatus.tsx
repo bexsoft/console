@@ -19,14 +19,14 @@ import {
   BackLink,
   Box,
   breakPoints,
-  BucketsIcon,
+  BucketIcon,
   Button,
   Grid,
   GroupsIcon,
   ShieldCheckIcon,
   Loader,
   PageLayout,
-  RefreshIcon,
+  RefreshCWIcon,
   UsersIcon,
   SectionTitle,
 } from "mds";
@@ -163,7 +163,7 @@ const SiteReplicationStatus = () => {
                     getStats();
                   }}
                   label={"Refresh"}
-                  icon={<RefreshIcon />}
+                  icon={<RefreshCWIcon />}
                   variant={"secondary"}
                   collapseOnSmall={false}
                 />
@@ -194,7 +194,7 @@ const SiteReplicationStatus = () => {
               entityStatObj={bucketStats}
               entityTextPlural={"Buckets"}
               maxValue={maxBuckets}
-              icon={<BucketsIcon />}
+              icon={<BucketIcon />}
             />
             <SREntityStatus
               entityStatObj={userStats}

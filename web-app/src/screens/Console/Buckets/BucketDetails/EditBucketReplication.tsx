@@ -19,14 +19,14 @@ import { useNavigate } from "react-router-dom";
 import {
   BackLink,
   Box,
-  BucketReplicationIcon,
+  BucketCopyIcon,
   Button,
   FormLayout,
   Grid,
   HelpBox,
   InputBox,
   PageLayout,
-  ReadBox,
+  CodeSnippet,
   Toggle,
 } from "mds";
 import { IAM_PAGES } from "../../../../common/SecureComponent/permissions";
@@ -164,7 +164,7 @@ const EditBucketReplication = () => {
             withBorders={false}
             helpBox={
               <HelpBox
-                icon={<BucketReplicationIcon />}
+                icon={<BucketCopyIcon />}
                 title="Bucket Replication Configuration"
                 help={
                   <Fragment>
@@ -204,9 +204,9 @@ const EditBucketReplication = () => {
                 setRuleState(e.target.checked);
               }}
             />
-            <ReadBox label={"Destination"} sx={{ width: "100%" }}>
+            <CodeSnippet label={"Destination"} sx={{ width: "100%" }}>
               {destination}
-            </ReadBox>
+            </CodeSnippet>
             <InputBox
               id="priority"
               name="priority"

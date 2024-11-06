@@ -20,7 +20,7 @@ import {
   CheckCircleIcon,
   FormLayout,
   InputBox,
-  ReadBox,
+  CodeSnippet,
   Select,
   Toggle,
   Tooltip,
@@ -309,12 +309,12 @@ const AddBulkReplicationModal = ({
             componentRender: (
               <Fragment>
                 <FormLayout containerPadding={false} withBorders={false}>
-                  <ReadBox
+                  <CodeSnippet
                     label="Local Buckets to replicate"
                     sx={{ maxWidth: "440px", width: "100%" }}
                   >
                     {bucketsToAlter.join(", ")}
-                  </ReadBox>
+                  </CodeSnippet>
                   <h4>Remote Endpoint Configuration</h4>
                   <span style={{ fontSize: 14 }}>
                     Please avoid the use of root credentials for this feature

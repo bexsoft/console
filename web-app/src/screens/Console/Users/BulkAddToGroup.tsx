@@ -21,7 +21,7 @@ import {
   FormLayout,
   Grid,
   ProgressBar,
-  ReadBox,
+  CodeSnippet,
 } from "mds";
 
 import { modalStyleUtils } from "../Common/FormComponents/common/styleLibrary";
@@ -116,21 +116,21 @@ const BulkAddToGroup = ({
             containerPadding={false}
             sx={{ margin: "30px 0" }}
           >
-            <ReadBox label={"Groups"} sx={{ width: "100%" }}>
+            <CodeSnippet label={"Groups"} sx={{ width: "100%" }}>
               {selectedGroups.join(", ")}
-            </ReadBox>
-            <ReadBox label={"Users"} sx={{ width: "100%" }}>
+            </CodeSnippet>
+            <CodeSnippet label={"Users"} sx={{ width: "100%" }}>
               {" "}
               {checkedUsers.join(", ")}{" "}
-            </ReadBox>
+            </CodeSnippet>
           </FormLayout>
         </React.Fragment>
       ) : (
         <form noValidate autoComplete="off" onSubmit={setSaving}>
           <FormLayout withBorders={false} containerPadding={false}>
-            <ReadBox label={"Selected Users"} sx={{ width: "100%" }}>
+            <CodeSnippet label={"Selected Users"} sx={{ width: "100%" }}>
               {checkedUsers.join(", ")}
-            </ReadBox>
+            </CodeSnippet>
             <GroupsSelectors
               selectedGroups={selectedGroups}
               setSelectedGroups={setSelectedGroups}

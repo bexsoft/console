@@ -26,7 +26,7 @@ import {
   ShieldCheckIcon,
   PageLayout,
   ProgressBar,
-  RefreshIcon,
+  RefreshCWIcon,
   ScreenTitle,
   SectionTitle,
   Tabs,
@@ -382,7 +382,7 @@ const PolicyDetails = () => {
                   id={"refresh-policy"}
                   label={"Refresh"}
                   variant="secondary"
-                  icon={<RefreshIcon />}
+                  icon={<RefreshCWIcon />}
                   onClick={() => {
                     refreshPolicyDetails();
                   }}

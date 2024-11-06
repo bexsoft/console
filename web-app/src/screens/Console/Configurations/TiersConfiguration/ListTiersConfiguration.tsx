@@ -19,7 +19,7 @@ import get from "lodash/get";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-  ActionLink,
+  LinkButton,
   PlusIcon,
   Box,
   Button,
@@ -28,7 +28,7 @@ import {
   HelpBox,
   PageLayout,
   ProgressBar,
-  RefreshIcon,
+  RefreshCWIcon,
   TierOfflineIcon,
   TierOnlineIcon,
   TiersIcon,
@@ -323,7 +323,7 @@ const ListTiersConfiguration = () => {
               >
                 <Button
                   id={"refresh-list"}
-                  icon={<RefreshIcon />}
+                  icon={<RefreshCWIcon />}
                   label={`Refresh List`}
                   onClick={() => {
                     setIsLoading(true);
@@ -508,13 +508,13 @@ const ListTiersConfiguration = () => {
                         {hasSetTier ? (
                           <div>
                             To get started,{" "}
-                            <ActionLink
+                            <LinkButton
                               isLoading={false}
                               label={""}
                               onClick={addTier}
                             >
                               Create Tier
-                            </ActionLink>
+                            </LinkButton>
                             .
                           </div>
                         ) : (

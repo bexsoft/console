@@ -22,7 +22,7 @@ import {
   Grid,
   InputBox,
   RadioGroup,
-  ReadBox,
+  CodeSnippet,
   Select,
   Toggle,
 } from "mds";
@@ -300,9 +300,9 @@ const ConfPostgres = ({ onChange }: IConfPostgresProps) => {
               />
             </Box>
           </Grid>
-          <ReadBox label={"Connection String"} multiLine>
+          <CodeSnippet label={"Connection String"} multiLine>
             {connectionString}
-          </ReadBox>
+          </CodeSnippet>
         </Fragment>
       )}
       <InputBox

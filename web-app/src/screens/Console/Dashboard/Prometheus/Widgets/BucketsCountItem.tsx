@@ -16,7 +16,7 @@
 
 import React from "react";
 import NumericStatCard from "./NumericStatCard";
-import { BucketsIcon } from "mds";
+import { BucketIcon } from "mds";
 
 const BucketsCountItem = ({
   title,
@@ -30,7 +30,7 @@ const BucketsCountItem = ({
   return (
     <NumericStatCard
       label={title}
-      icon={<BucketsIcon />}
+      icon={<BucketIcon />}
       value={value}
       loading={loading}
     />

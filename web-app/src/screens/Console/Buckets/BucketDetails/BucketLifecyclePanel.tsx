@@ -17,14 +17,13 @@
 import React, { Fragment, useEffect, useState } from "react";
 import get from "lodash/get";
 import {
-  PlusIcon,
   Button,
   DataTable,
   Grid,
   HelpBox,
+  PlusIcon,
   SectionTitle,
   TiersIcon,
-  HelpTip,
 } from "mds";
 import { useSelector } from "react-redux";
 import { api } from "api";
@@ -319,24 +318,7 @@ const BucketLifecyclePanel = () => {
           </SecureComponent>
         }
       >
-        <HelpTip
-          content={
-            <Fragment>
-              MinIO derives it’s behavior and syntax from{" "}
-              <a
-                target="blank"
-                href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html"
-              >
-                S3 lifecycle
-              </a>{" "}
-              for compatibility in migrating workloads and lifecycle rules from
-              S3 to MinIO.
-            </Fragment>
-          }
-          placement="right"
-        >
-          Lifecycle Rules
-        </HelpTip>
+        Lifecycle Rules
       </SectionTitle>
       <Grid container>
         <Grid item xs={12}>

@@ -19,7 +19,7 @@ import { useSelector } from "react-redux";
 import {
   Button,
   CopyIcon,
-  ReadBox,
+  CodeSnippet,
   ShareIcon,
   Grid,
   ProgressBar,
@@ -226,7 +226,7 @@ const ShareFile = ({
                 marginBottom: 10,
               }}
             >
-              <ReadBox
+              <CodeSnippet
                 actionButton={
                   <CopyToClipboard text={shareURL}>
                     <Button
@@ -249,7 +249,7 @@ const ShareFile = ({
                 }
               >
                 {shareURL}
-              </ReadBox>
+              </CodeSnippet>
             </Grid>
           </Fragment>
         )}

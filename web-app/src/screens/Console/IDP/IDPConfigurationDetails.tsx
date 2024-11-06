@@ -21,13 +21,13 @@ import {
   breakPoints,
   Button,
   ConsoleIcon,
-  EditIcon,
+  PencilIcon,
   FormLayout,
   Grid,
   HelpBox,
   InputBox,
   PageLayout,
-  RefreshIcon,
+  RefreshCWIcon,
   ScreenTitle,
   Toggle,
   Tooltip,
@@ -479,7 +479,7 @@ const IDPConfigurationDetails = ({
                       id={"edit"}
                       type="button"
                       variant={"primary"}
-                      icon={<EditIcon />}
+                      icon={<PencilIcon />}
                       onClick={toggleEditMode}
                       label={"Edit"}
                       disabled={envOverride}
@@ -504,7 +504,7 @@ const IDPConfigurationDetails = ({
                   id={"refresh-idp-config"}
                   onClick={() => setLoadingDetails(true)}
                   label={"Refresh"}
-                  icon={<RefreshIcon />}
+                  icon={<RefreshCWIcon />}
                 />
               </Fragment>
             }

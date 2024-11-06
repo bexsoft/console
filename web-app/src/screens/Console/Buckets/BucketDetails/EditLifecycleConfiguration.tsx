@@ -22,7 +22,7 @@ import {
   FormLayout,
   Grid,
   InputBox,
-  LifecycleConfigIcon,
+  RefreshCCWDotIcon,
   Loader,
   ProgressBar,
   RadioGroup,
@@ -330,7 +330,7 @@ const EditLifecycleConfiguration = ({
       }}
       modalOpen={open}
       title={"Edit Lifecycle Configuration"}
-      titleIcon={<LifecycleConfigIcon />}
+      titleIcon={<RefreshCCWDotIcon />}
     >
       {!loadingTiers ? (
         <form

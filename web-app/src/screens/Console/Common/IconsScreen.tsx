@@ -115,9 +115,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.AddAccessRuleIcon />
+          <cicons.CirclePlusIcon />
           <br />
-          AddAccessRuleIcon
+          CirclePlusIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -139,21 +139,21 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.AddNewTagIcon />
+          <cicons.TagIcon />
           <br />
-          AddNewTagIcon
+          TagIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.AlertIcon />
+          <cicons.CircleAlertIcon />
           <br />
-          AlertIcon
+          CircleAlertIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.AllBucketsIcon />
+          <cicons.AllBucketIcon />
           <br />
-          AllBucketsIcon
+          AllBucketIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -187,9 +187,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.BucketEncryptionIcon />
+          <cicons.LockKeyholeIcon />
           <br />
-          BucketEncryptionIcon
+          LockKeyholeIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -199,15 +199,15 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.BucketReplicationIcon />
+          <cicons.BucketCopyIcon />
           <br />
-          BucketReplicationIcon
+          BucketCopyIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.BucketsIcon />
+          <cicons.BucketIcon />
           <br />
-          BucketsIcon
+          BucketIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -391,9 +391,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.EditIcon />
+          <cicons.PencilIcon />
           <br />
-          EditIcon
+          PencilIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -433,9 +433,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.EventSubscriptionIcon />
+          <cicons.MessageCirclePlusIcon />
           <br />
-          EventSubscriptionIcon
+          MessageCirclePlusIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -583,9 +583,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.HardBucketQuotaIcon />
+          <cicons.HammerIcon />
           <br />
-          HardBucketQuotaIcon
+          HammerIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -661,9 +661,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.LifecycleConfigIcon />
+          <cicons.RefreshCCWDotIcon />
           <br />
-          LifecycleConfigIcon
+          RefreshCCWDotIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -715,9 +715,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.MultipleBucketsIcon />
+          <cicons.MultipleBucketIcon />
           <br />
-          MultipleBucketsIcon
+          MultipleBucketIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -859,9 +859,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.RefreshIcon />
+          <cicons.RefreshCWIcon />
           <br />
-          RefreshIcon
+          RefreshCWIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -877,9 +877,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.ReportedUsageFullIcon />
+          <cicons.PieChartIcon />
           <br />
-          ReportedUsageFullIcon
+          PieChartIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>

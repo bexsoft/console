@@ -82,7 +82,8 @@ const AddKeyModal = ({
               label="Key Name"
               autoFocus={true}
               value={keyName}
-              error={
+              state={keyName.indexOf(" ") !== -1 ? "error" : "normal"}
+              helper={
                 keyName.indexOf(" ") !== -1
                   ? "Key name cannot contain spaces"
                   : ""

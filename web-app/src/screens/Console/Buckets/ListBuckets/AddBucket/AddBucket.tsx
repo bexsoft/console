@@ -22,7 +22,7 @@ import { useNavigate } from "react-router-dom";
 import {
   BackLink,
   Box,
-  BucketsIcon,
+  BucketIcon,
   Button,
   FormLayout,
   Grid,
@@ -234,10 +234,10 @@ const AddBucket = () => {
       <PageLayout>
         <FormLayout
           title={"Create Bucket"}
-          icon={<BucketsIcon />}
+          icon={<BucketIcon />}
           helpBox={
             <HelpBox
-              icon={<BucketsIcon />}
+              icon={<BucketIcon />}
               title={"Buckets"}
               help={
                 <Fragment>

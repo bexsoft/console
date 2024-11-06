@@ -19,7 +19,7 @@ import {
   ArrowRightIcon,
   Box,
   breakPoints,
-  BucketsIcon,
+  BucketIcon,
   Button,
   DiagnosticsMenuIcon,
   DrivesIcon,
@@ -152,7 +152,7 @@ const BasicDashboard = ({ usage }: IDashboardProps) => {
             <BoxItem>
               <CounterCard
                 label={"Buckets"}
-                icon={<BucketsIcon />}
+                icon={<BucketIcon />}
                 counterValue={usage ? representationNumber(usage.buckets) : 0}
                 actions={
                   <Link

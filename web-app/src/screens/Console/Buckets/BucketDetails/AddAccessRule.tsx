@@ -17,7 +17,7 @@
 import React, { useEffect, useState, Fragment } from "react";
 import ModalWrapper from "../../Common/ModalWrapper/ModalWrapper";
 import {
-  AddAccessRuleIcon,
+  CirclePlusIcon,
   Button,
   FormLayout,
   Grid,
@@ -89,7 +89,7 @@ const AddAccessRule = ({
       modalOpen={modalOpen}
       title="Add Anonymous Access Rule"
       onClose={onClose}
-      titleIcon={<AddAccessRuleIcon />}
+      titleIcon={<CirclePlusIcon />}
     >
       <FormLayout withBorders={false} containerPadding={false}>
         <InputBox
@@ -115,13 +115,6 @@ const AddAccessRule = ({
           value={selectedAccess}
           options={accessOptions}
           disabled={false}
-          helpTip={
-            <Fragment>
-              Select the desired level of access available to unauthenticated
-              Users
-            </Fragment>
-          }
-          helpTipPlacement="right"
         />
         <Grid item xs={12} sx={modalStyleUtils.modalButtonBar}>
           <Button

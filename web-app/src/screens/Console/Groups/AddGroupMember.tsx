@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { useState } from "react";
-import { AddMembersToGroupIcon, Button, FormLayout, Grid, ReadBox } from "mds";
+import { AddMembersToGroupIcon, Button, FormLayout, Grid, CodeSnippet } from "mds";
 import { modalStyleUtils } from "../Common/FormComponents/common/styleLibrary";
 import { setModalErrorSnackMessage } from "../../../systemSlice";
 import { useAppDispatch } from "../../../store";
@@ -68,9 +68,9 @@ const AddGroupMember = ({
       titleIcon={<AddMembersToGroupIcon />}
     >
       <FormLayout withBorders={false} containerPadding={false}>
-        <ReadBox label={`Selected Group`} sx={{ width: "100%" }}>
+        <CodeSnippet label={`Selected Group`} sx={{ width: "100%" }}>
           {selectedGroup}
-        </ReadBox>
+        </CodeSnippet>
         <UsersSelectors
           selectedUsers={selectedUsers}
           setSelectedUsers={setSelectedUsers}

@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 import {
   BackLink,
   Box,
-  BucketReplicationIcon,
+  BucketCopyIcon,
   Button,
   FormLayout,
   Grid,
@@ -183,10 +183,10 @@ const AddBucketReplication = () => {
       <PageLayout>
         <FormLayout
           title="Add Replication Rule"
-          icon={<BucketReplicationIcon />}
+          icon={<BucketCopyIcon />}
           helpBox={
             <HelpBox
-              icon={<BucketReplicationIcon />}
+              icon={<BucketCopyIcon />}
               title="Bucket Replication Configuration"
               help={
                 <Fragment>
@@ -400,7 +400,7 @@ const AddBucketReplication = () => {
                 onChange={(e) => {
                   setRepExisting(e.target.checked);
                 }}
-                description={"Replicate existing objects"}
+                helper={"Replicate existing objects"}
               />
               <Toggle
                 checked={metadataSync}
@@ -410,7 +410,7 @@ const AddBucketReplication = () => {
                 onChange={(e) => {
                   setMetadataSync(e.target.checked);
                 }}
-                description={"Metadata Sync"}
+                helper={"Metadata Sync"}
               />
               <Toggle
                 checked={repDeleteMarker}
@@ -420,7 +420,7 @@ const AddBucketReplication = () => {
                 onChange={(e) => {
                   setRepDeleteMarker(e.target.checked);
                 }}
-                description={"Replicate soft deletes"}
+                helper={"Replicate soft deletes"}
               />
               <Toggle
                 checked={repDelete}
@@ -430,7 +430,7 @@ const AddBucketReplication = () => {
                 onChange={(e) => {
                   setRepDelete(e.target.checked);
                 }}
-                description={"Replicate versioned deletes"}
+                helper={"Replicate versioned deletes"}
               />
             </fieldset>
             <Grid

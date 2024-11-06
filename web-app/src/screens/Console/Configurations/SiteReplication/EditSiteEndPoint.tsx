@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { useState } from "react";
-import { Box, Button, EditIcon, Grid, InputBox, InputLabel } from "mds";
+import { Box, Button, PencilIcon, Grid, InputBox, InputLabel } from "mds";
 import ModalWrapper from "../../Common/ModalWrapper/ModalWrapper";
 import useApi from "../../Common/Hooks/useApi";
 import {
@@ -86,7 +86,7 @@ const EditSiteEndPoint = ({
     <ModalWrapper
       title={`Edit Replication Endpoint `}
       modalOpen={true}
-      titleIcon={<EditIcon />}
+      titleIcon={<PencilIcon />}
       onClose={onClose}
     >
       <SiteEndpointContainer>

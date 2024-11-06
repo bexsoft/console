@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { useState } from "react";
-import { AddNewTagIcon, Box, Button, FormLayout, Grid, InputBox } from "mds";
+import { TagIcon, Box, Button, FormLayout, Grid, InputBox } from "mds";
 import { modalStyleUtils } from "../../Common/FormComponents/common/styleLibrary";
 import ModalWrapper from "../../Common/ModalWrapper/ModalWrapper";
 import { setModalErrorSnackMessage } from "../../../../systemSlice";
@@ -74,7 +74,7 @@ const AddBucketTagModal = ({
       onClose={() => {
         onCloseAndUpdate(false);
       }}
-      titleIcon={<AddNewTagIcon />}
+      titleIcon={<TagIcon />}
     >
       <FormLayout withBorders={false} containerPadding={false}>
         <Box sx={{ marginBottom: 15 }}>

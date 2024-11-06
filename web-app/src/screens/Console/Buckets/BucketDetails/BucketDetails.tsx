@@ -26,11 +26,11 @@ import {
 import {
   BackLink,
   Box,
-  BucketsIcon,
+  BucketIcon,
   Button,
   FolderIcon,
   PageLayout,
-  RefreshIcon,
+  RefreshCWIcon,
   ScreenTitle,
   Tabs,
   TrashIcon,
@@ -217,7 +217,7 @@ const BucketDetails = () => {
         <ScreenTitle
           icon={
             <Fragment>
-              <BucketsIcon width={40} />
+              <BucketIcon width={40} />
             </Fragment>
           }
           title={bucketName}
@@ -279,7 +279,7 @@ const BucketDetails = () => {
                   dispatch(setBucketDetailsLoad(true));
                 }}
                 label={"Refresh"}
-                icon={<RefreshIcon />}
+                icon={<RefreshCWIcon />}
               />
             </Fragment>
           }

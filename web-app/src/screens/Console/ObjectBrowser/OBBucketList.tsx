@@ -18,14 +18,14 @@ import React, { Fragment, useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import {
-  ActionLink,
-  BucketsIcon,
+  LinkButton,
+  BucketIcon,
   Button,
   DataTable,
   HelpBox,
   PageLayout,
   ProgressBar,
-  RefreshIcon,
+  RefreshCWIcon,
   Grid,
   HelpTip,
 } from "mds";
@@ -158,7 +158,7 @@ const OBListBuckets = () => {
                 onClick={() => {
                   setLoading(true);
                 }}
-                icon={<RefreshIcon />}
+                icon={<RefreshCWIcon />}
                 variant={"secondary"}
               />
             </TooltipWrapper>
@@ -191,7 +191,7 @@ const OBListBuckets = () => {
                     elementKey: "name",
                     renderFunction: (label) => (
                       <div style={{ display: "flex" }}>
-                        <BucketsIcon
+                        <BucketIcon
                           style={{ width: 15, marginRight: 5, minWidth: 15 }}
                         />
                         <span
@@ -261,7 +261,7 @@ const OBListBuckets = () => {
               >
                 <Grid item xs={8}>
                   <HelpBox
-                    icon={<BucketsIcon />}
+                    icon={<BucketIcon />}
                     title={"No Results"}
                     help={
                       <Fragment>
@@ -283,7 +283,7 @@ const OBListBuckets = () => {
               >
                 <Grid item xs={8}>
                   <HelpBox
-                    icon={<BucketsIcon />}
+                    icon={<BucketIcon />}
                     title={"Buckets"}
                     help={
                       <Fragment>
@@ -312,13 +312,13 @@ const OBListBuckets = () => {
                         >
                           <br />
                           To get started,&nbsp;
-                          <ActionLink
+                          <LinkButton
                             onClick={() => {
                               navigate(IAM_PAGES.ADD_BUCKETS);
                             }}
                           >
                             Create a Bucket.
-                          </ActionLink>
+                          </LinkButton>
                         </SecureComponent>
                       </Fragment>
                     }

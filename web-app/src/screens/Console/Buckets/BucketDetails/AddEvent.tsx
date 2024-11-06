@@ -19,7 +19,7 @@ import {
   Autocomplete,
   Button,
   DataTable,
-  EventSubscriptionIcon,
+  MessageCirclePlusIcon,
   Grid,
   InputBox,
 } from "mds";
@@ -146,7 +146,7 @@ const AddEvent = ({
         closeModalAndRefresh();
       }}
       title="Subscribe To Bucket Events"
-      titleIcon={<EventSubscriptionIcon />}
+      titleIcon={<MessageCirclePlusIcon />}
     >
       <form
         noValidate
@@ -176,16 +176,6 @@ const AddEvent = ({
                 label={"ARN"}
                 value={arn}
                 options={arnValues || []}
-                helpTip={
-                  <Fragment>
-                    <a
-                      target="blank"
-                      href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html"
-                    >
-                      Amazon Resource Name
-                    </a>
-                  </Fragment>
-                }
               />
             </Grid>
             <Grid item xs={12} sx={formFieldStyles.formFieldRow}>

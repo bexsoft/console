@@ -16,7 +16,7 @@
 
 import React, { useState } from "react";
 import {
-  AddAccessRuleIcon,
+  CirclePlusIcon,
   Button,
   FormLayout,
   PageLayout,
@@ -71,7 +71,7 @@ const AddKeyForm = () => {
     <PageLayout>
       <FormLayout
         title={"Create Key"}
-        icon={<AddAccessRuleIcon />}
+        icon={<CirclePlusIcon />}
         helpBox={
           <KMSHelpBox
             helpText={"Encryption Key"}

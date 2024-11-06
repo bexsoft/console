@@ -16,7 +16,7 @@
 
 import React, { Fragment, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, Loader, LoginWrapper, RefreshIcon } from "mds";
+import { Box, Button, Loader, LoginWrapper, RefreshCWIcon } from "mds";
 import { loginStrategyType } from "./login.types";
 import MainError from "../Console/Common/MainError/MainError";
 import { AppState, useAppDispatch } from "../../store";
@@ -121,7 +121,7 @@ const Login = () => {
                   onClick={() => {
                     dispatch(getFetchConfigurationAsync());
                   }}
-                  icon={<RefreshIcon />}
+                  icon={<RefreshCWIcon />}
                   iconLocation={"end"}
                   variant="secondary"
                   id="retry"

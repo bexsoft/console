@@ -16,7 +16,7 @@
 
 import React, { Fragment, useEffect, useState } from "react";
 import {
-  ActionLink,
+  LinkButton,
   PlusIcon,
   Box,
   Button,
@@ -27,7 +27,7 @@ import {
   LambdaIcon,
   PageLayout,
   ProgressBar,
-  RefreshIcon,
+  RefreshCWIcon,
 } from "mds";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -178,7 +178,7 @@ const ListEventDestinations = () => {
                 id={"reload-event-destinations"}
                 label={"Refresh"}
                 variant="secondary"
-                icon={<RefreshIcon />}
+                icon={<RefreshCWIcon />}
                 onClick={() => {
                   dispatch(setDestinationLoading(true));
                 }}
@@ -272,13 +272,13 @@ const ListEventDestinations = () => {
                         <br />
                         <br />
                         To get started,{" "}
-                        <ActionLink
+                        <LinkButton
                           onClick={() => {
                             navigate(IAM_PAGES.EVENT_DESTINATIONS_ADD);
                           }}
                         >
                           Add an Event Destination
-                        </ActionLink>
+                        </LinkButton>
                         .
                       </Fragment>
                     }

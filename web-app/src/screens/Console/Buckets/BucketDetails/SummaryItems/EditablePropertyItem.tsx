@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from "react";
-import { ActionLink, Box, HelpTip, ValuePair } from "mds";
+import { LinkButton, Box, ValuePair } from "mds";
 import { SecureComponent } from "../../../../../common/SecureComponent";
 
 import EditActionButton from "./EditActionButton";
@@ -78,29 +78,12 @@ const EditablePropertyItem = ({
       <ValuePair
         label={property}
         value={
-          helpTip ? (
             <SecureAction
               resourceName={resourceName}
               iamScopes={iamScopes}
               secureCmpProps={secureCmpProps}
             >
-              <HelpTip placement="left" content={helpTip}>
-                <ActionLink
-                  isLoading={isLoading}
-                  onClick={onEdit}
-                  label={value}
-                  sx={{ fontWeight: "bold", textTransform: "capitalize" }}
-                  disabled={disabled}
-                />
-              </HelpTip>
-            </SecureAction>
-          ) : (
-            <SecureAction
-              resourceName={resourceName}
-              iamScopes={iamScopes}
-              secureCmpProps={secureCmpProps}
-            >
-              <ActionLink
+              <LinkButton
                 isLoading={isLoading}
                 onClick={onEdit}
                 label={value}
@@ -108,7 +91,6 @@ const EditablePropertyItem = ({
                 disabled={disabled}
               />
             </SecureAction>
-          )
         }
       />
       <SecureAction

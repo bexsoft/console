@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from "react";
-import { Button, CopyIcon, InputLabel, ReadBox, Box } from "mds";
+import { Button, CopyIcon, InputLabel, CodeSnippet, Box } from "mds";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { setModalSnackMessage } from "../../../../systemSlice";
 import { useAppDispatch } from "../../../../store";
@@ -31,7 +31,7 @@ const CredentialItem = ({ label = "", value = "" }: ICredentialsItem) => {
   return (
     <Box sx={{ marginTop: 12 }}>
       <InputLabel>{label}</InputLabel>
-      <ReadBox
+      <CodeSnippet
         actionButton={
           <CopyToClipboard text={value}>
             <Button
@@ -52,7 +52,7 @@ const CredentialItem = ({ label = "", value = "" }: ICredentialsItem) => {
         }
       >
         {value}
-      </ReadBox>
+      </CodeSnippet>
     </Box>
   );
 };

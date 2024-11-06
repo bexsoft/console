@@ -17,7 +17,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  ActionLink,
+  LinkButton,
   PlusIcon,
   Box,
   Button,
@@ -212,7 +212,7 @@ const SiteReplication = () => {
                     <br />
                     <br />
                     To get started,{" "}
-                    <ActionLink
+                    <LinkButton
                       isLoading={false}
                       label={""}
                       onClick={() => {
@@ -220,7 +220,7 @@ const SiteReplication = () => {
                       }}
                     >
                       Add a Replication Site
-                    </ActionLink>
+                    </LinkButton>
                     .
                     <br />
                     You can learn more at our{" "}

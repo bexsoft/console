@@ -159,7 +159,7 @@ const BucketTags = ({ bucketName }: BucketTagProps) => {
                 label="Add tag"
                 icon={<PlusIcon />}
                 id={"create-tag"}
-                variant={"outlined"}
+                color={"primary"}
                 onClick={() => {
                   setTagModalOpen(true);
                 }}

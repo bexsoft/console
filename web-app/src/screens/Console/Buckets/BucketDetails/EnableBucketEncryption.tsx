@@ -19,7 +19,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import {
   PlusIcon,
   Box,
-  BucketEncryptionIcon,
+  LockKeyholeIcon,
   Button,
   FormLayout,
   Grid,
@@ -150,7 +150,7 @@ const EnableBucketEncryption = ({
           closeModalAndRefresh();
         }}
         title="Enable Bucket Encryption"
-        titleIcon={<BucketEncryptionIcon />}
+        titleIcon={<LockKeyholeIcon />}
       >
         <form
           noValidate

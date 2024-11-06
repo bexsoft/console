@@ -23,7 +23,7 @@ import {
   InputBox,
   PendingItemsIcon,
   ProgressBar,
-  ReadBox,
+  CodeSnippet,
   Toggle,
   Tooltip,
   WebhookIcon,
@@ -209,7 +209,7 @@ const EditEndpointModal = ({
         <FormLayout withBorders={false} containerPadding={false}>
           {hasOverride.length > 0 ? (
             <Fragment>
-              <ReadBox
+              <CodeSnippet
                 label={"Enabled"}
                 sx={{ width: "100%" }}
                 actionButton={
@@ -237,8 +237,8 @@ const EditEndpointModal = ({
                 }
               >
                 {overrideValues.enable?.value || "-"}
-              </ReadBox>
-              <ReadBox
+              </CodeSnippet>
+              <CodeSnippet
                 label={"Endpoint"}
                 sx={{ width: "100%" }}
                 actionButton={
@@ -266,8 +266,8 @@ const EditEndpointModal = ({
                 }
               >
                 {overrideValues.endpoint?.value || "-"}
-              </ReadBox>
-              <ReadBox
+              </CodeSnippet>
+              <CodeSnippet
                 label={"Auth Token"}
                 sx={{ width: "100%" }}
                 actionButton={
@@ -295,7 +295,7 @@ const EditEndpointModal = ({
                 }
               >
                 {overrideValues.auth_token?.value || "-"}
-              </ReadBox>
+              </CodeSnippet>
             </Fragment>
           ) : (
             <Fragment>
