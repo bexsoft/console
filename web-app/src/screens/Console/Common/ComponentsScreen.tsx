@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment, useEffect, useState } from "react";
-import { Button, ConfirmDeleteIcon, PageLayout, SectionTitle, Grid } from "mds";
+import { Button, CircleXIcon, PageLayout, SectionTitle, Grid } from "mds";
 import ConfirmDialog from "./ModalWrapper/ConfirmDialog";
 import PageHeaderWrapper from "./PageHeaderWrapper/PageHeaderWrapper";
 import HelpMenu from "../HelpMenu";
@@ -57,7 +57,7 @@ const ComponentsScreen = () => {
               title={`Delete Bucket`}
               confirmText={"Delete"}
               isOpen={dialogOpen}
-              titleIcon={<ConfirmDeleteIcon />}
+              titleIcon={<CircleXIcon />}
               isLoading={false}
               onConfirm={() => {
                 setDialogOpen(false);

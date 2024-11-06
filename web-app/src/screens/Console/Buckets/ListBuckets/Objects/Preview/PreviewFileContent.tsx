@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment, useCallback, useEffect, useState } from "react";
-import { ProgressBar, Grid, Box, InformativeMessage } from "mds";
+import { ProgressBar, Grid, Box, NotificationAlert } from "mds";
 import get from "lodash/get";
 import { AllowedPreviews, previewObjectType } from "../utils";
 import { api } from "../../../../../../api";
@@ -188,12 +188,13 @@ const PreviewFile = ({
           )}
           {objectType === "none" && (
             <div>
-              <InformativeMessage
-                message=" File couldn't be previewed using file extension or mime type. Please
-            try Download instead"
+              <NotificationAlert
                 title="Preview unavailable"
+                variant={"information"}
                 sx={{ margin: "15px 0" }}
-              />
+              >
+                File couldn't be previewed using file extension or mime type. Please try Download instead
+              </NotificationAlert>
             </div>
           )}
           {objectType !== "none" &&

@@ -16,7 +16,7 @@
 
 import React, { Fragment, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
-import { Box, Button, InformativeMessage } from "mds";
+import { Box, Button, NotificationAlert } from "mds";
 
 pdfjs.GlobalWorkerOptions.workerSrc = "./scripts/pdf.worker.min.mjs";
 
@@ -46,60 +46,58 @@ const PreviewPDF = ({
   return (
     <Fragment>
       {errorState && totalPages === 0 && (
-        <InformativeMessage
-          variant={"error"}
+        <NotificationAlert
+          variant={"danger"}
           title={"Error"}
-          message={
-            <Fragment>
-              File preview couldn't be displayed, Please try Download instead.
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: 12,
-                }}
-              >
-                <Button
-                  id={"download-preview"}
-                  onClick={downloadFile}
-                  variant={"primary"}
-                >
-                  Download File
-                </Button>
-              </Box>
-            </Fragment>
-          }
           sx={{ marginBottom: 10 }}
-        />
+        >
+          <Fragment>
+            File preview couldn't be displayed, Please try Download instead.
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: 12,
+              }}
+            >
+              <Button
+                id={"download-preview"}
+                onClick={downloadFile}
+                variant={"primary"}
+              >
+                Download File
+              </Button>
+            </Box>
+          </Fragment>
+        </NotificationAlert>
       )}
       {!loading && !errorState && (
-        <InformativeMessage
+        <NotificationAlert
           variant={"warning"}
           title={"File Preview"}
-          message={
-            <Fragment>
-              This is a File Preview for the first {arrayCreate.length} pages of
-              the document, if you wish to work with the full document please
-              download instead.
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: 12,
-                }}
-              >
-                <Button
-                  id={"download-preview"}
-                  onClick={downloadFile}
-                  variant={"primary"}
-                >
-                  Download File
-                </Button>
-              </Box>
-            </Fragment>
-          }
           sx={{ marginBottom: 10 }}
-        />
+        >
+          <Fragment>
+            This is a File Preview for the first {arrayCreate.length} pages of
+            the document, if you wish to work with the full document please
+            download instead.
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: 12,
+              }}
+            >
+              <Button
+                id={"download-preview"}
+                onClick={downloadFile}
+                variant={"primary"}
+              >
+                Download File
+              </Button>
+            </Box>
+          </Fragment>
+        </NotificationAlert>
       )}
       {!errorState && (
         <Box

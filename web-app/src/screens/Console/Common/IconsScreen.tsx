@@ -229,15 +229,15 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.ChangeAccessPolicyIcon />
+          <cicons.PencilLineIcon />
           <br />
-          ChangeAccessPolicyIcon
+          PencilLineIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.ChangePasswordIcon />
+          <cicons.KeyRoundIcon />
           <br />
-          ChangePasswordIcon
+          KeyRoundIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -277,9 +277,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.ConfirmDeleteIcon />
+          <cicons.CircleXIcon />
           <br />
-          ConfirmDeleteIcon
+          CircleXIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -643,9 +643,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.LambdaNotificationsIcon />
+          <cicons.LambdaIcon />
           <br />
-          LambdaNotificationsIcon
+          LambdaIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>

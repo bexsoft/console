@@ -18,7 +18,7 @@ import React, { Fragment, useState } from "react";
 import {
   Box,
   CircleIcon,
-  ConfirmDeleteIcon,
+  CircleXIcon,
   DataTable,
   IColumns,
   ItemActions,
@@ -111,7 +111,7 @@ const ReplicationSites = ({
           title={`Delete Replication Site`}
           confirmText={"Delete"}
           isOpen={deleteSiteKey !== ""}
-          titleIcon={<ConfirmDeleteIcon />}
+          titleIcon={<CircleXIcon />}
           isLoading={false}
           onConfirm={() => {
             onDeleteSite(false, [deleteSiteKey]);

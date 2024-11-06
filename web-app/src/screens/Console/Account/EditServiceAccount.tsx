@@ -18,7 +18,7 @@ import React, { useEffect, useState, Fragment } from "react";
 import {
   Box,
   Button,
-  ChangeAccessPolicyIcon,
+  PencilLineIcon,
   DateTimeInput,
   Grid,
   InputBox,
@@ -108,7 +108,7 @@ const EditServiceAccount = ({
       onClose={() => {
         closeModalAndRefresh();
       }}
-      titleIcon={<ChangeAccessPolicyIcon />}
+      titleIcon={<PencilLineIcon />}
     >
       <form
         noValidate

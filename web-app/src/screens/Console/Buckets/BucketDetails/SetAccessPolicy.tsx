@@ -21,7 +21,7 @@ import { errorToHandler } from "api/errors";
 import {
   Box,
   Button,
-  ChangeAccessPolicyIcon,
+  PencilLineIcon,
   FormLayout,
   Grid,
   Select,
@@ -89,7 +89,7 @@ const SetAccessPolicy = ({
       onClose={() => {
         closeModalAndRefresh();
       }}
-      titleIcon={<ChangeAccessPolicyIcon />}
+      titleIcon={<PencilLineIcon />}
     >
       <form
         noValidate

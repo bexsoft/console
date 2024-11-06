@@ -17,7 +17,7 @@ import React from "react";
 
 import {
   Box,
-  ChangeAccessPolicyIcon,
+  PencilLineIcon,
   GroupsIcon,
   CircleHelpIcon,
   UsersIcon,
@@ -102,7 +102,7 @@ const AddUserHelpBox = () => {
         <FeatureItem icon={<UsersIcon />} description={`Create Users`} />
         <FeatureItem icon={<GroupsIcon />} description={`Manage Groups`} />
         <FeatureItem
-          icon={<ChangeAccessPolicyIcon />}
+          icon={<PencilLineIcon />}
           description={`Assign Policies`}
         />
       </Box>

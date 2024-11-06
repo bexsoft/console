@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment, useState } from "react";
-import { ConfirmDeleteIcon } from "mds";
+import { CircleXIcon } from "mds";
 import {
   setErrorSnackMessage,
   setServerNeedsRestart,
@@ -70,7 +70,7 @@ const DeleteIDPConfigurationModal = ({
       title={`Delete ${displayName}`}
       confirmText={"Delete"}
       isOpen={deleteOpen}
-      titleIcon={<ConfirmDeleteIcon />}
+      titleIcon={<CircleXIcon />}
       isLoading={deleteLoading}
       onConfirm={onConfirmDelete}
       onClose={onClose}

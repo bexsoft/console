@@ -17,7 +17,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { setErrorSnackMessage } from "../../../systemSlice";
-import { ConfirmDeleteIcon, DataTable, InformativeMessage, Loader } from "mds";
+import { CircleXIcon, DataTable, Loader, NotificationAlert } from "mds";
 import { IAM_PAGES } from "../../../common/SecureComponent/permissions";
 import ConfirmDialog from "../Common/ModalWrapper/ConfirmDialog";
 import { useAppDispatch } from "../../../store";
@@ -61,7 +61,7 @@ const DeleteUser = ({
           }
         })
         .catch((err) =>
-          dispatch(setErrorSnackMessage(errorToHandler(err.error))),
+          dispatch(setErrorSnackMessage(errorToHandler(err.error)))
         )
         .finally(() => setLoadingSA(false));
     }
@@ -77,7 +77,7 @@ const DeleteUser = ({
   ));
   const viewAction = (selectionElement: any): void => {
     navigate(
-      `${IAM_PAGES.USERS}/${encodeURIComponent(selectionElement.userName)}`,
+      `${IAM_PAGES.USERS}/${encodeURIComponent(selectionElement.userName)}`
     );
     onClose();
   };
@@ -95,7 +95,7 @@ const DeleteUser = ({
           setErrorSnackMessage({
             errorMessage: "Cannot delete currently logged in user",
             detailedError: `Cannot delete currently logged in user ${userLoggedIn}`,
-          }),
+          })
         );
         closeDeleteModalAndRefresh(true);
       } else {
@@ -122,7 +122,7 @@ const DeleteUser = ({
       title={`Delete User${selectedUsers.length > 1 ? "s" : ""}`}
       confirmText={"Delete"}
       isOpen={deleteOpen}
-      titleIcon={<ConfirmDeleteIcon />}
+      titleIcon={<CircleXIcon />}
       isLoading={deleteLoading}
       onConfirm={onConfirmDelete}
       onClose={onClose}
@@ -133,21 +133,20 @@ const DeleteUser = ({
           <Fragment>
             {hasSA ? (
               <Fragment>
-                <InformativeMessage
+                <NotificationAlert
                   variant={"warning"}
-                  message={
-                    <Fragment>
-                      Click on a user to view the full listing of associated
-                      Access Keys. All Access Keys associated with a user will
-                      be deleted along with the user.
-                      <br />
-                      <br />
-                      <strong>Are you sure you want to continue?</strong>
-                    </Fragment>
-                  }
                   title="Warning: One or more users selected has associated Access Keys."
                   sx={{ margin: "15px 0" }}
-                />
+                >
+                  <Fragment>
+                    Click on a user to view the full listing of associated
+                    Access Keys. All Access Keys associated with a user will be
+                    deleted along with the user.
+                    <br />
+                    <br />
+                    <strong>Are you sure you want to continue?</strong>
+                  </Fragment>
+                </NotificationAlert>
                 <DataTable
                   itemActions={tableActions}
                   columns={[

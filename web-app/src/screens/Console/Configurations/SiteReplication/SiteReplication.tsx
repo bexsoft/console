@@ -22,7 +22,7 @@ import {
   Box,
   Button,
   ClustersIcon,
-  ConfirmDeleteIcon,
+  CircleXIcon,
   Grid,
   HelpBox,
   Loader,
@@ -287,7 +287,7 @@ const SiteReplication = () => {
             title={`Delete All`}
             confirmText={"Delete"}
             isOpen={true}
-            titleIcon={<ConfirmDeleteIcon />}
+            titleIcon={<CircleXIcon />}
             isLoading={false}
             onConfirm={() => {
               const siteNames = sites.map((s: any) => s.name);

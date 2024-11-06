@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment, useState } from "react";
-import { ConfirmDeleteIcon } from "mds";
+import { CircleXIcon } from "mds";
 import { setErrorSnackMessage } from "../../../systemSlice";
 import { useAppDispatch } from "../../../store";
 import ConfirmDialog from "../Common/ModalWrapper/ConfirmDialog";
@@ -69,7 +69,7 @@ const DeleteGroup = ({
       title={`Delete Group${selectedGroups.length > 1 ? "s" : ""}`}
       confirmText={"Delete"}
       isOpen={deleteOpen}
-      titleIcon={<ConfirmDeleteIcon />}
+      titleIcon={<CircleXIcon />}
       isLoading={loadingDelete}
       onConfirm={onDeleteGroups}
       onClose={onClose}
