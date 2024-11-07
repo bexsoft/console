@@ -17,7 +17,7 @@
 import React from "react";
 import styled from "styled-components";
 import get from "lodash/get";
-import { Box, Loader, SuccessIcon } from "mds";
+import { Box, Loader, CheckIcon } from "mds";
 
 const TimeStatBase = styled.div(({ theme }) => ({
   display: "grid",
@@ -65,7 +65,7 @@ const TimeStatItem = ({
       {loading ? <Loader style={{ width: 10, height: 10 }} /> : icon}
       <Box className={"timeStatLabel"}>{label}</Box>
       <Box className={"timeStatValue"}>{value}</Box>
-      {value !== "n/a" ? <SuccessIcon className="ok-icon" /> : null}
+      {value !== "n/a" ? <CheckIcon className="ok-icon" /> : null}
     </TimeStatBase>
   );
 };

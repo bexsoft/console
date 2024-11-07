@@ -17,7 +17,7 @@
 import React, { useState } from "react";
 import {
   Button,
-  InspectMenuIcon,
+  FeatherIcon,
   KeyRoundIcon,
   Toggle,
   Grid,
@@ -110,7 +110,7 @@ const InspectObject = ({
       {!decryptionKey && (
         <ModalWrapper
           modalOpen={inspectOpen}
-          titleIcon={<InspectMenuIcon />}
+          titleIcon={<FeatherIcon />}
           title={`Inspect Object`}
           onClose={onClose}
         >

@@ -23,7 +23,7 @@ import {
   CircleOffIcon,
   CloudDownloadIcon,
   CircleCheckBigIcon,
-  UploadStatIcon,
+  UploadIcon,
   Tooltip,
 } from "mds";
 import clsx from "clsx";
@@ -203,7 +203,7 @@ const ObjectHandled = ({ objectToDisplay, deleteFromList }: IObjectHandled) => {
                               {objectToDisplay.type === "download" ? (
                                 <CloudDownloadIcon />
                               ) : (
-                                <UploadStatIcon />
+                                <UploadIcon />
                               )}
                             </Fragment>
                           )}

@@ -32,7 +32,7 @@ import {
   TierOfflineIcon,
   TierOnlineIcon,
   UsersRoundIcon,
-  TiersNotAvailableIcon,
+  FeatherIcon,
 } from "mds";
 import { api } from "api";
 import { errorToHandler } from "api/errors";
@@ -299,7 +299,7 @@ const ListTiersConfiguration = () => {
         {!distributedSetup ? (
           <DistributedOnly
             entity={"Tiers"}
-            icon={<TiersNotAvailableIcon />}
+            icon={<FeatherIcon />}
           />
         ) : (
           <Fragment>

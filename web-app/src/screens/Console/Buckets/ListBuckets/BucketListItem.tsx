@@ -17,7 +17,7 @@ import React, { Fragment, useState } from "react";
 import get from "lodash/get";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { Box, breakPoints, BucketIcon, Checkbox, Grid, PieChartIcon, Tooltip, TotalObjectsIcon } from "mds";
+import { Box, breakPoints, BucketIcon, Checkbox, Grid, PieChartIcon, Tooltip, FeatherIcon } from "mds";
 import { calculateBytes, niceBytes, prettyNumber } from "../../../../common/utils";
 import { IAM_PERMISSIONS, IAM_ROLES } from "../../../../common/SecureComponent/permissions";
 import { hasPermission } from "../../../../common/SecureComponent";
@@ -224,7 +224,7 @@ const BucketListItem = ({
         </Grid>
 
         <Grid item className={"metric"}>
-          <TotalObjectsIcon />
+          <FeatherIcon />
           <span className={"metricLabel"}>Objects</span>
           <div className={"metricText"}>
             {bucket.objects ? prettyNumber(bucket.objects) : 0}

@@ -25,25 +25,25 @@ import {
   S3_ALL_RESOURCES,
 } from "../../common/SecureComponent/permissions";
 import {
-  AccessMenuIcon,
-  AccountsMenuIcon,
-  AuditLogsMenuIcon,
-  BucketsMenuIcon,
+  FeatherIcon,
+  FeatherIcon,
+  FeatherIcon,
+  FeatherIcon,
   BookTextIcon,
-  GroupsMenuIcon,
-  IdentityMenuIcon,
+  FeatherIcon,
+  FeatherIcon,
   LambdaIcon,
   BookOpenTextIcon,
   LockOpenIcon,
   LoginIcon,
-  LogsMenuIcon,
-  MetricsMenuIcon,
-  MonitoringMenuIcon,
+  FeatherIcon,
+  FeatherIcon,
+  FeatherIcon,
   BucketIcon,
   ArchiveRestoreIcon,
   SettingsIcon,
   UsersRoundIcon,
-  UsersMenuIcon,
+  FeatherIcon,
 } from "mds";
 import { hasPermission } from "../../common/SecureComponent";
 import EncryptionIcon from "../../icons/SidebarMenus/EncryptionIcon";
@@ -109,7 +109,7 @@ export const validRoutes = (
       id: "nav-accesskeys",
       path: IAM_PAGES.ACCOUNT,
       name: "Access Keys",
-      icon: <AccountsMenuIcon />,
+      icon: <FeatherIcon />,
       forceDisplay: true,
     },
     {
@@ -124,7 +124,7 @@ export const validRoutes = (
       name: "Buckets",
       id: "buckets",
       path: IAM_PAGES.BUCKETS,
-      icon: <BucketsMenuIcon />,
+      icon: <FeatherIcon />,
       forceDisplay: true,
     },
     {
@@ -132,13 +132,13 @@ export const validRoutes = (
       name: "Policies",
       id: "policies",
       path: IAM_PAGES.POLICIES,
-      icon: <AccessMenuIcon />,
+      icon: <FeatherIcon />,
     },
     {
       group: "Administrator",
       name: "Identity",
       id: "identity",
-      icon: <IdentityMenuIcon />,
+      icon: <FeatherIcon />,
       children: [
         {
           id: "users",
@@ -148,14 +148,14 @@ export const validRoutes = (
             hasPermission(S3_ALL_RESOURCES, adminUserPermissions) ||
             hasPermission(CONSOLE_UI_RESOURCE, [IAM_SCOPES.ADMIN_ALL_ACTIONS]),
           name: "Users",
-          icon: <UsersMenuIcon />,
+          icon: <FeatherIcon />,
           fsHidden: ldapIsEnabled,
         },
         {
           id: "groups",
           path: IAM_PAGES.GROUPS,
           name: "Groups",
-          icon: <GroupsMenuIcon />,
+          icon: <FeatherIcon />,
           fsHidden: ldapIsEnabled,
         },
         {
@@ -176,25 +176,25 @@ export const validRoutes = (
       group: "Administrator",
       name: "Monitoring",
       id: "tools",
-      icon: <MonitoringMenuIcon />,
+      icon: <FeatherIcon />,
       children: [
         {
           name: "Metrics",
           id: "monitorMetrics",
           path: IAM_PAGES.DASHBOARD,
-          icon: <MetricsMenuIcon />,
+          icon: <FeatherIcon />,
         },
         {
           name: "Logs ",
           id: "monitorLogs",
           path: IAM_PAGES.TOOLS_LOGS,
-          icon: <LogsMenuIcon />,
+          icon: <FeatherIcon />,
         },
         {
           name: "Audit",
           id: "monitorAudit",
           path: IAM_PAGES.TOOLS_AUDITLOGS,
-          icon: <AuditLogsMenuIcon />,
+          icon: <FeatherIcon />,
         },
         {
           name: "Encryption",

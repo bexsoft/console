@@ -17,7 +17,7 @@
 import React from "react";
 import styled from "styled-components";
 import get from "lodash/get";
-import { Loader, NetworkGetIcon, Box } from "mds";
+import { Loader, NetworkIcon, Box } from "mds";
 
 const NetworkGetBase = styled.div(({ theme }) => ({
   "& .putLabel": {
@@ -61,7 +61,7 @@ const NetworkGetItem = ({
         {loading ? (
           <Loader style={{ width: "15px", height: "15px" }} />
         ) : (
-          <NetworkGetIcon />
+          <NetworkIcon />
         )}
       </Box>
       <Box className={"valueText"}>{value}</Box>

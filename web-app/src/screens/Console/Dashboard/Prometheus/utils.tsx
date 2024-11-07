@@ -25,7 +25,7 @@ import {
   textToRGBColor,
   units,
 } from "../../../../common/utils";
-import { ActivityIcon, HospitalIcon, UptimeIcon } from "mds";
+import { ActivityIcon, HospitalIcon, TimerIcon } from "mds";
 
 const colorsMain = [
   "#C4D4E9",
@@ -53,7 +53,7 @@ export const panelsConfiguration: IDashboardPanel[] = [
     title: "Uptime",
     data: "N/A",
     type: widgetType.simpleWidget,
-    widgetIcon: <UptimeIcon />,
+    widgetIcon: <TimerIcon />,
     labelDisplayFunction: niceDays,
   },
   {

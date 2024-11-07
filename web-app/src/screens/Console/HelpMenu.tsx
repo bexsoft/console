@@ -19,7 +19,7 @@ import ReactMarkdown from "react-markdown";
 import styled from "styled-components";
 import get from "lodash/get";
 import {
-  AlertCloseIcon,
+  XIcon,
   Box,
   Button,
   CircleHelpIcon,
@@ -305,7 +305,7 @@ const HelpMenu = () => {
                   }}
                   size="small"
                 >
-                  <AlertCloseIcon style={{ color: "#919191", width: 12 }} />
+                  <XIcon style={{ color: "#919191", width: 12 }} />
                 </IconButton>
               </Box>
             }

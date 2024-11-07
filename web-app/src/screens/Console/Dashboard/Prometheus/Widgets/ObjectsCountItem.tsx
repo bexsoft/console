@@ -16,7 +16,7 @@
 
 import React from "react";
 import NumericStatCard from "./NumericStatCard";
-import { TotalObjectsIcon } from "mds";
+import { FeatherIcon } from "mds";
 
 const ObjectsCountItem = ({
   title,
@@ -30,7 +30,7 @@ const ObjectsCountItem = ({
   return (
     <NumericStatCard
       label={title}
-      icon={<TotalObjectsIcon />}
+      icon={<FeatherIcon />}
       value={value}
       loading={loading}
     />

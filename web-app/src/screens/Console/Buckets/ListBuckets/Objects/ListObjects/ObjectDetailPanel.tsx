@@ -24,7 +24,7 @@ import {
   DeleteIcon,
   DownloadIcon,
   Grid,
-  InspectMenuIcon,
+  FeatherIcon,
   BalancerIcon,
   Loader,
   DataIcon,
@@ -34,7 +34,7 @@ import {
   ShareIcon,
   SimpleHeader,
   TagsIcon,
-  VersionsIcon,
+  SquareStackIcon,
 } from "mds";
 import { api } from "api";
 import { downloadObject } from "../../../../ObjectBrowser/utils";
@@ -477,7 +477,7 @@ const ObjectDetailPanel = ({
         !!actualInfo.is_delete_marker ||
         selectedVersion !== "" ||
         !canInspect,
-      icon: <InspectMenuIcon />,
+      icon: <FeatherIcon />,
       tooltip: canInspect
         ? "Inspect this file"
         : permissionTooltipHelper(
@@ -495,7 +495,7 @@ const ObjectDetailPanel = ({
         );
       },
       label: versionsMode ? "Hide Object Versions" : "Display Object Versions",
-      icon: <VersionsIcon />,
+      icon: <SquareStackIcon />,
       disabled:
         !distributedSetup ||
         !(actualInfo.version_id && actualInfo.version_id !== "null") ||

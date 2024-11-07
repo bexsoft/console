@@ -27,7 +27,7 @@ import {
   ScreenTitle,
   Select,
   SquareStackIcon,
-  VersionsIcon,
+  SquareStackIcon,
 } from "mds";
 import ShareFile from "./ShareFile";
 
@@ -411,7 +411,7 @@ const VersionsNavigator = ({
                       marginTop: "-10px",
                     }}
                   >
-                    <VersionsIcon style={{ width: 20, height: 20 }} />
+                    <SquareStackIcon style={{ width: 20, height: 20 }} />
                   </span>
                 }
                 title={`${

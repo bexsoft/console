@@ -21,7 +21,7 @@ import {
   breakPoints,
   BucketIcon,
   Button,
-  DiagnosticsMenuIcon,
+  FeatherIcon,
   HardDriveIcon,
   HardDriveDownloadIcon,
   HospitalIcon,
@@ -29,8 +29,8 @@ import {
   BookXIcon,
   ServerIcon,
   HardDriveIcon,
-  TotalObjectsIcon,
-  UptimeIcon,
+  FeatherIcon,
+  TimerIcon,
 } from "mds";
 import { calculateBytes, representationNumber } from "../../../../common/utils";
 import StatusCountCard from "./StatusCountCard";
@@ -187,7 +187,7 @@ const BasicDashboard = ({ usage }: IDashboardProps) => {
             <BoxItem>
               <CounterCard
                 label={"Objects"}
-                icon={<TotalObjectsIcon />}
+                icon={<FeatherIcon />}
                 counterValue={usage ? representationNumber(usage.objects) : 0}
               />
             </BoxItem>
@@ -257,7 +257,7 @@ const BasicDashboard = ({ usage }: IDashboardProps) => {
                   value={lastHeal}
                 />
                 <TimeStatItem
-                  icon={<DiagnosticsMenuIcon />}
+                  icon={<FeatherIcon />}
                   label={
                     <Box>
                       <Box
@@ -276,7 +276,7 @@ const BasicDashboard = ({ usage }: IDashboardProps) => {
                   value={lastScan}
                 />
                 <TimeStatItem
-                  icon={<UptimeIcon />}
+                  icon={<TimerIcon />}
                   label={"Uptime"}
                   value={upTime}
                 />

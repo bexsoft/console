@@ -837,21 +837,16 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.TiersNotAvailableIcon />
+          <cicons.FeatherIcon />
           <br />
-          TiersNotAvailableIcon
+          FeatherIcon
         </Grid>
 
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.ToolsIcon />
-          <br />
-          ToolsIcon
-        </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.TotalObjectsIcon />
+          <cicons.FeatherIcon />
           <br />
-          TotalObjectsIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -867,15 +862,9 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.UploadFile />
+          <cicons.UploadIcon />
           <br />
-          UploadFile
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.UploadFolderIcon />
-          <br />
-          UploadFolderIcon
+          UploadIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -885,15 +874,15 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.UploadStatIcon />
+          <cicons.UploadIcon />
           <br />
-          UploadStatIcon
+          UploadIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.UptimeIcon />
+          <cicons.TimerIcon />
           <br />
-          UptimeIcon
+          TimerIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -903,21 +892,15 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.VerifiedIcon />
+          <cicons.BadgeCheckIcon />
           <br />
-          VerifiedIcon
+          BadgeCheckIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.VersionIcon />
+          <cicons.SquareStackIcon />
           <br />
-          VersionIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.VersionsIcon />
-          <br />
-          VersionsIcon
+          SquareStackIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
@@ -927,55 +910,36 @@ const IconsScreen = () => {
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.WarpIcon />
-          <br />
-          WarpIcon
-        </Grid>
-
-        <Grid item xs={3} sm={2} md={1}>
           <cicons.WatchIcon />
           <br />
           WatchIcon
         </Grid>
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.AlertCloseIcon />
+          <cicons.XIcon />
           <br />
-          AlertCloseIcon
+          XIcon
         </Grid>
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.OpenSourceIcon />
-          <br />
-          OpenSourceIcon
-        </Grid>
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.LicenseDocIcon />
-          <br />
-          LicenseDocIcon
-        </Grid>
-        <Grid item xs={3} sm={2} md={1}>
-          <cicons.BackIcon />
-          <br />
-          BackIcon
-        </Grid>
+
+
         <Grid item xs={3} sm={2} md={1}>
           <cicons.FilterIcon />
           <br />
           FilterIcon
         </Grid>
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.SuccessIcon />
+          <cicons.CheckIcon />
           <br />
-          SuccessIcon
+          CheckIcon
         </Grid>
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.NetworkGetIcon />
+          <cicons.NetworkIcon />
           <br />
-          NetworkGetIcon
+          NetworkIcon
         </Grid>
         <Grid item xs={3} sm={2} md={1}>
-          <cicons.NetworkPutIcon />
+          <cicons.NetworkIcon />
           <br />
-          NetworkPutIcon
+          NetworkIcon
         </Grid>
       </Grid>
       <h1>Menu Icons</h1>
@@ -994,135 +958,135 @@ const IconsScreen = () => {
         }}
       >
         <Grid item xs={3} sm={2} md={1}>
-          <micons.AccessMenuIcon />
+          <micons.FeatherIcon />
           <br />
-          AccessMenuIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <micons.AccountsMenuIcon />
+          <micons.FeatherIcon />
           <br />
-          AccountsMenuIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <micons.AuditLogsMenuIcon />
+          <micons.FeatherIcon />
           <br />
-          AuditLogsMenuIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <micons.BucketsMenuIcon />
+          <micons.FeatherIcon />
           <br />
-          BucketsMenuIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <micons.CallHomeMenuIcon />
+          <micons.FeatherIcon />
           <br />
-          CallHomeMenuIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <micons.DiagnosticsMenuIcon />
+          <micons.FeatherIcon />
           <br />
-          DiagnosticsMenuIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <micons.DrivesMenuIcon />
+          <micons.FeatherIcon />
           <br />
-          DrivesMenuIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <micons.GroupsMenuIcon />
+          <micons.FeatherIcon />
           <br />
-          GroupsMenuIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <micons.HealthMenuIcon />
+          <micons.FeatherIcon />
           <br />
-          HealthMenuIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <micons.IdentityMenuIcon />
+          <micons.FeatherIcon />
           <br />
-          IdentityMenuIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <micons.InspectMenuIcon />
+          <micons.FeatherIcon />
           <br />
-          InspectMenuIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <micons.LogsMenuIcon />
+          <micons.FeatherIcon />
           <br />
-          LogsMenuIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <micons.MenuCollapsedIcon />
+          <micons.FeatherIcon />
           <br />
-          MenuCollapsedIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <micons.MenuExpandedIcon />
+          <micons.FeatherIcon />
           <br />
-          MenuExpandedIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <micons.MetricsMenuIcon />
+          <micons.FeatherIcon />
           <br />
-          MetricsMenuIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <micons.MonitoringMenuIcon />
+          <micons.FeatherIcon />
           <br />
-          MonitoringMenuIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <micons.PerformanceMenuIcon />
+          <micons.FeatherIcon />
           <br />
-          PerformanceMenuIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <micons.ProfileMenuIcon />
+          <micons.FeatherIcon />
           <br />
-          ProfileMenuIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <micons.RegisterMenuIcon />
+          <micons.FeatherIcon />
           <br />
-          RegisterMenuIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <micons.SupportMenuIcon />
+          <micons.FeatherIcon />
           <br />
-          SupportMenuIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <micons.TraceMenuIcon />
+          <micons.FeatherIcon />
           <br />
-          TraceMenuIcon
+          FeatherIcon
         </Grid>
 
         <Grid item xs={3} sm={2} md={1}>
-          <micons.UsersMenuIcon />
+          <micons.FeatherIcon />
           <br />
-          UsersMenuIcon
+          FeatherIcon
         </Grid>
       </Grid>
     </Box>

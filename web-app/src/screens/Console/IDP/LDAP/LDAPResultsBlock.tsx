@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment } from "react";
-import { Box, CollapseCaret, GroupsMenuIcon, SectionTitle } from "mds";
+import { Box, CollapseCaret, FeatherIcon, SectionTitle } from "mds";
 import { LdapEntities } from "api/consoleApi";
 
 interface IResultBlock {
@@ -82,7 +82,7 @@ const LDAPResultsBlock = ({ entityName, results }: IResultBlock) => {
       <SectionTitle
         separator
         sx={{ fontSize: 12 }}
-        icon={<GroupsMenuIcon style={{ width: 17, height: 17 }} />}
+        icon={<FeatherIcon style={{ width: 17, height: 17 }} />}
         actions={
           <Box sx={{ fontSize: 14 }}>
             <strong>{entityLength}</strong> Entit
