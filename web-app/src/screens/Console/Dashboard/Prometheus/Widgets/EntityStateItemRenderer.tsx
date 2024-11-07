@@ -15,9 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from "react";
-import styled from "styled-components";
 import get from "lodash/get";
-import { CircleIcon, HardDriveIcon, ServerIcon, Box } from "mds";
+import { CircleIcon, HardDriveIcon, ServerIcon, Box, styled } from "mds";
 import EntityStateStatItem from "./EntityStateStatItem";
 import DualStatCard from "./DualStatCard";
 import { IDashboardPanel } from "../types";

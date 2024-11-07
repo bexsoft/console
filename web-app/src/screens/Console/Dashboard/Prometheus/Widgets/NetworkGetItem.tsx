@@ -15,9 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from "react";
-import styled from "styled-components";
 import get from "lodash/get";
-import { Loader, NetworkIcon, Box } from "mds";
+import { Loader, NetworkIcon, Box, styled} from "mds";
 
 const NetworkGetBase = styled.div(({ theme }) => ({
   "& .putLabel": {

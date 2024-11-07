@@ -16,8 +16,7 @@
 
 import React from "react";
 import get from "lodash/get";
-import styled from "styled-components";
-import { Box, breakPoints, Tooltip } from "mds";
+import { Box, breakPoints, Tooltip, styled } from "mds";
 
 const CounterCardMain = styled.div(({ theme }) => ({
   fontFamily: "Inter,sans-serif",

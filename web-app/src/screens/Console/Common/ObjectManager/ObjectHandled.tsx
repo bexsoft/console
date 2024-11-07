@@ -25,10 +25,10 @@ import {
   CircleCheckBigIcon,
   UploadIcon,
   Tooltip,
+  styled
 } from "mds";
 import clsx from "clsx";
 import { callForObjectID } from "../../ObjectBrowser/transferManager";
-import styled from "styled-components";
 import get from "lodash/get";
 
 interface IObjectHandled {

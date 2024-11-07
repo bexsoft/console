@@ -23,8 +23,8 @@ import {
   IColumns,
   ItemActions,
   Tooltip,
+  styled,
 } from "mds";
-import styled from "styled-components";
 import get from "lodash/get";
 import { ReplicationSite } from "./SiteReplication";
 import ConfirmDialog from "../../Common/ModalWrapper/ConfirmDialog";

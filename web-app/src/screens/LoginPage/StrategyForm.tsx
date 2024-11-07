@@ -264,7 +264,7 @@ const StrategyForm = ({ redirectRules }: { redirectRules: RedirectRule[] }) => {
           <Select
             id="alternativeMethods"
             name="alternativeMethods"
-            fixedLabel="Other Authentication Methods"
+            placeholder="Other Authentication Methods"
             options={selectOptions}
             onChange={extraActionSelector}
             value={""}

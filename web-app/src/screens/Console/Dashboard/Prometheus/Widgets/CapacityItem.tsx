@@ -15,9 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import get from "lodash/get";
-import { Box, breakPoints, Loader, PieChartIcon } from "mds";
+import { Box, breakPoints, Loader, PieChartIcon, styled } from "mds";
 import { Cell, Pie, PieChart } from "recharts";
 import { useSelector } from "react-redux";
 import api from "../../../../../common/api";

@@ -15,9 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment, useEffect, useState } from "react";
-import styled from "styled-components";
 import get from "lodash/get";
-import { Button, CircleIcon, BucketIcon } from "mds";
+import { Button, CircleIcon, BucketIcon, styled } from "mds";
 import { useSelector } from "react-redux";
 import { toggleList } from "../../ObjectBrowser/objectBrowserSlice";
 import { AppState, useAppDispatch } from "../../../../store";

@@ -28,13 +28,13 @@ import {
   PageLayout,
   ProgressBar,
   RefreshCWIcon,
+  styled,
 } from "mds";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { api } from "api";
 import { NotificationEndpointItem } from "api/consoleApi";
 import { errorToHandler } from "api/errors";
-import styled from "styled-components";
 import get from "lodash/get";
 import { TransformedEndpointItem } from "./types";
 import { getNotificationConfigKey, notificationTransform } from "./utils";

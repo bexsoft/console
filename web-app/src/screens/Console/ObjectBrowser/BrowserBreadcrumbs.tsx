@@ -17,7 +17,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import CopyToClipboard from "react-copy-to-clipboard";
-import styled from "styled-components";
+
 import { Link, useNavigate } from "react-router-dom";
 import { safeDecodeURIComponent } from "../../../common/utils";
 import {
@@ -28,6 +28,7 @@ import {
   Breadcrumbs,
   breakPoints,
   Box,
+  styled
 } from "mds";
 import { hasPermission } from "../../../common/SecureComponent";
 import {

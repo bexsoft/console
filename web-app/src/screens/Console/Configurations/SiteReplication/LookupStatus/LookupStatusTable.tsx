@@ -15,9 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from "react";
-import styled from "styled-components";
 import get from "lodash/get";
-import { Box, CircleIcon } from "mds";
+import { Box, CircleIcon, styled } from "mds";
 
 const LookupTableBase = styled.div(({ theme }) => ({
   marginTop: 15,

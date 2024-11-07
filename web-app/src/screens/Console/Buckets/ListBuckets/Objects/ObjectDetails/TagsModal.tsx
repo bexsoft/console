@@ -16,7 +16,6 @@
 
 import React, { Fragment, useState } from "react";
 import get from "lodash/get";
-import styled from "styled-components";
 import {
   TagIcon,
   Button,
@@ -28,6 +27,7 @@ import {
   Grid,
   Tag,
   FormLayout,
+  styled
 } from "mds";
 import { BucketObject } from "api/consoleApi";
 import { api } from "api";

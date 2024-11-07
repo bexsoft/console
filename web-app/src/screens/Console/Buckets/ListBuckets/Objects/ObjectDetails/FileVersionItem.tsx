@@ -16,7 +16,6 @@
 
 import React from "react";
 import { DateTime } from "luxon";
-import styled from "styled-components";
 import get from "lodash/get";
 import { displayFileIconName } from "../ListObjects/utils";
 import {
@@ -28,6 +27,7 @@ import {
   Tooltip,
   Grid,
   Checkbox,
+  styled
 } from "mds";
 import { niceBytes } from "../../../../../../common/utils";
 import SpecificVersionPill from "./SpecificVersionPill";

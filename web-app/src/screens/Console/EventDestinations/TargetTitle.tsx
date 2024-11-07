@@ -16,8 +16,7 @@
 
 import React from "react";
 import get from "lodash/get";
-import styled from "styled-components";
-import { Box } from "mds";
+import { Box, styled } from "mds";
 
 interface ITargetTitle {
   logoSrc: string;

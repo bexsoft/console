@@ -14,10 +14,9 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import React, { Fragment, useCallback, useEffect, useState } from "react";
+import React, { CSSProperties, Fragment, useCallback, useEffect, useState } from "react";
 import get from "lodash/get";
 import { useSelector } from "react-redux";
-import { CSSObject } from "styled-components";
 import {
   Box,
   breakPoints,
@@ -49,7 +48,7 @@ import MissingIntegration from "../../Common/MissingIntegration/MissingIntegrati
 import PageHeaderWrapper from "../../Common/PageHeaderWrapper/PageHeaderWrapper";
 import HelpMenu from "../../HelpMenu";
 
-const filtersContainer: CSSObject = {
+const filtersContainer = {
   display: "flex",
   justifyContent: "space-between",
   marginBottom: 12,

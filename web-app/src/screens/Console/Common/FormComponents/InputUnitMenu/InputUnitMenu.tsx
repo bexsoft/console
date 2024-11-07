@@ -15,8 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment } from "react";
-import { DropdownSelector, SelectorType } from "mds";
-import styled from "styled-components";
+import { DropdownSelector, SelectorType, styled } from "mds";
 import get from "lodash/get";
 
 interface IInputUnitBox {

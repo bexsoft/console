@@ -16,18 +16,17 @@
 
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import styled from "styled-components";
 import get from "lodash/get";
 import {
   XIcon,
   Box,
   Button,
   CircleHelpIcon,
-  CircleHelpIcon,
   IconButton,
   MinIOIcon,
   TabItemProps,
   Tabs,
+  styled
 } from "mds";
 import { useSelector } from "react-redux";
 import { AppState, useAppDispatch } from "../../store";

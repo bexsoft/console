@@ -18,17 +18,17 @@ import React from "react";
 import { HelpBox, Box, Grid, breakPoints } from "mds";
 
 interface IDistributedOnly {
-  iconComponent: any;
+  icon: any;
   entity: string;
 }
 
-const DistributedOnly = ({ iconComponent, entity }: IDistributedOnly) => {
+const DistributedOnly = ({ icon, entity }: IDistributedOnly) => {
   return (
     <Grid container>
       <Grid item xs={12}>
         <HelpBox
           title={`${entity} not available`}
-          icon={iconComponent}
+          icon={icon}
           help={
             <Box
               sx={{

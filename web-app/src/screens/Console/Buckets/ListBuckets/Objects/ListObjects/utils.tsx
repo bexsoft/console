@@ -26,14 +26,12 @@ import {
   FileLockIcon,
   FileQuestionIcon,
   FileMusicIcon,
-  FileNonType,
-  FileType2Icon,
+  FileIcon,
   FileClockIcon,
-  FileTextIcon,
   FileVideoIcon,
   FileBarChart2Icon,
   FileArchiveIcon,
-  FolderBrowserIcon,
+  FolderIcon,
 } from "mds";
 import IconWithLabel from "./IconWithLabel";
 
@@ -106,10 +104,10 @@ export const displayFileIconName = (
   returnOnlyIcon: boolean = false,
 ) => {
   let elementString = element;
-  let icon = <FileNonType />;
+  let icon = <FileIcon />;
   // Element is a folder
   if (element.endsWith("/")) {
-    icon = <FolderBrowserIcon />;
+    icon = <FolderIcon />;
     elementString = element.slice(0, -1);
   }
 

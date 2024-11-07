@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment, useEffect, useRef, useState } from "react";
-import styled from "styled-components";
 import get from "lodash/get";
 import { useSelector } from "react-redux";
 import {
@@ -27,7 +26,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { Box, breakPoints, Grid, Loader } from "mds";
+import { Box, breakPoints, Grid, Loader, styled } from "mds";
 import { ILinearGraphConfiguration } from "./types";
 import { widgetCommon } from "../../../Common/FormComponents/common/styleLibrary";
 import { IDashboardPanel } from "../types";

@@ -16,7 +16,6 @@
 
 import React, { Fragment } from "react";
 import get from "lodash/get";
-import styled from "styled-components";
 import {
   Box,
   Button,
@@ -24,6 +23,7 @@ import {
   SquareUserRoundIcon,
   CircleAlertIcon,
   Grid,
+  styled
 } from "mds";
 import { NewServiceAccount } from "./types";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";

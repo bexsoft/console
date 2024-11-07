@@ -15,10 +15,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment, useEffect, useState } from "react";
-import styled from "styled-components";
 import get from "lodash/get";
 import { useSelector } from "react-redux";
-import { Loader } from "mds";
+import { Loader, styled } from "mds";
 import api from "../../../../../common/api";
 import { widgetDetailsToPanel } from "../utils";
 import { IDashboardPanel } from "../types";

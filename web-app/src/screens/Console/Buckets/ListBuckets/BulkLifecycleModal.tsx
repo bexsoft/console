@@ -17,7 +17,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import {
   Box,
-  CheckCircleIcon,
+  CircleCheckIcon,
   FormLayout,
   Grid,
   InputBox,
@@ -116,7 +116,7 @@ const AddBulkReplicationModal = ({
               color: "#42C91A",
             }}
           >
-            <CheckCircleIcon />
+            <CircleCheckIcon />
           </Box>
         );
       case "n/a":

@@ -24,8 +24,7 @@ import React, {
 } from "react";
 import get from "lodash/get";
 import {
-  AccessRuleIcon,
-  ActionsList,
+  FeatherIcon,
   Badge,
   Box,
   BucketIcon,
@@ -39,7 +38,7 @@ import {
   EyeIcon,
   RefreshCWIcon,
   ScreenTitle,
-  ShareIcon,
+  ShareIcon, NotificationCount
 } from "mds";
 import { api } from "api";
 import { errorToHandler } from "api/errors";
@@ -895,7 +894,7 @@ const ListObjects = () => {
         selectedObjects.length !== 1 ||
         !selectedObjects[0].endsWith("/") ||
         !canSetAnonymousAccess,
-      icon: <AccessRuleIcon />,
+      icon: <FeatherIcon />,
       tooltip:
         selectedObjects.length === 1 && selectedObjects[0].endsWith("/")
           ? "Set Anonymous Access to this Folder"
@@ -1072,7 +1071,7 @@ const ListObjects = () => {
                       id={"rewind-objects-list"}
                       label={"Rewind"}
                       icon={
-                        <Badge color="alert" dotOnly invisible={!rewindEnabled}>
+                        <NotificationCount color="danger" dotOnly invisible={!rewindEnabled}>
                           <HistoryIcon
                             style={{
                               minWidth: 16,
@@ -1082,7 +1081,7 @@ const ListObjects = () => {
                               marginTop: -3,
                             }}
                           />
-                        </Badge>
+                        </NotificationCount>
                       }
                       variant={"secondary"}
                       onClick={() => {
@@ -1151,7 +1150,6 @@ const ListObjects = () => {
                 />
               </Fragment>
             }
-            bottomBorder={false}
           />
         </Box>
         <div

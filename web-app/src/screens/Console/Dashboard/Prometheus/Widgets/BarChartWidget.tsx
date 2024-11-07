@@ -15,8 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment, useEffect, useRef, useState } from "react";
-import styled from "styled-components";
-import { Box, breakPoints, Grid, Loader } from "mds";
+import { Box, breakPoints, Grid, Loader, styled } from "mds";
 import { useSelector } from "react-redux";
 import {
   Bar,

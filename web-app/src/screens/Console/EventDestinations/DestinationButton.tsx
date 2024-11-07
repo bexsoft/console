@@ -17,7 +17,7 @@
 import React from "react";
 import get from "lodash/get";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import {styled} from "mds";
 import { IAM_PAGES } from "../../../common/SecureComponent/permissions";
 
 interface IDestinationButton {

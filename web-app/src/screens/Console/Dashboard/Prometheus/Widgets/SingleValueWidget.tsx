@@ -16,8 +16,7 @@
 
 import React, { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Box, Loader } from "mds";
-import styled from "styled-components";
+import { Box, Loader, styled } from "mds";
 import get from "lodash/get";
 import { widgetCommon } from "../../../Common/FormComponents/common/styleLibrary";
 import { splitSizeMetric, widgetDetailsToPanel } from "../utils";

@@ -16,8 +16,7 @@
 
 import React, { useEffect, useState } from "react";
 import get from "lodash/get";
-import styled from "styled-components";
-import { Box, Loader } from "mds";
+import { Box, Loader, styled } from "mds";
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 import { useSelector } from "react-redux";
 import api from "../../../../../common/api";

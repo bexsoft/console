@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { useState } from "react";
-import { Box, Button, PencilIcon, Grid, InputBox, InputLabel } from "mds";
+import { Box, Button, PencilIcon, Grid, InputBox, InputLabel, styled } from "mds";
 import ModalWrapper from "../../Common/ModalWrapper/ModalWrapper";
 import useApi from "../../Common/Hooks/useApi";
 import {
@@ -24,7 +24,6 @@ import {
 } from "../../../../systemSlice";
 import { useAppDispatch } from "../../../../store";
 import { modalStyleUtils } from "../../Common/FormComponents/common/styleLibrary";
-import styled from "styled-components";
 import get from "lodash/get";
 
 const SiteEndpointContainer = styled.div(({ theme }) => ({

@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment, useEffect, useState } from "react";
-import styled from "styled-components";
 import get from "lodash/get";
 
 import { useNavigate } from "react-router-dom";
@@ -34,6 +33,7 @@ import {
   Toggle,
   SectionTitle,
   ProgressBar,
+  styled
 } from "mds";
 import { k8sScalarUnitsExcluding } from "../../../../../common/utils";
 import { AppState, useAppDispatch } from "../../../../../store";

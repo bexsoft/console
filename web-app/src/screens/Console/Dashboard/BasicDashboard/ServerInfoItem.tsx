@@ -14,9 +14,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import React from "react";
-import styled from "styled-components";
 import get from "lodash/get";
-import { Box, breakPoints, CircleIcon } from "mds";
+import { Box, breakPoints, CircleIcon, styled } from "mds";
 import { niceDays } from "../../../../common/utils";
 import {
   getDriveStatusColor,
