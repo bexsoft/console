@@ -440,7 +440,7 @@ const VersionsNavigator = ({
                           setSelectEnabled(!selectEnabled);
                         }}
                         icon={<SquareStackIcon />}
-                        variant={selectEnabled ? "callAction" : "regular"}
+                        variant={selectEnabled ? "primary" : "secondary"}
                         style={{ marginRight: 8 }}
                       />
                     </TooltipWrapper>
@@ -488,7 +488,6 @@ const VersionsNavigator = ({
                     />
                   </Fragment>
                 }
-                bottomBorder={false}
               />
             </Grid>
             <Grid

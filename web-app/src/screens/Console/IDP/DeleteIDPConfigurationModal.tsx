@@ -75,6 +75,7 @@ const DeleteIDPConfigurationModal = ({
       onConfirm={onConfirmDelete}
       onClose={onClose}
       confirmButtonProps={{
+        id: "delete-confirm",
         disabled: deleteLoading,
       }}
       confirmationContent={

@@ -15,17 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from "react";
-import { Box, Button, ModalBox } from "mds";
-
-interface ButtonProps {
-  label?: string;
-  variant?: "regular" | "callAction" | "secondary";
-  icon?: React.ReactNode;
-  iconLocation?: "start" | "end";
-  fullWidth?: boolean;
-  disabled?: boolean;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-}
+import { Box, Button, ModalBox, ButtonProps } from "mds";
 
 type ConfirmDialogProps = {
   isOpen?: boolean;
@@ -92,7 +82,7 @@ const ConfirmDialog = ({
           onClick={onConfirm}
           label={confirmText}
           disabled={isLoading}
-          variant={"secondary"}
+          variant={"primary"}
           {...confirmButtonProps}
         />
       </Box>

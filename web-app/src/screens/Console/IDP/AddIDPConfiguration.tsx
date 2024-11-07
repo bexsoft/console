@@ -135,7 +135,7 @@ const AddIDPConfiguration = ({
             onChange={(e) =>
               setFields({ ...fields, [key]: e.target.checked ? "on" : "off" })
             }
-            description=""
+            helper=""
           />
         );
       default:

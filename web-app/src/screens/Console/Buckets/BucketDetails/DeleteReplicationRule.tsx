@@ -89,6 +89,7 @@ const DeleteReplicationRule = ({
       onConfirm={onConfirmDelete}
       onClose={onClose}
       confirmButtonProps={{
+        id: "delete-replication-rule",
         disabled: deleteSelectedRules && confirmationText !== "Yes, I am sure",
       }}
       confirmationContent={

@@ -14,16 +14,15 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import { Box } from "mds";
-import { CSSObject } from "styled-components";
+import { Box, OverrideTheme } from "mds";
 import { breakPoints } from "mds";
 
 export type DLayoutColumnProps = {
   componentId: number;
-  sx?: CSSObject;
+  sx?: OverrideTheme;
 };
 export type DLayoutRowProps = {
-  sx?: CSSObject;
+  sx?: OverrideTheme;
   columns: DLayoutColumnProps[];
 };
 

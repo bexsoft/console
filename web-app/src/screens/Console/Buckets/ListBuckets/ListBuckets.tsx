@@ -258,7 +258,7 @@ const ListBuckets = () => {
                       setSelectedBuckets([]);
                     }}
                     icon={<SquareStackIcon />}
-                    variant={bulkSelect ? "callAction" : "regular"}
+                    variant={bulkSelect ? "primary" : "secondary"}
                     disabled={!hasBuckets}
                   />
                 </TooltipWrapper>

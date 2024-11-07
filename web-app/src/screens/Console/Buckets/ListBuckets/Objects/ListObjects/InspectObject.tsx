@@ -132,7 +132,7 @@ const InspectObject = ({
               onChange={(e) => {
                 setIsEncrypt(!isEncrypt);
               }}
-              description=""
+              helper=""
             />
             <Grid item xs={12} sx={modalStyleUtils.modalButtonBar}>
               <Button

@@ -75,6 +75,7 @@ const RestoreFileVersion = ({
       titleIcon={<ArchiveRestoreIcon />}
       onConfirm={restoreVersion}
       confirmButtonProps={{
+        id: "restore-file-version",
         variant: "secondary",
         disabled: restoreLoading,
       }}

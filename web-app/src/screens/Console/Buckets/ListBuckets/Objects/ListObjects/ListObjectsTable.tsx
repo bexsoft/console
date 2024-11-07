@@ -36,7 +36,7 @@ import {
 } from "../../../../../../common/SecureComponent/permissions";
 import { hasPermission } from "../../../../../../common/SecureComponent";
 import { downloadObject } from "../../../../ObjectBrowser/utils";
-import { DataTable, ItemActions } from "mds";
+import { DataTable, ItemActions, SelectOption } from "mds";
 import { BucketObject } from "api/consoleApi";
 
 const ListObjectsTable = () => {
@@ -123,7 +123,7 @@ const ListObjectsTable = () => {
     }
     dispatch(setSelectedObjectView(idElement));
   };
-  const tableActions: ItemActions[] = [
+  const tableActions: SelectOption[] = [
     {
       type: "view",
       tooltip: "View",

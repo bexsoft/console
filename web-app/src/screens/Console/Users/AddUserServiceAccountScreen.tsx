@@ -218,7 +218,7 @@ const AddServiceAccount = () => {
                   setIsRestrictedByPolicy(event.target.checked);
                 }}
                 label={"Restrict beyond user policy"}
-                description={
+                helper={
                   "You can specify an optional JSON-formatted IAM policy to further restrict Access Key access to a subset of the actions and resources explicitly allowed for the parent user. Additional access beyond that of the parent user cannot be implemented through these policies."
                 }
               />

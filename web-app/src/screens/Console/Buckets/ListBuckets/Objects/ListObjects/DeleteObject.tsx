@@ -125,7 +125,7 @@ const DeleteObject = ({
                   onChange={(e) => {
                     setDeleteVersions(!deleteVersions);
                   }}
-                  description=""
+                  helper=""
                 />
               </Fragment>
             )}
@@ -146,7 +146,7 @@ const DeleteObject = ({
                   onChange={(e) => {
                     setBypassGovernance(!bypassGovernance);
                   }}
-                  description=""
+                  helper=""
                 />
               </div>
             </Fragment>

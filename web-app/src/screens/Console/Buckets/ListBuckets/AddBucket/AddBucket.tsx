@@ -448,7 +448,8 @@ const AddBucket = () => {
                           disabled={false}
                         />
                       }
-                      error={
+                      state={invalidFields.includes("quotaSize") ? "error" : "normal"}
+                      helper={
                         invalidFields.includes("quotaSize")
                           ? "Please enter a valid quota"
                           : ""

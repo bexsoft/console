@@ -96,6 +96,7 @@ const DeleteNonCurrentVersions = ({
       onConfirm={onConfirmDelete}
       onClose={() => closeDeleteModalAndRefresh(false)}
       confirmButtonProps={{
+        id: "proceed-delete",
         disabled: typeConfirm !== "YES, PROCEED" || deleteLoading,
       }}
       confirmationContent={
@@ -119,7 +120,7 @@ const DeleteNonCurrentVersions = ({
                   onChange={(e) => {
                     setBypassGovernance(!bypassGovernance);
                   }}
-                  description=""
+                  helper=""
                 />
               </div>
             </Fragment>

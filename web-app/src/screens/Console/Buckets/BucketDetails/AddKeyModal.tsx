@@ -63,8 +63,9 @@ const AddKeyModal = ({
       onConfirm={onConfirmAdd}
       onClose={onClose}
       confirmButtonProps={{
+        id: "add-key",
         disabled: keyName.indexOf(" ") !== -1 || keyName === "" || loadingAdd,
-        variant: "callAction",
+        variant: "primary",
       }}
       confirmationContent={
         <Fragment>

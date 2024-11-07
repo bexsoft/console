@@ -16,9 +16,8 @@
 
 import { useMemo } from "react";
 import get from "lodash/get";
-import { useTheme } from "styled-components";
 import { niceBytes } from "../../../../common/utils";
-import { Box, breakPoints, CircleIcon, SizeChart } from "mds";
+import { Box, breakPoints, CircleIcon, SizeChart, useMDSTheme } from "mds";
 import { ServerDrives } from "api/consoleApi";
 import { STATUS_COLORS } from "./Utils";
 
@@ -27,7 +26,7 @@ interface ICardProps {
 }
 
 const DriveInfoItem = ({ drive }: ICardProps) => {
-  const theme = useTheme();
+  const theme = useMDSTheme();
 
   const totalSpace = drive.totalSpace ?? 0;
   const usedSpace = drive.usedSpace ?? 0;
