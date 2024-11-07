@@ -29,8 +29,6 @@ import {
   PageLayout,
   ProgressBar,
   RefreshCWIcon,
-  TierOfflineIcon,
-  TierOnlineIcon,
   UsersRoundIcon,
   FeatherIcon,
 } from "mds";
@@ -172,7 +170,7 @@ const ListTiersConfiguration = () => {
             flexDirection: "column",
           }}
         >
-          <TierOnlineIcon style={{ fill: "#4CCB92", width: 14, height: 14 }} />
+          <FeatherIcon style={{ fill: "#4CCB92", width: 14, height: 14 }} />
           ONLINE
         </Grid>
       );
@@ -188,7 +186,7 @@ const ListTiersConfiguration = () => {
           fontSize: "8px",
         }}
       >
-        <TierOfflineIcon style={{ fill: "#C83B51", width: 14, height: 14 }} />
+        <FeatherIcon style={{ fill: "#C83B51", width: 14, height: 14 }} />
         OFFLINE
       </Grid>
     );

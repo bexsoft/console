@@ -16,7 +16,7 @@
 
 import React, { Fragment, useEffect, useState } from "react";
 import {
-  CommentBox,
+  TextArea,
   SquareTerminalIcon,
   FormLayout,
   Grid,
@@ -166,7 +166,7 @@ const ConfTargetGeneric = ({
         );
       case "comment":
         return (
-          <CommentBox
+          <TextArea
             id={field.name}
             name={field.name}
             label={field.label}

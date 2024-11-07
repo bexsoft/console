@@ -17,7 +17,7 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import {
   Box,
-  CommentBox,
+  TextArea,
   FormLayout,
   Grid,
   InputBox,
@@ -353,7 +353,7 @@ const ConfPostgres = ({ onChange }: IConfPostgresProps) => {
           setQueueLimit(e.target.value);
         }}
       />
-      <CommentBox
+      <TextArea
         id="comment"
         name="comment"
         label="Comment"

@@ -21,7 +21,7 @@ import {
   FormLayout,
   Grid,
   InputBox,
-  PendingItemsIcon,
+  FeatherIcon,
   ProgressBar,
   CodeSnippet,
   Toggle,
@@ -190,7 +190,7 @@ const EditEndpointModal = ({
       break;
     case "audit_webhook":
       title = `Edit ${defaultWH ? " the Default " : ""}Audit Webhook`;
-      icon = <PendingItemsIcon />;
+      icon = <FeatherIcon />;
       break;
   }
 

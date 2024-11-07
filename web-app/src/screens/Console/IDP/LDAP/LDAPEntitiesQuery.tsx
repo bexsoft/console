@@ -25,7 +25,7 @@ import {
   TrashIcon,
   SearchIcon,
   SectionTitle,
-  TimeIcon,
+  CalendarIcon,
 } from "mds";
 import { useSelector } from "react-redux";
 import { DateTime } from "luxon";
@@ -249,7 +249,7 @@ const LDAPEntitiesQuery = () => {
                   >
                     {results?.timestamp ? (
                       <Fragment>
-                        <TimeIcon
+                        <CalendarIcon
                           style={{
                             width: 14,
                             height: 14,

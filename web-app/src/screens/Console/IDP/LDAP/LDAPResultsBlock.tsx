@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment } from "react";
-import { Box, CollapseCaret, FeatherIcon, SectionTitle } from "mds";
+import { Box, ChevronUpIcon, FeatherIcon, SectionTitle } from "mds";
 import { LdapEntities } from "api/consoleApi";
 
 interface IResultBlock {
@@ -35,7 +35,7 @@ interface IEntityResultItem {
 const EntityResultTitle = ({ name }: IEntityResultName) => {
   return (
     <h4>
-      <CollapseCaret style={{ transform: "rotateZ(90deg)" }} />
+      <ChevronUpIcon style={{ transform: "rotateZ(90deg)" }} />
       {name}
     </h4>
   );

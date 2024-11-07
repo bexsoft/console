@@ -16,12 +16,8 @@
 
 import {
   AzureAksSiteIcon,
-  AzureAksSiteIcon,
-  GoogleGkeSiteIcon,
   GoogleGkeSiteIcon,
   MinIOIcon,
-  MinIOIcon,
-  FeatherIcon,
   FeatherIcon,
 } from "mds";
 

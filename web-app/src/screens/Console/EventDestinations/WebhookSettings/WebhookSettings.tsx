@@ -21,8 +21,7 @@ import {
   SquareTerminalIcon,
   DataTable,
   Grid,
-  TierOfflineIcon,
-  TierOnlineIcon,
+  FeatherIcon,
 } from "mds";
 import AddEndpointModal from "./AddEndpointModal";
 import DeleteWebhookEndpoint from "./DeleteWebhookEndpoint";
@@ -101,7 +100,7 @@ const WebhookSettings = ({
             fontSize: "8px",
           }}
         >
-          <TierOnlineIcon style={{ fill: "#4CCB92", width: 14, height: 14 }} />
+          <FeatherIcon style={{ fill: "#4CCB92", width: 14, height: 14 }} />
           Enabled
         </Grid>
       );
@@ -118,7 +117,7 @@ const WebhookSettings = ({
           fontSize: "8px",
         }}
       >
-        <TierOfflineIcon style={{ fill: "#C83B51", width: 14, height: 14 }} />
+        <FeatherIcon style={{ fill: "#C83B51", width: 14, height: 14 }} />
         Disabled
       </Grid>
     );

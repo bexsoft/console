@@ -18,7 +18,6 @@ import React, { Fragment, useEffect, useState } from "react";
 import get from "lodash/get";
 import { useSelector } from "react-redux";
 import {
-  ActionsList,
   Box,
   Button,
   DeleteIcon,
@@ -32,7 +31,7 @@ import {
   EyeIcon,
   WineIcon,
   ShareIcon,
-  SimpleHeader,
+  ScreenTitle,
   TagsIcon,
   SquareStackIcon,
 } from "mds";
@@ -61,7 +60,6 @@ import {
   setSelectedVersion,
   setVersionsModeEnabled,
 } from "../../../../ObjectBrowser/objectBrowserSlice";
-import { displayFileIconName } from "./utils";
 import PreviewFileModal from "../Preview/PreviewFileModal";
 import ObjectMetaData from "../ObjectDetails/ObjectMetaData";
 import ShareFile from "../ObjectDetails/ShareFile";
@@ -635,7 +633,7 @@ const ObjectDetailPanel = ({
             },
           }}
         >
-          <ActionsList
+          {/*<ActionsList
             title={
               <div className={"ObjectDetailsTitle"}>
                 {displayFileIconName(objectName || "", true)}
@@ -643,7 +641,7 @@ const ObjectDetailPanel = ({
               </div>
             }
             items={multiActionButtons}
-          />
+          />*/}
           <TooltipWrapper
             tooltip={
               canDelete
@@ -689,7 +687,7 @@ const ObjectDetailPanel = ({
               </SecureComponent>
             </Grid>
           </TooltipWrapper>
-          <SimpleHeader icon={<InfoIcon />} label={"Object Info"} />
+          <ScreenTitle icon={<InfoIcon />} title={"Object Info"} />
           <Box className={"detailContainer"}>
             <strong>Name:</strong>
             <br />
@@ -789,7 +787,7 @@ const ObjectDetailPanel = ({
           </Box>
           {!actualInfo.is_delete_marker && (
             <Fragment>
-              <SimpleHeader label={"Metadata"} icon={<DataIcon />} />
+              <ScreenTitle title={"Metadata"} icon={<DataIcon />} />
               <Box className={"detailContainer"}>
                 {actualInfo && metaData ? (
                   <ObjectMetaData metaData={metaData} />

@@ -17,7 +17,7 @@
 import React from "react";
 import ModalWrapper from "../Common/ModalWrapper/ModalWrapper";
 
-import { AGPLV3DarkLogo, Box, Button } from "mds";
+import { Box, Button } from "mds";
 import { setLicenseConsent } from "./utils";
 import LicenseLink from "./LicenseLink";
 import LicenseFAQ from "./LicenseFAQ";
@@ -65,7 +65,7 @@ const LicenseConsentModal = ({
             },
           }}
         >
-          <AGPLV3DarkLogo />
+          {/*<AGPLV3DarkLogo />*/}
         </Box>
         <Box
           sx={{

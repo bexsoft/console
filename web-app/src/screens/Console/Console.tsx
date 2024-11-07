@@ -21,7 +21,7 @@ import React, {
   useLayoutEffect,
   useState,
 } from "react";
-import { Box, Button, MainContainer, ProgressBar, Snackbar } from "mds";
+import { Box, Button, NotificationAlert, ProgressBar } from "mds";
 import debounce from "lodash/debounce";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -50,35 +50,35 @@ import LoadingComponent from "../../common/LoadingComponent";
 import ComponentsScreen from "./Common/ComponentsScreen";
 
 const EventDestinations = React.lazy(
-  () => import("./EventDestinations/EventDestinations"),
+  () => import("./EventDestinations/EventDestinations")
 );
 const AddEventDestination = React.lazy(
-  () => import("./EventDestinations/AddEventDestination"),
+  () => import("./EventDestinations/AddEventDestination")
 );
 const EventTypeSelector = React.lazy(
-  () => import("./EventDestinations/EventTypeSelector"),
+  () => import("./EventDestinations/EventTypeSelector")
 );
 
 const ListTiersConfiguration = React.lazy(
-  () => import("./Configurations/TiersConfiguration/ListTiersConfiguration"),
+  () => import("./Configurations/TiersConfiguration/ListTiersConfiguration")
 );
 const TierTypeSelector = React.lazy(
-  () => import("./Configurations/TiersConfiguration/TierTypeSelector"),
+  () => import("./Configurations/TiersConfiguration/TierTypeSelector")
 );
 const AddTierConfiguration = React.lazy(
-  () => import("./Configurations/TiersConfiguration/AddTierConfiguration"),
+  () => import("./Configurations/TiersConfiguration/AddTierConfiguration")
 );
 
 const ErrorLogs = React.lazy(() => import("./Logs/ErrorLogs/ErrorLogs"));
 const LogsSearchMain = React.lazy(
-  () => import("./Logs/LogSearch/LogsSearchMain"),
+  () => import("./Logs/LogSearch/LogsSearchMain")
 );
 const GroupsDetails = React.lazy(() => import("./Groups/GroupsDetails"));
 
 const IconsScreen = React.lazy(() => import("./Common/IconsScreen"));
 
 const ObjectManager = React.lazy(
-  () => import("./Common/ObjectManager/ObjectManager"),
+  () => import("./Common/ObjectManager/ObjectManager")
 );
 
 const ObjectBrowser = React.lazy(() => import("./ObjectBrowser/ObjectBrowser"));
@@ -86,10 +86,10 @@ const ObjectBrowser = React.lazy(() => import("./ObjectBrowser/ObjectBrowser"));
 const Buckets = React.lazy(() => import("./Buckets/Buckets"));
 
 const EditBucketReplication = React.lazy(
-  () => import("./Buckets/BucketDetails/EditBucketReplication"),
+  () => import("./Buckets/BucketDetails/EditBucketReplication")
 );
 const AddBucketReplication = React.lazy(
-  () => import("./Buckets/BucketDetails/AddBucketReplication"),
+  () => import("./Buckets/BucketDetails/AddBucketReplication")
 );
 const Policies = React.lazy(() => import("./Policies/Policies"));
 
@@ -99,39 +99,39 @@ const Dashboard = React.lazy(() => import("./Dashboard/Dashboard"));
 const Account = React.lazy(() => import("./Account/Account"));
 
 const AccountCreate = React.lazy(
-  () => import("./Account/AddServiceAccountScreen"),
+  () => import("./Account/AddServiceAccountScreen")
 );
 
 const Users = React.lazy(() => import("./Users/Users"));
 const Groups = React.lazy(() => import("./Groups/Groups"));
 const IDPOpenIDConfigurations = React.lazy(
-  () => import("./IDP/IDPOpenIDConfigurations"),
+  () => import("./IDP/IDPOpenIDConfigurations")
 );
 const AddIDPOpenIDConfiguration = React.lazy(
-  () => import("./IDP/AddIDPOpenIDConfiguration"),
+  () => import("./IDP/AddIDPOpenIDConfiguration")
 );
 const IDPLDAPConfigurationDetails = React.lazy(
-  () => import("./IDP/LDAP/IDPLDAPConfigurationDetails"),
+  () => import("./IDP/LDAP/IDPLDAPConfigurationDetails")
 );
 const IDPOpenIDConfigurationDetails = React.lazy(
-  () => import("./IDP/IDPOpenIDConfigurationDetails"),
+  () => import("./IDP/IDPOpenIDConfigurationDetails")
 );
 
 const License = React.lazy(() => import("./License/License"));
 const ConfigurationOptions = React.lazy(
-  () => import("./Configurations/ConfigurationPanels/ConfigurationOptions"),
+  () => import("./Configurations/ConfigurationPanels/ConfigurationOptions")
 );
 
 const AddGroupScreen = React.lazy(() => import("./Groups/AddGroupScreen"));
 const SiteReplication = React.lazy(
-  () => import("./Configurations/SiteReplication/SiteReplication"),
+  () => import("./Configurations/SiteReplication/SiteReplication")
 );
 const SiteReplicationStatus = React.lazy(
-  () => import("./Configurations/SiteReplication/SiteReplicationStatus"),
+  () => import("./Configurations/SiteReplication/SiteReplicationStatus")
 );
 
 const AddReplicationSites = React.lazy(
-  () => import("./Configurations/SiteReplication/AddReplicationSites"),
+  () => import("./Configurations/SiteReplication/AddReplicationSites")
 );
 
 const KMSRoutes = React.lazy(() => import("./KMS/KMSRoutes"));
@@ -144,16 +144,16 @@ const Console = () => {
   const features = useSelector(selFeatures);
   const distributedSetup = useSelector(selDistSet);
   const snackBarMessage = useSelector(
-    (state: AppState) => state.system.snackBar,
+    (state: AppState) => state.system.snackBar
   );
   const needsRestart = useSelector(
-    (state: AppState) => state.system.serverNeedsRestart,
+    (state: AppState) => state.system.serverNeedsRestart
   );
   const isServerLoading = useSelector(
-    (state: AppState) => state.system.serverIsLoading,
+    (state: AppState) => state.system.serverIsLoading
   );
   const loadingProgress = useSelector(
-    (state: AppState) => state.system.loadingProgress,
+    (state: AppState) => state.system.loadingProgress
   );
 
   const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
@@ -214,7 +214,7 @@ const Console = () => {
           resource.length > 0 &&
           hasPermission(
             resource[1],
-            IAM_PAGES_PERMISSIONS[IAM_PAGES.OBJECT_BROWSER_VIEW],
+            IAM_PAGES_PERMISSIONS[IAM_PAGES.OBJECT_BROWSER_VIEW]
           )
         );
       },
@@ -241,7 +241,7 @@ const Console = () => {
       customPermissionFnc: () => {
         return hasPermission(
           "*",
-          IAM_PAGES_PERMISSIONS[IAM_PAGES.BUCKETS_ADD_REPLICATION],
+          IAM_PAGES_PERMISSIONS[IAM_PAGES.BUCKETS_ADD_REPLICATION]
         );
       },
     },
@@ -251,7 +251,7 @@ const Console = () => {
       customPermissionFnc: () => {
         return hasPermission(
           "*",
-          IAM_PAGES_PERMISSIONS[IAM_PAGES.BUCKETS_EDIT_REPLICATION],
+          IAM_PAGES_PERMISSIONS[IAM_PAGES.BUCKETS_EDIT_REPLICATION]
         );
       },
     },
@@ -266,7 +266,7 @@ const Console = () => {
           resource.length > 0 &&
           hasPermission(
             resource[1],
-            IAM_PAGES_PERMISSIONS[IAM_PAGES.BUCKETS_ADMIN_VIEW],
+            IAM_PAGES_PERMISSIONS[IAM_PAGES.BUCKETS_ADMIN_VIEW]
           )
         );
       },
@@ -403,9 +403,9 @@ const Console = () => {
             ? route.customPermissionFnc()
             : hasPermission(
                 CONSOLE_UI_RESOURCE,
-                IAM_PAGES_PERMISSIONS[route.path],
+                IAM_PAGES_PERMISSIONS[route.path]
               ))) &&
-        !route.fsHidden,
+        !route.fsHidden
   );
 
   const closeSnackBar = () => {
@@ -432,17 +432,12 @@ const Console = () => {
   return (
     <Fragment>
       {session && session.status === "ok" ? (
-        <MainContainer
-          menu={!hideMenu ? <MenuWrapper /> : <Fragment />}
-          mobileModeAuto={false}
-        >
-          <Fragment>
-            {needsRestart && (
-              <Snackbar
-                onClose={() => {}}
-                open={needsRestart}
-                variant={"warning"}
-                message={
+        <div>
+          <div>{!hideMenu ? <MenuWrapper /> : <Fragment />}</div>
+          <div>
+            <Fragment>
+              {needsRestart && (
+                <NotificationAlert color={"warning"}>
                   <Box
                     sx={{
                       display: "flex",
@@ -481,75 +476,71 @@ const Console = () => {
                       </Fragment>
                     )}
                   </Box>
-                }
-                autoHideDuration={0}
-              />
-            )}
-            {loadingProgress < 100 && (
-              <ProgressBar
-                barHeight={3}
-                variant="determinate"
-                value={loadingProgress}
-                sx={{ width: "100%", position: "absolute", top: 0, left: 0 }}
-              />
-            )}
-            <MainError />
-            <Snackbar
-              onClose={closeSnackBar}
-              open={openSnackbar}
-              message={snackBarMessage.message}
-              variant={snackBarMessage.type === "error" ? "error" : "default"}
-              autoHideDuration={snackBarMessage.type === "error" ? 10 : 5}
-              condensed
-            />
-            <Suspense fallback={<LoadingComponent />}>
-              <ObjectManager />
-            </Suspense>
-            <Routes>
-              {allowedRoutes.map((route: any) => (
+                </NotificationAlert>
+              )}
+              {loadingProgress < 100 && (
+                <ProgressBar
+                  barHeight={3}
+                  variant="determinate"
+                  value={loadingProgress}
+                  sx={{ width: "100%", position: "absolute", top: 0, left: 0 }}
+                />
+              )}
+              <MainError />
+              <NotificationAlert
+                color={snackBarMessage.type === "error" ? "error" : "default"}
+              >
+                {snackBarMessage.message}
+              </NotificationAlert>
+              <Suspense fallback={<LoadingComponent />}>
+                <ObjectManager />
+              </Suspense>
+              <Routes>
+                {allowedRoutes.map((route: any) => (
+                  <Route
+                    key={route.path}
+                    path={`${route.path}/*`}
+                    element={
+                      <Suspense fallback={<LoadingComponent />}>
+                        <route.component {...route.props} />
+                      </Suspense>
+                    }
+                  />
+                ))}
                 <Route
-                  key={route.path}
-                  path={`${route.path}/*`}
+                  key={"icons"}
+                  path={"icons"}
                   element={
                     <Suspense fallback={<LoadingComponent />}>
-                      <route.component {...route.props} />
+                      <IconsScreen />
                     </Suspense>
                   }
                 />
-              ))}
-              <Route
-                key={"icons"}
-                path={"icons"}
-                element={
-                  <Suspense fallback={<LoadingComponent />}>
-                    <IconsScreen />
-                  </Suspense>
-                }
-              />
-              <Route
-                key={"components"}
-                path={"components"}
-                element={
-                  <Suspense fallback={<LoadingComponent />}>
-                    <ComponentsScreen />
-                  </Suspense>
-                }
-              />
-              <Route
-                path={"*"}
-                element={
-                  <Fragment>
-                    {allowedRoutes.length > 0 ? (
-                      <Navigate to={allowedRoutes[0].path} />
-                    ) : (
-                      <Fragment />
-                    )}
-                  </Fragment>
-                }
-              />
-            </Routes>
-          </Fragment>
-        </MainContainer>
+                <Route
+                  key={"components"}
+                  path={"components"}
+                  element={
+                    <Suspense fallback={<LoadingComponent />}>
+                      <ComponentsScreen />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path={"*"}
+                  element={
+                    <Fragment>
+                      {allowedRoutes.length > 0 ? (
+                        <Navigate to={allowedRoutes[0].path} />
+                      ) : (
+                        <Fragment />
+                      )}
+                    </Fragment>
+                  }
+                />
+              </Routes>
+            </Fragment>
+          </div>
+        </div>
       ) : null}
     </Fragment>
   );

@@ -18,11 +18,9 @@ import { DateTime } from "luxon";
 import { LogMessage } from "../types";
 import {
   Box,
-  BoxArrowDown,
-  BoxArrowUp,
   TableCell,
   TableRow,
-  WarnFilledIcon,
+  CircleAlertIcon, ChevronUpIcon, ChevronDownIcon
 } from "mds";
 
 import getByKey from "lodash/get";
@@ -206,7 +204,7 @@ const LogLine = (props: { log: LogMessage }) => {
               lineHeight: 1,
             }}
           >
-            <WarnFilledIcon />
+            <CircleAlertIcon />
             <div>{dateStr}</div>
           </Box>
         </TableCell>
@@ -260,7 +258,7 @@ const LogLine = (props: { log: LogMessage }) => {
               },
             }}
           >
-            {open ? <BoxArrowUp /> : <BoxArrowDown />}
+            {open ? <ChevronUpIcon /> : <ChevronDownIcon />}
           </Box>
         </TableCell>
       </TableRow>

@@ -26,24 +26,15 @@ import {
 } from "../../common/SecureComponent/permissions";
 import {
   FeatherIcon,
-  FeatherIcon,
-  FeatherIcon,
-  FeatherIcon,
   BookTextIcon,
-  FeatherIcon,
-  FeatherIcon,
   LambdaIcon,
   BookOpenTextIcon,
   LockOpenIcon,
-  LoginIcon,
-  FeatherIcon,
-  FeatherIcon,
-  FeatherIcon,
+  LogInIcon,
   BucketIcon,
   ArchiveRestoreIcon,
   SettingsIcon,
   UsersRoundIcon,
-  FeatherIcon,
 } from "mds";
 import { hasPermission } from "../../common/SecureComponent";
 import EncryptionIcon from "../../icons/SidebarMenus/EncryptionIcon";
@@ -168,7 +159,7 @@ export const validRoutes = (
           name: "LDAP",
           id: "ldap",
           path: IAM_PAGES.IDP_LDAP_CONFIGURATIONS,
-          icon: <LoginIcon />,
+          icon: <LogInIcon />,
         },
       ],
     },

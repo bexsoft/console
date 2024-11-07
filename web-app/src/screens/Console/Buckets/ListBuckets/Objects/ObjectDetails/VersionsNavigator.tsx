@@ -27,7 +27,6 @@ import {
   ScreenTitle,
   Select,
   SquareStackIcon,
-  SquareStackIcon,
 } from "mds";
 import ShareFile from "./ShareFile";
 

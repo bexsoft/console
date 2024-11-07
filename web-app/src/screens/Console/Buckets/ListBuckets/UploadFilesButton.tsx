@@ -15,8 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment, useState } from "react";
-import { CSSObject } from "styled-components";
-import { Button, DropdownSelector, UploadIcon, UploadIcon } from "mds";
+import { Button, DropdownSelector, OverrideTheme, UploadIcon } from "mds";
 import {
   IAM_SCOPES,
   permissionTooltipHelper,
@@ -33,7 +32,7 @@ interface IUploadFilesButton {
   forceDisable?: boolean;
   uploadFileFunction: (closeFunction: () => void) => void;
   uploadFolderFunction: (closeFunction: () => void) => void;
-  overrideStyles?: CSSObject;
+  overrideStyles?: OverrideTheme;
 }
 
 const UploadFilesButton = ({

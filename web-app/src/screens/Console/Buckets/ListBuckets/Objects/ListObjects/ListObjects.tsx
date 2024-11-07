@@ -25,7 +25,6 @@ import React, {
 import get from "lodash/get";
 import {
   FeatherIcon,
-  Badge,
   Box,
   BucketIcon,
   Button,
@@ -1256,12 +1255,12 @@ const ListObjects = () => {
                   }}
                   className={`${versionsMode ? "hideListOnSmall" : ""}`}
                 >
-                  {selectedObjects.length > 0 && (
+                  {/*selectedObjects.length > 0 && (
                     <ActionsList
                       items={multiActionButtons}
                       title={"Selected Objects:"}
                     />
-                  )}
+                  )*/}
                   {selectedInternalPaths !== null && (
                     <ObjectDetailPanel
                       internalPaths={selectedInternalPaths}

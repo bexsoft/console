@@ -434,7 +434,7 @@ const GroupsDetails = () => {
                       onChange={() => {
                         toggleGroupStatus(!isGroupEnabled);
                       }}
-                      switchOnly
+                      toggleOnly
                     />
                   </SecureComponent>
                 </TooltipWrapper>

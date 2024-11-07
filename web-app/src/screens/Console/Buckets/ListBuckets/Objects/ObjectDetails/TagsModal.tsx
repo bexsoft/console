@@ -20,7 +20,6 @@ import {
   TagIcon,
   Button,
   CircleOffIcon,
-  TagIcon,
   InputBox,
   SectionTitle,
   Box,

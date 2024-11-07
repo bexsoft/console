@@ -24,7 +24,6 @@ import {
   HelpBox,
   ShieldCheckIcon,
   PageLayout,
-  UsersIcon,
   DataTable,
   Grid,
   Box,

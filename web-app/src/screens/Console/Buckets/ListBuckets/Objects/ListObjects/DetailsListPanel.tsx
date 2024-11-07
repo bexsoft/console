@@ -64,7 +64,7 @@ const DetailsListPanel = ({
       className={`${open ? "open" : ""} ${className}`}
     >
       <Button
-        variant={"text"}
+        variant={"primary-ghost"}
         id={"close-details-list"}
         onClick={closePanel}
         icon={<ArrowRightToLineIcon />}

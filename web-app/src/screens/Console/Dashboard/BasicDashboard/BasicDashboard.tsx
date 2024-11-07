@@ -21,8 +21,6 @@ import {
   breakPoints,
   BucketIcon,
   Button,
-  FeatherIcon,
-  HardDriveIcon,
   HardDriveDownloadIcon,
   HospitalIcon,
   HelpBox,

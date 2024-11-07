@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { useCallback, useEffect, useState } from "react";
-import { Snackbar } from "mds";
+import { NotificationAlert } from "mds";
 import { useSelector } from "react-redux";
 import get from "lodash/get";
 import { AppState, useAppDispatch } from "../../../../store";
@@ -61,14 +61,12 @@ const MainError = ({ isModal = false }: IMainErrorProps) => {
   }
 
   return (
-    <Snackbar
+    <NotificationAlert
       onClose={closeErrorMessage}
-      open={displayErrorMsg}
-      variant={"error"}
-      message={messageDetails ? messageDetails : `${message}.`}
-      autoHideDuration={10}
-      closeButton
-    />
+      color={"error"}
+    >
+      {messageDetails ? messageDetails : `${message}.`}
+    </NotificationAlert>
   );
 };
 

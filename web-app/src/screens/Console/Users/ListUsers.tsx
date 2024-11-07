@@ -20,7 +20,6 @@ import {
   PlusIcon,
   Button,
   DeleteIcon,
-  UsersIcon,
   HelpBox,
   PageLayout,
   UsersIcon,

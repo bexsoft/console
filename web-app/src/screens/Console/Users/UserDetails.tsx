@@ -314,7 +314,7 @@ const UserDetails = () => {
                         setEnabled(!enabled);
                         saveRecord(!enabled);
                       }}
-                      switchOnly
+                      toggleOnly
                       disabled={!enableEnabled && !disableEnabled}
                     />
                   </TooltipWrapper>

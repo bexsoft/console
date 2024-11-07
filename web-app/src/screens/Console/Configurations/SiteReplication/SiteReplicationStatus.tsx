@@ -27,7 +27,6 @@ import {
   Loader,
   PageLayout,
   RefreshCWIcon,
-  UsersIcon,
   SectionTitle,
 } from "mds";
 import { useNavigate } from "react-router-dom";

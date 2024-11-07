@@ -20,7 +20,6 @@ import {
   PencilLineIcon,
   UsersIcon,
   CircleHelpIcon,
-  UsersIcon,
 } from "mds";
 
 const FeatureItem = ({

@@ -18,7 +18,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { IElementValue } from "../../Configurations/types";
 import {
   Box,
-  CommentBox,
+  TextArea,
   FormLayout,
   Grid,
   InputBox,
@@ -270,7 +270,7 @@ const ConfMySql = ({ onChange }: IConfMySqlProps) => {
           setQueueLimit(e.target.value);
         }}
       />
-      <CommentBox
+      <TextArea
         id="comment"
         name="comment"
         label="Comment"

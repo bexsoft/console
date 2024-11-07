@@ -21,7 +21,7 @@ import {
   FormLayout,
   Grid,
   InputBox,
-  PendingItemsIcon,
+  FeatherIcon,
   ProgressBar,
   WebhookIcon,
 } from "mds";
@@ -141,7 +141,7 @@ const AddEndpointModal = ({ open, type, onCloseEndpoint }: IEndpointModal) => {
       break;
     case "audit_webhook":
       title = "New Audit Webhook";
-      icon = <PendingItemsIcon />;
+      icon = <FeatherIcon />;
       break;
   }
 
