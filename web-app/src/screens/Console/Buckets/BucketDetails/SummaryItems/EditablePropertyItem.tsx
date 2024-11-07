@@ -29,7 +29,6 @@ type EditablePropertyItemProps = {
   onEdit: () => void;
   secureCmpProps?: Record<any, any>;
   disabled?: boolean;
-  helpTip?: any;
 };
 
 const SecureAction = ({
@@ -64,7 +63,6 @@ const EditablePropertyItem = ({
   value = null,
   onEdit,
   disabled = false,
-  helpTip,
 }: EditablePropertyItemProps) => {
   return (
     <Box

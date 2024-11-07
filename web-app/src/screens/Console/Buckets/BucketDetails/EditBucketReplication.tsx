@@ -263,7 +263,7 @@ const EditBucketReplication = () => {
                 onChange={(e) => {
                   setRepExisting(e.target.checked);
                 }}
-                description={"Replicate existing objects"}
+                helper={"Replicate existing objects"}
               />
               <Toggle
                 checked={metadataSync}
@@ -273,7 +273,7 @@ const EditBucketReplication = () => {
                 onChange={(e) => {
                   setMetadataSync(e.target.checked);
                 }}
-                description={"Metadata Sync"}
+                helper={"Metadata Sync"}
               />
               <Toggle
                 checked={repDeleteMarker}
@@ -283,7 +283,7 @@ const EditBucketReplication = () => {
                 onChange={(e) => {
                   setRepDeleteMarker(e.target.checked);
                 }}
-                description={"Replicate soft deletes"}
+                helper={"Replicate soft deletes"}
               />
               <Toggle
                 checked={repDelete}
@@ -293,7 +293,7 @@ const EditBucketReplication = () => {
                 onChange={(e) => {
                   setRepDelete(e.target.checked);
                 }}
-                description={"Replicate versioned deletes"}
+                helper={"Replicate versioned deletes"}
               />
             </fieldset>
             <Grid

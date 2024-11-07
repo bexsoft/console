@@ -61,8 +61,6 @@ const CodeMirrorWrapper = ({
           </TooltipWrapper>
         </Fragment>
       }
-      helpTip={helptip}
-      helpTipPlacement="right"
     />
   );
 };

@@ -16,10 +16,9 @@
 
 import React from "react";
 import { useSelector } from "react-redux";
-import { Menu } from "mds";
 import { AppState, useAppDispatch } from "../../../store";
 import { validRoutes } from "../valid-routes";
-import { menuOpen } from "../../../systemSlice";
+//import { menuOpen } from "../../../systemSlice";
 import { selFeatures } from "../consoleSlice";
 import {
   getLogoApplicationVariant,
@@ -54,7 +53,7 @@ const MenuWrapper = () => {
 
   const allowedMenuItems = validRoutes(features, licenseNotification);
 
-  return (
+  /*return (
     <Menu
       isOpen={sidebarOpen}
       displayGroupTitles
@@ -75,6 +74,10 @@ const MenuWrapper = () => {
       currentPath={pathname}
       mobileModeAuto={false}
     />
+  );*/
+
+  return (
+    <div>Menu</div>
   );
 };
 
