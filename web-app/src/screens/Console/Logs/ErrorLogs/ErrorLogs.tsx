@@ -299,7 +299,7 @@ const ErrorLogs = () => {
                 borderRadius: 4,
               }}
             >
-              <Box withBorders customBorderPadding={"0px"} useBackground>
+              <Box withBorders customBorderPadding={"0px"}>
                 <Table aria-label="collapsible table">
                   <TableBody>
                     {filteredMessages.map((m) => {

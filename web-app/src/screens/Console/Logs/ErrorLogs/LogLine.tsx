@@ -286,7 +286,6 @@ const LogLine = (props: { log: LogMessage }) => {
                 fontSize: 14,
               }}
               withBorders
-              useBackground
             >
               {fullMessage}
             </Box>

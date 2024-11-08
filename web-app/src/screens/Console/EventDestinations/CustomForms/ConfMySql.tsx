@@ -155,7 +155,6 @@ const ConfMySql = ({ onChange }: IConfMySqlProps) => {
           <Box>
             <Box
               withBorders
-              useBackground
               sx={{
                 overflowY: "auto",
                 height: 170,

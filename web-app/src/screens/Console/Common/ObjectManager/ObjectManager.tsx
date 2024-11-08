@@ -76,7 +76,6 @@ const ObjectManager = () => {
           className={`${anonymousMode ? "downloadContainerAnonymous" : ""} ${
             managerOpen ? "open" : ""
           }`}
-          useBackground
           withBorders
         >
           <Box

@@ -60,7 +60,6 @@ const ServersList = ({ data }: { data: ServerProperties[] }) => {
               sx={{ marginBottom: 15 }}
             >
               <Box
-                useBackground
                 sx={{ padding: "10px 30px", fontWeight: "bold" }}
               >
                 Drives ({serverInfo.drives?.length})

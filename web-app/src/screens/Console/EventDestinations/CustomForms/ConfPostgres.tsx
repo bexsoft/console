@@ -222,7 +222,6 @@ const ConfPostgres = ({ onChange }: IConfPostgresProps) => {
           <Grid item xs={12}>
             <Box
               withBorders
-              useBackground
               sx={{
                 overflowY: "auto",
                 height: 170,
