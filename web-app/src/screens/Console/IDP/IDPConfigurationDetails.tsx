@@ -20,20 +20,20 @@ import {
   Box,
   breakPoints,
   Button,
-  SquareTerminalIcon,
-  PencilIcon,
+  CircleAlertIcon,
   FormLayout,
   Grid,
   HelpBox,
   InputBox,
   PageLayout,
+  PencilIcon,
   RefreshCWIcon,
   ScreenTitle,
+  SquareTerminalIcon,
   Toggle,
   Tooltip,
   TrashIcon,
   ValuePair,
-  CircleAlertIcon,
 } from "mds";
 import { useNavigate, useParams } from "react-router-dom";
 import { modalStyleUtils } from "../Common/FormComponents/common/styleLibrary";
@@ -105,10 +105,11 @@ const IDPConfigurationDetails = ({
           }
 
           if (item.isEnv) {
-            overrideFields[item.key] =
-              `MINIO_IDENTITY_OPENID_${item.key.toUpperCase()}${
-                configurationName !== "_" ? `_${configurationName}` : ""
-              }`;
+            overrideFields[
+              item.key
+            ] = `MINIO_IDENTITY_OPENID_${item.key.toUpperCase()}${
+              configurationName !== "_" ? `_${configurationName}` : ""
+            }`;
             totEnv++;
           }
 
@@ -122,7 +123,7 @@ const IDPConfigurationDetails = ({
       setFields(fields);
       setOverrideFields(overrideFields);
     },
-    [configurationName],
+    [configurationName]
   );
 
   const toggleEditMode = () => {
@@ -261,7 +262,7 @@ const IDPConfigurationDetails = ({
             name={key}
             label={value.label}
             tooltip={value.tooltip}
-            error={value.hasError(fields[key], editMode)}
+            helper={value.hasError(fields[key], editMode)}
             value={fields[key] ? fields[key] : ""}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setFields({ ...fields, [key]: e.target.value })
@@ -288,19 +289,7 @@ const IDPConfigurationDetails = ({
             {editMode ? (
               <Grid item xs={12} sx={{ marginBottom: 15 }}>
                 <HelpBox
-                  title={
-                    <Box
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        flexGrow: 1,
-                      }}
-                    >
-                      Client Secret must be re-entered to change OpenID
-                      configurations
-                    </Box>
-                  }
+                  title={"Client Secret must be re-entered to change OpenID configurations"}
                   icon={<CircleAlertIcon />}
                   help={null}
                 />
@@ -308,7 +297,7 @@ const IDPConfigurationDetails = ({
             ) : null}
             <Grid xs={12} item>
               {Object.entries(formFields).map(([key, value]) =>
-                renderFormField(key, value),
+                renderFormField(key, value)
               )}
               <Grid item xs={12} sx={modalStyleUtils.modalButtonBar}>
                 {editMode && (

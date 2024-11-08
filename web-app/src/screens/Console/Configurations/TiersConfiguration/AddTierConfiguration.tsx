@@ -339,7 +339,8 @@ const AddTierConfiguration = () => {
                     placeholder="Enter Name (Eg. REMOTE-TIER)"
                     value={name}
                     onChange={updateTierName}
-                    error={nameInputError}
+                    state={nameInputError !== "" ? "error" : "normal"}
+                    helper={nameInputError}
                     required
                   />
                   <InputBox

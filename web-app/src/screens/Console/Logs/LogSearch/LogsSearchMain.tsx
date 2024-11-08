@@ -419,7 +419,6 @@ const LogsSearchMain = () => {
                           </span>
                         </Fragment>
                       ),
-                      renderFullObject: true,
                     },
                     {
                       label: LogSearchColumnLabels.request_content_length,

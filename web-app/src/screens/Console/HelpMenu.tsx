@@ -299,6 +299,7 @@ const HelpMenu = () => {
             optionsEndComponent={
               <Box sx={{ marginRight: 15 }}>
                 <IconButton
+                  id={"help-menu"}
                   onClick={() => {
                     setHelpMenuOpen(false);
                   }}
@@ -308,7 +309,6 @@ const HelpMenu = () => {
                 </IconButton>
               </Box>
             }
-            horizontalBarBackground
             horizontal
           />
         </HelpMenuContainer>

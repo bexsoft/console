@@ -391,7 +391,6 @@ const GroupsDetails = () => {
             }
             title={params.groupName || ""}
             subTitle={null}
-            bottomBorder
             actions={
               <Box
                 sx={{

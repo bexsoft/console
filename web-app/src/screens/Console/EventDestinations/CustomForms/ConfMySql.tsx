@@ -215,7 +215,7 @@ const ConfMySql = ({ onChange }: IConfMySqlProps) => {
             </Box>
           </Box>
           <Grid item xs={12} sx={{ margin: "12px 0" }}>
-            <CodeSnippet label={"Connection String"} multiLine>
+            <CodeSnippet label={"Connection String"} mode={"multi"}>
               {dsnString}
             </CodeSnippet>
           </Grid>

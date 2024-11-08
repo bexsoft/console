@@ -87,6 +87,7 @@ const ObjectManager = () => {
           >
             <Tooltip tooltip={"Clean Completed Objects"} placement="bottom">
               <IconButton
+                id={"cleanList"}
                 aria-label={"Clear Completed List"}
                 onClick={() => dispatch(cleanList())}
               >

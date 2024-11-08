@@ -265,7 +265,7 @@ const IDPLDAPConfigurationDetails = () => {
             name={key}
             label={value.label}
             tooltip={value.tooltip}
-            error={value.hasError(fields[key], editMode)}
+            helper={value.hasError(fields[key], editMode)}
             value={fields[key] ? fields[key] : ""}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setFields({ ...fields, [key]: e.target.value })
@@ -338,7 +338,7 @@ const IDPLDAPConfigurationDetails = () => {
                                 label={
                                   isEnabled ? "Disable LDAP" : "Enable LDAP"
                                 }
-                                variant={isEnabled ? "secondary" : "regular"}
+                                variant={isEnabled ? "primary" : "secondary"}
                                 disabled={envOverride}
                               />
                             </Tooltip>
@@ -385,19 +385,7 @@ const IDPLDAPConfigurationDetails = () => {
                             {editMode && hasConfiguration ? (
                               <Box sx={{ marginBottom: 15 }}>
                                 <HelpBox
-                                  title={
-                                    <Box
-                                      style={{
-                                        display: "flex",
-                                        justifyContent: "space-between",
-                                        alignItems: "center",
-                                        flexGrow: 1,
-                                      }}
-                                    >
-                                      Lookup Bind Password must be re-entered to
-                                      change LDAP configurations
-                                    </Box>
-                                  }
+                                  title={"Lookup Bind Password must be re-entered to change LDAP configurations"}
                                   icon={<CircleAlertIcon />}
                                   help={null}
                                 />

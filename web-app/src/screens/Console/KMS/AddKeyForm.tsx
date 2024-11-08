@@ -96,7 +96,8 @@ const AddKeyForm = () => {
                 label="Key Name"
                 autoFocus={true}
                 value={keyName}
-                error={validateKeyName(keyName)}
+                state={validateKeyName(keyName) !== "" ? "error" : "normal"}
+                helper={validateKeyName(keyName)}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setKeyName(e.target.value);
                 }}

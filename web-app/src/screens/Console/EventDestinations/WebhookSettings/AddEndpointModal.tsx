@@ -17,12 +17,12 @@
 import React, { Fragment, useState } from "react";
 import {
   Button,
-  SquareTerminalIcon,
+  FeatherIcon,
   FormLayout,
   Grid,
   InputBox,
-  FeatherIcon,
   ProgressBar,
+  SquareTerminalIcon,
   WebhookIcon,
 } from "mds";
 import { api } from "api";
@@ -162,7 +162,12 @@ const AddEndpointModal = ({ open, type, onCloseEndpoint }: IEndpointModal) => {
               setName(event.target.value);
               validateInput("name", event.target.validity.valid);
             }}
-            error={
+            state={
+              invalidInputs.includes("name") && !initialInputs.includes("name")
+                ? "error"
+                : "normal"
+            }
+            helper={
               invalidInputs.includes("name") && !initialInputs.includes("name")
                 ? "Invalid Name"
                 : ""
@@ -180,7 +185,13 @@ const AddEndpointModal = ({ open, type, onCloseEndpoint }: IEndpointModal) => {
               setEndpoint(event.target.value);
               validateInput("endpoint", event.target.validity.valid);
             }}
-            error={
+            state={
+              invalidInputs.includes("endpoint") &&
+              !initialInputs.includes("endpoint")
+                ? "error"
+                : "normal"
+            }
+            helper={
               invalidInputs.includes("endpoint") &&
               !initialInputs.includes("endpoint")
                 ? "Invalid Endpoint set"

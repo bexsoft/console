@@ -450,7 +450,6 @@ const ListTiersConfiguration = () => {
                           isLoading={isLoading}
                           records={filteredRecords}
                           entityName="Tiers"
-                          idField="service_name"
                           customPaperHeight={"400px"}
                         />
                       </SecureComponent>

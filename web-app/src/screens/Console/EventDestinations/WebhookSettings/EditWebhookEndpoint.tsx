@@ -317,7 +317,11 @@ const EditEndpointModal = ({
                   setEndpoint(event.target.value);
                   validateInput("endpoint", event.target.validity.valid);
                 }}
-                error={
+                state={
+                  invalidInputs.includes("endpoint")
+                    ? "error"
+                    : "normal"}
+                helper={
                   invalidInputs.includes("endpoint")
                     ? "Invalid Endpoint set"
                     : ""

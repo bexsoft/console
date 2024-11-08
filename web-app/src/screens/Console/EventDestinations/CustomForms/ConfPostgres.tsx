@@ -299,7 +299,7 @@ const ConfPostgres = ({ onChange }: IConfPostgresProps) => {
               />
             </Box>
           </Grid>
-          <CodeSnippet label={"Connection String"} multiLine>
+          <CodeSnippet label={"Connection String"} mode={"multi"}>
             {connectionString}
           </CodeSnippet>
         </Fragment>

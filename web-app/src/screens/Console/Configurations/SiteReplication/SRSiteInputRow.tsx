@@ -16,7 +16,7 @@
 
 import React, { Fragment } from "react";
 import TooltipWrapper from "../../Common/TooltipWrapper/TooltipWrapper";
-import { PlusIcon, Box, Button, Grid, InputBox, TrashIcon } from "mds";
+import { Box, Button, Grid, InputBox, PlusIcon, TrashIcon } from "mds";
 import { SiteInputRow } from "./Types";
 
 interface ISRSiteInputRowProps {
@@ -68,7 +68,8 @@ const SRSiteInputRow = ({
           placeholder={`https://dr.minio-storage:900${index}`}
           label=""
           readOnly={disabledFields.includes("endpoint")}
-          error={fieldErrors["endpoint"]}
+          state={fieldErrors["endpoint"] ? "error" : "normal"}
+          helper={fieldErrors["endpoint"]}
           value={endpoint}
           onChange={(e) => {
             onFieldChange(e, "endpoint", index);
@@ -85,7 +86,8 @@ const SRSiteInputRow = ({
           required={true}
           disabled={disabledFields.includes("accessKey")}
           value={accessKey}
-          error={fieldErrors["accessKey"]}
+          state={fieldErrors["accessKey"] ? "error" : "normal"}
+          helper={fieldErrors["accessKey"]}
           onChange={(e) => {
             onFieldChange(e, "accessKey", index);
           }}
@@ -100,7 +102,8 @@ const SRSiteInputRow = ({
           required={true}
           type={"password"}
           value={secretKey}
-          error={fieldErrors["secretKey"]}
+          state={fieldErrors["secretKey"] ? "error" : "normal"}
+          helper={fieldErrors["secretKey"]}
           disabled={disabledFields.includes("secretKey")}
           onChange={(e) => {
             onFieldChange(e, "secretKey", index);

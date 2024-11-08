@@ -146,7 +146,7 @@ const AddIDPConfiguration = ({
             name={key}
             label={value.label}
             tooltip={value.tooltip}
-            error={value.hasError(fields[key], true)}
+            helper={value.hasError(fields[key], true)}
             value={fields[key] ? fields[key] : ""}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setFields({ ...fields, [key]: e.target.value })
