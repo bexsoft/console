@@ -17,7 +17,6 @@
 import React, { Fragment, useState } from "react";
 import { Box, CircleOffIcon, CircleCheckBigIcon, Grid } from "mds";
 import SearchBox from "../Common/SearchBox";
-import { STATUS_COLORS } from "../Dashboard/BasicDashboard/Utils";
 import { IAMStatement } from "./types";
 
 const rowGridStyle = {
@@ -122,7 +121,7 @@ const PolicyView = ({
                       alignItems: "center",
                       "& .min-icon": {
                         marginRight: "5px",
-                        fill: isAllow ? STATUS_COLORS.GREEN : STATUS_COLORS.RED,
+                        fill: isAllow ? "#4CCB92" : "#C83B51",
                         height: "14px",
                         width: "14px",
                       },

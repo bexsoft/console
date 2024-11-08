@@ -50,7 +50,6 @@ import { Bucket } from "../../../api/consoleApi";
 import { api } from "../../../api";
 import { errorToHandler } from "../../../api/errors";
 import HelpMenu from "../HelpMenu";
-import { usageClarifyingContent } from "../Dashboard/BasicDashboard/ReportedUsage";
 
 const OBListBuckets = () => {
   const dispatch = useAppDispatch();
@@ -221,12 +220,7 @@ const OBListBuckets = () => {
                         onMouseEnter={() => setClickOverride(true)}
                         onMouseLeave={() => setClickOverride(false)}
                       >
-                        <Tooltip
-                          tooltip={usageClarifyingContent}
-                          placement="right"
-                        >
                           <>{niceBytesInt(size || 0)}</>
-                        </Tooltip>
                       </div>
                     ),
                   },

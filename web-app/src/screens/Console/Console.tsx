@@ -49,30 +49,6 @@ import MenuWrapper from "./Menu/MenuWrapper";
 import LoadingComponent from "../../common/LoadingComponent";
 import ComponentsScreen from "./Common/ComponentsScreen";
 
-const EventDestinations = React.lazy(
-  () => import("./EventDestinations/EventDestinations")
-);
-const AddEventDestination = React.lazy(
-  () => import("./EventDestinations/AddEventDestination")
-);
-const EventTypeSelector = React.lazy(
-  () => import("./EventDestinations/EventTypeSelector")
-);
-
-const ListTiersConfiguration = React.lazy(
-  () => import("./Configurations/TiersConfiguration/ListTiersConfiguration")
-);
-const TierTypeSelector = React.lazy(
-  () => import("./Configurations/TiersConfiguration/TierTypeSelector")
-);
-const AddTierConfiguration = React.lazy(
-  () => import("./Configurations/TiersConfiguration/AddTierConfiguration")
-);
-
-const ErrorLogs = React.lazy(() => import("./Logs/ErrorLogs/ErrorLogs"));
-const LogsSearchMain = React.lazy(
-  () => import("./Logs/LogSearch/LogsSearchMain")
-);
 const GroupsDetails = React.lazy(() => import("./Groups/GroupsDetails"));
 
 const IconsScreen = React.lazy(() => import("./Common/IconsScreen"));
@@ -94,7 +70,6 @@ const AddBucketReplication = React.lazy(
 const Policies = React.lazy(() => import("./Policies/Policies"));
 
 const AddPolicyScreen = React.lazy(() => import("./Policies/AddPolicyScreen"));
-const Dashboard = React.lazy(() => import("./Dashboard/Dashboard"));
 
 const Account = React.lazy(() => import("./Account/Account"));
 
@@ -104,18 +79,6 @@ const AccountCreate = React.lazy(
 
 const Users = React.lazy(() => import("./Users/Users"));
 const Groups = React.lazy(() => import("./Groups/Groups"));
-const IDPOpenIDConfigurations = React.lazy(
-  () => import("./IDP/IDPOpenIDConfigurations")
-);
-const AddIDPOpenIDConfiguration = React.lazy(
-  () => import("./IDP/AddIDPOpenIDConfiguration")
-);
-const IDPLDAPConfigurationDetails = React.lazy(
-  () => import("./IDP/LDAP/IDPLDAPConfigurationDetails")
-);
-const IDPOpenIDConfigurationDetails = React.lazy(
-  () => import("./IDP/IDPOpenIDConfigurationDetails")
-);
 
 const License = React.lazy(() => import("./License/License"));
 const ConfigurationOptions = React.lazy(
@@ -123,18 +86,7 @@ const ConfigurationOptions = React.lazy(
 );
 
 const AddGroupScreen = React.lazy(() => import("./Groups/AddGroupScreen"));
-const SiteReplication = React.lazy(
-  () => import("./Configurations/SiteReplication/SiteReplication")
-);
-const SiteReplicationStatus = React.lazy(
-  () => import("./Configurations/SiteReplication/SiteReplicationStatus")
-);
 
-const AddReplicationSites = React.lazy(
-  () => import("./Configurations/SiteReplication/AddReplicationSites")
-);
-
-const KMSRoutes = React.lazy(() => import("./KMS/KMSRoutes"));
 
 const Console = () => {
   const dispatch = useAppDispatch();
@@ -225,10 +177,6 @@ const Console = () => {
       forceDisplay: true,
     },
     {
-      component: Dashboard,
-      path: IAM_PAGES.DASHBOARD,
-    },
-    {
       component: Buckets,
       path: IAM_PAGES.ADD_BUCKETS,
       customPermissionFnc: () => {
@@ -305,70 +253,8 @@ const Console = () => {
       path: IAM_PAGES.POLICIES,
     },
     {
-      component: IDPLDAPConfigurationDetails,
-      path: IAM_PAGES.IDP_LDAP_CONFIGURATIONS,
-    },
-    {
-      component: IDPOpenIDConfigurations,
-      path: IAM_PAGES.IDP_OPENID_CONFIGURATIONS,
-    },
-    {
-      component: AddIDPOpenIDConfiguration,
-      path: IAM_PAGES.IDP_OPENID_CONFIGURATIONS_ADD,
-    },
-    {
-      component: IDPOpenIDConfigurationDetails,
-      path: IAM_PAGES.IDP_OPENID_CONFIGURATIONS_VIEW,
-    },
-    {
-      component: ErrorLogs,
-      path: IAM_PAGES.TOOLS_LOGS,
-    },
-    {
-      component: LogsSearchMain,
-      path: IAM_PAGES.TOOLS_AUDITLOGS,
-    },
-    {
       component: ConfigurationOptions,
       path: IAM_PAGES.SETTINGS,
-    },
-    {
-      component: AddEventDestination,
-      path: IAM_PAGES.EVENT_DESTINATIONS_ADD_SERVICE,
-    },
-    {
-      component: EventTypeSelector,
-      path: IAM_PAGES.EVENT_DESTINATIONS_ADD,
-    },
-    {
-      component: EventDestinations,
-      path: IAM_PAGES.EVENT_DESTINATIONS,
-    },
-    {
-      component: AddTierConfiguration,
-      path: IAM_PAGES.TIERS_ADD_SERVICE,
-      fsHidden: !distributedSetup,
-    },
-    {
-      component: TierTypeSelector,
-      path: IAM_PAGES.TIERS_ADD,
-      fsHidden: !distributedSetup,
-    },
-    {
-      component: ListTiersConfiguration,
-      path: IAM_PAGES.TIERS,
-    },
-    {
-      component: SiteReplication,
-      path: IAM_PAGES.SITE_REPLICATION,
-    },
-    {
-      component: SiteReplicationStatus,
-      path: IAM_PAGES.SITE_REPLICATION_STATUS,
-    },
-    {
-      component: AddReplicationSites,
-      path: IAM_PAGES.SITE_REPLICATION_ADD,
     },
     {
       component: Account,
@@ -385,11 +271,6 @@ const Console = () => {
       component: License,
       path: IAM_PAGES.LICENSE,
       forceDisplay: true,
-    },
-    {
-      component: KMSRoutes,
-      path: IAM_PAGES.KMS,
-      fsHidden: !kmsIsEnabled,
     },
   ];
 

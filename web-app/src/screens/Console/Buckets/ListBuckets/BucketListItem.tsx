@@ -16,12 +16,11 @@
 import React, { Fragment, useState } from "react";
 import get from "lodash/get";
 import { Link, useNavigate } from "react-router-dom";
-import { Box, breakPoints, BucketIcon, Checkbox, Grid, PieChartIcon, Tooltip, FeatherIcon, styled } from "mds";
+import { Box, breakPoints, BucketIcon, Checkbox, FeatherIcon, Grid, PieChartIcon, styled } from "mds";
 import { calculateBytes, niceBytes, prettyNumber } from "../../../../common/utils";
 import { IAM_PERMISSIONS, IAM_ROLES } from "../../../../common/SecureComponent/permissions";
 import { hasPermission } from "../../../../common/SecureComponent";
 import { Bucket } from "../../../../api/consoleApi";
-import { usageClarifyingContent } from "screens/Console/Dashboard/BasicDashboard/ReportedUsage";
 
 const BucketItemMain = styled.div(({ theme }) => ({
   border: `${get(theme, "borderColor", "#eaeaea")} 1px solid`,
@@ -202,11 +201,7 @@ const BucketListItem = ({
             bucket.details?.versioning && setClickOverride(false)
           }
         >
-          {bucket.details?.versioning && (
-            <Tooltip tooltip={usageClarifyingContent} placement="top">
-              <PieChartIcon />
-            </Tooltip>
-          )}
+          {bucket.details?.versioning && <PieChartIcon />}
           {!bucket.details?.versioning && <PieChartIcon />}
           <span className={"metricLabel"}>Usage</span>
           <div className={"metricText"}>

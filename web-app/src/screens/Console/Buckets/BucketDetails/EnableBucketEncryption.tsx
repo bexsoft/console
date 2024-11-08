@@ -43,7 +43,6 @@ import {
 } from "../../../../common/SecureComponent/permissions";
 import { SecureComponent } from "../../../../common/SecureComponent";
 import TooltipWrapper from "../../Common/TooltipWrapper/TooltipWrapper";
-import AddKeyModal from "./AddKeyModal";
 import ModalWrapper from "../../Common/ModalWrapper/ModalWrapper";
 
 interface IEnableBucketEncryptionProps {
@@ -134,16 +133,6 @@ const EnableBucketEncryption = ({
 
   return (
     <Fragment>
-      {addOpen && (
-        <AddKeyModal
-          addOpen={addOpen}
-          closeAddModalAndRefresh={(refresh: boolean) => {
-            setAddOpen(false);
-            setLoadingKeys(true);
-          }}
-        />
-      )}
-
       <ModalWrapper
         modalOpen={open}
         onClose={() => {
