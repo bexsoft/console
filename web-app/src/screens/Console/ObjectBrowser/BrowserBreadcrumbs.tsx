@@ -250,45 +250,43 @@ const BrowserBreadcrumbs = ({
             }
           />
         )}
-        <Breadcrumbs
+        {/*<Breadcrumbs
           sx={{
             whiteSpace: "pre",
           }}
           goBackFunction={goBackFunction}
-          additionalOptions={
-            <Fragment>
-              <CopyToClipboard text={`${bucketName}/${splitPaths.join("/")}`}>
-                <Button
-                  id={"copy-path"}
-                  icon={
-                    <CopyIcon
-                      style={{
-                        width: "12px",
-                        height: "12px",
-                        fill: "#969FA8",
-                        marginTop: -1,
-                      }}
-                    />
-                  }
-                  variant={"secondary"}
-                  onClick={() => {
-                    dispatch(setSnackBarMessage("Path copied to clipboard"));
-                  }}
-                  style={{
-                    width: "28px",
-                    height: "28px",
-                    color: "#969FA8",
-                    border: "#969FA8 1px solid",
-                    marginRight: 5,
-                  }}
-                />
-              </CopyToClipboard>
-              <Box className={"additionalOptions"}>{additionalOptions}</Box>
-            </Fragment>
-          }
         >
           {listBreadcrumbs}
-        </Breadcrumbs>
+        </Breadcrumbs>*/}
+        <Fragment>
+          <CopyToClipboard text={`${bucketName}/${splitPaths.join("/")}`}>
+            <Button
+              id={"copy-path"}
+              icon={
+                <CopyIcon
+                  style={{
+                    width: "12px",
+                    height: "12px",
+                    fill: "#969FA8",
+                    marginTop: -1,
+                  }}
+                />
+              }
+              variant={"secondary"}
+              onClick={() => {
+                dispatch(setSnackBarMessage("Path copied to clipboard"));
+              }}
+              style={{
+                width: "28px",
+                height: "28px",
+                color: "#969FA8",
+                border: "#969FA8 1px solid",
+                marginRight: 5,
+              }}
+            />
+          </CopyToClipboard>
+          <Box className={"additionalOptions"}>{additionalOptions}</Box>
+        </Fragment>
         {!hidePathButton && (
           <Tooltip
             tooltip={

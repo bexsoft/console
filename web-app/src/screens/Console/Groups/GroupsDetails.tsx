@@ -30,7 +30,7 @@ import {
   SectionTitle,
   Toggle,
   Tabs,
-  TrashIcon,
+  TrashIcon, IColumns
 } from "mds";
 import { api } from "api";
 import { errorToHandler } from "api/errors";
@@ -246,7 +246,7 @@ const GroupsDetails = () => {
                   isDisabled: !viewUser,
                 },
               ]}
-              columns={[{ label: "Access Key" }]}
+              columns={["Access Key"]}
               selectedItems={[]}
               isLoading={false}
               records={filteredMembers}
@@ -318,7 +318,7 @@ const GroupsDetails = () => {
                 isDisabled: !canViewPolicy,
               },
             ]}
-            columns={[{ label: "Policy" }]}
+            columns={["Policy"]}
             isLoading={false}
             records={groupPolicies}
             entityName="Policies"

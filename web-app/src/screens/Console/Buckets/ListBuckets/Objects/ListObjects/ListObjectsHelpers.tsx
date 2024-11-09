@@ -18,6 +18,7 @@ import { DateTime } from "luxon";
 import { BucketObjectItem } from "./types";
 import { niceBytes } from "../../../../../../common/utils";
 import { displayFileIconName } from "./utils";
+import { IColumns } from "mds";
 
 // Functions
 
@@ -54,7 +55,7 @@ const displayDeleteFlag = (state: boolean) => {
 
 // Table Props
 
-export const listModeColumns = [
+export const listModeColumns: IColumns<any>[] = [
   {
     label: "Name",
     elementKey: "name",
@@ -65,20 +66,20 @@ export const listModeColumns = [
     label: "Last Modified",
     elementKey: "last_modified",
     renderFunction: displayParsedDate,
-    renderFullObject: true,
+
     enableSort: true,
   },
   {
     label: "Size",
     elementKey: "size",
     renderFunction: displayNiceBytes,
-    renderFullObject: true,
+
     width: 100,
     enableSort: true,
   },
 ];
 
-export const rewindModeColumns = [
+export const rewindModeColumns: IColumns<any>[] = [
   {
     label: "Name",
     elementKey: "name",
@@ -89,14 +90,14 @@ export const rewindModeColumns = [
     label: "Object Date",
     elementKey: "last_modified",
     renderFunction: displayParsedDate,
-    renderFullObject: true,
+
     enableSort: true,
   },
   {
     label: "Size",
     elementKey: "size",
     renderFunction: displayNiceBytes,
-    renderFullObject: true,
+
     width: 100,
     enableSort: true,
   },

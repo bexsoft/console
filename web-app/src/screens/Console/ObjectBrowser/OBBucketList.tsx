@@ -209,13 +209,13 @@ const OBListBuckets = () => {
                   {
                     label: "Objects",
                     elementKey: "objects",
-                    renderFunction: (size: number | null) =>
+                    renderFunction: (size: number | undefined) =>
                       size ? size.toLocaleString() : 0,
                   },
                   {
                     label: "Size",
                     elementKey: "size",
-                    renderFunction: (size: number) => (
+                    renderFunction: (size: number | undefined) => (
                       <div
                         onMouseEnter={() => setClickOverride(true)}
                         onMouseLeave={() => setClickOverride(false)}
@@ -227,8 +227,7 @@ const OBListBuckets = () => {
                   {
                     label: "Access",
                     elementKey: "rw_access",
-                    renderFullObject: true,
-                    renderFunction: (bucket: Bucket) => {
+                    renderFunction: (bucket: any) => {
                       let access = [];
                       if (bucket.rw_access?.read) {
                         access.push("R");

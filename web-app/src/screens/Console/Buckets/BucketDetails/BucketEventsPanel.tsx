@@ -28,7 +28,7 @@ import {
   SectionTitle,
 } from "mds";
 import { api } from "api";
-import { NotificationConfig } from "api/consoleApi";
+import { NotificationConfig, NotificationEventType } from "api/consoleApi";
 import { errorToHandler } from "api/errors";
 import {
   hasPermission,
@@ -96,7 +96,7 @@ const BucketEventsPanel = () => {
     }
   }, [loadingEvents, dispatch, bucketName, displayEvents]);
 
-  const eventsDisplay = (events: string[] | null) => {
+  const eventsDisplay = (events: NotificationEventType[] | undefined) => {
     if (!events) {
       return "other";
     }

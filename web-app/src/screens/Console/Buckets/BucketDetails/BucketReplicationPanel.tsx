@@ -167,8 +167,8 @@ const BucketReplicationPanel = () => {
     return <Fragment>{events.bucket.replace("arn:aws:s3:::", "")}</Fragment>;
   };
 
-  const tagDisplay = (events: BucketReplicationRule) => {
-    return <Fragment>{events && events.tags !== "" ? "Yes" : "No"}</Fragment>;
+  const tagDisplay = (events: string | undefined) => {
+    return <Fragment>{events !== "" ? "Yes" : "No"}</Fragment>;
   };
 
   const selectAllItems = () => {

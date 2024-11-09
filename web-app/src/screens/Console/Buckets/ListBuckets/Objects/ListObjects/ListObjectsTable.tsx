@@ -36,7 +36,7 @@ import {
 } from "../../../../../../common/SecureComponent/permissions";
 import { hasPermission } from "../../../../../../common/SecureComponent";
 import { downloadObject } from "../../../../ObjectBrowser/utils";
-import { DataTable, ItemActions, SelectOption } from "mds";
+import { DataTable } from "mds";
 import { BucketObject } from "api/consoleApi";
 
 const ListObjectsTable = () => {
@@ -52,31 +52,31 @@ const ListObjectsTable = () => {
   const bucketName = params.bucketName || "";
 
   const detailsOpen = useSelector(
-    (state: AppState) => state.objectBrowser.objectDetailsOpen,
+    (state: AppState) => state.objectBrowser.objectDetailsOpen
   );
 
   const requestInProgress = useSelector(
-    (state: AppState) => state.objectBrowser.requestInProgress,
+    (state: AppState) => state.objectBrowser.requestInProgress
   );
 
   const features = useSelector(selFeatures);
   const obOnly = !!features?.includes("object-browser-only");
 
   const rewindEnabled = useSelector(
-    (state: AppState) => state.objectBrowser.rewind.rewindEnabled,
+    (state: AppState) => state.objectBrowser.rewind.rewindEnabled
   );
   const records = useSelector((state: AppState) => state.objectBrowser.records);
   const searchObjects = useSelector(
-    (state: AppState) => state.objectBrowser.searchObjects,
+    (state: AppState) => state.objectBrowser.searchObjects
   );
   const selectedObjects = useSelector(
-    (state: AppState) => state.objectBrowser.selectedObjects,
+    (state: AppState) => state.objectBrowser.selectedObjects
   );
   const connectionError = useSelector(
-    (state: AppState) => state.objectBrowser.connectionError,
+    (state: AppState) => state.objectBrowser.connectionError
   );
   const anonymousMode = useSelector(
-    (state: AppState) => state.system.anonymousMode,
+    (state: AppState) => state.system.anonymousMode
   );
 
   const displayListObjects = hasPermission(bucketName, [
@@ -123,14 +123,6 @@ const ListObjectsTable = () => {
     }
     dispatch(setSelectedObjectView(idElement));
   };
-  const tableActions: SelectOption[] = [
-    {
-      type: "view",
-      tooltip: "View",
-      onClick: openPath,
-      sendOnlyId: false,
-    },
-  ];
 
   const sortChange = (sortData: any) => {
     const newSortDirection = get(sortData, "sortDirection", "DESC");
@@ -175,7 +167,7 @@ const ListObjectsTable = () => {
     !displayListObjects && !anonymousMode
       ? permissionTooltipHelper(
           [IAM_SCOPES.S3_LIST_BUCKET, IAM_SCOPES.S3_ALL_LIST_BUCKET],
-          "view Objects in this bucket",
+          "view Objects in this bucket"
         )
       : `This location is empty${
           !rewindEnabled ? ", please try uploading a new file" : ""
@@ -194,7 +186,13 @@ const ListObjectsTable = () => {
 
   return (
     <DataTable
-      itemActions={tableActions}
+      itemActions={[
+        {
+          type: "view",
+          tooltip: "View",
+          onClick: openPath,
+        },
+      ]}
       columns={rewindEnabled ? rewindModeColumns : listModeColumns}
       isLoading={requestInProgress}
       entityName="Objects"
