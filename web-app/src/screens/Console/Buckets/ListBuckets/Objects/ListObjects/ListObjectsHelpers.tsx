@@ -65,14 +65,14 @@ export const listModeColumns: IColumns<any>[] = [
   {
     label: "Last Modified",
     elementKey: "last_modified",
-    renderFunction: displayParsedDate,
+    renderFullObjectFunction: displayParsedDate,
 
     enableSort: true,
   },
   {
     label: "Size",
     elementKey: "size",
-    renderFunction: displayNiceBytes,
+    renderFullObjectFunction: displayNiceBytes,
 
     width: 100,
     enableSort: true,
@@ -89,14 +89,14 @@ export const rewindModeColumns: IColumns<any>[] = [
   {
     label: "Object Date",
     elementKey: "last_modified",
-    renderFunction: displayParsedDate,
+    renderFullObjectFunction: displayParsedDate,
 
     enableSort: true,
   },
   {
     label: "Size",
     elementKey: "size",
-    renderFunction: displayNiceBytes,
+    renderFullObjectFunction: displayNiceBytes,
 
     width: 100,
     enableSort: true,
