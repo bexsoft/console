@@ -16,9 +16,25 @@
 import React, { Fragment, useState } from "react";
 import get from "lodash/get";
 import { Link, useNavigate } from "react-router-dom";
-import { Box, breakPoints, BucketIcon, Checkbox, FeatherIcon, Grid, PieChartIcon, styled } from "mds";
-import { calculateBytes, niceBytes, prettyNumber } from "../../../../common/utils";
-import { IAM_PERMISSIONS, IAM_ROLES } from "../../../../common/SecureComponent/permissions";
+import {
+  Box,
+  breakPoints,
+  BucketIcon,
+  Checkbox,
+  FeatherIcon,
+  Grid,
+  PieChartIcon,
+  styled,
+} from "mds";
+import {
+  calculateBytes,
+  niceBytes,
+  prettyNumber,
+} from "../../../../common/utils";
+import {
+  IAM_PERMISSIONS,
+  IAM_ROLES,
+} from "../../../../common/SecureComponent/permissions";
 import { hasPermission } from "../../../../common/SecureComponent";
 import { Bucket } from "../../../../api/consoleApi";
 

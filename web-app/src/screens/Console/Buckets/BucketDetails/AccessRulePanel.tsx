@@ -33,13 +33,13 @@ import withSuspense from "../../Common/Components/withSuspense";
 import TooltipWrapper from "../../Common/TooltipWrapper/TooltipWrapper";
 
 const AddAccessRuleModal = withSuspense(
-  React.lazy(() => import("./AddAccessRule"))
+  React.lazy(() => import("./AddAccessRule")),
 );
 const DeleteAccessRuleModal = withSuspense(
-  React.lazy(() => import("./DeleteAccessRule"))
+  React.lazy(() => import("./DeleteAccessRule")),
 );
 const EditAccessRuleModal = withSuspense(
-  React.lazy(() => import("./EditAccessRule"))
+  React.lazy(() => import("./EditAccessRule")),
 );
 
 const AccessRule = () => {

@@ -25,7 +25,7 @@ import {
   CircleCheckBigIcon,
   UploadIcon,
   Tooltip,
-  styled
+  styled,
 } from "mds";
 import clsx from "clsx";
 import { callForObjectID } from "../../ObjectBrowser/transferManager";

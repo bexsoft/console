@@ -359,7 +359,7 @@ const IconsScreen = () => {
           <br />
           TagIcon
         </Grid>
-        
+
         <Grid item xs={3} sm={2} md={1}>
           <cicons.CircleCheckBigIcon />
           <br />
@@ -371,7 +371,6 @@ const IconsScreen = () => {
           <br />
           MessageCirclePlusIcon
         </Grid>
-
 
         <Grid item xs={3} sm={2} md={1}>
           <cicons.FileTextIcon />
@@ -625,7 +624,6 @@ const IconsScreen = () => {
           MinIOIcon
         </Grid>
 
-
         <Grid item xs={3} sm={2} md={1}>
           <cicons.BucketCopyIcon />
           <br />
@@ -842,7 +840,6 @@ const IconsScreen = () => {
           FeatherIcon
         </Grid>
 
-
         <Grid item xs={3} sm={2} md={1}>
           <cicons.FeatherIcon />
           <br />
@@ -919,7 +916,6 @@ const IconsScreen = () => {
           <br />
           XIcon
         </Grid>
-
 
         <Grid item xs={3} sm={2} md={1}>
           <cicons.FilterIcon />

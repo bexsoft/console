@@ -26,7 +26,8 @@ import {
   PageLayout,
   ProgressBar,
   RefreshCWIcon,
-  Grid, Tooltip
+  Grid,
+  Tooltip,
 } from "mds";
 import { actionsTray } from "../Common/FormComponents/common/styleLibrary";
 import { SecureComponent } from "../../../common/SecureComponent";
@@ -220,7 +221,7 @@ const OBListBuckets = () => {
                         onMouseEnter={() => setClickOverride(true)}
                         onMouseLeave={() => setClickOverride(false)}
                       >
-                          <>{niceBytesInt(size || 0)}</>
+                        <>{niceBytesInt(size || 0)}</>
                       </div>
                     ),
                   },

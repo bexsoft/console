@@ -73,7 +73,7 @@ const AddServiceAccount = () => {
         .invoke(
           "POST",
           `/api/v1/user/${encodeURIComponent(
-            userName
+            userName,
           )}/service-account-credentials`,
           {
             policy: policyJSON,
@@ -83,7 +83,7 @@ const AddServiceAccount = () => {
             comment: comments,
             name: name,
             expiry: expiryDt,
-          }
+          },
         )
         .then((res) => {
           setAddSending(false);

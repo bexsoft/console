@@ -28,7 +28,7 @@ import {
   Breadcrumbs,
   breakPoints,
   Box,
-  styled
+  styled,
 } from "mds";
 import { hasPermission } from "../../../common/SecureComponent";
 import {

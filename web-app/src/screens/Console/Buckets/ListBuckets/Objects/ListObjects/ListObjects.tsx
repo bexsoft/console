@@ -37,7 +37,8 @@ import {
   EyeIcon,
   RefreshCWIcon,
   ScreenTitle,
-  ShareIcon, NotificationCount
+  ShareIcon,
+  NotificationCount,
 } from "mds";
 import { api } from "api";
 import { errorToHandler } from "api/errors";
@@ -1070,7 +1071,11 @@ const ListObjects = () => {
                       id={"rewind-objects-list"}
                       label={"Rewind"}
                       icon={
-                        <NotificationCount color="danger" dotOnly invisible={!rewindEnabled}>
+                        <NotificationCount
+                          color="danger"
+                          dotOnly
+                          invisible={!rewindEnabled}
+                        >
                           <HistoryIcon
                             style={{
                               minWidth: 16,

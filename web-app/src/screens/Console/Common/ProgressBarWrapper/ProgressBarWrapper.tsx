@@ -50,15 +50,15 @@ function LinearProgressWithLabel(
 }
 
 const ProgressBarWrapper = ({
-                              value,
-                              ready,
-                              indeterminate,
-                              withLabel,
-                              size = "regular",
-                              error,
-                              cancelled,
-                              notificationLabel,
-                            }: IProgressBarWrapper) => {
+  value,
+  ready,
+  indeterminate,
+  withLabel,
+  size = "regular",
+  error,
+  cancelled,
+  notificationLabel,
+}: IProgressBarWrapper) => {
   let color: ProgressState;
   if (error) {
     color = "error";

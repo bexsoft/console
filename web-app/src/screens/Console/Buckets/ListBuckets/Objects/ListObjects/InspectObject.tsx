@@ -15,14 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { useState } from "react";
-import {
-  Button,
-  FeatherIcon,
-  KeyRoundIcon,
-  Toggle,
-  Grid,
-  Box,
-} from "mds";
+import { Button, FeatherIcon, KeyRoundIcon, Toggle, Grid, Box } from "mds";
 import {
   deleteCookie,
   getCookieValue,

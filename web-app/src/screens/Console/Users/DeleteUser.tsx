@@ -61,7 +61,7 @@ const DeleteUser = ({
           }
         })
         .catch((err) =>
-          dispatch(setErrorSnackMessage(errorToHandler(err.error)))
+          dispatch(setErrorSnackMessage(errorToHandler(err.error))),
         )
         .finally(() => setLoadingSA(false));
     }
@@ -77,7 +77,7 @@ const DeleteUser = ({
   ));
   const viewAction = (selectionElement: any): void => {
     navigate(
-      `${IAM_PAGES.USERS}/${encodeURIComponent(selectionElement.userName)}`
+      `${IAM_PAGES.USERS}/${encodeURIComponent(selectionElement.userName)}`,
     );
     onClose();
   };
@@ -95,7 +95,7 @@ const DeleteUser = ({
           setErrorSnackMessage({
             errorMessage: "Cannot delete currently logged in user",
             detailedError: `Cannot delete currently logged in user ${userLoggedIn}`,
-          })
+          }),
         );
         closeDeleteModalAndRefresh(true);
       } else {

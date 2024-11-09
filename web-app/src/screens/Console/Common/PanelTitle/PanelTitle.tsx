@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from "react";
-import {styled} from "mds";
+import { styled } from "mds";
 
 const PanelTitleContainer = styled.h1(() => ({
   padding: 0,

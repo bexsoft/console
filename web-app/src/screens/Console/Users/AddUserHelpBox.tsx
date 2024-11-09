@@ -15,12 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import React from "react";
 
-import {
-  Box,
-  PencilLineIcon,
-  UsersIcon,
-  CircleHelpIcon,
-} from "mds";
+import { Box, PencilLineIcon, UsersIcon, CircleHelpIcon } from "mds";
 
 const FeatureItem = ({
   icon,

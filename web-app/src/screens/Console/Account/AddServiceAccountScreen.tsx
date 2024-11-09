@@ -83,7 +83,7 @@ const AddServiceAccount = () => {
             name: name,
             expiry: expiryDt,
           },
-          { type: ContentType.Json }
+          { type: ContentType.Json },
         )
         .then((res) => {
           setAddSending(false);

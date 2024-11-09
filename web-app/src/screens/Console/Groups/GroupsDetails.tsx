@@ -30,7 +30,8 @@ import {
   SectionTitle,
   Toggle,
   Tabs,
-  TrashIcon, IColumns
+  TrashIcon,
+  IColumns,
 } from "mds";
 import { api } from "api";
 import { errorToHandler } from "api/errors";

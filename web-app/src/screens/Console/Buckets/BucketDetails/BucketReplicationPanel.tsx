@@ -50,13 +50,13 @@ import TooltipWrapper from "../../Common/TooltipWrapper/TooltipWrapper";
 import withSuspense from "../../Common/Components/withSuspense";
 
 const EditReplicationModal = withSuspense(
-  React.lazy(() => import("./EditReplicationModal"))
+  React.lazy(() => import("./EditReplicationModal")),
 );
 const AddReplicationModal = withSuspense(
-  React.lazy(() => import("./AddReplicationModal"))
+  React.lazy(() => import("./AddReplicationModal")),
 );
 const DeleteReplicationRule = withSuspense(
-  React.lazy(() => import("./DeleteReplicationRule"))
+  React.lazy(() => import("./DeleteReplicationRule")),
 );
 
 const BucketReplicationPanel = () => {
@@ -159,7 +159,7 @@ const BucketReplicationPanel = () => {
   const editReplicationRule = (replication: BucketReplicationRule) => {
     setSelectedRRule(replication.id);
     navigate(
-      `/buckets/edit-replication?bucketName=${bucketName}&ruleID=${replication.id}`
+      `/buckets/edit-replication?bucketName=${bucketName}&ruleID=${replication.id}`,
     );
   };
 
@@ -210,7 +210,7 @@ const BucketReplicationPanel = () => {
           IAM_SCOPES.S3_PUT_REPLICATION_CONFIGURATION,
           IAM_SCOPES.S3_PUT_ACTIONS,
         ],
-        true
+        true,
       ),
     },
   ];
@@ -298,7 +298,7 @@ const BucketReplicationPanel = () => {
                       IAM_PAGES.BUCKETS_ADD_REPLICATION +
                         `?bucketName=${bucketName}&nextPriority=${
                           replicationRules.length + 1
-                        }`
+                        }`,
                     );
                   }}
                   label={"Add Replication Rule"}

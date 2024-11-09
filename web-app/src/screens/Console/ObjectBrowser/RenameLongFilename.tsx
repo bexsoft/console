@@ -82,7 +82,9 @@ const RenameLongFileName = ({
             label=""
             type={"text"}
             value={newFileName}
-            state={newFileName.length > 200 && !acceptLongName ? "error" : "normal"}
+            state={
+              newFileName.length > 200 && !acceptLongName ? "error" : "normal"
+            }
             helper={
               newFileName.length > 200 && !acceptLongName
                 ? "Filename should be less than 200 characters long."

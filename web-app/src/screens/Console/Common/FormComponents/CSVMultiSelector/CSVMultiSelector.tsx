@@ -23,7 +23,14 @@ import React, {
   Fragment,
 } from "react";
 import get from "lodash/get";
-import { PlusIcon, Box, CircleHelpIcon, InputBox, InputLabel, Tooltip } from "mds";
+import {
+  PlusIcon,
+  Box,
+  CircleHelpIcon,
+  InputBox,
+  InputLabel,
+  Tooltip,
+} from "mds";
 
 interface ICSVMultiSelector {
   elements: string;

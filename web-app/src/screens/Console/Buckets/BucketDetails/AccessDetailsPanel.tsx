@@ -144,9 +144,7 @@ const AccessDetails = () => {
 
   return (
     <Fragment>
-      <SectionTitle separator>
-          Access Audit
-      </SectionTitle>
+      <SectionTitle separator>Access Audit</SectionTitle>
       <Tabs
         currentTabOrPath={curTab}
         onTabClick={(newValue: string) => {

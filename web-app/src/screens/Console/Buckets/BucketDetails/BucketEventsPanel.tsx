@@ -176,7 +176,7 @@ const BucketEventsPanel = () => {
           </SecureComponent>
         }
       >
-          Events
+        Events
       </SectionTitle>
 
       <Grid container>

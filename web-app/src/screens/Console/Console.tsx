@@ -54,7 +54,7 @@ const GroupsDetails = React.lazy(() => import("./Groups/GroupsDetails"));
 const IconsScreen = React.lazy(() => import("./Common/IconsScreen"));
 
 const ObjectManager = React.lazy(
-  () => import("./Common/ObjectManager/ObjectManager")
+  () => import("./Common/ObjectManager/ObjectManager"),
 );
 
 const ObjectBrowser = React.lazy(() => import("./ObjectBrowser/ObjectBrowser"));
@@ -62,10 +62,10 @@ const ObjectBrowser = React.lazy(() => import("./ObjectBrowser/ObjectBrowser"));
 const Buckets = React.lazy(() => import("./Buckets/Buckets"));
 
 const EditBucketReplication = React.lazy(
-  () => import("./Buckets/BucketDetails/EditBucketReplication")
+  () => import("./Buckets/BucketDetails/EditBucketReplication"),
 );
 const AddBucketReplication = React.lazy(
-  () => import("./Buckets/BucketDetails/AddBucketReplication")
+  () => import("./Buckets/BucketDetails/AddBucketReplication"),
 );
 const Policies = React.lazy(() => import("./Policies/Policies"));
 
@@ -74,7 +74,7 @@ const AddPolicyScreen = React.lazy(() => import("./Policies/AddPolicyScreen"));
 const Account = React.lazy(() => import("./Account/Account"));
 
 const AccountCreate = React.lazy(
-  () => import("./Account/AddServiceAccountScreen")
+  () => import("./Account/AddServiceAccountScreen"),
 );
 
 const Users = React.lazy(() => import("./Users/Users"));
@@ -82,11 +82,10 @@ const Groups = React.lazy(() => import("./Groups/Groups"));
 
 const License = React.lazy(() => import("./License/License"));
 const ConfigurationOptions = React.lazy(
-  () => import("./Configurations/ConfigurationPanels/ConfigurationOptions")
+  () => import("./Configurations/ConfigurationPanels/ConfigurationOptions"),
 );
 
 const AddGroupScreen = React.lazy(() => import("./Groups/AddGroupScreen"));
-
 
 const Console = () => {
   const dispatch = useAppDispatch();
@@ -96,16 +95,16 @@ const Console = () => {
   const features = useSelector(selFeatures);
   const distributedSetup = useSelector(selDistSet);
   const snackBarMessage = useSelector(
-    (state: AppState) => state.system.snackBar
+    (state: AppState) => state.system.snackBar,
   );
   const needsRestart = useSelector(
-    (state: AppState) => state.system.serverNeedsRestart
+    (state: AppState) => state.system.serverNeedsRestart,
   );
   const isServerLoading = useSelector(
-    (state: AppState) => state.system.serverIsLoading
+    (state: AppState) => state.system.serverIsLoading,
   );
   const loadingProgress = useSelector(
-    (state: AppState) => state.system.loadingProgress
+    (state: AppState) => state.system.loadingProgress,
   );
 
   const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
@@ -166,7 +165,7 @@ const Console = () => {
           resource.length > 0 &&
           hasPermission(
             resource[1],
-            IAM_PAGES_PERMISSIONS[IAM_PAGES.OBJECT_BROWSER_VIEW]
+            IAM_PAGES_PERMISSIONS[IAM_PAGES.OBJECT_BROWSER_VIEW],
           )
         );
       },
@@ -189,7 +188,7 @@ const Console = () => {
       customPermissionFnc: () => {
         return hasPermission(
           "*",
-          IAM_PAGES_PERMISSIONS[IAM_PAGES.BUCKETS_ADD_REPLICATION]
+          IAM_PAGES_PERMISSIONS[IAM_PAGES.BUCKETS_ADD_REPLICATION],
         );
       },
     },
@@ -199,7 +198,7 @@ const Console = () => {
       customPermissionFnc: () => {
         return hasPermission(
           "*",
-          IAM_PAGES_PERMISSIONS[IAM_PAGES.BUCKETS_EDIT_REPLICATION]
+          IAM_PAGES_PERMISSIONS[IAM_PAGES.BUCKETS_EDIT_REPLICATION],
         );
       },
     },
@@ -214,7 +213,7 @@ const Console = () => {
           resource.length > 0 &&
           hasPermission(
             resource[1],
-            IAM_PAGES_PERMISSIONS[IAM_PAGES.BUCKETS_ADMIN_VIEW]
+            IAM_PAGES_PERMISSIONS[IAM_PAGES.BUCKETS_ADMIN_VIEW],
           )
         );
       },
@@ -284,9 +283,9 @@ const Console = () => {
             ? route.customPermissionFnc()
             : hasPermission(
                 CONSOLE_UI_RESOURCE,
-                IAM_PAGES_PERMISSIONS[route.path]
+                IAM_PAGES_PERMISSIONS[route.path],
               ))) &&
-        !route.fsHidden
+        !route.fsHidden,
   );
 
   const closeSnackBar = () => {

@@ -193,7 +193,8 @@ const PreviewFile = ({
                 variant={"information"}
                 sx={{ margin: "15px 0" }}
               >
-                File couldn't be previewed using file extension or mime type. Please try Download instead
+                File couldn't be previewed using file extension or mime type.
+                Please try Download instead
               </NotificationAlert>
             </div>
           )}

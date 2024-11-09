@@ -18567,6 +18567,7 @@ __metadata:
   resolution: "web-app@workspace:."
   dependencies:
     "@babel/plugin-proposal-private-property-in-object": "npm:^7.21.11"
+    "@emotion/react": "npm:^11.13.3"
     "@playwright/test": "npm:^1.45.2"
     "@reduxjs/toolkit": "npm:^1.9.7"
     "@types/jest": "npm:^29.5.12"

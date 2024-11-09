@@ -88,9 +88,7 @@ const ObjectManagerButton = () => {
               >
                 <CircleIcon />
               </IndicatorContainer>
-              <BucketIcon
-                style={{ width: 20, height: 20, marginTop: -2 }}
-              />
+              <BucketIcon style={{ width: 20, height: 20, marginTop: -2 }} />
             </Fragment>
           }
           id="object-manager-toggle"

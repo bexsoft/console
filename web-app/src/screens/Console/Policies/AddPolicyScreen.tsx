@@ -126,7 +126,9 @@ const AddPolicyScreen = () => {
                     label="Policy Name"
                     autoFocus={true}
                     value={policyName}
-                    state={validatePolicyname(policyName) !== "" ? "error" : "normal"}
+                    state={
+                      validatePolicyname(policyName) !== "" ? "error" : "normal"
+                    }
                     helper={validatePolicyname(policyName)}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       setPolicyName(e.target.value);

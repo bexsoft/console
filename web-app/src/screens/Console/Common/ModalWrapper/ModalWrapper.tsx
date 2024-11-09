@@ -92,7 +92,9 @@ const ModalWrapper = ({
       <NotificationAlert
         onClose={closeSnackBar}
         color={modalSnackMessage.type === "error" ? "error" : "default"}
-      >{message}</NotificationAlert>
+      >
+        {message}
+      </NotificationAlert>
       {children}
     </ModalBox>
   );

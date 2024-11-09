@@ -27,7 +27,7 @@ import {
   Tooltip,
   Grid,
   Checkbox,
-  styled
+  styled,
 } from "mds";
 import { niceBytes } from "../../../../../../common/utils";
 import SpecificVersionPill from "./SpecificVersionPill";

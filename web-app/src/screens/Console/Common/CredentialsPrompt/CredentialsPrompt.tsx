@@ -23,7 +23,7 @@ import {
   SquareUserRoundIcon,
   CircleAlertIcon,
   Grid,
-  styled
+  styled,
 } from "mds";
 import { NewServiceAccount } from "./types";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";

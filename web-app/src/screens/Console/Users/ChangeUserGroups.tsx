@@ -16,14 +16,7 @@
 
 import React, { useCallback, useEffect, useState, Fragment } from "react";
 
-import {
-  UserPlusIcon,
-  Button,
-  FormLayout,
-  Grid,
-  Box,
-  ProgressBar,
-} from "mds";
+import { UserPlusIcon, Button, FormLayout, Grid, Box, ProgressBar } from "mds";
 import { modalStyleUtils } from "../Common/FormComponents/common/styleLibrary";
 import { ErrorResponseHandler } from "../../../common/types";
 import { setModalErrorSnackMessage } from "../../../systemSlice";

@@ -33,7 +33,7 @@ import {
   Toggle,
   SectionTitle,
   ProgressBar,
-  styled
+  styled,
 } from "mds";
 import { k8sScalarUnitsExcluding } from "../../../../../common/utils";
 import { AppState, useAppDispatch } from "../../../../../store";
@@ -448,7 +448,9 @@ const AddBucket = () => {
                           disabled={false}
                         />
                       }
-                      state={invalidFields.includes("quotaSize") ? "error" : "normal"}
+                      state={
+                        invalidFields.includes("quotaSize") ? "error" : "normal"
+                      }
                       helper={
                         invalidFields.includes("quotaSize")
                           ? "Please enter a valid quota"

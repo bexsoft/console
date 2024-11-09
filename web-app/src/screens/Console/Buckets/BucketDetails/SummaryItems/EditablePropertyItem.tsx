@@ -76,19 +76,19 @@ const EditablePropertyItem = ({
       <ValuePair
         label={property}
         value={
-            <SecureAction
-              resourceName={resourceName}
-              iamScopes={iamScopes}
-              secureCmpProps={secureCmpProps}
-            >
-              <LinkButton
-                isLoading={isLoading}
-                onClick={onEdit}
-                label={value}
-                sx={{ fontWeight: "bold", textTransform: "capitalize" }}
-                disabled={disabled}
-              />
-            </SecureAction>
+          <SecureAction
+            resourceName={resourceName}
+            iamScopes={iamScopes}
+            secureCmpProps={secureCmpProps}
+          >
+            <LinkButton
+              isLoading={isLoading}
+              onClick={onEdit}
+              label={value}
+              sx={{ fontWeight: "bold", textTransform: "capitalize" }}
+              disabled={disabled}
+            />
+          </SecureAction>
         }
       />
       <SecureAction

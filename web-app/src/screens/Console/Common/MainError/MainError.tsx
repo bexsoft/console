@@ -61,10 +61,7 @@ const MainError = ({ isModal = false }: IMainErrorProps) => {
   }
 
   return (
-    <NotificationAlert
-      onClose={closeErrorMessage}
-      color={"error"}
-    >
+    <NotificationAlert onClose={closeErrorMessage} color={"error"}>
       {messageDetails ? messageDetails : `${message}.`}
     </NotificationAlert>
   );

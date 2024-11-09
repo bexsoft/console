@@ -26,7 +26,7 @@ import {
   MinIOIcon,
   TabItemProps,
   Tabs,
-  styled
+  styled,
 } from "mds";
 import { useSelector } from "react-redux";
 import { AppState, useAppDispatch } from "../../store";

@@ -26,7 +26,7 @@ import {
   Grid,
   Tag,
   FormLayout,
-  styled
+  styled,
 } from "mds";
 import { BucketObject } from "api/consoleApi";
 import { api } from "api";

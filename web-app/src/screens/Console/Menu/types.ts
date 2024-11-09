@@ -30,7 +30,6 @@ export interface MenuItemProps {
   isVisible?: boolean;
 }
 
-
 export interface IMenuItem extends MenuItemProps {
   forceDisplay?: boolean;
   fsHidden?: boolean;

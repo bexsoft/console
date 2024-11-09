@@ -17,14 +17,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
-import {
-  Button,
-  FolderPlusIcon,
-  InputBox,
-  Grid,
-  FormLayout,
-  Box,
-} from "mds";
+import { Button, FolderPlusIcon, InputBox, Grid, FormLayout, Box } from "mds";
 import ModalWrapper from "../../../../Common/ModalWrapper/ModalWrapper";
 import { modalStyleUtils } from "../../../../Common/FormComponents/common/styleLibrary";
 import { BucketObjectItem } from "./types";

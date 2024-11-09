@@ -478,7 +478,11 @@ const BucketSummary = () => {
                     value={
                       <LabelWithIcon
                         icon={
-                          replicationRules ? <CircleCheckBigIcon /> : <CircleOffIcon />
+                          replicationRules ? (
+                            <CircleCheckBigIcon />
+                          ) : (
+                            <CircleOffIcon />
+                          )
                         }
                         label={
                           <label className={"muted"}>
@@ -502,7 +506,11 @@ const BucketSummary = () => {
                     value={
                       <LabelWithIcon
                         icon={
-                          hasObjectLocking ? <CircleCheckBigIcon /> : <CircleOffIcon />
+                          hasObjectLocking ? (
+                            <CircleCheckBigIcon />
+                          ) : (
+                            <CircleOffIcon />
+                          )
                         }
                         label={
                           <label className={"muted"}>
