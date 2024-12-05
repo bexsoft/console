@@ -16,7 +16,7 @@
 
 import React, { Fragment, useEffect, useState } from "react";
 import ConfirmDialog from "../../../../Common/ModalWrapper/ConfirmDialog";
-import { ConfirmDeleteIcon, Switch } from "mds";
+import { CircleXIcon, Toggle } from "mds";
 import { setErrorSnackMessage } from "../../../../../../systemSlice";
 import { AppState, useAppDispatch } from "../../../../../../store";
 import { hasPermission } from "../../../../../../common/SecureComponent";
@@ -104,7 +104,7 @@ const DeleteObject = ({
       title={`Delete Selected Versions`}
       confirmText={"Delete"}
       isOpen={deleteOpen}
-      titleIcon={<ConfirmDeleteIcon />}
+      titleIcon={<CircleXIcon />}
       isLoading={deleteLoading}
       onConfirm={onConfirmDelete}
       onClose={onClose}
@@ -119,7 +119,7 @@ const DeleteObject = ({
                   marginTop: 10,
                 }}
               >
-                <Switch
+                <Toggle
                   label={"Bypass Governance Mode"}
                   indicatorLabels={["Yes", "No"]}
                   checked={bypassGovernance}
@@ -129,7 +129,7 @@ const DeleteObject = ({
                   onChange={(e) => {
                     setBypassGovernance(!bypassGovernance);
                   }}
-                  description=""
+                  helper=""
                 />
               </div>
             </Fragment>

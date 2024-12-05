@@ -16,7 +16,7 @@
 
 import React, { Fragment, useState } from "react";
 import ConfirmDialog from "../Common/ModalWrapper/ConfirmDialog";
-import { ConfirmDeleteIcon } from "mds";
+import { CircleXIcon } from "mds";
 import { setErrorSnackMessage } from "../../../systemSlice";
 import { useAppDispatch } from "../../../store";
 import { api } from "api";
@@ -63,7 +63,7 @@ const DeletePolicy = ({
       title={`Delete Policy`}
       confirmText={"Delete"}
       isOpen={deleteOpen}
-      titleIcon={<ConfirmDeleteIcon />}
+      titleIcon={<CircleXIcon />}
       isLoading={loadingDelete}
       onConfirm={onConfirmDelete}
       onClose={onClose}

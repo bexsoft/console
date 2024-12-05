@@ -17,61 +17,32 @@
 import React, { Fragment, useEffect, useState } from "react";
 import get from "lodash/get";
 import { useSelector } from "react-redux";
-import {
-  ActionsList,
-  Box,
-  Button,
-  DeleteIcon,
-  DownloadIcon,
-  Grid,
-  InspectMenuIcon,
-  LegalHoldIcon,
-  Loader,
-  MetadataIcon,
-  ObjectInfoIcon,
-  PreviewIcon,
-  RetentionIcon,
-  ShareIcon,
-  SimpleHeader,
-  TagsIcon,
-  VersionsIcon,
-} from "mds";
+import { Box, DataIcon, Loader, ScreenTitle } from "mds";
 import { api } from "api";
-import { downloadObject } from "../../../../ObjectBrowser/utils";
-import { BucketObject, BucketVersioningResponse } from "api/consoleApi";
-import { AllowedPreviews, previewObjectType } from "../utils";
+import { BucketObject } from "api/consoleApi";
 import {
   niceBytes,
   niceBytesInt,
   niceDaysInt,
 } from "../../../../../../common/utils";
-import {
-  IAM_SCOPES,
-  permissionTooltipHelper,
-} from "../../../../../../common/SecureComponent/permissions";
+import { IAM_SCOPES } from "../../../../../../common/SecureComponent/permissions";
 import { AppState, useAppDispatch } from "../../../../../../store";
 import {
-  hasPermission,
   SecureComponent,
 } from "../../../../../../common/SecureComponent";
 import { selDistSet } from "../../../../../../systemSlice";
 import {
   setLoadingObjectInfo,
-  setLoadingVersions,
-  setSelectedVersion,
-  setVersionsModeEnabled,
+  setLongFileOpen,
+  setObjectInfo,
+  setObjectMetadata,
 } from "../../../../ObjectBrowser/objectBrowserSlice";
-import { displayFileIconName } from "./utils";
-import PreviewFileModal from "../Preview/PreviewFileModal";
 import ObjectMetaData from "../ObjectDetails/ObjectMetaData";
-import ShareFile from "../ObjectDetails/ShareFile";
-import SetRetention from "../ObjectDetails/SetRetention";
-import DeleteObject from "../ListObjects/DeleteObject";
-import SetLegalHoldModal from "../ObjectDetails/SetLegalHoldModal";
-import TagsModal from "../ObjectDetails/TagsModal";
-import InspectObject from "./InspectObject";
 import RenameLongFileName from "../../../../ObjectBrowser/RenameLongFilename";
-import TooltipWrapper from "../../../../Common/TooltipWrapper/TooltipWrapper";
+import { displayFileIconName } from "./utils";
+import SingleObjectSelected from "../../../../ObjectBrowser/ButtonGroups/SingleObjectSelected";
+import { Theme } from "@emotion/react";
+import ObjectDetailsTabs from "./ObjectDetailsTabs";
 
 const emptyFile: BucketObject = {
   is_latest: true,
@@ -88,45 +59,31 @@ const emptyFile: BucketObject = {
 interface IObjectDetailPanelProps {
   internalPaths: string;
   bucketName: string;
-  versioningInfo: BucketVersioningResponse;
-  locking: boolean | undefined;
-  onClosePanel: (hardRefresh: boolean) => void;
 }
 
 const ObjectDetailPanel = ({
   internalPaths,
   bucketName,
-  versioningInfo,
-  locking,
-  onClosePanel,
 }: IObjectDetailPanelProps) => {
   const dispatch = useAppDispatch();
 
   const distributedSetup = useSelector(selDistSet);
-  const versionsMode = useSelector(
-    (state: AppState) => state.objectBrowser.versionsMode,
-  );
   const selectedVersion = useSelector(
-    (state: AppState) => state.objectBrowser.selectedVersion,
+    (state: AppState) => state.objectBrowser.selectedVersion
   );
   const loadingObjectInfo = useSelector(
-    (state: AppState) => state.objectBrowser.loadingObjectInfo,
+    (state: AppState) => state.objectBrowser.loadingObjectInfo
+  );
+  const actualInfo = useSelector(
+    (state: AppState) => state.objectBrowser.objectData.selectedObjectInfo
+  );
+  const longFileOpen = useSelector(
+    (state: AppState) => state.objectBrowser.longFileOpen
   );
 
-  const [shareFileModalOpen, setShareFileModalOpen] = useState<boolean>(false);
-  const [retentionModalOpen, setRetentionModalOpen] = useState<boolean>(false);
-  const [tagModalOpen, setTagModalOpen] = useState<boolean>(false);
-  const [legalholdOpen, setLegalholdOpen] = useState<boolean>(false);
-  const [inspectModalOpen, setInspectModalOpen] = useState<boolean>(false);
-  const [actualInfo, setActualInfo] = useState<BucketObject | null>(null);
   const [allInfoElements, setAllInfoElements] = useState<BucketObject[]>([]);
-  const [objectToShare, setObjectToShare] = useState<BucketObject | null>(null);
   const [versions, setVersions] = useState<BucketObject[]>([]);
-  const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
-  const [previewOpen, setPreviewOpen] = useState<boolean>(false);
   const [totalVersionsSize, setTotalVersionsSize] = useState<number>(0);
-  const [longFileOpen, setLongFileOpen] = useState<boolean>(false);
-  const [metaData, setMetaData] = useState<any | null>(null);
   const [loadMetadata, setLoadingMetadata] = useState<boolean>(false);
 
   const internalPathsDecoded = internalPaths || "";
@@ -147,7 +104,7 @@ const ObjectDetailPanel = ({
       if (selectedVersion !== "") {
         infoElement =
           allInfoElements.find(
-            (el: BucketObject) => el.version_id === selectedVersion,
+            (el: BucketObject) => el.version_id === selectedVersion
           ) || emptyFile;
       }
 
@@ -155,9 +112,9 @@ const ObjectDetailPanel = ({
         setLoadingMetadata(true);
       }
 
-      setActualInfo(infoElement);
+      dispatch(setObjectInfo(infoElement));
     }
-  }, [selectedVersion, distributedSetup, allInfoElements]);
+  }, [selectedVersion, distributedSetup, allInfoElements, dispatch]);
 
   useEffect(() => {
     if (loadingObjectInfo && internalPaths !== "") {
@@ -179,14 +136,14 @@ const ObjectDetailPanel = ({
                 }
                 return acc;
               },
-              0,
+              0
             );
 
             setTotalVersionsSize(tVersionSize);
           } else {
             const resInfo = result[0];
 
-            setActualInfo(resInfo);
+            dispatch(setObjectInfo(resInfo));
             setVersions([]);
 
             if (!resInfo.is_delete_marker) {
@@ -220,7 +177,7 @@ const ObjectDetailPanel = ({
         .then((res) => {
           let metadata = get(res.data, "objectMetadata", {});
 
-          setMetaData(metadata);
+          dispatch(setObjectMetadata(metadata));
           setLoadingMetadata(false);
         })
         .catch((err) => {
@@ -228,69 +185,16 @@ const ObjectDetailPanel = ({
           setLoadingMetadata(false);
         });
     }
-  }, [bucketName, internalPaths, loadMetadata, actualInfo?.version_id]);
-
-  let tagKeys: string[] = [];
-
-  if (actualInfo && actualInfo.tags) {
-    tagKeys = Object.keys(actualInfo.tags);
-  }
-
-  const openRetentionModal = () => {
-    setRetentionModalOpen(true);
-  };
-
-  const closeRetentionModal = (updateInfo: boolean) => {
-    setRetentionModalOpen(false);
-    if (updateInfo) {
-      dispatch(setLoadingObjectInfo(true));
-    }
-  };
-
-  const shareObject = () => {
-    setShareFileModalOpen(true);
-  };
-
-  const closeShareModal = () => {
-    setObjectToShare(null);
-    setShareFileModalOpen(false);
-  };
+  }, [
+    bucketName,
+    internalPaths,
+    loadMetadata,
+    actualInfo?.version_id,
+    dispatch,
+  ]);
 
   const closeFileOpen = () => {
-    setLongFileOpen(false);
-  };
-
-  const closeDeleteModal = (closeAndReload: boolean) => {
-    setDeleteOpen(false);
-
-    if (closeAndReload && selectedVersion === "") {
-      onClosePanel(true);
-    } else {
-      dispatch(setLoadingVersions(true));
-      dispatch(setSelectedVersion(""));
-      dispatch(setLoadingObjectInfo(true));
-    }
-  };
-
-  const closeAddTagModal = (reloadObjectData: boolean) => {
-    setTagModalOpen(false);
-    if (reloadObjectData) {
-      dispatch(setLoadingObjectInfo(true));
-    }
-  };
-
-  const closeInspectModal = (reloadObjectData: boolean) => {
-    setInspectModalOpen(false);
-    if (reloadObjectData) {
-      dispatch(setLoadingObjectInfo(true));
-    }
-  };
-
-  const closeLegalholdModal = (reload: boolean) => {
-    setLegalholdOpen(false);
-    if (reload) {
-      dispatch(setLoadingObjectInfo(true));
-    }
+    dispatch(setLongFileOpen(false));
   };
 
   const loaderForContainer = (
@@ -312,211 +216,6 @@ const ObjectDetailPanel = ({
       ? objectNameArray[objectNameArray.length - 1]
       : actualInfo.name;
 
-  const objectResources = [
-    bucketName,
-    currentItem,
-    [bucketName, actualInfo.name].join("/"),
-  ];
-  const canSetLegalHold = hasPermission(bucketName, [
-    IAM_SCOPES.S3_PUT_OBJECT_LEGAL_HOLD,
-    IAM_SCOPES.S3_PUT_ACTIONS,
-  ]);
-  const canSetTags = hasPermission(objectResources, [
-    IAM_SCOPES.S3_PUT_OBJECT_TAGGING,
-    IAM_SCOPES.S3_PUT_ACTIONS,
-  ]);
-
-  const canChangeRetention = hasPermission(
-    objectResources,
-    [
-      IAM_SCOPES.S3_GET_OBJECT_RETENTION,
-      IAM_SCOPES.S3_PUT_OBJECT_RETENTION,
-      IAM_SCOPES.S3_GET_ACTIONS,
-      IAM_SCOPES.S3_PUT_ACTIONS,
-    ],
-    true,
-  );
-  const canInspect = hasPermission(objectResources, [
-    IAM_SCOPES.ADMIN_INSPECT_DATA,
-  ]);
-  const canChangeVersioning = hasPermission(objectResources, [
-    IAM_SCOPES.S3_GET_BUCKET_VERSIONING,
-    IAM_SCOPES.S3_PUT_BUCKET_VERSIONING,
-    IAM_SCOPES.S3_GET_OBJECT_VERSION,
-    IAM_SCOPES.S3_GET_ACTIONS,
-    IAM_SCOPES.S3_PUT_ACTIONS,
-  ]);
-  const canGetObject = hasPermission(objectResources, [
-    IAM_SCOPES.S3_GET_OBJECT,
-    IAM_SCOPES.S3_GET_ACTIONS,
-  ]);
-  const canDelete = hasPermission(
-    [bucketName, currentItem, [bucketName, actualInfo.name].join("/")],
-    [IAM_SCOPES.S3_DELETE_OBJECT],
-  );
-
-  let objectType: AllowedPreviews = previewObjectType(metaData, currentItem);
-
-  const multiActionButtons = [
-    {
-      action: () => {
-        downloadObject(dispatch, bucketName, internalPaths, actualInfo);
-      },
-      label: "Download",
-      disabled: !!actualInfo.is_delete_marker || !canGetObject,
-      icon: <DownloadIcon />,
-      tooltip: canGetObject
-        ? "Download this Object"
-        : permissionTooltipHelper(
-            [IAM_SCOPES.S3_GET_OBJECT, IAM_SCOPES.S3_GET_ACTIONS],
-            "download this object",
-          ),
-    },
-    {
-      action: () => {
-        shareObject();
-      },
-      label: "Share",
-      disabled: !!actualInfo.is_delete_marker || !canGetObject,
-      icon: <ShareIcon />,
-      tooltip: canGetObject
-        ? "Share this File"
-        : permissionTooltipHelper(
-            [IAM_SCOPES.S3_GET_OBJECT, IAM_SCOPES.S3_GET_ACTIONS],
-            "share this object",
-          ),
-    },
-    {
-      action: () => {
-        setPreviewOpen(true);
-      },
-      label: "Preview",
-      disabled:
-        !!actualInfo.is_delete_marker ||
-        (objectType === "none" && !canGetObject),
-      icon: <PreviewIcon />,
-      tooltip: canGetObject
-        ? "Preview this File"
-        : permissionTooltipHelper(
-            [IAM_SCOPES.S3_GET_OBJECT, IAM_SCOPES.S3_GET_ACTIONS],
-            "preview this object",
-          ),
-    },
-    {
-      action: () => {
-        setLegalholdOpen(true);
-      },
-      label: "Legal Hold",
-      disabled:
-        !locking ||
-        !distributedSetup ||
-        !!actualInfo.is_delete_marker ||
-        !canSetLegalHold ||
-        selectedVersion !== "",
-      icon: <LegalHoldIcon />,
-      tooltip: canSetLegalHold
-        ? locking
-          ? "Change Legal Hold rules for this File"
-          : "Object Locking must be enabled on this bucket in order to set Legal Hold"
-        : permissionTooltipHelper(
-            [IAM_SCOPES.S3_PUT_OBJECT_LEGAL_HOLD, IAM_SCOPES.S3_PUT_ACTIONS],
-            "change legal hold settings for this object",
-          ),
-    },
-    {
-      action: openRetentionModal,
-      label: "Retention",
-      disabled:
-        !distributedSetup ||
-        !!actualInfo.is_delete_marker ||
-        !canChangeRetention ||
-        selectedVersion !== "" ||
-        !locking,
-      icon: <RetentionIcon />,
-      tooltip: canChangeRetention
-        ? locking
-          ? "Change Retention rules for this File"
-          : "Object Locking must be enabled on this bucket in order to set Retention Rules"
-        : permissionTooltipHelper(
-            [
-              IAM_SCOPES.S3_GET_OBJECT_RETENTION,
-              IAM_SCOPES.S3_PUT_OBJECT_RETENTION,
-              IAM_SCOPES.S3_GET_ACTIONS,
-              IAM_SCOPES.S3_PUT_ACTIONS,
-            ],
-            "change Retention Rules for this object",
-          ),
-    },
-    {
-      action: () => {
-        setTagModalOpen(true);
-      },
-      label: "Tags",
-      disabled:
-        !!actualInfo.is_delete_marker || selectedVersion !== "" || !canSetTags,
-      icon: <TagsIcon />,
-      tooltip: canSetTags
-        ? "Change Tags for this File"
-        : permissionTooltipHelper(
-            [
-              IAM_SCOPES.S3_PUT_OBJECT_TAGGING,
-              IAM_SCOPES.S3_GET_OBJECT_TAGGING,
-              IAM_SCOPES.S3_GET_ACTIONS,
-              IAM_SCOPES.S3_PUT_ACTIONS,
-            ],
-            "set Tags on this object",
-          ),
-    },
-    {
-      action: () => {
-        setInspectModalOpen(true);
-      },
-      label: "Inspect",
-      disabled:
-        !distributedSetup ||
-        !!actualInfo.is_delete_marker ||
-        selectedVersion !== "" ||
-        !canInspect,
-      icon: <InspectMenuIcon />,
-      tooltip: canInspect
-        ? "Inspect this file"
-        : permissionTooltipHelper(
-            [IAM_SCOPES.ADMIN_INSPECT_DATA],
-            "inspect this file",
-          ),
-    },
-    {
-      action: () => {
-        dispatch(
-          setVersionsModeEnabled({
-            status: !versionsMode,
-            objectName: objectName,
-          }),
-        );
-      },
-      label: versionsMode ? "Hide Object Versions" : "Display Object Versions",
-      icon: <VersionsIcon />,
-      disabled:
-        !distributedSetup ||
-        !(actualInfo.version_id && actualInfo.version_id !== "null") ||
-        !canChangeVersioning,
-      tooltip: canChangeVersioning
-        ? actualInfo.version_id && actualInfo.version_id !== "null"
-          ? "Display Versions for this file"
-          : ""
-        : permissionTooltipHelper(
-            [
-              IAM_SCOPES.S3_GET_BUCKET_VERSIONING,
-              IAM_SCOPES.S3_PUT_BUCKET_VERSIONING,
-              IAM_SCOPES.S3_GET_OBJECT_VERSION,
-              IAM_SCOPES.S3_GET_ACTIONS,
-              IAM_SCOPES.S3_PUT_ACTIONS,
-            ],
-            "display all versions of this object",
-          ),
-    },
-  ];
-
   const calculateLastModifyTime = (lastModified: string) => {
     const currentTime = new Date();
     const modifiedTime = new Date(lastModified);
@@ -530,68 +229,6 @@ const ObjectDetailPanel = ({
 
   return (
     <Fragment>
-      {shareFileModalOpen && actualInfo && (
-        <ShareFile
-          open={shareFileModalOpen}
-          closeModalAndRefresh={closeShareModal}
-          bucketName={bucketName}
-          dataObject={objectToShare || actualInfo}
-        />
-      )}
-      {retentionModalOpen && actualInfo && (
-        <SetRetention
-          open={retentionModalOpen}
-          closeModalAndRefresh={closeRetentionModal}
-          objectName={currentItem}
-          objectInfo={actualInfo}
-          bucketName={bucketName}
-        />
-      )}
-      {deleteOpen && (
-        <DeleteObject
-          deleteOpen={deleteOpen}
-          selectedBucket={bucketName}
-          selectedObject={internalPaths}
-          closeDeleteModalAndRefresh={closeDeleteModal}
-          versioningInfo={distributedSetup ? versioningInfo : undefined}
-          selectedVersion={selectedVersion}
-        />
-      )}
-      {legalholdOpen && actualInfo && (
-        <SetLegalHoldModal
-          open={legalholdOpen}
-          closeModalAndRefresh={closeLegalholdModal}
-          objectName={actualInfo.name || ""}
-          bucketName={bucketName}
-          actualInfo={actualInfo}
-        />
-      )}
-      {previewOpen && actualInfo && (
-        <PreviewFileModal
-          open={previewOpen}
-          bucketName={bucketName}
-          actualInfo={actualInfo}
-          onClosePreview={() => {
-            setPreviewOpen(false);
-          }}
-        />
-      )}
-      {tagModalOpen && actualInfo && (
-        <TagsModal
-          modalOpen={tagModalOpen}
-          bucketName={bucketName}
-          actualInfo={actualInfo}
-          onCloseAndUpdate={closeAddTagModal}
-        />
-      )}
-      {inspectModalOpen && actualInfo && (
-        <InspectObject
-          inspectOpen={inspectModalOpen}
-          volumeName={bucketName}
-          inspectPath={actualInfo.name || ""}
-          closeInspectModalAndRefresh={closeInspectModal}
-        />
-      )}
       {longFileOpen && actualInfo && (
         <RenameLongFileName
           open={longFileOpen}
@@ -607,7 +244,11 @@ const ObjectDetailPanel = ({
         <Fragment>{loaderForContainer}</Fragment>
       ) : (
         <Box
-          sx={{
+          sx={(theme) => ({
+            backgroundColor: theme.colors["Color/Neutral/Bg/colorBgShell"],
+            padding: `${theme.paddingSizes["sizeLG"]}px ${theme.paddingSizes["size"]}px`,
+            borderRadius: theme.borderRadius["borderRadiusLG"],
+            height: "100%",
             "& .ObjectDetailsTitle": {
               display: "flex",
               alignItems: "center",
@@ -628,175 +269,30 @@ const ObjectDetailPanel = ({
             "& .capitalizeFirst": {
               textTransform: "capitalize",
             },
-            "& .detailContainer": {
-              padding: "0 22px",
-              marginBottom: 10,
-              fontSize: 14,
-            },
-          }}
+          })}
         >
-          <ActionsList
-            title={
-              <div className={"ObjectDetailsTitle"}>
-                {displayFileIconName(objectName || "", true)}
-                <span className={"objectNameContainer"}>{objectName}</span>
-              </div>
-            }
-            items={multiActionButtons}
-          />
-          <TooltipWrapper
-            tooltip={
-              canDelete
-                ? ""
-                : permissionTooltipHelper(
-                    [IAM_SCOPES.S3_DELETE_OBJECT],
-                    "delete this object",
-                  )
-            }
+          <Box
+            sx={(theme) => ({
+              display: "flex",
+              gap: 8,
+              alignItems: "center",
+              marginBottom: theme.paddingSizes["size"],
+              "& .objTitleName": {
+                overflowWrap: "break-word",
+                boxSizing: "border-box",
+                overflow: "hidden",
+                color: theme.colors["Color/Neutral/Text/colorTextHeading"],
+              },
+            })}
           >
-            <Grid
-              item
-              xs={12}
-              sx={{ justifyContent: "center", display: "flex" }}
-            >
-              <SecureComponent
-                resource={[
-                  bucketName,
-                  currentItem,
-                  [bucketName, actualInfo.name].join("/"),
-                ]}
-                scopes={[IAM_SCOPES.S3_DELETE_OBJECT]}
-                errorProps={{ disabled: true }}
-              >
-                <Button
-                  id={"delete-element-click"}
-                  icon={<DeleteIcon />}
-                  iconLocation={"start"}
-                  fullWidth
-                  variant={"secondary"}
-                  onClick={() => {
-                    setDeleteOpen(true);
-                  }}
-                  disabled={
-                    selectedVersion === "" && actualInfo.is_delete_marker
-                  }
-                  sx={{
-                    width: "calc(100% - 44px)",
-                    margin: "8px 0",
-                  }}
-                  label={`Delete${selectedVersion !== "" ? " version" : ""}`}
-                />
-              </SecureComponent>
-            </Grid>
-          </TooltipWrapper>
-          <SimpleHeader icon={<ObjectInfoIcon />} label={"Object Info"} />
-          <Box className={"detailContainer"}>
-            <strong>Name:</strong>
-            <br />
-            <div style={{ overflowWrap: "break-word" }}>{objectName}</div>
+            {displayFileIconName(objectName || "", true)}
+            <Box className={"objTitleName Base_Strong"}>{objectName}</Box>
           </Box>
-          {selectedVersion !== "" && (
-            <Box className={"detailContainer"}>
-              <strong>Version ID:</strong>
-              <br />
-              {selectedVersion}
-            </Box>
-          )}
-          <Box className={"detailContainer"}>
-            <strong>Size:</strong>
-            <br />
-            {niceBytes(`${actualInfo.size || "0"}`)}
-          </Box>
-          {actualInfo.version_id &&
-            actualInfo.version_id !== "null" &&
-            selectedVersion === "" && (
-              <Box className={"detailContainer"}>
-                <strong>Versions:</strong>
-                <br />
-                {versions.length} version{versions.length !== 1 ? "s" : ""},{" "}
-                {niceBytesInt(totalVersionsSize)}
-              </Box>
-            )}
-          {selectedVersion === "" && (
-            <Box className={"detailContainer"}>
-              <strong>Last Modified:</strong>
-              <br />
-              {calculateLastModifyTime(actualInfo.last_modified || "")}
-            </Box>
-          )}
-          <Box className={"detailContainer"}>
-            <strong>ETAG:</strong>
-            <br />
-            {actualInfo.etag || "N/A"}
-          </Box>
-          <Box className={"detailContainer"}>
-            <strong>Tags:</strong>
-            <br />
-            {tagKeys.length === 0
-              ? "N/A"
-              : tagKeys.map((tagKey, index) => {
-                  return (
-                    <span key={`key-vs-${index.toString()}`}>
-                      {tagKey}:{get(actualInfo, `tags.${tagKey}`, "")}
-                      {index < tagKeys.length - 1 ? ", " : ""}
-                    </span>
-                  );
-                })}
-          </Box>
-          <Box className={"detailContainer"}>
-            <SecureComponent
-              scopes={[
-                IAM_SCOPES.S3_GET_OBJECT_LEGAL_HOLD,
-                IAM_SCOPES.S3_GET_ACTIONS,
-              ]}
-              resource={bucketName}
-            >
-              <Fragment>
-                <strong>Legal Hold:</strong>
-                <br />
-                {actualInfo.legal_hold_status ? "On" : "Off"}
-              </Fragment>
-            </SecureComponent>
-          </Box>
-          <Box className={"detailContainer"}>
-            <SecureComponent
-              scopes={[
-                IAM_SCOPES.S3_GET_OBJECT_RETENTION,
-                IAM_SCOPES.S3_GET_ACTIONS,
-              ]}
-              resource={bucketName}
-            >
-              <Fragment>
-                <strong>Retention Policy:</strong>
-                <br />
-                <span className={"capitalizeFirst"}>
-                  {actualInfo.version_id && actualInfo.version_id !== "null" ? (
-                    <Fragment>
-                      {actualInfo.retention_mode
-                        ? actualInfo.retention_mode.toLowerCase()
-                        : "None"}
-                    </Fragment>
-                  ) : (
-                    <Fragment>
-                      {actualInfo.retention_mode
-                        ? actualInfo.retention_mode.toLowerCase()
-                        : "None"}
-                    </Fragment>
-                  )}
-                </span>
-              </Fragment>
-            </SecureComponent>
-          </Box>
-          {!actualInfo.is_delete_marker && (
-            <Fragment>
-              <SimpleHeader label={"Metadata"} icon={<MetadataIcon />} />
-              <Box className={"detailContainer"}>
-                {actualInfo && metaData ? (
-                  <ObjectMetaData metaData={metaData} />
-                ) : null}
-              </Box>
-            </Fragment>
-          )}
+          <SingleObjectSelected />
+          <ObjectDetailsTabs
+            totalVersionsSize={totalVersionsSize}
+            versions={versions}
+          />
         </Box>
       )}
     </Fragment>

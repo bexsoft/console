@@ -15,17 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from "react";
-import { Box, Button, ModalBox } from "mds";
-
-interface ButtonProps {
-  label?: string;
-  variant?: "regular" | "callAction" | "secondary";
-  icon?: React.ReactNode;
-  iconLocation?: "start" | "end";
-  fullWidth?: boolean;
-  disabled?: boolean;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-}
+import { Box, Button, ModalBox, ButtonProps } from "mds";
 
 type ConfirmDialogProps = {
   isOpen?: boolean;
@@ -37,12 +27,12 @@ type ConfirmDialogProps = {
   confirmationContent: React.ReactNode | React.ReactNode[];
   cancelText?: string;
   confirmText?: string;
+  dialogWidth?: number;
   confirmButtonProps?: ButtonProps &
     React.ButtonHTMLAttributes<HTMLButtonElement>;
   cancelButtonProps?: ButtonProps &
     React.ButtonHTMLAttributes<HTMLButtonElement>;
   titleIcon?: React.ReactNode;
-  confirmationButtonSimple?: boolean;
 };
 
 const ConfirmDialog = ({
@@ -58,7 +48,7 @@ const ConfirmDialog = ({
   confirmButtonProps = undefined,
   cancelButtonProps = undefined,
   titleIcon = null,
-  confirmationButtonSimple = false,
+  dialogWidth = 510,
 }: ConfirmDialogProps) => {
   return (
     <ModalBox
@@ -66,7 +56,7 @@ const ConfirmDialog = ({
       titleIcon={titleIcon}
       onClose={onClose}
       open={isOpen}
-      customMaxWidth={510}
+      customMaxWidth={dialogWidth}
     >
       <Box>{confirmationContent}</Box>
       <Box
@@ -82,7 +72,7 @@ const ConfirmDialog = ({
           disabled={isLoading}
           type="button"
           {...cancelButtonProps}
-          variant="regular"
+          variant="secondary"
           id={"confirm-cancel"}
           label={cancelText}
         />
@@ -92,7 +82,7 @@ const ConfirmDialog = ({
           onClick={onConfirm}
           label={confirmText}
           disabled={isLoading}
-          variant={"secondary"}
+          variant={"destructive"}
           {...confirmButtonProps}
         />
       </Box>

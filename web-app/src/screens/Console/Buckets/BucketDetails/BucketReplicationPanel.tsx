@@ -18,16 +18,15 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  AddIcon,
   Box,
-  BucketsIcon,
+  BucketIcon,
   Button,
   DataTable,
   Grid,
   HelpBox,
+  PlusIcon,
   SectionTitle,
   TrashIcon,
-  HelpTip,
 } from "mds";
 import api from "../../../../common/api";
 import {
@@ -168,8 +167,8 @@ const BucketReplicationPanel = () => {
     return <Fragment>{events.bucket.replace("arn:aws:s3:::", "")}</Fragment>;
   };
 
-  const tagDisplay = (events: BucketReplicationRule) => {
-    return <Fragment>{events && events.tags !== "" ? "Yes" : "No"}</Fragment>;
+  const tagDisplay = (events: string | undefined) => {
+    return <Fragment>{events !== "" ? "Yes" : "No"}</Fragment>;
   };
 
   const selectAllItems = () => {
@@ -303,32 +302,15 @@ const BucketReplicationPanel = () => {
                     );
                   }}
                   label={"Add Replication Rule"}
-                  icon={<AddIcon />}
-                  variant={"callAction"}
+                  icon={<PlusIcon />}
+                  variant={"primary"}
                 />
               </TooltipWrapper>
             </SecureComponent>
           </Box>
         }
       >
-        <HelpTip
-          content={
-            <Fragment>
-              MinIO{" "}
-              <a
-                target="blank"
-                href="https://min.io/docs/minio/kubernetes/upstream/administration/bucket-replication.html"
-              >
-                server-side bucket replication
-              </a>{" "}
-              is an automatic bucket-level configuration that synchronizes
-              objects between a source and destination bucket.
-            </Fragment>
-          }
-          placement="right"
-        >
-          Replication
-        </HelpTip>
+        Replication
       </SectionTitle>
       <Grid container>
         <Grid item xs={12}>
@@ -383,7 +365,7 @@ const BucketReplicationPanel = () => {
           <br />
           <HelpBox
             title={"Replication"}
-            iconComponent={<BucketsIcon />}
+            icon={<BucketIcon />}
             help={
               <Fragment>
                 MinIO supports server-side and client-side replication of

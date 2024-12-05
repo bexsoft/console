@@ -18,7 +18,7 @@ import React, { Fragment, useEffect } from "react";
 import {
   BackLink,
   Button,
-  CreateUserIcon,
+  UserPlusIcon,
   FormLayout,
   Grid,
   PageLayout,
@@ -106,7 +106,7 @@ const AddUser = () => {
         <PageLayout>
           <FormLayout
             title={"Create User"}
-            icon={<CreateUserIcon />}
+            icon={<UserPlusIcon />}
             helpBox={<AddUserHelpBox />}
           >
             <form
@@ -135,7 +135,7 @@ const AddUser = () => {
                 <Button
                   id={"clear-add-user"}
                   type="button"
-                  variant="regular"
+                  variant="secondary"
                   onClick={(e) => {
                     dispatch(resetFormAsync());
                   }}
@@ -145,7 +145,7 @@ const AddUser = () => {
                 <Button
                   id={"save-user"}
                   type="submit"
-                  variant="callAction"
+                  variant="primary"
                   color="primary"
                   disabled={addLoading || !sendEnabled}
                   label={"Save"}

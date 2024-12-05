@@ -159,7 +159,7 @@ const ConfigurationOptions = () => {
         <Grid item xs={12} sx={{ paddingTop: "15px" }}>
           <HelpBox
             title={"Learn more about Configurations"}
-            iconComponent={<SettingsIcon />}
+            icon={<SettingsIcon />}
             help={
               <Fragment>
                 MinIO supports a variety of configurations ranging from

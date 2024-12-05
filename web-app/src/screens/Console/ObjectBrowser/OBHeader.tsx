@@ -91,7 +91,7 @@ const OBHeader = ({ bucketName }: IOBHeader) => {
           resource={bucketName}
           errorProps={{ disabled: true }}
         >
-          <FilterObjectsSB />
+          <div>adf</div>
         </SecureComponent>
       ) : (
         <Fragment>
@@ -114,63 +114,12 @@ const OBHeader = ({ bucketName }: IOBHeader) => {
 
   return (
     <Fragment>
-      {!obOnly ? (
-        <PageHeaderWrapper
-          label={
-            <BackLink
-              label={"Object Browser"}
-              onClick={() => {
-                navigate(IAM_PAGES.OBJECT_BROWSER_VIEW);
-              }}
-            />
-          }
-          actions={
-            <Fragment>
-              <SecureComponent
-                scopes={IAM_PERMISSIONS[IAM_ROLES.BUCKET_ADMIN]}
-                resource={bucketName}
-                errorProps={{ disabled: true }}
-              >
-                <TooltipWrapper
-                  tooltip={
-                    configureBucketAllowed
-                      ? "Configure Bucket"
-                      : "You do not have the required permissions to configure this bucket. Please contact your MinIO administrator to request " +
-                        IAM_ROLES.BUCKET_ADMIN +
-                        " permisions."
-                  }
-                >
-                  <Button
-                    id={"configure-bucket-main"}
-                    color="primary"
-                    aria-label="Configure Bucket"
-                    onClick={() => navigate(`/buckets/${bucketName}/admin`)}
-                    icon={
-                      <SettingsIcon
-                        style={{ width: 20, height: 20, marginTop: -3 }}
-                      />
-                    }
-                    style={{
-                      padding: "0 10px",
-                    }}
-                  />
-                </TooltipWrapper>
-              </SecureComponent>
-              <HelpMenu />
-            </Fragment>
-          }
-          middleComponent={searchBar}
-        />
-      ) : (
         <Grid
           container
           sx={{
             padding: "20px 32px 0",
           }}
         >
-          <Grid>
-            <AutoColorIcon marginRight={30} marginTop={10} />
-          </Grid>
           <Grid
             item
             xs
@@ -180,10 +129,8 @@ const OBHeader = ({ bucketName }: IOBHeader) => {
             }}
           >
             {searchBar}
-            <ObjectManagerButton />
           </Grid>
         </Grid>
-      )}
     </Fragment>
   );
 };

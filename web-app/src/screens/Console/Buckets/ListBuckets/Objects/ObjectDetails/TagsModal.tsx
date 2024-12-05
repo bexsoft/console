@@ -16,18 +16,17 @@
 
 import React, { Fragment, useState } from "react";
 import get from "lodash/get";
-import styled from "styled-components";
 import {
-  AddNewTagIcon,
+  TagIcon,
   Button,
-  DisabledIcon,
-  EditTagIcon,
+  CircleOffIcon,
   InputBox,
   SectionTitle,
   Box,
   Grid,
   Tag,
   FormLayout,
+  styled,
 } from "mds";
 import { BucketObject } from "api/consoleApi";
 import { api } from "api";
@@ -163,8 +162,7 @@ const AddTagModal = ({
         onClose={() => {
           onCloseAndUpdate(true);
         }}
-        iconColor={deleteEnabled ? "delete" : "default"}
-        titleIcon={deleteEnabled ? <DisabledIcon /> : <EditTagIcon />}
+        titleIcon={deleteEnabled ? <CircleOffIcon /> : <TagIcon />}
       >
         {deleteEnabled ? (
           <Fragment>
@@ -179,7 +177,7 @@ const AddTagModal = ({
                 <Button
                   id={"cancel"}
                   type="button"
-                  variant="regular"
+                  variant="secondary"
                   onClick={cancelDelete}
                   label={"Cancel"}
                 />
@@ -242,8 +240,7 @@ const AddTagModal = ({
                             <Tag
                               id={`${tagKey} : ${tag}`}
                               label={`${tagKey} : ${tag}`}
-                              variant={"regular"}
-                              color={"default"}
+                              color={"secondary"}
                               onDelete={() => {
                                 onDeleteTag(tagKey, tag);
                               }}
@@ -266,7 +263,7 @@ const AddTagModal = ({
               errorProps={{ disabled: true, onClick: null }}
             >
               <Box>
-                <SectionTitle icon={<AddNewTagIcon />} separator={false}>
+                <SectionTitle icon={<TagIcon />} separator={false}>
                   Add New Tag
                 </SectionTitle>
                 <FormLayout containerPadding={false} withBorders={false}>
@@ -294,14 +291,14 @@ const AddTagModal = ({
                     <Button
                       id={"clear"}
                       type="button"
-                      variant="regular"
+                      variant="secondary"
                       color="primary"
                       onClick={resetForm}
                       label={"Clear"}
                     />
                     <Button
                       type="submit"
-                      variant="callAction"
+                      variant="primary"
                       disabled={
                         newLabel.trim() === "" ||
                         newKey.trim() === "" ||

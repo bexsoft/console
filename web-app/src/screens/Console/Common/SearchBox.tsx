@@ -15,8 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from "react";
-import { InputBox, SearchIcon } from "mds";
-import { CSSObject } from "styled-components";
+import { InputBox, SearchIcon, OverrideTheme, Button } from "mds";
 
 type SearchBoxProps = {
   placeholder?: string;
@@ -25,7 +24,7 @@ type SearchBoxProps = {
   overrideClass?: any;
   id?: string;
   label?: string;
-  sx?: CSSObject;
+  sx?: OverrideTheme;
 };
 
 const SearchBox = ({
@@ -47,8 +46,9 @@ const SearchBox = ({
         onChange(e.target.value);
       }}
       value={value}
-      startIcon={<SearchIcon />}
       sx={sx}
+      sizeMode={"small"}
+      overlayObject={<Button id={"trigger-search"} icon={<SearchIcon />} />}
     />
   );
 };

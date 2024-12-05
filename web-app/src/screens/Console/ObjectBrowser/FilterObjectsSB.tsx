@@ -28,11 +28,12 @@ const FilterObjectsSB = () => {
   );
   return (
     <SearchBox
-      placeholder={"Start typing to filter objects in the bucket"}
+      placeholder={"Filter Objects"}
       onChange={(value) => {
         dispatch(setSearchObjects(value));
       }}
       value={searchObjects}
+      sx={{width: "initial"}}
     />
   );
 };

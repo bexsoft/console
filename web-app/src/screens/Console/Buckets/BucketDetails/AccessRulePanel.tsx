@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment, useEffect, useState } from "react";
-import { AddIcon, Button, DataTable, SectionTitle, HelpTip } from "mds";
+import { Button, DataTable, PlusIcon, SectionTitle } from "mds";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { api } from "api";
@@ -187,32 +187,14 @@ const AccessRule = () => {
                   setAddAccessRuleOpen(true);
                 }}
                 label={"Add Access Rule"}
-                icon={<AddIcon />}
-                variant={"callAction"}
+                icon={<PlusIcon />}
+                variant={"primary"}
               />
             </TooltipWrapper>
           </SecureComponent>
         }
       >
-        <HelpTip
-          content={
-            <Fragment>
-              Setting an{" "}
-              <a
-                href="https://min.io/docs/minio/linux/reference/minio-mc/mc-anonymous-set.html"
-                target="blank"
-              >
-                Anonymous
-              </a>{" "}
-              policy allows clients to access the Bucket or prefix contents and
-              perform actions consistent with the specified policy without
-              authentication.
-            </Fragment>
-          }
-          placement="right"
-        >
-          Anonymous Access
-        </HelpTip>
+        Anonymous Access
       </SectionTitle>
       <SecureComponent
         scopes={[IAM_SCOPES.S3_GET_BUCKET_POLICY, IAM_SCOPES.S3_GET_ACTIONS]}

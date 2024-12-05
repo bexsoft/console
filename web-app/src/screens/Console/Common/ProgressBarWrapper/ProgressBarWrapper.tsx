@@ -14,8 +14,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import React from "react";
-import { ProgressBar, ProgressBarProps } from "mds";
+import { ProgressBar, ProgressBarProps, ProgressState } from "mds";
 
 interface IProgressBarWrapper {
   value: number;
@@ -43,7 +42,7 @@ function LinearProgressWithLabel(
     <ProgressBar
       variant={"determinate"}
       value={props.value}
-      color={props.color}
+      state={props.state}
       progressLabel
       notificationLabel={label}
     />
@@ -60,21 +59,21 @@ const ProgressBarWrapper = ({
   cancelled,
   notificationLabel,
 }: IProgressBarWrapper) => {
-  let color: any;
+  let color: ProgressState;
   if (error) {
-    color = "red";
+    color = "error";
   } else if (cancelled) {
-    color = "orange";
+    color = "paused";
   } else if (value === 100 && ready) {
-    color = "green";
+    color = "success";
   } else {
-    color = "blue";
+    color = "progress";
   }
   const propsComponent: ProgressBarProps = {
     variant:
       indeterminate && !ready && !cancelled ? "indeterminate" : "determinate",
     value: ready && !error ? 100 : value,
-    color: color,
+    state: color,
     notificationLabel: notificationLabel || "",
   };
   if (withLabel) {

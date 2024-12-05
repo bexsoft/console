@@ -18,16 +18,16 @@ import React, { Fragment, useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import {
-  ActionLink,
-  BucketsIcon,
+  LinkButton,
+  BucketIcon,
   Button,
   DataTable,
   HelpBox,
   PageLayout,
   ProgressBar,
-  RefreshIcon,
+  RefreshCWIcon,
   Grid,
-  HelpTip,
+  Tooltip,
 } from "mds";
 import { actionsTray } from "../Common/FormComponents/common/styleLibrary";
 import { SecureComponent } from "../../../common/SecureComponent";
@@ -51,7 +51,6 @@ import { Bucket } from "../../../api/consoleApi";
 import { api } from "../../../api";
 import { errorToHandler } from "../../../api/errors";
 import HelpMenu from "../HelpMenu";
-import { usageClarifyingContent } from "../Dashboard/BasicDashboard/ReportedUsage";
 
 const OBListBuckets = () => {
   const dispatch = useAppDispatch();
@@ -158,8 +157,8 @@ const OBListBuckets = () => {
                 onClick={() => {
                   setLoading(true);
                 }}
-                icon={<RefreshIcon />}
-                variant={"regular"}
+                icon={<RefreshCWIcon />}
+                variant={"secondary"}
               />
             </TooltipWrapper>
           </Grid>
@@ -191,7 +190,7 @@ const OBListBuckets = () => {
                     elementKey: "name",
                     renderFunction: (label) => (
                       <div style={{ display: "flex" }}>
-                        <BucketsIcon
+                        <BucketIcon
                           style={{ width: 15, marginRight: 5, minWidth: 15 }}
                         />
                         <span
@@ -211,31 +210,25 @@ const OBListBuckets = () => {
                   {
                     label: "Objects",
                     elementKey: "objects",
-                    renderFunction: (size: number | null) =>
+                    renderFunction: (size: number | undefined) =>
                       size ? size.toLocaleString() : 0,
                   },
                   {
                     label: "Size",
                     elementKey: "size",
-                    renderFunction: (size: number) => (
+                    renderFunction: (size: number | undefined) => (
                       <div
                         onMouseEnter={() => setClickOverride(true)}
                         onMouseLeave={() => setClickOverride(false)}
                       >
-                        <HelpTip
-                          content={usageClarifyingContent}
-                          placement="right"
-                        >
-                          {niceBytesInt(size || 0)}
-                        </HelpTip>
+                        <>{niceBytesInt(size || 0)}</>
                       </div>
                     ),
                   },
                   {
                     label: "Access",
                     elementKey: "rw_access",
-                    renderFullObject: true,
-                    renderFunction: (bucket: Bucket) => {
+                    renderFunction: (bucket: any) => {
                       let access = [];
                       if (bucket.rw_access?.read) {
                         access.push("R");
@@ -261,7 +254,7 @@ const OBListBuckets = () => {
               >
                 <Grid item xs={8}>
                   <HelpBox
-                    iconComponent={<BucketsIcon />}
+                    icon={<BucketIcon />}
                     title={"No Results"}
                     help={
                       <Fragment>
@@ -283,7 +276,7 @@ const OBListBuckets = () => {
               >
                 <Grid item xs={8}>
                   <HelpBox
-                    iconComponent={<BucketsIcon />}
+                    icon={<BucketIcon />}
                     title={"Buckets"}
                     help={
                       <Fragment>
@@ -312,13 +305,13 @@ const OBListBuckets = () => {
                         >
                           <br />
                           To get started,&nbsp;
-                          <ActionLink
+                          <LinkButton
                             onClick={() => {
                               navigate(IAM_PAGES.ADD_BUCKETS);
                             }}
                           >
                             Create a Bucket.
-                          </ActionLink>
+                          </LinkButton>
                         </SecureComponent>
                       </Fragment>
                     }

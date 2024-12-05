@@ -17,10 +17,9 @@
 import React, { Fragment } from "react";
 import { Box } from "mds";
 import { safeDecodeURIComponent } from "../../../../../../common/utils";
-
-interface IObjectMetadata {
-  metaData: any;
-}
+import { useSelector } from "react-redux";
+import { AppState } from "../../../../../../store";
+import { Metadata } from "../../../../../../api/consoleApi";
 
 const itemRendererFn = (element: any) => {
   return Array.isArray(element)
@@ -28,26 +27,25 @@ const itemRendererFn = (element: any) => {
     : safeDecodeURIComponent(element);
 };
 
-const ObjectMetaData = ({ metaData }: IObjectMetadata) => {
+const ObjectMetaData = () => {
+  const metaData = useSelector(
+    (state: AppState) => state.objectBrowser.objectData.selectedObjectMetadata,
+  );
+
+  if (!metaData) {
+    return null;
+  }
+
   const metaKeys = Object.keys(metaData);
 
   return (
     <Fragment>
       {metaKeys.map((element: string, index: number) => {
-        const renderItem = itemRendererFn(metaData[element]);
+        const renderItem = itemRendererFn(metaData[element as keyof Metadata]);
         return (
-          <Box
-            sx={{
-              marginBottom: 15,
-              fontSize: 14,
-              maxHeight: 180,
-              overflowY: "auto",
-            }}
-            key={`box-meta-${element}-${index.toString()}`}
-          >
-            <strong>{element}</strong>
-            <br />
-            {renderItem}
+          <Box className={"detailContainer"} key={`box-meta-${element}-${index.toString()}`}>
+            <div className={"labelTitle SM_Normal"}>{element}</div>
+            <div className={"SM_Strong"}>{renderItem}</div>
           </Box>
         );
       })}

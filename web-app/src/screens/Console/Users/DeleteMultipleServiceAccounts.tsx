@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment, useState } from "react";
-import { ConfirmDeleteIcon } from "mds";
+import { CircleXIcon } from "mds";
 import ConfirmDialog from "../../../screens/Console/Common/ModalWrapper/ConfirmDialog";
 import { setErrorSnackMessage } from "../../../systemSlice";
 import { useAppDispatch } from "../../../store";
@@ -60,7 +60,7 @@ const DeleteMultipleSAs = ({
       title={`Delete Access Keys`}
       confirmText={"Delete"}
       isOpen={deleteOpen}
-      titleIcon={<ConfirmDeleteIcon />}
+      titleIcon={<CircleXIcon />}
       isLoading={loadingDelete}
       onConfirm={onConfirmDelete}
       onClose={onClose}

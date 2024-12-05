@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment, useState } from "react";
-import { AddAccessRuleIcon, Button, FormLayout, Grid, Select } from "mds";
+import { CirclePlusIcon, Button, FormLayout, Grid, Select } from "mds";
 import { api } from "api";
 import { errorToHandler } from "api/errors";
 import { modalStyleUtils } from "../../Common/FormComponents/common/styleLibrary";
@@ -72,7 +72,7 @@ const EditAccessRule = ({
         modalOpen={modalOpen}
         title={`Edit Anonymous Access Rule for ${`${bucket}/${toEdit || ""}`}`}
         onClose={onClose}
-        titleIcon={<AddAccessRuleIcon />}
+        titleIcon={<CirclePlusIcon />}
       >
         <FormLayout containerPadding={false} withBorders={false}>
           <Select
@@ -91,14 +91,14 @@ const EditAccessRule = ({
           <Button
             id={"clear"}
             type="button"
-            variant="regular"
+            variant="secondary"
             onClick={resetForm}
             label={"Clear"}
           />
           <Button
             id={"save"}
             type="submit"
-            variant="callAction"
+            variant="primary"
             onClick={createProcess}
             label={"Save"}
           />

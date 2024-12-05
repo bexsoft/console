@@ -21,13 +21,12 @@ import {
   breakPoints,
   Button,
   DeleteIcon,
-  DeleteNonCurrentIcon,
+  TrashIcon,
   Grid,
   ProgressBar,
   ScreenTitle,
   Select,
-  SelectMultipleIcon,
-  VersionsIcon,
+  SquareStackIcon,
 } from "mds";
 import ShareFile from "./ShareFile";
 
@@ -383,6 +382,7 @@ const VersionsNavigator = ({
                 bucketName={bucketName}
                 internalPaths={internalPaths}
                 hidePathButton={true}
+                uploadButton={<Fragment></Fragment>}
               />
             </Grid>
             <Grid
@@ -411,7 +411,7 @@ const VersionsNavigator = ({
                       marginTop: "-10px",
                     }}
                   >
-                    <VersionsIcon style={{ width: 20, height: 20 }} />
+                    <SquareStackIcon style={{ width: 20, height: 20 }} />
                   </span>
                 }
                 title={`${
@@ -440,8 +440,8 @@ const VersionsNavigator = ({
                         onClick={() => {
                           setSelectEnabled(!selectEnabled);
                         }}
-                        icon={<SelectMultipleIcon />}
-                        variant={selectEnabled ? "callAction" : "regular"}
+                        icon={<SquareStackIcon />}
+                        variant={selectEnabled ? "primary" : "secondary"}
                         style={{ marginRight: 8 }}
                       />
                     </TooltipWrapper>
@@ -465,7 +465,7 @@ const VersionsNavigator = ({
                         onClick={() => {
                           setDeleteNonCurrentOpen(true);
                         }}
-                        icon={<DeleteNonCurrentIcon />}
+                        icon={<TrashIcon />}
                         variant={"secondary"}
                         style={{ marginRight: 15 }}
                         disabled={versions.length <= 1}
@@ -489,7 +489,6 @@ const VersionsNavigator = ({
                     />
                   </Fragment>
                 }
-                bottomBorder={false}
               />
             </Grid>
             <Grid

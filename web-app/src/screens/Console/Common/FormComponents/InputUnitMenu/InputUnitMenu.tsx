@@ -15,14 +15,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment } from "react";
-import { DropdownSelector, SelectorType } from "mds";
-import styled from "styled-components";
+import { DropdownSelector, SelectOption, styled } from "mds";
 import get from "lodash/get";
 
 interface IInputUnitBox {
   id: string;
   unitSelected: string;
-  unitsList: SelectorType[];
+  unitsList: SelectOption[];
   disabled?: boolean;
   onUnitChange?: (newValue: string) => void;
 }

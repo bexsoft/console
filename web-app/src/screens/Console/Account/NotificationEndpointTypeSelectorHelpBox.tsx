@@ -15,12 +15,12 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import React from "react";
 
-import { HelpBox, LambdaNotificationsIcon, Box } from "mds";
+import { HelpBox, LambdaIcon, Box } from "mds";
 
 const NotificationEndpointTypeSelectorHelpBox = () => {
   return (
     <HelpBox
-      iconComponent={<LambdaNotificationsIcon />}
+      icon={<LambdaIcon />}
       title={"What are Event Destinations?"}
       help={
         <Box sx={{ paddingTop: "20px" }}>

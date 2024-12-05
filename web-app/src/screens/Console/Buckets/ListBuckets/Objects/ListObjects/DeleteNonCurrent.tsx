@@ -16,7 +16,7 @@
 
 import React, { Fragment, useEffect, useState } from "react";
 
-import { ConfirmDeleteIcon, Switch, Grid, InputBox } from "mds";
+import { CircleXIcon, Toggle, Grid, InputBox } from "mds";
 import ConfirmDialog from "../../../../Common/ModalWrapper/ConfirmDialog";
 import { setErrorSnackMessage } from "../../../../../../systemSlice";
 import { AppState, useAppDispatch } from "../../../../../../store";
@@ -91,11 +91,12 @@ const DeleteNonCurrentVersions = ({
       title={`Delete Non-Current versions`}
       confirmText={"Delete"}
       isOpen={deleteOpen}
-      titleIcon={<ConfirmDeleteIcon />}
+      titleIcon={<CircleXIcon />}
       isLoading={deleteLoading}
       onConfirm={onConfirmDelete}
       onClose={() => closeDeleteModalAndRefresh(false)}
       confirmButtonProps={{
+        id: "proceed-delete",
         disabled: typeConfirm !== "YES, PROCEED" || deleteLoading,
       }}
       confirmationContent={
@@ -109,7 +110,7 @@ const DeleteNonCurrentVersions = ({
                   marginTop: 10,
                 }}
               >
-                <Switch
+                <Toggle
                   label={"Bypass Governance Mode"}
                   indicatorLabels={["Yes", "No"]}
                   checked={bypassGovernance}
@@ -119,7 +120,7 @@ const DeleteNonCurrentVersions = ({
                   onChange={(e) => {
                     setBypassGovernance(!bypassGovernance);
                   }}
-                  description=""
+                  helper=""
                 />
               </div>
             </Fragment>

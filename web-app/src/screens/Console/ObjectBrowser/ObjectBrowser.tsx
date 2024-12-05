@@ -55,14 +55,6 @@ const ObjectBrowser = () => {
           </Suspense>
         }
       />
-      <Route
-        path=":bucketName/"
-        element={
-          <Suspense fallback={<LoadingComponent />}>
-            <BrowserHandler />
-          </Suspense>
-        }
-      />
       <Route element={<Navigate to={`/browser`} />} path="*" />
 
       <Route

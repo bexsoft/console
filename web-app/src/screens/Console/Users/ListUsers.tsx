@@ -17,17 +17,16 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  AddIcon,
+  PlusIcon,
   Button,
   DeleteIcon,
-  GroupsIcon,
   HelpBox,
   PageLayout,
   UsersIcon,
   DataTable,
   Grid,
   ProgressBar,
-  ActionLink,
+  LinkButton,
 } from "mds";
 
 import { User, UsersList } from "./types";
@@ -254,14 +253,14 @@ const ListUsers = () => {
                 <Button
                   id={"add-to-group"}
                   label={"Add to Group"}
-                  icon={<GroupsIcon />}
+                  icon={<UsersIcon />}
                   disabled={checkedUsers.length <= 0}
                   onClick={() => {
                     if (checkedUsers.length > 0) {
                       setAddGroupOpen(true);
                     }
                   }}
-                  variant={"regular"}
+                  variant={"secondary"}
                 />
               </TooltipWrapper>
             </SecureComponent>
@@ -302,11 +301,11 @@ const ListUsers = () => {
                 <Button
                   id={"create-user"}
                   label={"Create User"}
-                  icon={<AddIcon />}
+                  icon={<PlusIcon />}
                   onClick={() => {
                     navigate(`${IAM_PAGES.USER_ADD}`);
                   }}
-                  variant={"callAction"}
+                  variant={"primary"}
                   disabled={
                     !hasPermission(
                       "console-ui",
@@ -355,7 +354,7 @@ const ListUsers = () => {
                   </Grid>
                   <HelpBox
                     title={"Users"}
-                    iconComponent={<UsersIcon />}
+                    icon={<UsersIcon />}
                     help={
                       <Fragment>
                         A MinIO user consists of a unique access key (username)
@@ -404,7 +403,7 @@ const ListUsers = () => {
                   <Grid item xs={8}>
                     <HelpBox
                       title={"Users"}
-                      iconComponent={<UsersIcon />}
+                      icon={<UsersIcon />}
                       help={
                         <Fragment>
                           A MinIO user consists of a unique access key
@@ -445,13 +444,13 @@ const ListUsers = () => {
                             <br />
                             <br />
                             To get started,{" "}
-                            <ActionLink
+                            <LinkButton
                               onClick={() => {
                                 navigate(`${IAM_PAGES.USER_ADD}`);
                               }}
                             >
                               Create a User
-                            </ActionLink>
+                            </LinkButton>
                             .
                           </SecureComponent>
                         </Fragment>

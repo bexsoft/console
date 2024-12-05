@@ -17,14 +17,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
-import {
-  Button,
-  CreateNewPathIcon,
-  InputBox,
-  Grid,
-  FormLayout,
-  Box,
-} from "mds";
+import { Button, FolderPlusIcon, InputBox, Grid, FormLayout, Box } from "mds";
 import ModalWrapper from "../../../../Common/ModalWrapper/ModalWrapper";
 import { modalStyleUtils } from "../../../../Common/FormComponents/common/styleLibrary";
 import { BucketObjectItem } from "./types";
@@ -132,7 +125,7 @@ const CreatePathModal = ({
         modalOpen={modalOpen}
         title="Choose or create a new path"
         onClose={onClose}
-        titleIcon={<CreateNewPathIcon />}
+        titleIcon={<FolderPlusIcon />}
       >
         <FormLayout withBorders={false} containerPadding={false}>
           <Box className={"inputItem"} sx={{ display: "flex", gap: 8 }}>
@@ -170,14 +163,14 @@ const CreatePathModal = ({
               id={"clear"}
               type="button"
               color="primary"
-              variant="regular"
+              variant="secondary"
               onClick={resetForm}
               label={"Clear"}
             />
             <Button
               id={"create"}
               type="submit"
-              variant="callAction"
+              variant="primary"
               disabled={!isFormValid}
               onClick={createProcess}
               label={"Create"}

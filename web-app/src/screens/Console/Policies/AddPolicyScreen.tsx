@@ -16,7 +16,7 @@
 
 import React, { Fragment, useEffect, useState } from "react";
 import {
-  AddAccessRuleIcon,
+  CirclePlusIcon,
   BackLink,
   Box,
   Button,
@@ -105,7 +105,7 @@ const AddPolicyScreen = () => {
         <PageLayout>
           <FormLayout
             title={"Create Policy"}
-            icon={<AddAccessRuleIcon />}
+            icon={<CirclePlusIcon />}
             helpBox={<AddPolicyHelpBox />}
           >
             <form
@@ -123,7 +123,10 @@ const AddPolicyScreen = () => {
                     label="Policy Name"
                     autoFocus={true}
                     value={policyName}
-                    error={validatePolicyname(policyName)}
+                    state={
+                      validatePolicyname(policyName) !== "" ? "error" : "normal"
+                    }
+                    helper={validatePolicyname(policyName)}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       setPolicyName(e.target.value);
                     }}
@@ -162,7 +165,7 @@ const AddPolicyScreen = () => {
                     <Button
                       id={"clear"}
                       type="button"
-                      variant="regular"
+                      variant="secondary"
                       onClick={resetForm}
                       label={"Clear"}
                     />
@@ -170,7 +173,7 @@ const AddPolicyScreen = () => {
                     <Button
                       id={"save-policy"}
                       type="submit"
-                      variant="callAction"
+                      variant="primary"
                       color="primary"
                       disabled={addLoading || !validSave}
                       label={"Save"}

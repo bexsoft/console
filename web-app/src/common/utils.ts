@@ -523,3 +523,15 @@ export const safeDecodeURIComponent = (value: any) => {
     return value;
   }
 };
+
+// calculate last modify time
+export const calculateLastModifyTime = (lastModified: string) => {
+  const currentTime = new Date();
+  const modifiedTime = new Date(lastModified);
+
+  const difTime = currentTime.getTime() - modifiedTime.getTime();
+
+  const formatTime = niceDaysInt(difTime, "ms");
+
+  return formatTime.trim() !== "" ? `${formatTime} ago` : "Just now";
+};

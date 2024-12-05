@@ -14,9 +14,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import React, { Fragment, useState } from "react";
-import { CSSObject } from "styled-components";
-import { Button, DropdownSelector, UploadFolderIcon, UploadIcon } from "mds";
+import React, { Fragment } from "react";
+import { ExpandMenu, ExpandMenuOption, FolderUpIcon, UploadIcon } from "mds";
 import {
   IAM_SCOPES,
   permissionTooltipHelper,
@@ -31,9 +30,8 @@ interface IUploadFilesButton {
   uploadPath: string;
   bucketName: string;
   forceDisable?: boolean;
-  uploadFileFunction: (closeFunction: () => void) => void;
-  uploadFolderFunction: (closeFunction: () => void) => void;
-  overrideStyles?: CSSObject;
+  uploadFileFunction: () => void;
+  uploadFolderFunction: () => void;
 }
 
 const UploadFilesButton = ({
@@ -42,10 +40,7 @@ const UploadFilesButton = ({
   forceDisable = false,
   uploadFileFunction,
   uploadFolderFunction,
-  overrideStyles = {},
 }: IUploadFilesButton) => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [uploadOptionsOpen, uploadOptionsSetOpen] = useState<boolean>(false);
 
   const anonymousMode = useSelector(
     (state: AppState) => state.system.anonymousMode,
@@ -66,15 +61,6 @@ const UploadFilesButton = ({
     putObjectPermScopes,
   );
 
-  const openUploadMenu = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    uploadOptionsSetOpen(!uploadOptionsOpen);
-    setAnchorEl(event.currentTarget);
-  };
-  const handleCloseUpload = () => {
-    setAnchorEl(null);
-  };
-
   const uploadObjectAllowed =
     hasPermission(
       [uploadPath, ...sessionGrantWildCards],
@@ -88,13 +74,13 @@ const UploadFilesButton = ({
     true,
   );
 
-  const uploadFolderAction = (action: string) => {
+  const uploadFilesAction = (action: string) => {
     if (action === "folder") {
-      uploadFolderFunction(handleCloseUpload);
+      uploadFolderFunction();
       return;
     }
 
-    uploadFileFunction(handleCloseUpload);
+    uploadFileFunction();
   };
 
   const uploadEnabled: boolean = uploadObjectAllowed || uploadFolderAllowed;
@@ -104,52 +90,43 @@ const UploadFilesButton = ({
       <TooltipWrapper
         tooltip={
           uploadEnabled
-            ? "Upload Files"
+            ? ""
             : permissionTooltipHelper(
                 [IAM_SCOPES.S3_PUT_OBJECT, IAM_SCOPES.S3_PUT_ACTIONS],
                 "upload files to this bucket",
               )
         }
       >
-        <Button
+        <ExpandMenu
           id={"upload-main"}
           aria-controls={`upload-main-menu`}
           aria-haspopup="true"
-          aria-expanded={openUploadMenu ? "true" : undefined}
-          onClick={handleClick}
           label={"Upload"}
+          variant={"primary"}
           icon={<UploadIcon />}
-          variant={"callAction"}
           disabled={forceDisable || !uploadEnabled}
-          sx={overrideStyles}
-        />
+          dropMenuPosition={"end"}
+          compact
+          menuTopSpacing={false}
+        >
+          <ExpandMenuOption
+            onClick={() => uploadFilesAction("file")}
+            id={"upload-file"}
+            icon={<UploadIcon />}
+            disabled={!uploadObjectAllowed || forceDisable}
+          >
+            Upload File
+          </ExpandMenuOption>
+          <ExpandMenuOption
+            onClick={() => uploadFilesAction("folder")}
+            id={"upload-folder"}
+            icon={<FolderUpIcon />}
+            disabled={!uploadFolderAllowed || forceDisable}
+          >
+            Upload Folder
+          </ExpandMenuOption>
+        </ExpandMenu>
       </TooltipWrapper>
-      <DropdownSelector
-        id={"upload-main-menu"}
-        options={[
-          {
-            label: "Upload File",
-            icon: <UploadIcon />,
-            value: "file",
-            disabled: !uploadObjectAllowed || forceDisable,
-          },
-          {
-            label: "Upload Folder",
-            icon: <UploadFolderIcon />,
-            value: "folder",
-            disabled: !uploadFolderAllowed || forceDisable,
-          },
-        ]}
-        selectedOption={""}
-        onSelect={(nValue) => uploadFolderAction(nValue)}
-        hideTriggerAction={() => {
-          uploadOptionsSetOpen(false);
-        }}
-        open={uploadOptionsOpen}
-        anchorEl={anchorEl}
-        anchorOrigin={"end"}
-        useAnchorWidth
-      />
     </Fragment>
   );
 };

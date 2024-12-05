@@ -17,7 +17,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import get from "lodash/get";
 import { useSelector } from "react-redux";
-import { Button, FormLayout, ReadBox, Grid, ProgressBar } from "mds";
+import { Button, FormLayout, CodeSnippet, Grid, ProgressBar } from "mds";
 
 import { ErrorResponseHandler } from "../../../common/types";
 import { setModalErrorSnackMessage } from "../../../systemSlice";
@@ -131,21 +131,21 @@ const SetPolicy = ({
       <FormLayout withBorders={false} containerPadding={false}>
         {(selectedGroups?.length === 1 || selectedUser != null) && (
           <Fragment>
-            <ReadBox
+            <CodeSnippet
               label={`Selected ${selectedGroups !== null ? "Group" : "User"}`}
               sx={{ width: "100%" }}
             >
               {selectedGroups !== null ? selectedGroups[0] : userName}
-            </ReadBox>
-            <ReadBox label={"Current Policy"} sx={{ width: "100%" }}>
+            </CodeSnippet>
+            <CodeSnippet label={"Current Policy"} sx={{ width: "100%" }}>
               {actualPolicy.join(", ")}
-            </ReadBox>
+            </CodeSnippet>
           </Fragment>
         )}
         {selectedGroups && selectedGroups?.length > 1 && (
-          <ReadBox label={"Selected Groups"} sx={{ width: "100%" }}>
+          <CodeSnippet label={"Selected Groups"} sx={{ width: "100%" }}>
             {selectedGroups.join(", ")}
-          </ReadBox>
+          </CodeSnippet>
         )}
         <Grid item xs={12}>
           <PolicySelectors selectedPolicy={selectedPolicy} />
@@ -155,14 +155,14 @@ const SetPolicy = ({
         <Button
           id={"reset"}
           type="button"
-          variant="regular"
+          variant="secondary"
           onClick={resetSelection}
           label={"Reset"}
         />
         <Button
           id={"save"}
           type="button"
-          variant="callAction"
+          variant="primary"
           color="primary"
           disabled={loading}
           onClick={setPolicyAction}

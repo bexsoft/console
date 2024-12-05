@@ -24,22 +24,16 @@ import React, {
 } from "react";
 import get from "lodash/get";
 import {
-  AccessRuleIcon,
-  ActionsList,
-  Badge,
   Box,
-  BucketsIcon,
+  BucketIcon,
   Button,
-  Checkbox,
-  DeleteIcon,
-  DownloadIcon,
-  Grid,
-  HistoryIcon,
-  PageLayout,
-  PreviewIcon,
-  RefreshIcon,
+  ButtonGroup,
+  ChevronRightIcon,
+  NotificationCount,
+  RefreshCWIcon,
+  RewindIcon,
   ScreenTitle,
-  ShareIcon,
+  ScreenTitleOptions,
 } from "mds";
 import { api } from "api";
 import { errorToHandler } from "api/errors";
@@ -50,7 +44,6 @@ import { useDropzone } from "react-dropzone";
 import { DateTime } from "luxon";
 import { niceBytesInt } from "../../../../../../common/utils";
 import BrowserBreadcrumbs from "../../../../ObjectBrowser/BrowserBreadcrumbs";
-import { AllowedPreviews, previewObjectType } from "../utils";
 import { ErrorResponseHandler } from "../../../../../../common/types";
 import { AppState, useAppDispatch } from "../../../../../../store";
 import {
@@ -61,10 +54,7 @@ import {
   hasPermission,
   SecureComponent,
 } from "../../../../../../common/SecureComponent";
-import {
-  setErrorSnackMessage,
-  setSnackBarMessage,
-} from "../../../../../../systemSlice";
+import { setErrorSnackMessage } from "../../../../../../systemSlice";
 import { isVersionedMode } from "../../../../../../utils/validationFunctions";
 import {
   extractFileExtn,
@@ -89,14 +79,13 @@ import {
   setLoadingVersions,
   setNewObject,
   setObjectDetailsView,
+  setObjectMetadata,
   setPreviewOpen,
   setReloadObjectsList,
   setRetentionConfig,
-  setSelectedObjects,
   setSelectedObjectView,
   setSelectedPreview,
   setShareFileModalOpen,
-  setShowDeletedObjects,
   setVersionsModeEnabled,
   updateProgress,
 } from "../../../../ObjectBrowser/objectBrowserSlice";
@@ -106,12 +95,6 @@ import {
   setBucketDetailsLoad,
   setBucketInfo,
 } from "../../../BucketDetails/bucketDetailsSlice";
-import {
-  downloadSelected,
-  openAnonymousAccess,
-  openPreview,
-  openShare,
-} from "../../../../ObjectBrowser/objectBrowserThunks";
 import withSuspense from "../../../../Common/Components/withSuspense";
 import UploadFilesButton from "../../UploadFilesButton";
 import DetailsListPanel from "./DetailsListPanel";
@@ -122,16 +105,15 @@ import TooltipWrapper from "../../../../Common/TooltipWrapper/TooltipWrapper";
 import ListObjectsTable from "./ListObjectsTable";
 import FilterObjectsSB from "../../../../ObjectBrowser/FilterObjectsSB";
 import AddAccessRule from "../../../BucketDetails/AddAccessRule";
+import EPageLayout from "../../../../Common/EPageLayout/EPageLayout";
+import MultipleObjectSelection from "../../../../ObjectBrowser/ButtonGroups/MultipleObjectSelection";
 
-const DeleteMultipleObjects = withSuspense(
-  React.lazy(() => import("./DeleteMultipleObjects")),
-);
 const ShareFile = withSuspense(
-  React.lazy(() => import("../ObjectDetails/ShareFile")),
+  React.lazy(() => import("../ObjectDetails/ShareFile"))
 );
 const RewindEnable = withSuspense(React.lazy(() => import("./RewindEnable")));
 const PreviewFileModal = withSuspense(
-  React.lazy(() => import("../Preview/PreviewFileModal")),
+  React.lazy(() => import("../Preview/PreviewFileModal"))
 );
 
 const baseDnDStyle = {
@@ -156,76 +138,72 @@ const acceptDnDStyle = {
 const ListObjects = () => {
   const dispatch = useAppDispatch();
   const params = useParams();
-  const navigate = useNavigate();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const rewindEnabled = useSelector(
-    (state: AppState) => state.objectBrowser.rewind.rewindEnabled,
+    (state: AppState) => state.objectBrowser.rewind.rewindEnabled
   );
   const bucketToRewind = useSelector(
-    (state: AppState) => state.objectBrowser.rewind.bucketToRewind,
+    (state: AppState) => state.objectBrowser.rewind.bucketToRewind
   );
   const versionsMode = useSelector(
-    (state: AppState) => state.objectBrowser.versionsMode,
+    (state: AppState) => state.objectBrowser.versionsMode
   );
   const showDeleted = useSelector(
-    (state: AppState) => state.objectBrowser.showDeleted,
+    (state: AppState) => state.objectBrowser.showDeleted
   );
   const detailsOpen = useSelector(
-    (state: AppState) => state.objectBrowser.objectDetailsOpen,
+    (state: AppState) => state.objectBrowser.objectDetailsOpen
   );
   const selectedInternalPaths = useSelector(
-    (state: AppState) => state.objectBrowser.selectedInternalPaths,
+    (state: AppState) => state.objectBrowser.selectedInternalPaths
   );
   const requestInProgress = useSelector(
-    (state: AppState) => state.objectBrowser.requestInProgress,
+    (state: AppState) => state.objectBrowser.requestInProgress
   );
   const simplePath = useSelector(
-    (state: AppState) => state.objectBrowser.simplePath,
+    (state: AppState) => state.objectBrowser.simplePath
   );
   const versioningConfig = useSelector(
-    (state: AppState) => state.objectBrowser.versionInfo,
-  );
-  const lockingEnabled = useSelector(
-    (state: AppState) => state.objectBrowser.lockingEnabled,
+    (state: AppState) => state.objectBrowser.versionInfo
   );
   const downloadRenameModal = useSelector(
-    (state: AppState) => state.objectBrowser.downloadRenameModal,
+    (state: AppState) => state.objectBrowser.downloadRenameModal
   );
   const selectedPreview = useSelector(
-    (state: AppState) => state.objectBrowser.selectedPreview,
+    (state: AppState) => state.objectBrowser.selectedPreview
   );
   const shareFileModalOpen = useSelector(
-    (state: AppState) => state.objectBrowser.shareFileModalOpen,
+    (state: AppState) => state.objectBrowser.shareFileModalOpen
   );
   const previewOpen = useSelector(
-    (state: AppState) => state.objectBrowser.previewOpen,
+    (state: AppState) => state.objectBrowser.previewOpen
   );
   const selectedBucket = useSelector(
-    (state: AppState) => state.objectBrowser.selectedBucket,
+    (state: AppState) => state.objectBrowser.selectedBucket
   );
   const anonymousMode = useSelector(
-    (state: AppState) => state.system.anonymousMode,
+    (state: AppState) => state.system.anonymousMode
   );
   const anonymousAccessOpen = useSelector(
-    (state: AppState) => state.objectBrowser.anonymousAccessOpen,
+    (state: AppState) => state.objectBrowser.anonymousAccessOpen
   );
 
   const records = useSelector(
-    (state: AppState) => state.objectBrowser?.records || [],
+    (state: AppState) => state.objectBrowser?.records || []
   );
 
   const loadingBucket = useSelector(selBucketDetailsLoading);
   const bucketInfo = useSelector(selBucketDetailsInfo);
 
-  const [deleteMultipleOpen, setDeleteMultipleOpen] = useState<boolean>(false);
   const [rewindSelect, setRewindSelect] = useState<boolean>(false);
   const [iniLoad, setIniLoad] = useState<boolean>(false);
-  const [canShareFile, setCanShareFile] = useState<boolean>(false);
-  const [canPreviewFile, setCanPreviewFile] = useState<boolean>(false);
   const [quota, setQuota] = useState<BucketQuota | null>(null);
-  const [metaData, setMetaData] = useState<any>(null);
   const [isMetaDataLoaded, setIsMetaDataLoaded] = useState(false);
+  const [panelHidden, setPanelHidden] = useState<"versions" | "objects">(
+    "versions"
+  );
 
   const isVersioningApplied = isVersionedMode(versioningConfig.status);
 
@@ -245,7 +223,7 @@ const ListObjects = () => {
   const folderUpload = useRef<HTMLInputElement>(null);
 
   const sessionGrants = useSelector((state: AppState) =>
-    state.console.session ? state.console.session.permissions || {} : {},
+    state.console.session ? state.console.session.permissions || {} : {}
   );
 
   const putObjectPermScopes = [
@@ -257,43 +235,46 @@ const ListObjects = () => {
   const allowedFileExtensions = getPolicyAllowedFileExtensions(
     sessionGrants,
     pathAsResourceInPolicy,
-    putObjectPermScopes,
+    putObjectPermScopes
   );
 
   const sessionGrantWildCards = getSessionGrantsWildCard(
     sessionGrants,
     pathAsResourceInPolicy,
-    putObjectPermScopes,
+    putObjectPermScopes
   );
 
-  const canDownload = hasPermission(
-    [pathAsResourceInPolicy, ...sessionGrantWildCards],
-    [IAM_SCOPES.S3_GET_OBJECT, IAM_SCOPES.S3_GET_ACTIONS],
-  );
-  const canRewind = hasPermission(bucketName, [
-    IAM_SCOPES.S3_GET_OBJECT,
-    IAM_SCOPES.S3_GET_ACTIONS,
-    IAM_SCOPES.S3_GET_BUCKET_VERSIONING,
-  ]);
-  const canDelete = hasPermission(
-    [pathAsResourceInPolicy, ...sessionGrantWildCards],
-    [IAM_SCOPES.S3_DELETE_OBJECT],
-  );
   const canUpload =
     hasPermission(
       [pathAsResourceInPolicy, ...sessionGrantWildCards],
-      putObjectPermScopes,
+      putObjectPermScopes
     ) || anonymousMode;
 
-  const canSetAnonymousAccess = hasPermission(bucketName, [
+  const configureBucketAllowed = hasPermission(bucketName, [
     IAM_SCOPES.S3_GET_BUCKET_POLICY,
     IAM_SCOPES.S3_PUT_BUCKET_POLICY,
+    IAM_SCOPES.S3_GET_BUCKET_VERSIONING,
+    IAM_SCOPES.S3_PUT_BUCKET_VERSIONING,
+    IAM_SCOPES.S3_GET_BUCKET_ENCRYPTION_CONFIGURATION,
+    IAM_SCOPES.S3_PUT_BUCKET_ENCRYPTION_CONFIGURATION,
+    IAM_SCOPES.S3_DELETE_BUCKET,
+    IAM_SCOPES.S3_GET_BUCKET_NOTIFICATIONS,
+    IAM_SCOPES.S3_PUT_BUCKET_NOTIFICATIONS,
+    IAM_SCOPES.S3_GET_REPLICATION_CONFIGURATION,
+    IAM_SCOPES.S3_PUT_REPLICATION_CONFIGURATION,
+    IAM_SCOPES.ADMIN_GET_BUCKET_QUOTA,
+    IAM_SCOPES.ADMIN_SET_BUCKET_QUOTA,
+    IAM_SCOPES.S3_PUT_BUCKET_TAGGING,
+    IAM_SCOPES.S3_GET_BUCKET_TAGGING,
+    IAM_SCOPES.S3_LIST_BUCKET_VERSIONS,
+    IAM_SCOPES.S3_GET_BUCKET_POLICY_STATUS,
+    IAM_SCOPES.S3_DELETE_BUCKET_POLICY,
     IAM_SCOPES.S3_GET_ACTIONS,
     IAM_SCOPES.S3_PUT_ACTIONS,
   ]);
 
   const selectedObjects = useSelector(
-    (state: AppState) => state.objectBrowser.selectedObjects,
+    (state: AppState) => state.objectBrowser.selectedObjects
   );
 
   const checkForDelMarker = (): boolean => {
@@ -321,18 +302,18 @@ const ListObjects = () => {
         .then((res) => {
           let metadata = get(res.data, "objectMetadata", {});
           setIsMetaDataLoaded(true);
-          setMetaData(metadata);
+          dispatch(setObjectMetadata(metadata));
         })
         .catch((err) => {
           console.error(
             "Error Getting Metadata Status: ",
             err,
-            err?.detailedError,
+            err?.detailedError
           );
           setIsMetaDataLoaded(true);
         });
     }
-  }, [bucketName, selectedObjects, isMetaDataLoaded]);
+  }, [bucketName, selectedObjects, isMetaDataLoaded, dispatch]);
 
   useEffect(() => {
     if (bucketName && !isSelObjectDelMarker) {
@@ -357,30 +338,6 @@ const ListObjects = () => {
   }, [folderUpload]);
 
   useEffect(() => {
-    if (selectedObjects.length === 1) {
-      const objectName = selectedObjects[0];
-      const isPrefix = objectName.endsWith("/");
-
-      let objectType: AllowedPreviews = previewObjectType(metaData, objectName);
-
-      if (objectType !== "none" && canDownload) {
-        setCanPreviewFile(true);
-      } else {
-        setCanPreviewFile(false);
-      }
-
-      if (canDownload && !isPrefix) {
-        setCanShareFile(true);
-      } else {
-        setCanShareFile(false);
-      }
-    } else {
-      setCanShareFile(false);
-      setCanPreviewFile(false);
-    }
-  }, [selectedObjects, canDownload, metaData]);
-
-  useEffect(() => {
     if (!quota && !anonymousMode) {
       api.buckets
         .getBucketQuota(bucketName)
@@ -396,7 +353,7 @@ const ListObjects = () => {
         .catch((err) => {
           console.error(
             "Error Getting Quota Status: ",
-            err.error.detailedMessage,
+            err.error.detailedMessage
           );
           setQuota(null);
         });
@@ -405,7 +362,7 @@ const ListObjects = () => {
 
   useEffect(() => {
     if (selectedObjects.length > 0) {
-      dispatch(setObjectDetailsView(true));
+      dispatch(setObjectDetailsView(false));
       return;
     }
 
@@ -456,16 +413,6 @@ const ListObjects = () => {
     }
   }, [selectedBucket, dispatch]);
 
-  const closeDeleteMultipleModalAndRefresh = (refresh: boolean) => {
-    setDeleteMultipleOpen(false);
-
-    if (refresh) {
-      dispatch(setSnackBarMessage(`Objects deleted successfully.`));
-      dispatch(setSelectedObjects([]));
-      dispatch(setReloadObjectsList(true));
-    }
-  };
-
   const handleUploadButton = (e: any) => {
     if (
       e === null ||
@@ -497,7 +444,7 @@ const ListObjects = () => {
         files: File[],
         bucketName: string,
         path: string,
-        folderPath: string,
+        folderPath: string
       ) => {
         let uploadPromise = (file: File) => {
           return new Promise((resolve, reject) => {
@@ -546,14 +493,14 @@ const ListObjects = () => {
 
             if (prefixPath !== "") {
               uploadUrl = `${uploadUrl}?prefix=${encodeURIComponent(
-                prefixPath + fileName,
+                prefixPath + fileName
               )}`;
             } else {
               uploadUrl = `${uploadUrl}?prefix=${encodeURIComponent(fileName)}`;
             }
 
             const identity = encodeURIComponent(
-              `${bucketName}-${prefixPath}-${new Date().getTime()}-${Math.random()}`,
+              `${bucketName}-${prefixPath}-${new Date().getTime()}-${Math.random()}`
             );
 
             let xhr = new XMLHttpRequest();
@@ -597,7 +544,7 @@ const ListObjects = () => {
                   failObject({
                     instanceID: identity,
                     msg: errorMessage,
-                  }),
+                  })
                 );
                 reject({ status: xhr.status, message: errorMessage });
 
@@ -611,7 +558,7 @@ const ListObjects = () => {
                 failObject({
                   instanceID: identity,
                   msg: "A network error occurred.",
-                }),
+                })
               );
               return;
             });
@@ -623,7 +570,7 @@ const ListObjects = () => {
                 updateProgress({
                   instanceID: identity,
                   progress: progress,
-                }),
+                })
               );
             });
 
@@ -633,7 +580,7 @@ const ListObjects = () => {
                 failObject({
                   instanceID: identity,
                   msg: "A network error occurred.",
-                }),
+                })
               );
               return;
             };
@@ -663,7 +610,7 @@ const ListObjects = () => {
                   failed: false,
                   cancelled: false,
                   errorMessage: "",
-                }),
+                })
               );
               storeFormDataWithID(ID, formData);
             }
@@ -679,7 +626,7 @@ const ListObjects = () => {
         }
         Promise.allSettled(uploadFilePromises).then((results: Array<any>) => {
           const errors = results.filter(
-            (result) => result.status === "rejected",
+            (result) => result.status === "rejected"
           );
           if (errors.length > 0) {
             const totalFiles = uploadFilePromises.length;
@@ -698,7 +645,7 @@ const ListObjects = () => {
 
       upload(files, bucketName, pathPrefix, folderPath);
     },
-    [bucketName, dispatch, simplePath, anonymousMode],
+    [bucketName, dispatch, simplePath, anonymousMode]
   );
 
   const onDrop = useCallback(
@@ -720,7 +667,7 @@ const ListObjects = () => {
           console.log(
             `${allowedFiles.length} Allowed Files Processed out of ${acceptedFiles.length}.`,
             pathAsResourceInPolicy,
-            ...sessionGrantWildCards,
+            ...sessionGrantWildCards
           );
 
           if (allowedFiles.length !== acceptedFiles.length) {
@@ -729,9 +676,9 @@ const ListObjects = () => {
                 errorMessage: "Upload is restricted.",
                 detailedError: permissionTooltipHelper(
                   [IAM_SCOPES.S3_PUT_OBJECT, IAM_SCOPES.S3_PUT_ACTIONS],
-                  "upload objects to this location",
+                  "upload objects to this location"
                 ),
-              }),
+              })
             );
           }
         } else {
@@ -740,15 +687,15 @@ const ListObjects = () => {
               errorMessage: "Could not process drag and drop.",
               detailedError: permissionTooltipHelper(
                 [IAM_SCOPES.S3_PUT_OBJECT, IAM_SCOPES.S3_PUT_ACTIONS],
-                "upload objects to this location",
+                "upload objects to this location"
               ),
-            }),
+            })
           );
 
           console.error(
             "Could not process drag and drop . upload may be restricted.",
             pathAsResourceInPolicy,
-            ...sessionGrantWildCards,
+            ...sessionGrantWildCards
           );
         }
       }
@@ -758,14 +705,14 @@ const ListObjects = () => {
             errorMessage: "Upload not allowed",
             detailedError: permissionTooltipHelper(
               [IAM_SCOPES.S3_PUT_OBJECT, IAM_SCOPES.S3_PUT_ACTIONS],
-              "upload objects to this location",
+              "upload objects to this location"
             ),
-          }),
+          })
         );
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [uploadObject],
+    [uploadObject]
   );
 
   const { getRootProps, getInputProps, isDragActive, isDragAccept } =
@@ -780,7 +727,7 @@ const ListObjects = () => {
       ...(isDragActive ? activeDnDStyle : {}),
       ...(isDragAccept ? acceptDnDStyle : {}),
     }),
-    [isDragActive, isDragAccept],
+    [isDragActive, isDragAccept]
   );
 
   const closeShareModal = () => {
@@ -815,7 +762,9 @@ const ListObjects = () => {
       }
 
       navigate(
-        `/browser/${encodeURIComponent(bucketName)}/${encodeURIComponent(URLItem)}`,
+        `/browser/${encodeURIComponent(bucketName)}/${encodeURIComponent(
+          URLItem
+        )}`
       );
     }
 
@@ -824,12 +773,6 @@ const ListObjects = () => {
     if (forceRefresh) {
       dispatch(setReloadObjectsList(true));
     }
-  };
-
-  const setDeletedAction = () => {
-    dispatch(resetMessages());
-    dispatch(setShowDeletedObjects(!showDeleted));
-    onClosePanel(true);
   };
 
   const closeRenameModal = () => {
@@ -846,79 +789,63 @@ const ListObjects = () => {
     createdTime = DateTime.fromISO(bucketInfo.creation_date) as DateTime<true>;
   }
 
-  const downloadToolTip =
-    selectedObjects?.length <= 1
-      ? "Download Selected"
-      : ` Download selected objects as Zip. Any Deleted objects in the selection would be skipped from download.`;
+  /*let extraOptions: SelectorTypes[] = [];
 
-  const multiActionButtons = [
-    {
-      action: () => {
-        dispatch(downloadSelected(bucketName));
+
+  if (isVersioningApplied && !!rewindEnabled) {
+    extraOptions = [
+      {
+        label: `${showDeleted ? "Hide" : "Show"} deleted objects`,
+        icon: showDeleted ? <VisibilityOffIcon /> : <VisibilityOnIcon />,
+        value: "toggleDeleted",
       },
-      label: "Download",
-      disabled: !canDownload || isSelObjectDelMarker,
-      icon: <DownloadIcon />,
-      tooltip: canDownload
-        ? downloadToolTip
-        : permissionTooltipHelper(
-            [IAM_SCOPES.S3_GET_OBJECT, IAM_SCOPES.S3_GET_ACTIONS],
-            "download objects from this bucket",
-          ),
-    },
-    {
-      action: () => {
-        dispatch(openShare());
+    ];
+  }*/
+
+  let titleOptions: ScreenTitleOptions[] = [];
+
+  if (!anonymousMode) {
+    titleOptions = [
+      {
+        title: "Created",
+        value: bucketInfo?.creation_date
+          ? createdTime.toFormat("ccc, LLL dd yyyy HH:mm:ss (ZZZZ)")
+          : "",
       },
-      label: "Share",
-      disabled:
-        selectedObjects.length !== 1 || !canShareFile || isSelObjectDelMarker,
-      icon: <ShareIcon />,
-      tooltip: canShareFile ? "Share Selected File" : "Sharing unavailable",
-    },
-    {
-      action: () => {
-        dispatch(openPreview());
+      { title: "Access", value: bucketInfo?.access || "" },
+      {
+        title: "Size",
+        value: `${
+          bucketInfo?.size
+            ? `${niceBytesInt(bucketInfo.size)}${
+                !!quota ? ` / ${niceBytesInt(quota.quota || 0)}` : ""
+              }`
+            : ""
+        }${bucketInfo?.size && bucketInfo?.objects ? " - " : ""}
+                       
+                          
+                          ${
+                            bucketInfo?.objects
+                              ? `${bucketInfo.objects} Object${
+                                  bucketInfo.objects && bucketInfo.objects !== 1
+                                    ? "s"
+                                    : ""
+                                }`
+                              : ""
+                          }`,
       },
-      label: "Preview",
-      disabled:
-        selectedObjects.length !== 1 || !canPreviewFile || isSelObjectDelMarker,
-      icon: <PreviewIcon />,
-      tooltip: canPreviewFile ? "Preview Selected File" : "Preview unavailable",
-    },
-    {
-      action: () => {
-        dispatch(openAnonymousAccess());
-      },
-      label: "Anonymous Access",
-      disabled:
-        selectedObjects.length !== 1 ||
-        !selectedObjects[0].endsWith("/") ||
-        !canSetAnonymousAccess,
-      icon: <AccessRuleIcon />,
-      tooltip:
-        selectedObjects.length === 1 && selectedObjects[0].endsWith("/")
-          ? "Set Anonymous Access to this Folder"
-          : "Anonymous Access unavailable",
-    },
-    {
-      action: () => {
-        setDeleteMultipleOpen(true);
-      },
-      label: "Delete",
-      icon: <DeleteIcon />,
-      disabled: !canDelete || selectedObjects.length === 0,
-      tooltip: canDelete
-        ? "Delete Selected Files"
-        : permissionTooltipHelper(
-            [IAM_SCOPES.S3_DELETE_OBJECT],
-            "delete objects in this bucket",
-          ),
-    },
-  ];
+    ];
+  }
 
   return (
-    <Fragment>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        flexGrow: 1,
+      }}
+    >
       {shareFileModalOpen && selectedPreview && (
         <ShareFile
           open={shareFileModalOpen}
@@ -929,15 +856,6 @@ const ListObjects = () => {
             last_modified: "",
             version_id: selectedPreview.version_id,
           }}
-        />
-      )}
-      {deleteMultipleOpen && (
-        <DeleteMultipleObjects
-          deleteOpen={deleteMultipleOpen}
-          selectedBucket={bucketName}
-          selectedObjects={selectedObjects}
-          closeDeleteModalAndRefresh={closeDeleteMultipleModalAndRefresh}
-          versioning={versioningConfig}
         />
       )}
       {rewindSelect && (
@@ -984,187 +902,130 @@ const ListObjects = () => {
         />
       )}
 
-      <PageLayout variant={"full"}>
+      <ScreenTitle
+        icon={<BucketIcon />}
+        superTitle={"Object Browser"}
+        title={bucketName!}
+        titleOptions={titleOptions}
+        sx={{ padding: "12px 24px" }}
+        actions={
+          <Fragment>
+            {!anonymousMode && (
+              <Fragment>
+                <TooltipWrapper tooltip={"Rewind Bucket"}>
+                  <Button
+                    id={"rewind-objects-list"}
+                    label={"Rewind"}
+                    compact
+                    icon={
+                      <NotificationCount
+                        color="danger"
+                        dotOnly
+                        invisible={!rewindEnabled}
+                      >
+                        <RewindIcon
+                          style={{
+                            width: 16,
+                            height: 16,
+                          }}
+                        />
+                      </NotificationCount>
+                    }
+                    onClick={() => {
+                      setRewindSelect(true);
+                    }}
+                    disabled={
+                      !isVersioningApplied ||
+                      !hasPermission(bucketName, [
+                        IAM_SCOPES.S3_GET_OBJECT,
+                        IAM_SCOPES.S3_GET_ACTIONS,
+                      ])
+                    }
+                  />
+                </TooltipWrapper>
+              </Fragment>
+            )}
+            <ButtonGroup>
+              <TooltipWrapper tooltip={"Refresh"}>
+                <Button
+                  id={"refresh-objects-list"}
+                  icon={<RefreshCWIcon />}
+                  onClick={() => {
+                    if (versionsMode) {
+                      dispatch(setLoadingVersions(true));
+                    } else {
+                      dispatch(resetMessages());
+                      dispatch(setReloadObjectsList(true));
+                    }
+                  }}
+                  disabled={
+                    anonymousMode
+                      ? false
+                      : !hasPermission(bucketName, [
+                          IAM_SCOPES.S3_LIST_BUCKET,
+                          IAM_SCOPES.S3_ALL_LIST_BUCKET,
+                        ]) || rewindEnabled
+                  }
+                />
+              </TooltipWrapper>
+            </ButtonGroup>
+            <input
+              type="file"
+              multiple
+              accept={allowedFileExtensions ? allowedFileExtensions : undefined}
+              onChange={handleUploadButton}
+              style={{ display: "none" }}
+              ref={fileUpload}
+            />
+            <input
+              type="file"
+              multiple
+              onChange={handleUploadButton}
+              style={{ display: "none" }}
+              ref={folderUpload}
+            />
+          </Fragment>
+        }
+      />
+
+      <EPageLayout>
         {anonymousMode && (
           <div style={{ paddingBottom: 16 }}>
             <FilterObjectsSB />
           </div>
         )}
-        <Box withBorders sx={{ padding: "0 5px" }}>
-          <ScreenTitle
-            icon={
-              <span>
-                <BucketsIcon style={{ width: 30 }} />
-              </span>
-            }
-            title={bucketName}
-            subTitle={
-              !anonymousMode ? (
-                <Box
-                  sx={{
-                    "& .detailsSpacer": {
-                      marginRight: 18,
-                      "@media (max-width: 600px)": {
-                        marginRight: 0,
-                      },
-                    },
-                  }}
-                >
-                  <span className={"detailsSpacer"}>
-                    Created on:&nbsp;
-                    <strong>
-                      {bucketInfo?.creation_date
-                        ? createdTime.toFormat(
-                            "ccc, LLL dd yyyy HH:mm:ss (ZZZZ)",
-                          )
-                        : ""}
-                    </strong>
-                  </span>
-                  <span className={"detailsSpacer"}>
-                    Access:&nbsp;&nbsp;
-                    <strong>{bucketInfo?.access || ""}</strong>
-                  </span>
-                  {bucketInfo && (
-                    <Fragment>
-                      <span className={"detailsSpacer"}>
-                        {bucketInfo.size && (
-                          <Fragment>{niceBytesInt(bucketInfo.size)}</Fragment>
-                        )}
-                        {bucketInfo.size && quota && (
-                          <Fragment>
-                            {" "}
-                            / {niceBytesInt(quota.quota || 0)}
-                          </Fragment>
-                        )}
-                        {bucketInfo.size && bucketInfo.objects ? " - " : ""}
-                        {bucketInfo.objects && (
-                          <Fragment>
-                            {bucketInfo.objects}&nbsp;Object
-                            {bucketInfo.objects && bucketInfo.objects !== 1
-                              ? "s"
-                              : ""}
-                          </Fragment>
-                        )}
-                      </span>
-                    </Fragment>
-                  )}
-                </Box>
-              ) : null
-            }
-            actions={
-              <Fragment>
-                {!anonymousMode && (
-                  <TooltipWrapper
-                    tooltip={
-                      canRewind
-                        ? "Rewind Bucket"
-                        : permissionTooltipHelper(
-                            [
-                              IAM_SCOPES.S3_GET_OBJECT,
-                              IAM_SCOPES.S3_GET_ACTIONS,
-                              IAM_SCOPES.S3_GET_BUCKET_VERSIONING,
-                            ],
-                            "apply rewind in this bucket",
-                          )
-                    }
-                  >
-                    <Button
-                      id={"rewind-objects-list"}
-                      label={"Rewind"}
-                      icon={
-                        <Badge color="alert" dotOnly invisible={!rewindEnabled}>
-                          <HistoryIcon
-                            style={{
-                              minWidth: 16,
-                              minHeight: 16,
-                              width: 16,
-                              height: 16,
-                              marginTop: -3,
-                            }}
-                          />
-                        </Badge>
-                      }
-                      variant={"regular"}
-                      onClick={() => {
-                        setRewindSelect(true);
-                      }}
-                      disabled={!isVersioningApplied || !canRewind}
-                    />
-                  </TooltipWrapper>
-                )}
-                <TooltipWrapper tooltip={"Reload List"}>
-                  <Button
-                    id={"refresh-objects-list"}
-                    label={"Refresh"}
-                    icon={<RefreshIcon />}
-                    variant={"regular"}
-                    onClick={() => {
-                      if (versionsMode) {
-                        dispatch(setLoadingVersions(true));
-                      } else {
-                        dispatch(resetMessages());
-                        dispatch(setReloadObjectsList(true));
-                      }
-                    }}
-                    disabled={
-                      anonymousMode
-                        ? false
-                        : !hasPermission(bucketName, [
-                            IAM_SCOPES.S3_LIST_BUCKET,
-                            IAM_SCOPES.S3_ALL_LIST_BUCKET,
-                          ]) || rewindEnabled
-                    }
-                  />
-                </TooltipWrapper>
-                <input
-                  type="file"
-                  multiple
-                  accept={
-                    allowedFileExtensions ? allowedFileExtensions : undefined
-                  }
-                  onChange={handleUploadButton}
-                  style={{ display: "none" }}
-                  ref={fileUpload}
-                />
-                <input
-                  type="file"
-                  multiple
-                  onChange={handleUploadButton}
-                  style={{ display: "none" }}
-                  ref={folderUpload}
-                />
-                <UploadFilesButton
-                  bucketName={bucketName}
-                  uploadPath={pathAsResourceInPolicy}
-                  uploadFileFunction={(closeMenu) => {
-                    if (fileUpload && fileUpload.current) {
-                      fileUpload.current.click();
-                    }
-                    closeMenu();
-                  }}
-                  uploadFolderFunction={(closeMenu) => {
-                    if (folderUpload && folderUpload.current) {
-                      folderUpload.current.click();
-                    }
-                    closeMenu();
-                  }}
-                />
-              </Fragment>
-            }
-            bottomBorder={false}
-          />
-        </Box>
         <div
           id="object-list-wrapper"
           {...getRootProps({ style: { ...dndStyles } })}
         >
           <input {...getInputProps()} />
+
           <Box
             withBorders
             sx={{
               display: "flex",
+              overflow: "hidden",
               borderTop: 0,
               padding: 0,
+              width: "100%",
+              maxWidth: "100%",
+              position: "relative",
+              "& .basicPanel": {
+                width: 0,
+                opacity: 0,
+                transitionDuration: "0.3s",
+                overflow: "hidden",
+              },
+              "& .panelVisible": {
+                width: "100%",
+                opacity: 1,
+              },
+              "& .sideBarVisible": {
+                paddingRight: 24,
+              },
+              "& .hiddenPage": {
+                display: "none",
+              },
               "& .hideListOnSmall": {
                 "@media (max-width: 799px)": {
                   display: "none",
@@ -1172,114 +1033,152 @@ const ListObjects = () => {
               },
             }}
           >
-            {versionsMode ? (
-              <Fragment>
-                {selectedInternalPaths !== null && (
-                  <VersionsNavigator
-                    internalPaths={selectedInternalPaths}
-                    bucketName={bucketName}
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                transitionDuration: "0.3s",
+                padding: "16px 24px",
+              }}
+            >
+              <Box
+                className={`basicPanel ${!versionsMode ? "panelVisible" : ""} ${
+                  versionsMode && panelHidden === "objects" ? "hiddenPage" : ""
+                } ${detailsOpen ? "sideBarVisible" : ""}`.trim()}
+              >
+                <SecureComponent
+                  scopes={[
+                    IAM_SCOPES.S3_LIST_BUCKET,
+                    IAM_SCOPES.S3_ALL_LIST_BUCKET,
+                  ]}
+                  resource={bucketName!}
+                  errorProps={{ disabled: true }}
+                >
+                  <Box
+                    sx={{
+                      width: "100%",
+                      position: "relative",
+                      "&.detailsOpen": {
+                        "@media (max-width: 799px)": {
+                          display: "none",
+                        },
+                      },
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 16,
+                      "& .breadcrumbs-bar": {
+                        height: 28,
+                      },
+                    }}
+                    className={detailsOpen ? "detailsOpen" : ""}
+                  >
+                    {!anonymousMode && (
+                      <Fragment>
+                        {selectedObjects.length > 0 ? (
+                          <Fragment>
+                            <MultipleObjectSelection />
+                            Multi Select Actions
+                          </Fragment>
+                        ) : (
+                          <BrowserBreadcrumbs
+                            bucketName={bucketName!}
+                            internalPaths={internalPaths!}
+                            hidePathButton={false}
+                            uploadButton={
+                              <UploadFilesButton
+                                bucketName={bucketName!}
+                                uploadPath={pathAsResourceInPolicy}
+                                uploadFileFunction={() => {
+                                  if (fileUpload && fileUpload.current) {
+                                    fileUpload.current.click();
+                                  }
+                                }}
+                                uploadFolderFunction={() => {
+                                  if (folderUpload && folderUpload.current) {
+                                    folderUpload.current.click();
+                                  }
+                                }}
+                              />
+                            }
+                          />
+                        )}
+                      </Fragment>
+                    )}
+                    <ListObjectsTable />
+                  </Box>
+                </SecureComponent>
+              </Box>
+              <Box sx={{ position: "relative", width: 0 }}>
+                {detailsOpen && (
+                  <Button
+                    variant={"primary-lighter"}
+                    id={"close-details-list"}
+                    onClick={() => {
+                      onClosePanel(false);
+                    }}
+                    icon={<ChevronRightIcon />}
+                    sx={{
+                      zIndex: 10,
+                      position: "absolute",
+                      padding: 6,
+                      height: 22,
+                      width: 22,
+                      borderRadius: "100%",
+                      bottom: 25,
+                      left: -10,
+                      "&:hover:not(:disabled)": {
+                        backgroundColor: "transparent",
+                      },
+                    }}
                   />
                 )}
-              </Fragment>
-            ) : (
-              <SecureComponent
-                scopes={[
-                  IAM_SCOPES.S3_LIST_BUCKET,
-                  IAM_SCOPES.S3_ALL_LIST_BUCKET,
-                ]}
-                resource={bucketName}
-                errorProps={{ disabled: true }}
-              >
-                <Grid
-                  item
-                  xs={12}
-                  sx={{
-                    width: "100%",
-                    position: "relative",
-                    "&.detailsOpen": {
-                      "@media (max-width: 799px)": {
-                        display: "none",
-                      },
-                    },
-                  }}
-                  className={detailsOpen ? "detailsOpen" : ""}
+              </Box>
+              {!anonymousMode && (
+                <SecureComponent
+                  scopes={[
+                    IAM_SCOPES.S3_LIST_BUCKET,
+                    IAM_SCOPES.S3_ALL_LIST_BUCKET,
+                  ]}
+                  resource={bucketName!}
+                  errorProps={{ disabled: true }}
                 >
-                  {!anonymousMode && (
-                    <Grid
-                      item
-                      xs={12}
-                      sx={{
-                        padding: "12px 14px 5px",
-                      }}
-                    >
-                      <BrowserBreadcrumbs
+                  <DetailsListPanel
+                    open={detailsOpen}
+                    className={`${versionsMode ? "hideListOnSmall" : ""}`}
+                  >
+                    {selectedInternalPaths !== null && (
+                      <ObjectDetailPanel
+                        internalPaths={selectedInternalPaths}
                         bucketName={bucketName}
-                        internalPaths={internalPaths}
-                        additionalOptions={
-                          !isVersioningApplied || rewindEnabled ? null : (
-                            <Checkbox
-                              name={"deleted_objects"}
-                              id={"showDeletedObjects"}
-                              value={"deleted_on"}
-                              label={"Show deleted objects"}
-                              onChange={setDeletedAction}
-                              checked={showDeleted}
-                              sx={{
-                                marginLeft: 5,
-                                "@media (max-width: 600px)": {
-                                  marginLeft: 0,
-                                  flexDirection: "row" as const,
-                                },
-                              }}
-                            />
-                          )
-                        }
-                        hidePathButton={false}
                       />
-                    </Grid>
-                  )}
-                  <ListObjectsTable />
-                </Grid>
-              </SecureComponent>
-            )}
-            {!anonymousMode && (
-              <SecureComponent
-                scopes={[
-                  IAM_SCOPES.S3_LIST_BUCKET,
-                  IAM_SCOPES.S3_ALL_LIST_BUCKET,
-                ]}
-                resource={bucketName}
-                errorProps={{ disabled: true }}
+                    )}
+                    {selectedObjects.length === 0 &&
+                      selectedInternalPaths === null && (
+                        <Box>Select a file to see details here</Box>
+                      )}
+                  </DetailsListPanel>
+                </SecureComponent>
+              )}
+
+              <Box
+                className={`basicPanel ${versionsMode ? "panelVisible" : ""} ${
+                  panelHidden === "versions" ? "hiddenPage" : ""
+                }`}
               >
-                <DetailsListPanel
-                  open={detailsOpen}
-                  closePanel={() => {
-                    onClosePanel(false);
-                  }}
-                  className={`${versionsMode ? "hideListOnSmall" : ""}`}
-                >
-                  {selectedObjects.length > 0 && (
-                    <ActionsList
-                      items={multiActionButtons}
-                      title={"Selected Objects:"}
-                    />
-                  )}
+                <Fragment>
                   {selectedInternalPaths !== null && (
-                    <ObjectDetailPanel
+                    <VersionsNavigator
                       internalPaths={selectedInternalPaths}
                       bucketName={bucketName}
-                      onClosePanel={onClosePanel}
-                      versioningInfo={versioningConfig}
-                      locking={lockingEnabled}
                     />
                   )}
-                </DetailsListPanel>
-              </SecureComponent>
-            )}
+                </Fragment>
+              </Box>
+            </Box>
           </Box>
         </div>
-      </PageLayout>
-    </Fragment>
+      </EPageLayout>
+    </Box>
   );
 };
 

@@ -14,31 +14,40 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, ReactNode, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import CopyToClipboard from "react-copy-to-clipboard";
-import styled from "styled-components";
+
 import { Link, useNavigate } from "react-router-dom";
 import { safeDecodeURIComponent } from "../../../common/utils";
 import {
   Button,
   CopyIcon,
-  NewPathIcon,
+  FolderPlusIcon,
   Tooltip,
   Breadcrumbs,
   breakPoints,
   Box,
+  styled, ExpandMenu, EllipsisVerticalIcon, ExpandMenuOption, EyeOffIcon, EyeIcon, BreadcrumbsOption
 } from "mds";
-import { hasPermission } from "../../../common/SecureComponent";
+import { hasPermission, SecureComponent } from "../../../common/SecureComponent";
 import {
   IAM_SCOPES,
   permissionTooltipHelper,
 } from "../../../common/SecureComponent/permissions";
+import {
+  resetMessages,
+  setShowDeletedObjects,
+  setVersionsModeEnabled,
+} from "./objectBrowserSlice";
 import withSuspense from "../Common/Components/withSuspense";
 import { setSnackBarMessage } from "../../../systemSlice";
 import { AppState, useAppDispatch } from "../../../store";
-import { setVersionsModeEnabled } from "./objectBrowserSlice";
 import { getSessionGrantsWildCard } from "../Buckets/ListBuckets/UploadPermissionUtils";
+import SearchBox from "../Common/SearchBox";
+import FilterObjectsSB from "./FilterObjectsSB";
+import { SelectorTypes } from "../../../common/types";
+import { isVersionedMode } from "../../../utils/validationFunctions";
 
 const CreatePathModal = withSuspense(
   React.lazy(
@@ -47,15 +56,11 @@ const CreatePathModal = withSuspense(
 );
 
 const BreadcrumbsMain = styled.div(() => ({
-  display: "flex",
-  "& .additionalOptions": {
-    paddingRight: "10px",
-    display: "flex",
-    alignItems: "center",
-    [`@media (max-width: ${breakPoints.lg}px)`]: {
-      display: "none",
-    },
-  },
+  boxSizing: "content-box" as const,
+  display: "grid",
+  gridTemplateColumns: "1fr 230px auto auto",
+  alignItems: "center",
+  gap: 8,
   "& .slashSpacingStyle": {
     margin: "0 5px",
   },
@@ -65,7 +70,8 @@ interface IObjectBrowser {
   bucketName: string;
   internalPaths: string;
   hidePathButton?: boolean;
-  additionalOptions?: React.ReactNode;
+  additionalOptions?: SelectorTypes[];
+  uploadButton: ReactNode;
 }
 
 const BrowserBreadcrumbs = ({
@@ -73,6 +79,7 @@ const BrowserBreadcrumbs = ({
   internalPaths,
   hidePathButton,
   additionalOptions,
+                              uploadButton,
 }: IObjectBrowser) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -83,12 +90,17 @@ const BrowserBreadcrumbs = ({
   const versionsMode = useSelector(
     (state: AppState) => state.objectBrowser.versionsMode,
   );
-  const versionedFile = useSelector(
-    (state: AppState) => state.objectBrowser.versionedFile,
-  );
   const anonymousMode = useSelector(
     (state: AppState) => state.system.anonymousMode,
   );
+  const showDeleted = useSelector(
+    (state: AppState) => state.objectBrowser.showDeleted,
+  );
+  const versioningConfig = useSelector(
+    (state: AppState) => state.objectBrowser.versionInfo,
+  );
+
+  const isVersioningApplied = isVersionedMode(versioningConfig.status);
 
   const [createFolderOpen, setCreateFolderOpen] = useState<boolean>(false);
   const [canCreateSubpath, setCanCreateSubpath] = useState<boolean>(false);
@@ -135,72 +147,29 @@ const BrowserBreadcrumbs = ({
     anonymousMode ||
     canCreateSubpath;
 
-  let breadcrumbsMap = splitPaths.map((objectItem: string, index: number) => {
-    const subSplit = `${splitPaths.slice(0, index + 1).join("/")}/`;
-    const route = `/browser/${encodeURIComponent(bucketName)}/${
-      subSplit ? `${encodeURIComponent(subSplit)}` : ``
-    }`;
+  let breadcrumbsMap: BreadcrumbsOption[] = splitPaths.map(
+    (objectItem: string, index: number) => {
+      const subSplit = `${splitPaths.slice(0, index + 1).join("/")}/`;
+      const route = `../${bucketName}/${
+        subSplit ? `${encodeURIComponent(subSplit)}` : `../`
+      }`;
 
-    if (index === lastBreadcrumbsIndex && objectItem === versionedFile) {
-      return null;
-    }
+      return {
+        to: route,
+        label: safeDecodeURIComponent(objectItem),
+      };
+    },
+  );
 
-    return (
-      <Fragment key={`breadcrumbs-${index.toString()}`}>
-        <span className={"slashSpacingStyle"}>/</span>
-        {index === lastBreadcrumbsIndex ? (
-          <span style={{ cursor: "default", whiteSpace: "pre" }}>
-            {safeDecodeURIComponent(objectItem) /*Only for display*/}
-          </span>
-        ) : (
-          <Link
-            style={{
-              whiteSpace: "pre",
-            }}
-            to={route}
-            onClick={() => {
-              dispatch(
-                setVersionsModeEnabled({ status: false, objectName: "" }),
-              );
-            }}
-          >
-            {
-              safeDecodeURIComponent(
-                objectItem,
-              ) /*Only for display to preserve */
-            }
-          </Link>
-        )}
-      </Fragment>
-    );
-  });
-
-  let versionsItem: any[] = [];
-
-  if (versionsMode) {
-    versionsItem = [
-      <Fragment key={`breadcrumbs-versionedItem`}>
-        <span>
-          <span className={"slashSpacingStyle"}>/</span>
-          {versionedFile} - Versions
-        </span>
-      </Fragment>,
-    ];
-  }
-
-  const listBreadcrumbs: any[] = [
-    <Fragment key={`breadcrumbs-root-path`}>
-      <Link
-        to={`/browser/${bucketName}`}
-        onClick={() => {
-          dispatch(setVersionsModeEnabled({ status: false, objectName: "" }));
-        }}
-      >
-        {bucketName}
-      </Link>
-    </Fragment>,
+  const listBreadcrumbs: BreadcrumbsOption[] = [
+    {
+      to: `../${bucketName}`,
+      label: bucketName,
+      onClick: () => {
+        dispatch(setVersionsModeEnabled({ status: false, objectName: "" }));
+      },
+    },
     ...breadcrumbsMap,
-    ...versionsItem,
   ];
 
   const closeAddFolderModal = () => {
@@ -229,111 +198,108 @@ const BrowserBreadcrumbs = ({
     }
   };
 
+  const setDeletedAction = () => {
+    dispatch(resetMessages());
+    dispatch(setShowDeletedObjects(!showDeleted));
+  };
+
   return (
     <Fragment>
-      <BreadcrumbsMain>
-        {createFolderOpen && (
-          <CreatePathModal
-            modalOpen={createFolderOpen}
-            bucketName={bucketName}
-            folderName={internalPaths}
-            onClose={closeAddFolderModal}
-            limitedSubPath={
-              canCreateSubpath &&
-              !(
-                hasPermission(
-                  [pathToCheckPerms, ...sessionGrantWildCards],
-                  putObjectPermScopes,
-                ) || anonymousMode
-              )
-            }
-          />
-        )}
-        <Breadcrumbs
-          sx={{
-            whiteSpace: "pre",
-          }}
-          goBackFunction={goBackFunction}
-          additionalOptions={
-            <Fragment>
-              <CopyToClipboard text={`${bucketName}/${splitPaths.join("/")}`}>
-                <Button
-                  id={"copy-path"}
-                  icon={
-                    <CopyIcon
-                      style={{
-                        width: "12px",
-                        height: "12px",
-                        fill: "#969FA8",
-                        marginTop: -1,
-                      }}
-                    />
-                  }
-                  variant={"regular"}
-                  onClick={() => {
-                    dispatch(setSnackBarMessage("Path copied to clipboard"));
-                  }}
-                  style={{
-                    width: "28px",
-                    height: "28px",
-                    color: "#969FA8",
-                    border: "#969FA8 1px solid",
-                    marginRight: 5,
-                  }}
-                />
-              </CopyToClipboard>
-              <Box className={"additionalOptions"}>{additionalOptions}</Box>
-            </Fragment>
+      {createFolderOpen && (
+        <CreatePathModal
+          modalOpen={createFolderOpen}
+          bucketName={bucketName}
+          folderName={internalPaths}
+          onClose={closeAddFolderModal}
+          limitedSubPath={
+            canCreateSubpath &&
+            !(
+              hasPermission(
+                [pathToCheckPerms, ...sessionGrantWildCards],
+                putObjectPermScopes,
+              ) || anonymousMode
+            )
           }
+        />
+      )}
+      <BreadcrumbsMain>
+        <Breadcrumbs
+          options={listBreadcrumbs}
+          goBackFunction={goBackFunction}
+          markCurrentItem={versionsMode}
+          displayLastItems={2}
+          onClickOption={(to) => {
+            navigate(to || "/");
+            dispatch(setVersionsModeEnabled({ status: false, objectName: "" }));
+          }}
+        />
+        <SecureComponent
+          scopes={[IAM_SCOPES.S3_LIST_BUCKET, IAM_SCOPES.S3_ALL_LIST_BUCKET]}
+          resource={bucketName}
+          errorProps={{ disabled: true }}
         >
-          {listBreadcrumbs}
-        </Breadcrumbs>
-        {!hidePathButton && (
-          <Tooltip
-            tooltip={
-              canCreatePath
-                ? "Choose or create a new path"
-                : permissionTooltipHelper(
-                    [IAM_SCOPES.S3_PUT_OBJECT, IAM_SCOPES.S3_PUT_ACTIONS],
-                    "create a new path",
-                  )
-            }
+          <FilterObjectsSB />
+        </SecureComponent>
+        {uploadButton}
+        <Box>
+          <ExpandMenu
+            id={"list-options"}
+            icon={<EllipsisVerticalIcon />}
+            compact
+            sx={{ padding: 6, width: 28, height: 28, boxSizing: "border-box" }}
+            dropMenuPosition={"end"}
+            dropArrow={false}
           >
-            <Button
-              id={"new-path"}
-              onClick={() => {
-                setCreateFolderOpen(true);
-              }}
-              disabled={anonymousMode ? false : rewindEnabled || !canCreatePath}
-              icon={<NewPathIcon style={{ fill: "#969FA8" }} />}
-              style={{
-                whiteSpace: "nowrap",
-              }}
-              variant={"regular"}
-              label={"Create new path"}
-            />
-          </Tooltip>
-        )}
+            {!hidePathButton && (
+              <Tooltip
+                tooltip={
+                  canCreatePath
+                    ? ""
+                    : permissionTooltipHelper(
+                        [IAM_SCOPES.S3_PUT_OBJECT, IAM_SCOPES.S3_PUT_ACTIONS],
+                        "create a new path"
+                      )
+                }
+              >
+                <Button
+                  id={"new-path"}
+                  onClick={() => {
+                    setCreateFolderOpen(true);
+                  }}
+                  disabled={
+                    anonymousMode ? false : rewindEnabled || !canCreatePath
+                  }
+                  icon={<FolderPlusIcon />}
+                  style={{
+                    whiteSpace: "nowrap",
+                  }}
+                  label={"Create new path"}
+                />
+              </Tooltip>
+            )}
+            <CopyToClipboard text={`${bucketName}/${splitPaths.join("/")}`}>
+              <Button
+                id={"copy-path"}
+                icon={<CopyIcon />}
+                onClick={() => {
+                  // TODO: ENABLE NOTIFICATIONS
+                  //notification.success("Path copied to clipboard");
+                }}
+                label={"Copy Path"}
+              />
+            </CopyToClipboard>
+
+              <ExpandMenuOption
+                id={"deleted-objects-toggle"}
+                icon={showDeleted ? <EyeOffIcon /> : <EyeIcon />}
+                onClick={setDeletedAction}
+                disabled={!isVersioningApplied || rewindEnabled}
+              >
+                {showDeleted ? "Hide" : "Show"} Deleted Objects
+              </ExpandMenuOption>
+          </ExpandMenu>
+        </Box>
       </BreadcrumbsMain>
-      <Box
-        sx={{
-          display: "none",
-          marginTop: 15,
-          marginBottom: 5,
-          justifyContent: "flex-start",
-          "& > div": {
-            fontSize: 12,
-            fontWeight: "normal",
-            flexDirection: "row",
-            flexWrap: "nowrap",
-          },
-          [`@media (max-width: ${breakPoints.lg}px)`]: {
-            display: "flex",
-          },
-        }}
-      >
-        {additionalOptions}
-      </Box>
     </Fragment>
   );
 };

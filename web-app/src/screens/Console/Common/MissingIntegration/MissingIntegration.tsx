@@ -18,13 +18,13 @@ import React, { Fragment } from "react";
 import { HelpBox, Grid } from "mds";
 
 interface IMissingIntegration {
-  iconComponent: any;
+  icon: any;
   entity: string;
   documentationLink: string;
 }
 
 const MissingIntegration = ({
-  iconComponent,
+  icon,
   entity,
   documentationLink,
 }: IMissingIntegration) => {
@@ -40,7 +40,7 @@ const MissingIntegration = ({
       <Grid item xs={8}>
         <HelpBox
           title={`${entity} not available`}
-          iconComponent={iconComponent}
+          icon={icon}
           help={
             <Fragment>
               This feature is not available.

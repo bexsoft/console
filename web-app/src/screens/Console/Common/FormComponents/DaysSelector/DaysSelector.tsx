@@ -26,7 +26,6 @@ interface IDaysSelector {
   id: string;
   maxSeconds: number;
   label: string;
-  entity: string;
   onChange: (newDate: string, isValid: boolean) => void;
 }
 
@@ -43,7 +42,6 @@ const DaysSelector = ({
   id,
   label,
   maxSeconds,
-  entity,
   onChange,
 }: IDaysSelector) => {
   const maxDays = Math.floor(maxSeconds / DAY_SECONDS);
@@ -155,8 +153,9 @@ const DaysSelector = ({
           alignItems: "center",
           marginBottom: 5,
         }}
+        className={"Base_Strong"}
       >
-        <InputLabel htmlFor={id}>{label}</InputLabel>
+        {label}
       </Box>
       <Box
         sx={{
@@ -164,20 +163,13 @@ const DaysSelector = ({
           alignItems: "flex-start",
           justifyContent: "space-evenly",
           gap: 10,
-          "& .reverseInput": {
-            flexFlow: "row-reverse",
-            "& > label": {
-              fontWeight: 400,
-              marginLeft: 15,
-              marginRight: 25,
-            },
-          },
+          marginTop: 12,
         }}
       >
         <Box>
           <InputBox
             id={id}
-            className={`reverseInput removeArrows`}
+            className={`removeArrows`}
             type="number"
             min="0"
             max="7"
@@ -189,12 +181,14 @@ const DaysSelector = ({
             value={selectedDays.toString()}
             sx={extraStyles}
             noLabelMinWidth
+            sizeMode={"small"}
+            orientation={"vertical"}
           />
         </Box>
         <Box>
           <InputBox
             id={id}
-            className={`reverseInput removeArrows`}
+            className={`removeArrows`}
             type="number"
             min="0"
             max="23"
@@ -206,12 +200,14 @@ const DaysSelector = ({
             value={selectedHours.toString()}
             sx={extraStyles}
             noLabelMinWidth
+            sizeMode={"small"}
+            orientation={"vertical"}
           />
         </Box>
         <Box>
           <InputBox
             id={id}
-            className={`reverseInput removeArrows`}
+            className={`removeArrows`}
             type="number"
             min="0"
             max="59"
@@ -223,60 +219,10 @@ const DaysSelector = ({
             value={selectedMinutes.toString()}
             sx={extraStyles}
             noLabelMinWidth
+            sizeMode={"small"}
+            orientation={"vertical"}
           />
         </Box>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-start",
-          marginTop: 25,
-          marginLeft: 10,
-          marginBottom: 15,
-          "& .validityText": {
-            fontSize: 14,
-            marginTop: 15,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            "@media (max-width: 900px)": {
-              flexFlow: "column",
-            },
-            "& > .min-icon": {
-              color: "#5E5E5E",
-              width: 15,
-              height: 15,
-              marginRight: 10,
-            },
-          },
-          "& .validTill": {
-            fontWeight: "bold",
-            marginLeft: 15,
-          },
-          "& .invalidDurationText": {
-            marginTop: 15,
-            display: "flex",
-            color: "red",
-            fontSize: 11,
-          },
-        }}
-      >
-        {validDate && dateSelected ? (
-          <div className={"validityText"}>
-            <LinkIcon />
-            <div>{entity} will be available until:</div>{" "}
-            <div className={"validTill"}>
-              {DateTime.fromISO(dateSelected).toFormat(
-                "MM/dd/yyyy HH:mm:ss ZZZZ",
-              )}
-            </div>
-          </div>
-        ) : (
-          <div className={"invalidDurationText"}>
-            Please select a valid duration.
-          </div>
-        )}
       </Box>
     </Box>
   );

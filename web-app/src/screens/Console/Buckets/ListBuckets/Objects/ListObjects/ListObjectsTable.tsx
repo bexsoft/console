@@ -36,7 +36,7 @@ import {
 } from "../../../../../../common/SecureComponent/permissions";
 import { hasPermission } from "../../../../../../common/SecureComponent";
 import { downloadObject } from "../../../../ObjectBrowser/utils";
-import { DataTable, ItemActions } from "mds";
+import { DataTable } from "mds";
 import { BucketObject } from "api/consoleApi";
 
 const ListObjectsTable = () => {
@@ -123,14 +123,6 @@ const ListObjectsTable = () => {
     }
     dispatch(setSelectedObjectView(idElement));
   };
-  const tableActions: ItemActions[] = [
-    {
-      type: "view",
-      tooltip: "View",
-      onClick: openPath,
-      sendOnlyId: false,
-    },
-  ];
 
   const sortChange = (sortData: any) => {
     const newSortDirection = get(sortData, "sortDirection", "DESC");
@@ -168,6 +160,8 @@ const ListObjectsTable = () => {
     dispatch(setSelectedObjects(elements));
     dispatch(setSelectedObjectView(null));
 
+    console.log("sd")
+
     return elements;
   };
 
@@ -186,7 +180,7 @@ const ListObjectsTable = () => {
       "Objects List unavailable. Please review your WebSockets configuration and try again";
   }
 
-  let customPaperHeight = "calc(100vh - 290px)";
+  let customPaperHeight = "calc(100vh - 232px)";
 
   if (obOnly) {
     customPaperHeight = "calc(100vh - 315px)";
@@ -194,7 +188,13 @@ const ListObjectsTable = () => {
 
   return (
     <DataTable
-      itemActions={tableActions}
+      itemActions={[
+        {
+          type: "view",
+          tooltip: "View",
+          onClick: openPath,
+        },
+      ]}
       columns={rewindEnabled ? rewindModeColumns : listModeColumns}
       isLoading={requestInProgress}
       entityName="Objects"

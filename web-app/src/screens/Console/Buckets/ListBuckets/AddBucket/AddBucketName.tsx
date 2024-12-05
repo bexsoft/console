@@ -28,7 +28,8 @@ const AddBucketName = ({ hasErrors }: { hasErrors: boolean }) => {
     <InputBox
       id="bucket-name"
       name="bucket-name"
-      error={hasErrors ? "Invalid bucket name" : ""}
+      state={hasErrors ? "error" : "normal"}
+      helper={hasErrors ? "Invalid bucket name" : ""}
       onFocus={() => {
         dispatch(setIsDirty(true));
       }}

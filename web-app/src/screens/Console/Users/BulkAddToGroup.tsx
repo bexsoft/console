@@ -16,12 +16,12 @@
 
 import React, { useEffect, useState } from "react";
 import {
-  AddMembersToGroupIcon,
+  UserPlusIcon,
   Button,
   FormLayout,
   Grid,
   ProgressBar,
-  ReadBox,
+  CodeSnippet,
 } from "mds";
 
 import { modalStyleUtils } from "../Common/FormComponents/common/styleLibrary";
@@ -107,7 +107,7 @@ const BulkAddToGroup = ({
           ? "The selected users were added to the following groups."
           : "Add Users to Group"
       }
-      titleIcon={<AddMembersToGroupIcon />}
+      titleIcon={<UserPlusIcon />}
     >
       {accepted ? (
         <React.Fragment>
@@ -116,21 +116,21 @@ const BulkAddToGroup = ({
             containerPadding={false}
             sx={{ margin: "30px 0" }}
           >
-            <ReadBox label={"Groups"} sx={{ width: "100%" }}>
+            <CodeSnippet label={"Groups"} sx={{ width: "100%" }}>
               {selectedGroups.join(", ")}
-            </ReadBox>
-            <ReadBox label={"Users"} sx={{ width: "100%" }}>
+            </CodeSnippet>
+            <CodeSnippet label={"Users"} sx={{ width: "100%" }}>
               {" "}
               {checkedUsers.join(", ")}{" "}
-            </ReadBox>
+            </CodeSnippet>
           </FormLayout>
         </React.Fragment>
       ) : (
         <form noValidate autoComplete="off" onSubmit={setSaving}>
           <FormLayout withBorders={false} containerPadding={false}>
-            <ReadBox label={"Selected Users"} sx={{ width: "100%" }}>
+            <CodeSnippet label={"Selected Users"} sx={{ width: "100%" }}>
               {checkedUsers.join(", ")}
-            </ReadBox>
+            </CodeSnippet>
             <GroupsSelectors
               selectedGroups={selectedGroups}
               setSelectedGroups={setSelectedGroups}
@@ -140,7 +140,7 @@ const BulkAddToGroup = ({
             <Button
               id={"clear-bulk-add-group"}
               type="button"
-              variant="regular"
+              variant="secondary"
               color="primary"
               onClick={resetForm}
               label={"Clear"}
@@ -148,7 +148,7 @@ const BulkAddToGroup = ({
             <Button
               id={"save-add-group"}
               type="submit"
-              variant="callAction"
+              variant="primary"
               disabled={saving || selectedGroups.length < 1}
               label={"Save"}
             />

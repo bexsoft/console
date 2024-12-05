@@ -16,14 +16,14 @@
 
 import React, { Fragment } from "react";
 import get from "lodash/get";
-import styled from "styled-components";
 import {
   Box,
   Button,
   DownloadIcon,
-  ServiceAccountCredentialsIcon,
-  WarnIcon,
+  SquareUserRoundIcon,
+  CircleAlertIcon,
   Grid,
+  styled,
 } from "mds";
 import { NewServiceAccount } from "./types";
 import ModalWrapper from "../ModalWrapper/ModalWrapper";
@@ -147,7 +147,7 @@ const CredentialsPrompt = ({
         closeModal();
       }}
       title={`New ${entity} Created`}
-      titleIcon={<ServiceAccountCredentialsIcon />}
+      titleIcon={<SquareUserRoundIcon />}
     >
       <Grid container>
         <Grid item xs={12}>
@@ -219,7 +219,7 @@ const CredentialsPrompt = ({
             </WarningBlock>
           ) : (
             <WarningBlock>
-              <WarnIcon />
+              <CircleAlertIcon />
               <span>
                 Write these down, as this is the only time the secret will be
                 displayed.
@@ -240,7 +240,7 @@ const CredentialsPrompt = ({
                   label={"Download for import"}
                   onClick={downloadImport}
                   icon={<DownloadIcon />}
-                  variant="callAction"
+                  variant="primary"
                 />
               </TooltipWrapper>
 
@@ -255,7 +255,7 @@ const CredentialsPrompt = ({
                     label={"Download all access credentials"}
                     onClick={downloaddAllCredentials}
                     icon={<DownloadIcon />}
-                    variant="callAction"
+                    variant="primary"
                     color="primary"
                   />
                 </TooltipWrapper>

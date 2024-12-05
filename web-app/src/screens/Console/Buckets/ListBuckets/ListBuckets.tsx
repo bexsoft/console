@@ -17,19 +17,20 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  AddIcon,
-  BucketsIcon,
+  PlusIcon,
+  BucketIcon,
   Button,
   HelpBox,
-  MultipleBucketsIcon,
+  RefreshCCWDotIcon,
+  BucketCopyIcon,
   PageLayout,
-  RefreshIcon,
-  SelectAllIcon,
-  SelectMultipleIcon,
+  RefreshCWIcon,
+  CheckCheckIcon,
+  SquareStackIcon,
   Grid,
   breakPoints,
   ProgressBar,
-  ActionLink,
+  LinkButton,
 } from "mds";
 
 import { actionsTray } from "../../Common/FormComponents/common/styleLibrary";
@@ -226,8 +227,8 @@ const ListBuckets = () => {
                       setBulkSelect(!bulkSelect);
                       setSelectedBuckets([]);
                     }}
-                    icon={<SelectMultipleIcon />}
-                    variant={bulkSelect ? "callAction" : "regular"}
+                    icon={<SquareStackIcon />}
+                    variant={bulkSelect ? "primary" : "secondary"}
                     disabled={!hasBuckets}
                   />
                 </TooltipWrapper>
@@ -245,8 +246,8 @@ const ListBuckets = () => {
                     <Button
                       id={"select-all-buckets"}
                       onClick={selectAllBuckets}
-                      icon={<SelectAllIcon />}
-                      variant={"regular"}
+                      icon={<CheckCheckIcon />}
+                      variant={"secondary"}
                     />
                   </TooltipWrapper>
                 )}
@@ -267,8 +268,8 @@ const ListBuckets = () => {
                     onClick={() => {
                       setReplicationModalOpen(true);
                     }}
-                    icon={<MultipleBucketsIcon />}
-                    variant={"regular"}
+                    icon={<BucketCopyIcon />}
+                    variant={"secondary"}
                     disabled={selectedBuckets.length === 0}
                   />
                 </TooltipWrapper>
@@ -281,8 +282,8 @@ const ListBuckets = () => {
                 onClick={() => {
                   setLoading(true);
                 }}
-                icon={<RefreshIcon />}
-                variant={"regular"}
+                icon={<RefreshCWIcon />}
+                variant={"secondary"}
               />
             </TooltipWrapper>
 
@@ -302,8 +303,8 @@ const ListBuckets = () => {
                   onClick={() => {
                     navigate(IAM_PAGES.ADD_BUCKETS);
                   }}
-                  icon={<AddIcon />}
-                  variant={"callAction"}
+                  icon={<PlusIcon />}
+                  variant={"primary"}
                   disabled={!canCreateBucket}
                   label={"Create Bucket"}
                 />
@@ -336,7 +337,7 @@ const ListBuckets = () => {
               <Grid container>
                 <Grid item xs={8}>
                   <HelpBox
-                    iconComponent={<BucketsIcon />}
+                    icon={<BucketIcon />}
                     title={"No Results"}
                     help={
                       <Fragment>
@@ -351,7 +352,7 @@ const ListBuckets = () => {
               <Grid container>
                 <Grid item xs={8}>
                   <HelpBox
-                    iconComponent={<BucketsIcon />}
+                    icon={<BucketIcon />}
                     title={"Buckets"}
                     help={
                       <Fragment>
@@ -380,13 +381,13 @@ const ListBuckets = () => {
                         >
                           <br />
                           To get started,&nbsp;
-                          <ActionLink
+                          <LinkButton
                             onClick={() => {
                               navigate(IAM_PAGES.ADD_BUCKETS);
                             }}
                           >
                             Create a Bucket.
-                          </ActionLink>
+                          </LinkButton>
                         </SecureComponent>
                       </Fragment>
                     }

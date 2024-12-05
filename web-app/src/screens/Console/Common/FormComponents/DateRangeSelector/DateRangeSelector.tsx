@@ -14,14 +14,14 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import React, { Fragment } from "react";
+import React from "react";
 import {
   Button,
-  SyncIcon,
+  FolderSyncIcon,
   Grid,
   Box,
   breakPoints,
-  TimeIcon,
+  CalendarIcon,
   DateTimeInput,
 } from "mds";
 import { DateTime } from "luxon";
@@ -128,24 +128,16 @@ const DateRangeSelector = ({
             onChange={setTimeStart}
             id="stTime"
             secondsSelector={false}
-            pickerStartComponent={
-              <Fragment>
-                <TimeIcon />
-                <span>{startLabel}</span>
-              </Fragment>
-            }
+            openPickerIcon={<CalendarIcon />}
+            label={startLabel}
           />
           <DateTimeInput
             value={timeEnd}
             onChange={setTimeEnd}
             id="endTime"
             secondsSelector={false}
-            pickerStartComponent={
-              <Fragment>
-                <TimeIcon />
-                <span>{endLabel}</span>
-              </Fragment>
-            }
+            openPickerIcon={<CalendarIcon />}
+            label={endLabel}
           />
         </Box>
 
@@ -160,9 +152,9 @@ const DateRangeSelector = ({
             <Button
               id={"sync"}
               type="button"
-              variant="callAction"
+              variant="primary"
               onClick={triggerSync}
-              icon={<SyncIcon />}
+              icon={<FolderSyncIcon />}
               label={"Sync"}
             />
           </Box>

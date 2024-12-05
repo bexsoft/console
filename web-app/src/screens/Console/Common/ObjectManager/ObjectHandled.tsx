@@ -19,16 +19,16 @@ import { IFileItem } from "../../ObjectBrowser/types";
 import ProgressBarWrapper from "../ProgressBarWrapper/ProgressBarWrapper";
 import {
   Box,
-  CancelledIcon,
-  DisabledIcon,
-  DownloadStatIcon,
-  EnabledIcon,
-  UploadStatIcon,
+  CircleXIcon,
+  CircleOffIcon,
+  CloudDownloadIcon,
+  CircleCheckBigIcon,
+  UploadIcon,
   Tooltip,
+  styled,
 } from "mds";
 import clsx from "clsx";
 import { callForObjectID } from "../../ObjectBrowser/transferManager";
-import styled from "styled-components";
 import get from "lodash/get";
 
 interface IObjectHandled {
@@ -189,21 +189,21 @@ const ObjectHandled = ({ objectToDisplay, deleteFromList }: IObjectHandled) => {
                   })}
                 >
                   {objectToDisplay.cancelled ? (
-                    <CancelledIcon />
+                    <CircleXIcon />
                   ) : (
                     <Fragment>
                       {objectToDisplay.failed ? (
-                        <DisabledIcon />
+                        <CircleOffIcon />
                       ) : (
                         <Fragment>
                           {objectToDisplay.done ? (
-                            <EnabledIcon />
+                            <CircleCheckBigIcon />
                           ) : (
                             <Fragment>
                               {objectToDisplay.type === "download" ? (
-                                <DownloadStatIcon />
+                                <CloudDownloadIcon />
                               ) : (
-                                <UploadStatIcon />
+                                <UploadIcon />
                               )}
                             </Fragment>
                           )}

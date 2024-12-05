@@ -22,7 +22,7 @@ import {
   FormLayout,
   Grid,
   ProgressBar,
-  Switch,
+  Toggle,
 } from "mds";
 import { useSelector } from "react-redux";
 import ModalWrapper from "../../../../Common/ModalWrapper/ModalWrapper";
@@ -107,7 +107,7 @@ const RewindEnable = ({
         />
 
         {rewindEnabled && (
-          <Switch
+          <Toggle
             value="status"
             id="status"
             name="status"
@@ -122,7 +122,7 @@ const RewindEnable = ({
         <Grid item xs={12} sx={modalStyleUtils.modalButtonBar}>
           <Button
             type="button"
-            variant="callAction"
+            variant="primary"
             disabled={rewindEnabling || (!dateSelected && rewindEnableButton)}
             onClick={rewindApply}
             id={"rewind-apply-button"}

@@ -16,18 +16,18 @@
 
 import React from "react";
 import { DateTime } from "luxon";
-import styled from "styled-components";
 import get from "lodash/get";
 import { displayFileIconName } from "../ListObjects/utils";
 import {
   DownloadIcon,
-  PreviewIcon,
-  RecoverIcon,
+  EyeIcon,
+  ArchiveRestoreIcon,
   ShareIcon,
   IconButton,
   Tooltip,
   Grid,
   Checkbox,
+  styled,
 } from "mds";
 import { niceBytes } from "../../../../../../common/utils";
 import SpecificVersionPill from "./SpecificVersionPill";
@@ -178,7 +178,7 @@ const FileVersionItem = ({
 
   const versionItemButtons = [
     {
-      icon: <PreviewIcon />,
+      icon: <EyeIcon />,
       action: onPreview,
       tooltip: "Preview",
     },
@@ -193,7 +193,7 @@ const FileVersionItem = ({
       tooltip: "Share this version",
     },
     {
-      icon: <RecoverIcon />,
+      icon: <ArchiveRestoreIcon />,
       action: onRestore,
       tooltip: "Restore this version",
     },
@@ -235,14 +235,14 @@ const FileVersionItem = ({
         >
           <Grid
             item
-            xs
+            xs={12}
             className={`mainFileVersionItem ${
               versionInfo.is_delete_marker ? "deleted" : ""
             }`}
           >
             <Grid item xs={12}>
               <Grid container>
-                <Grid item xs md={4} className={"versionContainer"}>
+                <Grid item xs={12} md={4} className={"versionContainer"}>
                   {checkable && (
                     <Checkbox
                       checked={isChecked}

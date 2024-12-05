@@ -15,12 +15,12 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment, useEffect, useState } from "react";
-import styled from "styled-components";
 import get from "lodash/get";
-import { Button, CircleIcon, ObjectManagerIcon } from "mds";
+import { Button, CircleIcon, BucketIcon, styled, CircleFillIcon, ArrowUpDownIcon } from "mds";
 import { useSelector } from "react-redux";
 import { toggleList } from "../../ObjectBrowser/objectBrowserSlice";
 import { AppState, useAppDispatch } from "../../../../store";
+import TopNavigatorButton from "../../Menu/TopNavigationButton";
 
 const IndicatorContainer = styled.div(({ theme }) => ({
   position: "absolute",
@@ -74,29 +74,26 @@ const ObjectManagerButton = () => {
   return (
     <Fragment>
       {managerObjects && managerObjects.length > 0 && (
-        <Button
+        <TopNavigatorButton
           aria-label="Refresh List"
           onClick={() => {
             dispatch(toggleList());
           }}
-          icon={
-            <Fragment>
-              <IndicatorContainer
-                className={newObject ? "newItem" : ""}
-                style={{
-                  opacity: managerObjects.length > 0 && newItems ? 1 : 0,
-                }}
-              >
-                <CircleIcon />
-              </IndicatorContainer>
-              <ObjectManagerIcon
-                style={{ width: 20, height: 20, marginTop: -2 }}
-              />
-            </Fragment>
-          }
           id="object-manager-toggle"
           style={{ position: "relative", padding: "0 10px" }}
-        />
+        >
+          <Fragment>
+            <IndicatorContainer
+              className={newObject ? "newItem" : ""}
+              style={{
+                opacity: managerObjects.length > 0 && newItems ? 1 : 0,
+              }}
+            >
+              <CircleFillIcon />
+            </IndicatorContainer>
+            <ArrowUpDownIcon style={{ width: 16, height: 16 }} />
+          </Fragment>
+        </TopNavigatorButton>
       )}
     </Fragment>
   );

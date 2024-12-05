@@ -234,7 +234,6 @@ const BrowserHandler = () => {
 
   return (
     <Fragment>
-      {!anonymousMode && <OBHeader bucketName={bucketName} />}
       <ListObjects />
     </Fragment>
   );
