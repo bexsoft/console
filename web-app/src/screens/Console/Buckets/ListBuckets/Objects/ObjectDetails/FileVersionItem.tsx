@@ -235,14 +235,14 @@ const FileVersionItem = ({
         >
           <Grid
             item
-            xs
+            xs={12}
             className={`mainFileVersionItem ${
               versionInfo.is_delete_marker ? "deleted" : ""
             }`}
           >
             <Grid item xs={12}>
               <Grid container>
-                <Grid item xs md={4} className={"versionContainer"}>
+                <Grid item xs={12} md={4} className={"versionContainer"}>
                   {checkable && (
                     <Checkbox
                       checked={isChecked}

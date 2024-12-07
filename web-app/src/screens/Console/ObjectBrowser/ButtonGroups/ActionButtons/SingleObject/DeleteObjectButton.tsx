@@ -14,29 +14,21 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import React, { Fragment, useState } from "react";
-import { Button, DeleteIcon } from "mds";
+import React, { Fragment } from "react";
+import { ExpandMenuOption, TrashIcon } from "mds";
 import { useSelector } from "react-redux";
 import { SecureComponent } from "../../../../../../common/SecureComponent";
 import { IAM_SCOPES } from "../../../../../../common/SecureComponent/permissions";
 import { useParams } from "react-router-dom";
 import {
-  setLoadingObjectInfo,
-  setLoadingVersions,
-  setObjectInfo,
-  setObjectMetadata,
-  setSelectedVersion,
+  setDeleteObjectOpen,
 } from "../../../objectBrowserSlice";
-import DeleteObject from "../../../../Buckets/ListBuckets/Objects/ListObjects/DeleteObject";
 import { AppState, useAppDispatch } from "../../../../../../store";
-import { selDistSet } from "../../../../../../systemSlice";
 import { safeDecodeURIComponent } from "../../../../../../common/utils";
 
 const DeleteObjectButton = () => {
   const params = useParams();
   const dispatch = useAppDispatch();
-
-  const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
 
   const bucketName = params.bucketName || "";
 
@@ -49,10 +41,6 @@ const DeleteObjectButton = () => {
   const selectedInternalPaths = useSelector(
     (state: AppState) => state.objectBrowser.selectedInternalPaths,
   );
-  const versioningConfig = useSelector(
-    (state: AppState) => state.objectBrowser.versionInfo,
-  );
-  const distributedSetup = useSelector(selDistSet);
 
   const internalPathsDecoded =
     safeDecodeURIComponent(selectedInternalPaths || "") || "";
@@ -63,31 +51,8 @@ const DeleteObjectButton = () => {
     return null;
   }
 
-  const closeDeleteModal = (closeAndReload: boolean) => {
-    setDeleteOpen(false);
-
-    if (closeAndReload && selectedVersion === "") {
-      dispatch(setObjectInfo(null));
-      dispatch(setObjectMetadata(null));
-    } else {
-      dispatch(setLoadingVersions(true));
-      dispatch(setSelectedVersion(""));
-      dispatch(setLoadingObjectInfo(true));
-    }
-  };
-
   return (
     <Fragment>
-      {deleteOpen && (
-        <DeleteObject
-          deleteOpen={deleteOpen}
-          selectedBucket={bucketName}
-          selectedObject={selectedInternalPaths || ""}
-          closeDeleteModalAndRefresh={closeDeleteModal}
-          versioningInfo={distributedSetup ? versioningConfig : undefined}
-          selectedVersion={selectedVersion}
-        />
-      )}
       <SecureComponent
         resource={[
           bucketName,
@@ -97,17 +62,17 @@ const DeleteObjectButton = () => {
         scopes={[IAM_SCOPES.S3_DELETE_OBJECT]}
         errorProps={{ disabled: true }}
       >
-        <Button
+        <ExpandMenuOption
           id={"delete-element-click"}
-          icon={<DeleteIcon />}
-          iconLocation={"start"}
-          variant={"secondary"}
+          icon={<TrashIcon />}
+          className={"danger"}
           onClick={() => {
-            setDeleteOpen(true);
+            dispatch(setDeleteObjectOpen(true));
           }}
           disabled={selectedVersion === "" && actualInfo.is_delete_marker}
-          label={`Delete${selectedVersion !== "" ? " version" : ""}`}
-        />
+        >
+          {`Delete${selectedVersion !== "" ? " version" : ""}`}
+        </ExpandMenuOption>
       </SecureComponent>
     </Fragment>
   );

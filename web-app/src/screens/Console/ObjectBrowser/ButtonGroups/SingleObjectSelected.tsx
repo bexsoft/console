@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import { Box, ButtonGroup, EllipsisVerticalIcon, ExpandMenu } from "mds";
+import { Box, ButtonGroup, EllipsisVerticalIcon, ExpandMenu, ExpandMenuDivider } from "mds";
 
 import DeleteObjectButton from "./ActionButtons/SingleObject/DeleteObjectButton";
 import DownloadObjectButton from "./ActionButtons/SingleObject/DownloadObjectButton";
@@ -66,6 +66,7 @@ const SingleObjectSelected = () => {
         <InspectObjectButton />
         <RetentionObjectButton />
         <ObjectVersionsButton />
+        <ExpandMenuDivider />
         <DeleteObjectButton />
       </ExpandMenu>
     </Box>

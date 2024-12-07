@@ -27,12 +27,12 @@ type ConfirmDialogProps = {
   confirmationContent: React.ReactNode | React.ReactNode[];
   cancelText?: string;
   confirmText?: string;
+  dialogWidth?: number;
   confirmButtonProps?: ButtonProps &
     React.ButtonHTMLAttributes<HTMLButtonElement>;
   cancelButtonProps?: ButtonProps &
     React.ButtonHTMLAttributes<HTMLButtonElement>;
   titleIcon?: React.ReactNode;
-  confirmationButtonSimple?: boolean;
 };
 
 const ConfirmDialog = ({
@@ -48,7 +48,7 @@ const ConfirmDialog = ({
   confirmButtonProps = undefined,
   cancelButtonProps = undefined,
   titleIcon = null,
-  confirmationButtonSimple = false,
+  dialogWidth = 510,
 }: ConfirmDialogProps) => {
   return (
     <ModalBox
@@ -56,7 +56,7 @@ const ConfirmDialog = ({
       titleIcon={titleIcon}
       onClose={onClose}
       open={isOpen}
-      customMaxWidth={510}
+      customMaxWidth={dialogWidth}
     >
       <Box>{confirmationContent}</Box>
       <Box
@@ -82,7 +82,7 @@ const ConfirmDialog = ({
           onClick={onConfirm}
           label={confirmText}
           disabled={isLoading}
-          variant={"primary"}
+          variant={"destructive"}
           {...confirmButtonProps}
         />
       </Box>

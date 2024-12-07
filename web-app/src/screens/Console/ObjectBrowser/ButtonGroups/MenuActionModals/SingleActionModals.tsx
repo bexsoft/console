@@ -49,9 +49,6 @@ const SingleActionModals = () => {
     (state: AppState) =>
       state.objectBrowser.singleObjectModals.deleteObjectOpen,
   );
-  const promptModalOpen = useSelector(
-    (state: AppState) => state.objectBrowser.singleObjectModals.promptOpen,
-  );
 
   const distributedSetup = useSelector(selDistSet);
 

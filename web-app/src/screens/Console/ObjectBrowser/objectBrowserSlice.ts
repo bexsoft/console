@@ -89,7 +89,6 @@ const initialState: ObjectBrowserState = {
     inspectOpen: false,
     legalHoldOpen: false,
     retentionOpen: false,
-    promptOpen: false,
   },
   multiObjectModals: {
     deleteMultiple: false,

@@ -18,7 +18,7 @@ import React, { Fragment, useState } from "react";
 import { ErrorResponseHandler } from "../../../../../../common/types";
 import ConfirmDialog from "../../../../Common/ModalWrapper/ConfirmDialog";
 import useApi from "../../../../Common/Hooks/useApi";
-import { CircleXIcon, Toggle } from "mds";
+import { CircleXIcon, NotificationAlert, Toggle } from "mds";
 import { setErrorSnackMessage } from "../../../../../../systemSlice";
 import { AppState, useAppDispatch } from "../../../../../../store";
 import { hasPermission } from "../../../../../../common/SecureComponent";
@@ -95,6 +95,7 @@ const DeleteObject = ({
       isLoading={deleteLoading}
       onConfirm={onConfirmDelete}
       onClose={onClose}
+      dialogWidth={400}
       confirmationContent={
         <Fragment>
           Are you sure you want to delete: <br />
@@ -153,22 +154,9 @@ const DeleteObject = ({
           )}
           {deleteVersions && (
             <Fragment>
-              <div
-                style={{
-                  marginTop: 10,
-                  border: "#c83b51 1px solid",
-                  borderRadius: 3,
-                  padding: 5,
-                  backgroundColor: "#c83b5120",
-                  color: "#c83b51",
-                }}
-              >
-                This will remove the object as well as all of its versions,{" "}
-                <br />
-                This action is irreversible.
-              </div>
-              <br />
-              Are you sure you want to continue?
+              <NotificationAlert variant="danger" title={"Warning, this action is irreversible."}>
+                This will remove the object as well as all of its versions.
+              </NotificationAlert>
             </Fragment>
           )}
         </Fragment>

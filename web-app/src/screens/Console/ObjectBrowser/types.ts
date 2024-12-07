@@ -99,7 +99,6 @@ interface SingleObjectSubActionsModals {
   inspectOpen: boolean;
   retentionOpen: boolean;
   deleteObjectOpen: boolean;
-  promptOpen: boolean;
 }
 
 interface MultiObjectsActionModals {
