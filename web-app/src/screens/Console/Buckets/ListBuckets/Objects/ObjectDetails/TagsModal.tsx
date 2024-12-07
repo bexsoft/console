@@ -162,7 +162,6 @@ const AddTagModal = ({
         onClose={() => {
           onCloseAndUpdate(true);
         }}
-        iconColor={deleteEnabled ? "delete" : "default"}
         titleIcon={deleteEnabled ? <CircleOffIcon /> : <TagIcon />}
       >
         {deleteEnabled ? (

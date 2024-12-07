@@ -27,7 +27,7 @@ interface IModalProps {
   children: any;
   wideLimit?: boolean;
   titleIcon?: React.ReactNode;
-  iconColor?: "default" | "delete" | "accept";
+  customWidth?: string | number;
   sx?: OverrideTheme;
 }
 
@@ -38,7 +38,7 @@ const ModalWrapper = ({
   children,
   wideLimit = true,
   titleIcon = null,
-  iconColor = "default",
+  customWidth,
   sx,
 }: IModalProps) => {
   const dispatch = useAppDispatch();
@@ -87,6 +87,7 @@ const ModalWrapper = ({
       titleIcon={titleIcon}
       widthLimit={wideLimit}
       sx={sx}
+      customMaxWidth={customWidth}
     >
       <MainError isModal={true} />
       <NotificationAlert

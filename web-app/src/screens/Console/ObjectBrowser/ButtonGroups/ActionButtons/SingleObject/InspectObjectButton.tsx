@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { Fragment, useState } from "react";
-import { Button, Tooltip, ViewIcon } from "mds";
+import { ExpandMenuOption, Tooltip, ViewIcon } from "mds";
 import { useSelector } from "react-redux";
 import { hasPermission } from "../../../../../../common/SecureComponent";
 import {
@@ -23,7 +23,10 @@ import {
   permissionTooltipHelper,
 } from "../../../../../../common/SecureComponent/permissions";
 import { useParams } from "react-router-dom";
-import { setLoadingObjectInfo } from "../../../objectBrowserSlice";
+import {
+  setInspectOpen,
+  setLoadingObjectInfo,
+} from "../../../objectBrowserSlice";
 import InspectObject from "../../../../Buckets/ListBuckets/Objects/ListObjects/InspectObject";
 import { AppState, useAppDispatch } from "../../../../../../store";
 import { safeDecodeURIComponent } from "../../../../../../common/utils";
@@ -38,13 +41,13 @@ const InspectObjectButton = () => {
   const bucketName = params.bucketName || "";
 
   const actualInfo = useSelector(
-    (state: AppState) => state.objectBrowser.objectData.selectedObjectInfo,
+    (state: AppState) => state.objectBrowser.objectData.selectedObjectInfo
   );
   const selectedVersion = useSelector(
-    (state: AppState) => state.objectBrowser.selectedVersion,
+    (state: AppState) => state.objectBrowser.selectedVersion
   );
   const selectedInternalPaths = useSelector(
-    (state: AppState) => state.objectBrowser.selectedInternalPaths,
+    (state: AppState) => state.objectBrowser.selectedInternalPaths
   );
 
   const internalPathsDecoded =
@@ -90,12 +93,12 @@ const InspectObjectButton = () => {
           canInspect
             ? "Inspect this file"
             : permissionTooltipHelper(
-              [IAM_SCOPES.ADMIN_INSPECT_DATA],
-              "inspect this file",
-            )
+                [IAM_SCOPES.ADMIN_INSPECT_DATA],
+                "inspect this file"
+              )
         }
       >
-        <Button
+        <ExpandMenuOption
           id={`preview-file`}
           icon={<ViewIcon />}
           disabled={
@@ -105,11 +108,11 @@ const InspectObjectButton = () => {
             !canInspect
           }
           onClick={() => {
-            setInspectModalOpen(true);
+            dispatch(setInspectOpen(true));
           }}
         >
           Inspect
-        </Button>
+        </ExpandMenuOption>
       </Tooltip>
     </Fragment>
   );

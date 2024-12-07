@@ -15,7 +15,16 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React, { useState } from "react";
-import { Button, FeatherIcon, KeyRoundIcon, Toggle, Grid, Box } from "mds";
+import {
+  Box,
+  Button,
+  Checkbox,
+  FeatherIcon,
+  Grid,
+  KeyRoundIcon,
+  Link,
+  NotificationAlert, ScanEyeIcon
+} from "mds";
 import {
   deleteCookie,
   getCookieValue,
@@ -55,7 +64,13 @@ const InspectObject = ({
 
   const performInspect = async () => {
     let basename = document.baseURI.replace(window.location.origin, "");
-    const urlOfInspectApi = `${window.location.origin}${basename}/api/v1/admin/inspect?volume=${encodeURIComponent(volumeName)}&file=${encodeURIComponent(inspectPath + "/xl.meta")}&encrypt=${isEncrypt}`;
+    const urlOfInspectApi = `${
+      window.location.origin
+    }${basename}/api/v1/admin/inspect?volume=${encodeURIComponent(
+      volumeName
+    )}&file=${encodeURIComponent(
+      inspectPath + "/xl.meta"
+    )}&encrypt=${isEncrypt}`;
 
     makeRequest(urlOfInspectApi)
       .then(async (res) => {
@@ -66,7 +81,7 @@ const InspectObject = ({
             setErrorSnackMessage({
               errorMessage: resErr.message,
               detailedError: resErr.code,
-            }),
+            })
           );
         }
         const blob: Blob = await res.blob();
@@ -103,10 +118,23 @@ const InspectObject = ({
       {!decryptionKey && (
         <ModalWrapper
           modalOpen={inspectOpen}
-          titleIcon={<FeatherIcon />}
+          titleIcon={<ScanEyeIcon />}
           title={`Inspect Object`}
           onClose={onClose}
+          customWidth={608}
         >
+          Inspect will produce non-human-readable xl.meta binary file containing
+          the data and metadata associated to this object, which is intended for
+          troubleshooting use by MinIO Engineering. For more information{" "}
+          <Link
+            href={
+              "https://min.io/docs/minio/linux/reference/minio-mc/mc-support-inspect.html"
+            }
+            target={"_blank"}
+            rel="noopener"
+          >
+            visit this.
+          </Link>
           <form
             noValidate
             autoComplete="off"
@@ -114,20 +142,47 @@ const InspectObject = ({
               onSubmit(e);
             }}
           >
-            Would you like to encrypt <b>{inspectPath}</b>? <br />
-            <Toggle
-              label={"Encrypt"}
-              indicatorLabels={["Yes", "No"]}
-              checked={isEncrypt}
-              value={"encrypt"}
-              id="encrypt"
-              name="encrypt"
-              onChange={(e) => {
-                setIsEncrypt(!isEncrypt);
-              }}
-              helper=""
-            />
+            <Box sx={{
+              margin: "24px 0",
+              display: "flex",
+              gap: 16,
+              "& .inputItem": {
+                width: "initial"
+              }
+            }}>
+              <Checkbox
+                checked={isEncrypt}
+                value={"encrypt"}
+                id="encrypt"
+                name="encrypt"
+                onChange={(e) => {
+                  setIsEncrypt(!isEncrypt);
+                }}
+              />
+              <Box>
+                {`Encrypt ${inspectPath} inspection report`}
+              </Box>
+            </Box>
+            <NotificationAlert variant={"warning"}>
+              This report may contain internal or private data points. It can be
+              encrypted for enhanced security, and decrypted using MinIO’s{" "}
+              <Link
+                href={
+                  "https://min.io/docs/minio/linux/operations/troubleshooting/encrypting-files.html#decryption"
+                }
+                target={"_blank"}
+                rel="noopener"
+              >
+                decrypted tool.
+              </Link>
+            </NotificationAlert>
             <Grid item xs={12} sx={modalStyleUtils.modalButtonBar}>
+              <Button
+                id={"cancel"}
+                variant="secondary"
+                onClick={onClose}
+                label={"Cancel"}
+              />
               <Button
                 id={"inspect"}
                 type="submit"
