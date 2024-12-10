@@ -180,7 +180,7 @@ const ListObjectsTable = () => {
       "Objects List unavailable. Please review your WebSockets configuration and try again";
   }
 
-  let customPaperHeight = "calc(100vh - 290px)";
+  let customPaperHeight = "calc(100vh - 232px)";
 
   if (obOnly) {
     customPaperHeight = "calc(100vh - 315px)";
