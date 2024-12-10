@@ -89,13 +89,15 @@ const ModalWrapper = ({
       sx={sx}
       customMaxWidth={customWidth}
     >
+      {/* TODO: Fix with Notifications
+
       <MainError isModal={true} />
       <NotificationAlert
         onClose={closeSnackBar}
         color={modalSnackMessage.type === "error" ? "error" : "default"}
       >
         {message}
-      </NotificationAlert>
+      </NotificationAlert>*/}
       {children}
     </ModalBox>
   );

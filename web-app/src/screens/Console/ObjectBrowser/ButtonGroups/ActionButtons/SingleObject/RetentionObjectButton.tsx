@@ -14,8 +14,8 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import React, { Fragment, useState } from "react";
-import { Button, FeatherIcon, Tooltip } from "mds";
+import React, { Fragment } from "react";
+import { AnchorIcon, Button, Tooltip } from "mds";
 import { useSelector } from "react-redux";
 import { hasPermission } from "../../../../../../common/SecureComponent";
 import {
@@ -23,8 +23,7 @@ import {
   permissionTooltipHelper,
 } from "../../../../../../common/SecureComponent/permissions";
 import { useParams } from "react-router-dom";
-import { setLoadingObjectInfo } from "../../../objectBrowserSlice";
-import SetRetention from "../../../../Buckets/ListBuckets/Objects/ObjectDetails/SetRetention";
+import { setRetentionOpen } from "../../../objectBrowserSlice";
 import { AppState, useAppDispatch } from "../../../../../../store";
 import { safeDecodeURIComponent } from "../../../../../../common/utils";
 import { selDistSet } from "../../../../../../systemSlice";
@@ -32,8 +31,6 @@ import { selDistSet } from "../../../../../../systemSlice";
 const RetentionObjectButton = () => {
   const params = useParams();
   const dispatch = useAppDispatch();
-
-  const [retentionModalOpen, setRetentionModalOpen] = useState<boolean>(false);
 
   const bucketName = params.bucketName || "";
 
@@ -78,24 +75,8 @@ const RetentionObjectButton = () => {
     true,
   );
 
-  const closeRetentionModal = (updateInfo: boolean) => {
-    setRetentionModalOpen(false);
-    if (updateInfo) {
-      dispatch(setLoadingObjectInfo(true));
-    }
-  };
-
   return (
     <Fragment>
-      {retentionModalOpen && actualInfo && (
-        <SetRetention
-          open={retentionModalOpen}
-          closeModalAndRefresh={closeRetentionModal}
-          objectName={currentItem}
-          objectInfo={actualInfo}
-          bucketName={bucketName}
-        />
-      )}
       <Tooltip
         tooltip={
           canChangeRetention
@@ -115,7 +96,7 @@ const RetentionObjectButton = () => {
       >
         <Button
           id={`preview-file`}
-          icon={<FeatherIcon />}
+          icon={<AnchorIcon />}
           disabled={
             !distributedSetup ||
             !!actualInfo.is_delete_marker ||
@@ -124,7 +105,7 @@ const RetentionObjectButton = () => {
             !lockingEnabled
           }
           onClick={() => {
-            setRetentionModalOpen(true);
+            dispatch(setRetentionOpen(true));
           }}
         >
           Retention
