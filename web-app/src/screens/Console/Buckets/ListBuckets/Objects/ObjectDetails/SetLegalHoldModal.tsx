@@ -16,7 +16,7 @@
 
 import React, { useEffect, useState } from "react";
 import get from "lodash/get";
-import { Box, Button, FormLayout, Grid, Toggle } from "mds";
+import { Box, Button, FeatherIcon, FormLayout, Grid, Toggle, useMDSTheme } from "mds";
 import { BucketObject, ObjectLegalHoldStatus } from "api/consoleApi";
 import { api } from "api";
 import { errorToHandler } from "api/errors";
@@ -41,6 +41,8 @@ const SetLegalHoldModal = ({
   actualInfo,
 }: ISetRetentionProps) => {
   const dispatch = useAppDispatch();
+  const theme = useMDSTheme();
+
   const [legalHoldEnabled, setLegalHoldEnabled] = useState<boolean>(false);
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const versionId = actualInfo.version_id;
@@ -65,7 +67,7 @@ const SetLegalHoldModal = ({
           status: legalHoldEnabled
             ? ObjectLegalHoldStatus.Enabled
             : ObjectLegalHoldStatus.Disabled,
-        },
+        }
       )
       .then(() => {
         setIsSaving(false);
@@ -77,19 +79,39 @@ const SetLegalHoldModal = ({
       });
   };
 
-  const resetForm = () => {
-    setLegalHoldEnabled(false);
-  };
-
   return (
     <ModalWrapper
       title="Set Legal Hold"
       modalOpen={open}
       onClose={() => {
-        resetForm();
         closeModalAndRefresh(false);
       }}
+      titleIcon={<FeatherIcon />}
     >
+      <Box
+        sx={{
+          backgroundColor:
+            theme.colors["Color/Brand/Neutral/colorPrimaryBg"],
+          display: "flex",
+          gap: 8,
+          padding: theme.paddingSizes["size"],
+          borderRadius: 8,
+          marginBottom: theme.paddingSizes["sizeLG"],
+        }}
+      >
+        <Box
+          className={"Base_Strong"}
+          sx={{ color: theme.colors["Color/Neutral/Text/colorTextLabel"] }}
+        >
+          Object:
+        </Box>
+        <Box
+          className="Base_Normal"
+          sx={{ color: theme.colors["Color/Neutral/Text/colorTextLabel"], flexGrow: 1, width: "100%", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
+        >
+          {bucketName + "/" + objectName}
+        </Box>
+      </Box>
       <form
         noValidate
         autoComplete="off"
@@ -98,9 +120,6 @@ const SetLegalHoldModal = ({
         }}
       >
         <FormLayout withBorders={false} containerPadding={false}>
-          <Box className={"inputItem"}>
-            <strong>Object</strong>: {bucketName + "/" + objectName}
-          </Box>
           <Toggle
             value="legalhold"
             id="legalhold"
@@ -111,17 +130,18 @@ const SetLegalHoldModal = ({
             }}
             label={"Legal Hold Status"}
             indicatorLabels={["Enabled", "Disabled"]}
-            tooltip={
+            helper={
               "To enable this feature you need to enable versioning on the bucket before creation"
             }
+            inverse
           />
           <Grid item xs={12} sx={modalStyleUtils.modalButtonBar}>
             <Button
               id={"clear"}
               type="button"
               variant="secondary"
-              onClick={resetForm}
-              label={"Clear"}
+              onClick={() => closeModalAndRefresh(false)}
+              label={"Cancel"}
             />
             <Button
               id={"save"}

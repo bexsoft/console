@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { Button, FeatherIcon, Tooltip } from "mds";
 import { useSelector } from "react-redux";
 import { hasPermission } from "../../../../../../common/SecureComponent";
@@ -23,8 +23,7 @@ import {
   permissionTooltipHelper,
 } from "../../../../../../common/SecureComponent/permissions";
 import { useParams } from "react-router-dom";
-import { setLoadingObjectInfo } from "../../../objectBrowserSlice";
-import SetLegalHoldModal from "../../../../Buckets/ListBuckets/Objects/ObjectDetails/SetLegalHoldModal";
+import { setLegalHoldOpen } from "../../../objectBrowserSlice";
 import { AppState, useAppDispatch } from "../../../../../../store";
 import { selDistSet } from "../../../../../../systemSlice";
 
@@ -32,18 +31,16 @@ const LegalHoldObjectButton = () => {
   const params = useParams();
   const dispatch = useAppDispatch();
 
-  const [legalHoldOpen, setLegalHoldOpen] = useState<boolean>(false);
-
   const bucketName = params.bucketName || "";
 
   const actualInfo = useSelector(
-    (state: AppState) => state.objectBrowser.objectData.selectedObjectInfo,
+    (state: AppState) => state.objectBrowser.objectData.selectedObjectInfo
   );
   const selectedVersion = useSelector(
-    (state: AppState) => state.objectBrowser.selectedVersion,
+    (state: AppState) => state.objectBrowser.selectedVersion
   );
   const lockingEnabled = useSelector(
-    (state: AppState) => state.objectBrowser.lockingEnabled,
+    (state: AppState) => state.objectBrowser.lockingEnabled
   );
 
   const distributedSetup = useSelector(selDistSet);
@@ -57,24 +54,8 @@ const LegalHoldObjectButton = () => {
     IAM_SCOPES.S3_PUT_ACTIONS,
   ]);
 
-  const closeLegalholdModal = (reload: boolean) => {
-    setLegalHoldOpen(false);
-    if (reload) {
-      dispatch(setLoadingObjectInfo(true));
-    }
-  };
-
   return (
     <Fragment>
-      {legalHoldOpen && actualInfo && (
-        <SetLegalHoldModal
-          open={legalHoldOpen}
-          closeModalAndRefresh={closeLegalholdModal}
-          objectName={actualInfo.name || ""}
-          bucketName={bucketName}
-          actualInfo={actualInfo}
-        />
-      )}
       <Tooltip
         tooltip={
           canSetLegalHold
@@ -82,12 +63,12 @@ const LegalHoldObjectButton = () => {
               ? "Change Legal Hold rules for this File"
               : "Object Locking must be enabled on this bucket in order to set Legal Hold"
             : permissionTooltipHelper(
-              [
-                IAM_SCOPES.S3_PUT_OBJECT_LEGAL_HOLD,
-                IAM_SCOPES.S3_PUT_ACTIONS,
-              ],
-              "change legal hold settings for this object",
-            )
+                [
+                  IAM_SCOPES.S3_PUT_OBJECT_LEGAL_HOLD,
+                  IAM_SCOPES.S3_PUT_ACTIONS,
+                ],
+                "change legal hold settings for this object"
+              )
         }
       >
         <Button
@@ -101,7 +82,7 @@ const LegalHoldObjectButton = () => {
             selectedVersion !== ""
           }
           onClick={() => {
-            setLegalHoldOpen(true);
+            dispatch(setLegalHoldOpen(true));
           }}
         >
           Legal Hold
