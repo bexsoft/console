@@ -107,7 +107,7 @@ const UploadFilesButton = ({
           disabled={forceDisable || !uploadEnabled}
           dropMenuPosition={"end"}
           compact
-          forInputOptions
+          menuTopSpacing={false}
         >
           <ExpandMenuOption
             onClick={() => uploadFilesAction("file")}

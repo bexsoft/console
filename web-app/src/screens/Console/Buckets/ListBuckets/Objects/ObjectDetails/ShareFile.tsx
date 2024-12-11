@@ -17,13 +17,16 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
+  Box,
   Button,
   CopyIcon,
-  CodeSnippet,
-  ShareIcon,
   Grid,
+  InputBox,
+  NotificationAlert,
   ProgressBar,
+  ShareIcon,
   Tooltip,
+  useMDSTheme,
 } from "mds";
 import CopyToClipboard from "react-copy-to-clipboard";
 import ModalWrapper from "../../../../Common/ModalWrapper/ModalWrapper";
@@ -41,6 +44,7 @@ import { errorToHandler } from "api/errors";
 import { getMaxShareLinkExpTime } from "screens/Console/ObjectBrowser/objectBrowserThunks";
 import { maxShareLinkExpTime } from "screens/Console/ObjectBrowser/objectBrowserSlice";
 import debounce from "lodash/debounce";
+import { DateTime } from "luxon";
 
 interface IShareFileProps {
   open: boolean;
@@ -56,6 +60,8 @@ const ShareFile = ({
   dataObject,
 }: IShareFileProps) => {
   const dispatch = useAppDispatch();
+  const theme = useMDSTheme();
+
   const distributedSetup = useSelector(selDistSet);
   const maxShareLinkExpTimeVal = useSelector(maxShareLinkExpTime);
   const [shareURL, setShareURL] = useState<string>("");
@@ -93,7 +99,7 @@ const ShareFile = ({
             const result: BucketObject[] = res.data.objects || [];
 
             const latestVersion: BucketObject | undefined = result.find(
-              (elem: BucketObject) => elem.is_latest,
+              (elem: BucketObject) => elem.is_latest
             );
 
             if (latestVersion) {
@@ -128,7 +134,7 @@ const ShareFile = ({
       const currDate = new Date();
 
       const diffDate = Math.ceil(
-        (slDate.getTime() - currDate.getTime()) / 1000,
+        (slDate.getTime() - currDate.getTime()) / 1000
       );
 
       if (diffDate > 0) {
@@ -170,6 +176,7 @@ const ShareFile = ({
         onClose={() => {
           closeModalAndRefresh();
         }}
+        customWidth={400}
       >
         {isLoadingVersion && (
           <Grid item xs={12}>
@@ -200,57 +207,84 @@ const ShareFile = ({
                   </span>
                 }
               >
-                <span>
-                  The following URL lets you share this object without requiring
-                  a login. <br />
-                  The URL expires automatically at the earlier of your
-                  configured time ({niceTimeFromSeconds(maxShareLinkExpTimeVal)}
-                  ) or the expiration of your current web session.
-                </span>
+                <Box>
+                  <NotificationAlert>
+                    The following URL lets you share this object without
+                    requiring a login.
+                  </NotificationAlert>
+                  <Box
+                    className={"Base_Normal"}
+                    sx={{
+                      marginTop: 24,
+                    }}
+                  >
+                    The URL expires automatically at the earlier of your
+                    configured time{" "}
+                    <span className={"Base_Strong"}>
+                      ({niceTimeFromSeconds(maxShareLinkExpTimeVal)})
+                    </span>{" "}
+                    or the expiration of your current web session.
+                  </Box>
+                </Box>
               </Tooltip>
             </Grid>
             <br />
             <Grid item xs={12}>
               <DaysSelector
                 id="date"
-                label="Active for"
+                label="Active for:"
                 maxSeconds={maxShareLinkExpTimeVal}
                 onChange={debouncedDateChange}
-                entity="Link"
               />
             </Grid>
-            <Grid
-              item
-              xs={12}
+            <Box
               sx={{
-                marginBottom: 10,
+                backgroundColor: theme.colors["Color/Base/Shark/0"],
+                padding: theme.paddingSizes["size"],
+                borderRadius: 8,
+                marginTop: theme.paddingSizes["sizeLG"],
               }}
             >
-              <CodeSnippet
-                actionButton={
-                  <CopyToClipboard text={shareURL}>
-                    <Button
-                      id={"copy-path"}
-                      variant="secondary"
-                      onClick={() => {
-                        dispatch(
-                          setModalSnackMessage("Share URL Copied to clipboard"),
-                        );
-                      }}
-                      disabled={shareURL === "" || isLoadingFile}
-                      style={{
-                        width: "28px",
-                        height: "28px",
-                        padding: "0px",
-                      }}
-                      icon={<CopyIcon />}
-                    />
-                  </CopyToClipboard>
-                }
-              >
-                {shareURL}
-              </CodeSnippet>
-            </Grid>
+              {selectedDate ? (
+                <div className={"validityText"}>
+                  <Box className={"Base_Normal"} sx={{marginBottom: 4,}}>
+                    Link will be available until:
+                    <span className={"Base_Strong"}>
+                      {DateTime.fromISO(selectedDate).toFormat(
+                        "MM/dd/yyyy HH:mm:ss ZZZZ"
+                      )}
+                    </span>
+                  </Box>
+                  <InputBox
+                    id={"shareURL"}
+                    sizeMode={"small"}
+                    readOnly
+                    value={shareURL}
+                    overlayObject={
+                      <CopyToClipboard text={shareURL}>
+                        <Button
+                          id={"copy-path"}
+                          variant="secondary"
+                          onClick={() => {
+                            dispatch(
+                              setModalSnackMessage(
+                                "Share URL Copied to clipboard"
+                              )
+                            );
+                          }}
+                          disabled={shareURL === "" || isLoadingFile}
+                          icon={<CopyIcon />}
+                        />
+                      </CopyToClipboard>
+                    }
+                  />
+                </div>
+              ) : (
+                <div className={"invalidDurationText"}>
+                  Please select a valid duration.
+                </div>
+              )}
+            </Box>
           </Fragment>
         )}
       </ModalWrapper>

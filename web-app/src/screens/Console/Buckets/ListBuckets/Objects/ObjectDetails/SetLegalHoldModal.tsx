@@ -87,6 +87,7 @@ const SetLegalHoldModal = ({
         closeModalAndRefresh(false);
       }}
       titleIcon={<FeatherIcon />}
+      customWidth={608}
     >
       <Box
         sx={{
