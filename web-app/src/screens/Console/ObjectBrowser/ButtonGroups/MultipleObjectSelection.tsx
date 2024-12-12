@@ -73,7 +73,6 @@ const MultipleObjectSelection = () => {
           dropMenuPosition={"end"}
           dropArrow={false}
         >
-          <AnonymousMultipleButton />
           <DeleteMultipleButton />
         </ExpandMenu>
       </ButtonGroup>
