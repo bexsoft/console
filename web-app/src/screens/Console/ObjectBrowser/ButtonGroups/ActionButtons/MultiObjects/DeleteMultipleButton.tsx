@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
@@ -22,29 +22,20 @@ import {
   permissionTooltipHelper,
 } from "../../../../../../common/SecureComponent/permissions";
 import { hasPermission } from "../../../../../../common/SecureComponent";
-import { Button, DeleteIcon, Tooltip } from "mds";
+import { ExpandMenuOption, Tooltip, Trash2Icon } from "mds";
 import { getSessionGrantsWildCard } from "../../../../Buckets/ListBuckets/UploadPermissionUtils";
-import DeleteMultipleObjects from "../../../../Buckets/ListBuckets/Objects/ListObjects/DeleteMultipleObjects";
 import {
-  setReloadObjectsList,
-  setSelectedObjects,
+  setDeleteMultipleOpen,
 } from "../../../objectBrowserSlice";
 import { AppState, useAppDispatch } from "../../../../../../store";
-import { setSnackBarMessage } from "../../../../../../systemSlice";
-import { safeDecodeURIComponent } from "../../../../../../common/utils";
 
 const DeleteMultipleButton = () => {
   const params = useParams();
   const dispatch = useAppDispatch();
 
-  const [deleteMultipleOpen, setDeleteMultipleOpen] = useState<boolean>(false);
 
   const selectedObjects = useSelector(
     (state: AppState) => state.objectBrowser.selectedObjects,
-  );
-
-  const versioningConfig = useSelector(
-    (state: AppState) => state.objectBrowser.versionInfo,
   );
 
   const bucketName = params.bucketName || "";
@@ -74,27 +65,8 @@ const DeleteMultipleButton = () => {
     [IAM_SCOPES.S3_DELETE_OBJECT],
   );
 
-  const closeDeleteMultipleModalAndRefresh = (refresh: boolean) => {
-    setDeleteMultipleOpen(false);
-
-    if (refresh) {
-      dispatch(setSnackBarMessage(`Objects deleted successfully.`));
-      dispatch(setSelectedObjects([]));
-      dispatch(setReloadObjectsList(true));
-    }
-  };
-
   return (
     <Fragment>
-      {deleteMultipleOpen && (
-        <DeleteMultipleObjects
-          deleteOpen={deleteMultipleOpen}
-          selectedBucket={bucketName}
-          selectedObjects={selectedObjects}
-          closeDeleteModalAndRefresh={closeDeleteMultipleModalAndRefresh}
-          versioning={versioningConfig}
-        />
-      )}
       <Tooltip
         tooltip={
           canDelete
@@ -105,18 +77,18 @@ const DeleteMultipleButton = () => {
             )
         }
       >
-        <Button
+        <ExpandMenuOption
           id={"delete-multi-element-click"}
-          icon={<DeleteIcon />}
+          icon={<Trash2Icon />}
           variant={"secondary"}
-          iconLocation={"start"}
           onClick={() => {
-            setDeleteMultipleOpen(true);
+            dispatch(setDeleteMultipleOpen(true));
           }}
           disabled={!canDelete || selectedObjects.length === 0}
+          className={"danger"}
         >
-          Delete
-        </Button>
+          Delete Selected
+        </ExpandMenuOption>
       </Tooltip>
     </Fragment>
   );

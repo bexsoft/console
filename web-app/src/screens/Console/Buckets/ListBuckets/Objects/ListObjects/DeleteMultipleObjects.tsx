@@ -18,7 +18,7 @@ import React, { Fragment, useState } from "react";
 import { ErrorResponseHandler } from "../../../../../../common/types";
 import useApi from "../../../../Common/Hooks/useApi";
 import ConfirmDialog from "../../../../Common/ModalWrapper/ConfirmDialog";
-import { CircleXIcon, Toggle } from "mds";
+import { CircleXIcon, NotificationAlert, Toggle, Trash2Icon, TrashIcon } from "mds";
 import { setErrorSnackMessage } from "../../../../../../systemSlice";
 import { AppState, useAppDispatch } from "../../../../../../store";
 import { hasPermission } from "../../../../../../common/SecureComponent";
@@ -36,7 +36,7 @@ interface IDeleteObjectProps {
   versioning: BucketVersioningResponse;
 }
 
-const DeleteObject = ({
+const DeleteMultipleObjects = ({
   closeDeleteModalAndRefresh,
   deleteOpen,
   selectedBucket,
@@ -126,17 +126,17 @@ const DeleteObject = ({
 
   return (
     <ConfirmDialog
-      title={`Delete Objects`}
+      title={`Delete Selected Objects`}
       confirmText={"Delete"}
       isOpen={deleteOpen}
-      titleIcon={<CircleXIcon />}
+      titleIcon={<Trash2Icon />}
       isLoading={deleteLoading}
       onConfirm={onConfirmDelete}
       onClose={onClose}
+      dialogWidth={400}
       confirmationContent={
         <Fragment>
-          Are you sure you want to delete the selected {selectedObjects.length}{" "}
-          objects?{" "}
+          Are you sure you want to delete the selected {selectedObjects.length === 1 ? "object" : `${selectedObjects.length} objects`}?
           {isVersionedDelete && (
             <Fragment>
               <br />
@@ -177,22 +177,10 @@ const DeleteObject = ({
               )}
               {deleteVersions && (
                 <Fragment>
-                  <div
-                    style={{
-                      marginTop: 10,
-                      border: "#c83b51 1px solid",
-                      borderRadius: 3,
-                      padding: 5,
-                      backgroundColor: "#c83b5120",
-                      color: "#c83b51",
-                    }}
-                  >
-                    This will remove the objects as well as all of their
-                    versions, <br />
-                    This action is irreversible.
-                  </div>
-                  <br />
-                  Are you sure you want to continue?
+                  <NotificationAlert title={"Warning, this action is irreversible"} variant={"danger"}>
+                    This will remove the {selectedObjects.length === 1 ? "object" : "objects"} as well as all of its
+                    versions.
+                  </NotificationAlert>
                 </Fragment>
               )}
             </Fragment>
@@ -203,4 +191,4 @@ const DeleteObject = ({
   );
 };
 
-export default DeleteObject;
+export default DeleteMultipleObjects;
