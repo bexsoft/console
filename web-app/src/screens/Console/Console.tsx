@@ -19,7 +19,6 @@ import React, {
   Suspense,
   useEffect,
   useLayoutEffect,
-  useState,
 } from "react";
 import { Box, Button, NotificationAlert, ProgressBar } from "mds";
 import debounce from "lodash/debounce";
@@ -28,7 +27,6 @@ import { useSelector } from "react-redux";
 import { selFeatures, selSession } from "./consoleSlice";
 import { api } from "api";
 import { AppState, useAppDispatch } from "../../store";
-import MainError from "./Common/MainError/MainError";
 import {
   CONSOLE_UI_RESOURCE,
   IAM_PAGES,
@@ -90,9 +88,6 @@ const Console = () => {
   const open = useSelector((state: AppState) => state.system.sidebarOpen);
   const session = useSelector(selSession);
   const features = useSelector(selFeatures);
-  const snackBarMessage = useSelector(
-    (state: AppState) => state.system.snackBar
-  );
   const needsRestart = useSelector(
     (state: AppState) => state.system.serverNeedsRestart
   );
@@ -103,10 +98,7 @@ const Console = () => {
     (state: AppState) => state.system.loadingProgress
   );
 
-  const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
-
   const ldapIsEnabled = (features && features.includes("ldap-idp")) || false;
-  const kmsIsEnabled = (features && features.includes("kms")) || false;
   const obOnly = !!features?.includes("object-browser-only");
 
   useEffect(() => {
@@ -284,22 +276,6 @@ const Console = () => {
         !route.fsHidden
   );
 
-  const closeSnackBar = () => {
-    setOpenSnackbar(false);
-    dispatch(setSnackBarMessage(""));
-  };
-
-  useEffect(() => {
-    if (snackBarMessage.message === "") {
-      setOpenSnackbar(false);
-      return;
-    }
-    // Open SnackBar
-    if (snackBarMessage.type !== "error") {
-      setOpenSnackbar(true);
-    }
-  }, [snackBarMessage]);
-
   let hideMenu = false;
   if (features?.includes("hide-menu") || pathname.endsWith("/hop") || obOnly) {
     hideMenu = true;
@@ -374,12 +350,6 @@ const Console = () => {
                   sx={{ width: "100%", position: "absolute", top: 0, left: 0 }}
                 />
               )}
-              <MainError />
-              <NotificationAlert
-                color={snackBarMessage.type === "error" ? "error" : "default"}
-              >
-                {snackBarMessage.message}
-              </NotificationAlert>
               <Suspense fallback={<LoadingComponent />}>
                 <ObjectManager />
               </Suspense>
