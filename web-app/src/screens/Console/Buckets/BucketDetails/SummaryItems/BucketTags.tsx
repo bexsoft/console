@@ -16,7 +16,7 @@
 
 import React, { useEffect, useState } from "react";
 import get from "lodash/get";
-import { PlusIcon, Box, Loader, Tag } from "mds";
+import { PlusIcon, Box, Loader, Tag, useNotification } from "mds";
 import { ErrorResponseHandler } from "../../../../../common/types";
 import { IAM_SCOPES } from "../../../../../common/SecureComponent/permissions";
 import { SecureComponent } from "../../../../../common/SecureComponent";
@@ -47,6 +47,7 @@ interface Bucket {
 
 const BucketTags = ({ bucketName }: BucketTagProps) => {
   const dispatch = useAppDispatch();
+  const notification = useNotification();
 
   const [tags, setTags] = useState<any>(null);
   const [tagModalOpen, setTagModalOpen] = useState<boolean>(false);
@@ -70,6 +71,8 @@ const BucketTags = ({ bucketName }: BucketTagProps) => {
     setDeleteTagModalOpen(false);
 
     if (refresh) {
+      notification.success("Tag deleted successfully", {position: "bottom-right"});
+
       fetchTags();
     }
   };

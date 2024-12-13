@@ -21,9 +21,9 @@ import { BucketObject, ObjectLegalHoldStatus } from "api/consoleApi";
 import { api } from "api";
 import { errorToHandler } from "api/errors";
 import { modalStyleUtils } from "../../../../Common/FormComponents/common/styleLibrary";
-import { setModalErrorSnackMessage } from "../../../../../../systemSlice";
 import { useAppDispatch } from "../../../../../../store";
 import ModalWrapper from "../../../../Common/ModalWrapper/ModalWrapper";
+import { useQueryError } from "../../../../Common/Hooks/useQueryError";
 
 interface ISetRetentionProps {
   open: boolean;
@@ -41,6 +41,7 @@ const SetLegalHoldModal = ({
   actualInfo,
 }: ISetRetentionProps) => {
   const dispatch = useAppDispatch();
+  const { notifyError } = useQueryError();
   const theme = useMDSTheme();
 
   const [legalHoldEnabled, setLegalHoldEnabled] = useState<boolean>(false);
@@ -74,7 +75,7 @@ const SetLegalHoldModal = ({
         closeModalAndRefresh(true);
       })
       .catch((err) => {
-        dispatch(setModalErrorSnackMessage(errorToHandler(err.error)));
+        notifyError(errorToHandler(err.error));
         setIsSaving(false);
       });
   };

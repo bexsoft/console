@@ -12,8 +12,10 @@
 // GNU Affero General Public License for more details.
 //
 // You should have received a copy of the GNU Affero General Public License
-
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+import {NotificationOptions} from "mds";
+
 export interface snackBarMessage {
   message: string;
   detailedErrorMsg: string;
@@ -24,4 +26,10 @@ export interface SRInfoStateType {
   enabled: boolean;
   curSite: boolean;
   siteName: string;
+}
+
+export interface QueryErrorHookNotificationOpts
+  extends Omit<NotificationOptions, "children"> {
+  title?: string;
+  showUnauthorized?: boolean;
 }

@@ -26,7 +26,7 @@ import {
   Grid,
   Tag,
   FormLayout,
-  styled,
+  styled, useNotification
 } from "mds";
 import { BucketObject } from "api/consoleApi";
 import { api } from "api";
@@ -38,9 +38,9 @@ import { IAM_SCOPES } from "../../../../../../common/SecureComponent/permissions
 import { SecureComponent } from "../../../../../../common/SecureComponent";
 import {
   selDistSet,
-  setModalErrorSnackMessage,
 } from "../../../../../../systemSlice";
 import { useAppDispatch } from "../../../../../../store";
+import { useQueryError } from "../../../../Common/Hooks/useQueryError";
 
 interface ITagModal {
   modalOpen: boolean;
@@ -60,7 +60,9 @@ const AddTagModal = ({
   bucketName,
   actualInfo,
 }: ITagModal) => {
-  const dispatch = useAppDispatch();
+  const { notifyError } = useQueryError();
+  const notification = useNotification();
+
   const distributedSetup = useSelector(selDistSet);
   const [newKey, setNewKey] = useState<string>("");
   const [newLabel, setNewLabel] = useState<string>("");
@@ -97,10 +99,12 @@ const AddTagModal = ({
       )
       .then(() => {
         onCloseAndUpdate(true);
+        notification.success("Tag Added successfully", {position: "bottom-right"});
+
         setIsSending(false);
       })
       .catch((err) => {
-        dispatch(setModalErrorSnackMessage(errorToHandler(err.error)));
+        notifyError(errorToHandler(err.error));
         setIsSending(false);
       });
   };
@@ -119,10 +123,11 @@ const AddTagModal = ({
       )
       .then(() => {
         onCloseAndUpdate(true);
+        notification.success("Tag deleted successfully", {position: "bottom-right"});
         setIsSending(false);
       })
       .catch((err) => {
-        dispatch(setModalErrorSnackMessage(errorToHandler(err.error)));
+        notifyError(errorToHandler(err.error));
         setIsSending(false);
       });
   };

@@ -18,9 +18,10 @@ import React, { Fragment } from "react";
 import useApi from "../../Common/Hooks/useApi";
 import ConfirmDialog from "../../Common/ModalWrapper/ConfirmDialog";
 import { ErrorResponseHandler } from "../../../../common/types";
-import { CircleXIcon } from "mds";
+import { CircleXIcon, useNotification } from "mds";
 import { setErrorSnackMessage } from "../../../../systemSlice";
 import { useAppDispatch } from "../../../../store";
+import { useQueryError } from "../../Common/Hooks/useQueryError";
 
 interface IDeleteBucketTagModal {
   deleteOpen: boolean;
@@ -37,12 +38,15 @@ const DeleteBucketTagModal = ({
   onCloseAndUpdate,
   bucketName,
 }: IDeleteBucketTagModal) => {
-  const dispatch = useAppDispatch();
+  const { notifyError } = useQueryError();
+
   const [tagKey, tagLabel] = selectedTag;
 
-  const onDelSuccess = () => onCloseAndUpdate(true);
+  const onDelSuccess = () => {
+    onCloseAndUpdate(true);
+  };
   const onDelError = (err: ErrorResponseHandler) =>
-    dispatch(setErrorSnackMessage(err));
+    notifyError(err);
   const onClose = () => onCloseAndUpdate(false);
 
   const [deleteLoading, invokeDeleteApi] = useApi(onDelSuccess, onDelError);

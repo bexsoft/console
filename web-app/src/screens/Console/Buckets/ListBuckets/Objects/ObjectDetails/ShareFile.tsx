@@ -26,7 +26,7 @@ import {
   ProgressBar,
   ShareIcon,
   Tooltip,
-  useMDSTheme,
+  useMDSTheme, useNotification
 } from "mds";
 import CopyToClipboard from "react-copy-to-clipboard";
 import ModalWrapper from "../../../../Common/ModalWrapper/ModalWrapper";
@@ -61,6 +61,7 @@ const ShareFile = ({
 }: IShareFileProps) => {
   const dispatch = useAppDispatch();
   const theme = useMDSTheme();
+  const notification = useNotification();
 
   const distributedSetup = useSelector(selDistSet);
   const maxShareLinkExpTimeVal = useSelector(maxShareLinkExpTime);
@@ -266,11 +267,7 @@ const ShareFile = ({
                           id={"copy-path"}
                           variant="secondary"
                           onClick={() => {
-                            dispatch(
-                              setModalSnackMessage(
-                                "Share URL Copied to clipboard"
-                              )
-                            );
+                              notification.information("URL Copied to clipboard", {position: "bottom-right"});
                           }}
                           disabled={shareURL === "" || isLoadingFile}
                           icon={<CopyIcon />}

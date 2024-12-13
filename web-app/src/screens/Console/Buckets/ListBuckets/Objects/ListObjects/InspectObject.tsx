@@ -19,11 +19,11 @@ import {
   Box,
   Button,
   Checkbox,
-  FeatherIcon,
   Grid,
   KeyRoundIcon,
   Link,
-  NotificationAlert, ScanEyeIcon
+  NotificationAlert,
+  ScanEyeIcon,
 } from "mds";
 import {
   deleteCookie,
@@ -33,8 +33,7 @@ import {
 import ModalWrapper from "../../../../Common/ModalWrapper/ModalWrapper";
 import { modalStyleUtils } from "../../../../Common/FormComponents/common/styleLibrary";
 import KeyRevealer from "../../../../Tools/KeyRevealer";
-import { setErrorSnackMessage } from "../../../../../../systemSlice";
-import { useAppDispatch } from "../../../../../../store";
+import { useQueryError } from "../../../../Common/Hooks/useQueryError";
 
 interface IInspectObjectProps {
   closeInspectModalAndRefresh: (refresh: boolean) => void;
@@ -49,7 +48,8 @@ const InspectObject = ({
   inspectPath,
   volumeName,
 }: IInspectObjectProps) => {
-  const dispatch = useAppDispatch();
+  const { notifyError } = useQueryError();
+
   const onClose = () => closeInspectModalAndRefresh(false);
   const [isEncrypt, setIsEncrypt] = useState<boolean>(true);
   const [decryptionKey, setDecryptionKey] = useState<string>("");
@@ -77,12 +77,10 @@ const InspectObject = ({
         if (!res.ok) {
           const resErr: any = await res.json();
 
-          dispatch(
-            setErrorSnackMessage({
-              errorMessage: resErr.message,
-              detailedError: resErr.code,
-            })
-          );
+          notifyError({
+            errorMessage: resErr.message,
+            detailedError: resErr.code,
+          });
         }
         const blob: Blob = await res.blob();
 
@@ -99,7 +97,7 @@ const InspectObject = ({
         setDecryptionKey(decryptKey);
       })
       .catch((err) => {
-        dispatch(setErrorSnackMessage(err));
+        notifyError(err);
       });
   };
 
@@ -142,14 +140,16 @@ const InspectObject = ({
               onSubmit(e);
             }}
           >
-            <Box sx={{
-              margin: "24px 0",
-              display: "flex",
-              gap: 16,
-              "& .inputItem": {
-                width: "initial"
-              }
-            }}>
+            <Box
+              sx={{
+                margin: "24px 0",
+                display: "flex",
+                gap: 16,
+                "& .inputItem": {
+                  width: "initial",
+                },
+              }}
+            >
               <Checkbox
                 checked={isEncrypt}
                 value={"encrypt"}
@@ -159,9 +159,7 @@ const InspectObject = ({
                   setIsEncrypt(!isEncrypt);
                 }}
               />
-              <Box>
-                {`Encrypt ${inspectPath} inspection report`}
-              </Box>
+              <Box>{`Encrypt ${inspectPath} inspection report`}</Box>
             </Box>
             <NotificationAlert variant={"warning"}>
               This report may contain internal or private data points. It can be

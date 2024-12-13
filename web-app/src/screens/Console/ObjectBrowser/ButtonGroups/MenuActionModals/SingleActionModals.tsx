@@ -14,12 +14,14 @@ import SetLegalHoldModal from "../../../Buckets/ListBuckets/Objects/ObjectDetail
 import InspectObject from "../../../Buckets/ListBuckets/Objects/ListObjects/InspectObject";
 import SetRetention from "../../../Buckets/ListBuckets/Objects/ObjectDetails/SetRetention";
 import DeleteObject from "../../../Buckets/ListBuckets/Objects/ListObjects/DeleteObject";
+import { useNotification } from "mds";
 
 
 
 const SingleActionModals = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const notification = useNotification();
 
   const params = useParams();
   const bucketName = params.bucketName || "";
@@ -64,6 +66,7 @@ const SingleActionModals = () => {
       dispatch(setObjectMetadata(null));
       dispatch(resetMessages());
       dispatch(setReloadObjectsList(true));
+      notification.success("Object deleted successfully", {position: "bottom-right"});
 
       navigate(
         `../${encodeURIComponent(bucketName)}/${encodeURIComponent(`${allPathData.join("/")}/`)}`,
@@ -78,6 +81,7 @@ const SingleActionModals = () => {
   const closeLegalHoldModal = (reload: boolean) => {
     dispatch(setLegalHoldOpen(false));
     if (reload) {
+      notification.success("Legal Hold Status Changed", {position: "bottom-right"});
       dispatch(setLoadingObjectInfo(true));
     }
   };
@@ -92,6 +96,7 @@ const SingleActionModals = () => {
   const closeRetentionModal = (updateInfo: boolean) => {
     dispatch(setRetentionOpen(false));
     if (updateInfo) {
+      notification.success("Retention Status Changed", {position: "bottom-right"});
       dispatch(setLoadingObjectInfo(true));
     }
   };

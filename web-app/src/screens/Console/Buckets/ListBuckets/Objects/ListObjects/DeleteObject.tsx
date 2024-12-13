@@ -26,6 +26,7 @@ import { IAM_SCOPES } from "../../../../../../common/SecureComponent/permissions
 import { useSelector } from "react-redux";
 import { isVersionedMode } from "../../../../../../utils/validationFunctions";
 import { BucketVersioningResponse } from "api/consoleApi";
+import { useQueryError } from "../../../../Common/Hooks/useQueryError";
 
 interface IDeleteObjectProps {
   closeDeleteModalAndRefresh: (refresh: boolean) => void;
@@ -45,10 +46,11 @@ const DeleteObject = ({
   versioningInfo,
   selectedVersion = "",
 }: IDeleteObjectProps) => {
-  const dispatch = useAppDispatch();
+  const { notifyError } = useQueryError();
+
   const onDelSuccess = () => closeDeleteModalAndRefresh(true);
   const onDelError = (err: ErrorResponseHandler) => {
-    dispatch(setErrorSnackMessage(err));
+    notifyError(err);
 
     // We close the modal box on access denied.
     if (err.detailedError === "Access Denied.") {

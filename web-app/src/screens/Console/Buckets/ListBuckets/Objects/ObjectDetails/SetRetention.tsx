@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AnchorIcon,
   Box,
@@ -33,9 +33,11 @@ import { useSelector } from "react-redux";
 import { BucketObject, ObjectRetentionMode } from "api/consoleApi";
 import { api } from "api";
 import { modalStyleUtils } from "../../../../Common/FormComponents/common/styleLibrary";
-import { AppState, useAppDispatch } from "../../../../../../store";
+import { AppState } from "../../../../../../store";
 import ModalWrapper from "../../../../Common/ModalWrapper/ModalWrapper";
 import { DateTime } from "luxon";
+import { errorToHandler } from "../../../../../../api/errors";
+import { useQueryError } from "../../../../Common/Hooks/useQueryError";
 
 interface ISetRetentionProps {
   open: boolean;
@@ -45,10 +47,6 @@ interface ISetRetentionProps {
   objectInfo: BucketObject;
 }
 
-interface IRefObject {
-  resetDate: () => void;
-}
-
 const SetRetention = ({
   open,
   closeModalAndRefresh,
@@ -56,8 +54,9 @@ const SetRetention = ({
   objectInfo,
   bucketName,
 }: ISetRetentionProps) => {
-  const dispatch = useAppDispatch();
   const theme = useMDSTheme();
+  const { notifyError } = useQueryError();
+
   const retentionConfig = useSelector(
     (state: AppState) => state.objectBrowser.retentionConfig
   );
@@ -116,8 +115,7 @@ const SetRetention = ({
         closeModalAndRefresh(true);
       })
       .catch((err) => {
-        // TODO: Fix Error Notification
-        // dispatch(setModalErrorSnackMessage(errorToHandler(err.error)));
+        notifyError(errorToHandler(err.error))
         setIsSaving(false);
       });
   };
@@ -136,8 +134,7 @@ const SetRetention = ({
         closeModalAndRefresh(true);
       })
       .catch((err) => {
-        // TODO: Fix Error Notification
-        //dispatch(setModalErrorSnackMessage(errorToHandler(err.error)));
+        notifyError(errorToHandler(err.error));
         setIsSaving(false);
       });
   };
