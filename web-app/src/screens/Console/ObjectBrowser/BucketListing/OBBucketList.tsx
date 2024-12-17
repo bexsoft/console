@@ -27,7 +27,7 @@ import {
   LinkButton,
   ProgressBar,
   RefreshCWIcon,
-  ScreenTitle
+  ScreenTitle,
 } from "mds";
 import { SecureComponent } from "../../../../common/SecureComponent";
 import {
@@ -80,10 +80,10 @@ const OBListBuckets = () => {
           });
 
         api.admin.adminInfo().then((res) => {
-          if(res.data) {
+          if (res.data) {
             console.log(res.data);
           }
-        })
+        });
       };
       fetchRecords();
     }
@@ -104,9 +104,9 @@ const OBListBuckets = () => {
     IAM_SCOPES.S3_ALL_LIST_BUCKET,
   ]);
 
-  const clickBucketItem =  (bucket: Bucket) => {
+  const clickBucketItem = (bucket: Bucket) => {
     !clickOverride &&
-    navigate(`${IAM_PAGES.OBJECT_BROWSER_VIEW}/${bucket.name}`);
+      navigate(`${IAM_PAGES.OBJECT_BROWSER_VIEW}/${bucket.name}`);
   };
 
   useEffect(() => {
@@ -154,175 +154,114 @@ const OBListBuckets = () => {
       <EPageLayout>
         {loading && <ProgressBar />}
         {!loading && (
-          <Box sx={{padding: 24}}>
-          <Box
-            sx={(theme) => ({
-              height: "calc(100vh - 170px)",
-              border: `1px solid ${theme.colors["Color/Neutral/Border/colorBorderMinimal"]}`,
-              borderRadius: theme.borderRadius["borderRadiusLG"],
-              "&.isEmbedded": {
-                height: "calc(100vh - 128px)",
-              },
-              "& > div:last-child": {
-                borderBottom: 0,
-              }
-            })}
-            className={obOnly ? "isEmbedded" : ""}
-          >
-            {filteredRecords.length !== 0 && (
-              <VirtualizedList
-                rowRenderFunction={(index) => (
-                  <BucketsListElement
-                    bucketItem={filteredRecords[index]}
-                    onClick={clickBucketItem}
-                    key={`listElement-${index}`}
-                    lastItem={index === filteredRecords.length - 1}
-                  />
-                )}
-                totalItems={filteredRecords.length}
-                defaultHeight={72}
-              />
-              /*<DataTable
-                isLoading={loading}
-                records={filteredRecords}
-                entityName={"Buckets"}
-                idField={"name"}
-                columns={[
-                  {
-                    label: "Name",
-                    elementKey: "name",
-                    renderFunction: (label) => (
-                      <div style={{ display: "flex" }}>
-                        <BucketIcon
-                          style={{ width: 15, marginRight: 5, minWidth: 15 }}
-                        />
-                        <span
-                          id={`browse-${label}`}
-                          style={{
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            minWidth: 0,
-                          }}
-                        >
-                          {label}
-                        </span>
-                      </div>
-                    ),
-                  },
-                  {
-                    label: "Objects",
-                    elementKey: "objects",
-                    renderFunction: (size: number | undefined) =>
-                      size ? size.toLocaleString() : 0,
-                  },
-                  {
-                    label: "Size",
-                    elementKey: "size",
-                    renderFunction: (size: number | undefined) => (
-                      <div
-                        onMouseEnter={() => setClickOverride(true)}
-                        onMouseLeave={() => setClickOverride(false)}
-                      >
-                        <>{niceBytesInt(size || 0)}</>
-                      </div>
-                    ),
-                  },
-                  {
-                    label: "Access",
-                    elementKey: "rw_access",
-                    renderFunction: (bucket: any) => {
-                      let access = [];
-                      if (bucket.rw_access?.read) {
-                        access.push("R");
+          <Box sx={{ padding: 24 }}>
+            <Box
+              sx={(theme) => ({
+                height: "calc(100vh - 170px)",
+                border: `1px solid ${theme.colors["Color/Neutral/Border/colorBorderMinimal"]}`,
+                borderRadius: theme.borderRadius["borderRadiusLG"],
+                overflow: "hidden",
+                "&.isEmbedded": {
+                  height: "calc(100vh - 128px)",
+                },
+                "& > div:last-child": {
+                  borderBottom: 0,
+                },
+              })}
+              className={obOnly ? "isEmbedded" : ""}
+            >
+              {filteredRecords.length !== 0 && (
+                <VirtualizedList
+                  rowRenderFunction={(index) => (
+                    <BucketsListElement
+                      bucketItem={filteredRecords[index]}
+                      onClick={clickBucketItem}
+                      key={`listElement-${index}`}
+                      lastItem={index === filteredRecords.length - 1}
+                    />
+                  )}
+                  totalItems={filteredRecords.length}
+                  defaultHeight={72}
+                />
+              )}
+              {filteredRecords.length === 0 && filterBuckets !== "" && (
+                <Grid
+                  container
+                  sx={{
+                    justifyContent: "center",
+                    alignContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Grid item xs={8}>
+                    <HelpBox
+                      icon={<BucketIcon />}
+                      title={"No Results"}
+                      help={
+                        <Fragment>
+                          No buckets match the filtering condition
+                        </Fragment>
                       }
-                      if (bucket.rw_access?.write) {
-                        access.push("W");
-                      }
-                      return <span>{access.join("/")}</span>;
-                    },
-                  },
-                ]}
-                itemActions={tableActions}
-              />*/
-            )}
-            {filteredRecords.length === 0 && filterBuckets !== "" && (
-              <Grid
-                container
-                sx={{
-                  justifyContent: "center",
-                  alignContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Grid item xs={8}>
-                  <HelpBox
-                    icon={<BucketIcon />}
-                    title={"No Results"}
-                    help={
-                      <Fragment>
-                        No buckets match the filtering condition
-                      </Fragment>
-                    }
-                  />
+                    />
+                  </Grid>
                 </Grid>
-              </Grid>
-            )}
-            {!hasBuckets && (
-              <Grid
-                container
-                sx={{
-                  justifyContent: "center",
-                  alignContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Grid item xs={8}>
-                  <HelpBox
-                    icon={<BucketIcon />}
-                    title={"Buckets"}
-                    help={
-                      <Fragment>
-                        MinIO uses buckets to organize objects. A bucket is
-                        similar to a folder or directory in a filesystem, where
-                        each bucket can hold an arbitrary number of objects.
-                        <br />
-                        {canListBuckets ? (
-                          ""
-                        ) : (
-                          <Fragment>
-                            <br />
-                            {permissionTooltipHelper(
-                              [
-                                IAM_SCOPES.S3_LIST_BUCKET,
-                                IAM_SCOPES.S3_ALL_LIST_BUCKET,
-                              ],
-                              "view the buckets on this server"
-                            )}
-                            <br />
-                          </Fragment>
-                        )}
-                        <SecureComponent
-                          scopes={[IAM_SCOPES.S3_CREATE_BUCKET]}
-                          resource={CONSOLE_UI_RESOURCE}
-                        >
+              )}
+              {!hasBuckets && (
+                <Grid
+                  container
+                  sx={{
+                    justifyContent: "center",
+                    alignContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Grid item xs={8}>
+                    <HelpBox
+                      icon={<BucketIcon />}
+                      title={"Buckets"}
+                      help={
+                        <Fragment>
+                          MinIO uses buckets to organize objects. A bucket is
+                          similar to a folder or directory in a filesystem,
+                          where each bucket can hold an arbitrary number of
+                          objects.
                           <br />
-                          To get started,&nbsp;
-                          <LinkButton
-                            onClick={() => {
-                              navigate(IAM_PAGES.ADD_BUCKETS);
-                            }}
+                          {canListBuckets ? (
+                            ""
+                          ) : (
+                            <Fragment>
+                              <br />
+                              {permissionTooltipHelper(
+                                [
+                                  IAM_SCOPES.S3_LIST_BUCKET,
+                                  IAM_SCOPES.S3_ALL_LIST_BUCKET,
+                                ],
+                                "view the buckets on this server"
+                              )}
+                              <br />
+                            </Fragment>
+                          )}
+                          <SecureComponent
+                            scopes={[IAM_SCOPES.S3_CREATE_BUCKET]}
+                            resource={CONSOLE_UI_RESOURCE}
                           >
-                            Create a Bucket.
-                          </LinkButton>
-                        </SecureComponent>
-                      </Fragment>
-                    }
-                  />
+                            <br />
+                            To get started,&nbsp;
+                            <LinkButton
+                              onClick={() => {
+                                navigate(IAM_PAGES.ADD_BUCKETS);
+                              }}
+                            >
+                              Create a Bucket.
+                            </LinkButton>
+                          </SecureComponent>
+                        </Fragment>
+                      }
+                    />
+                  </Grid>
                 </Grid>
-              </Grid>
-            )}
-          </Box>
+              )}
+            </Box>
           </Box>
         )}
       </EPageLayout>

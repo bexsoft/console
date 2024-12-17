@@ -35,7 +35,7 @@ const EPageLayout = ({
         flexDirection: "column",
         flexGrow: 1,
         backgroundColor: withBackground
-          ? theme.colors["Color/Neutral/colorWhite"]
+          ? theme.colors["Color/Neutral/Bg/colorBgContainer"]
           : "inherit",
         "& > .box:first-of-type": {
           flexGrow: 1,
