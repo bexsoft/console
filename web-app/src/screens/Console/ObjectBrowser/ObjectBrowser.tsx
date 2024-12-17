@@ -19,7 +19,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { IAM_PAGES } from "../../../common/SecureComponent/permissions";
 import LoadingComponent from "../../../common/LoadingComponent";
 import NotFoundPage from "../../NotFoundPage";
-import OBBucketList from "./OBBucketList";
+import OBBucketList from "./BucketListing/OBBucketList";
 
 const BrowserHandler = React.lazy(
   () => import("../Buckets/BucketDetails/BrowserHandler"),

@@ -18,39 +18,37 @@ import React, { Fragment, useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import {
-  LinkButton,
+  Box,
   BucketIcon,
   Button,
-  DataTable,
+  CompassIcon,
+  Grid,
   HelpBox,
-  PageLayout,
+  LinkButton,
   ProgressBar,
   RefreshCWIcon,
-  Grid,
-  Tooltip,
+  ScreenTitle
 } from "mds";
-import { actionsTray } from "../Common/FormComponents/common/styleLibrary";
-import { SecureComponent } from "../../../common/SecureComponent";
+import { SecureComponent } from "../../../../common/SecureComponent";
 import {
   CONSOLE_UI_RESOURCE,
   IAM_PAGES,
   IAM_SCOPES,
   permissionTooltipHelper,
-} from "../../../common/SecureComponent/permissions";
-import SearchBox from "../Common/SearchBox";
-import hasPermission from "../../../common/SecureComponent/accessControl";
-import { setErrorSnackMessage, setHelpName } from "../../../systemSlice";
-import { useAppDispatch } from "../../../store";
+} from "../../../../common/SecureComponent/permissions";
+import SearchBox from "../../Common/SearchBox";
+import hasPermission from "../../../../common/SecureComponent/accessControl";
+import { setErrorSnackMessage, setHelpName } from "../../../../systemSlice";
+import { useAppDispatch } from "../../../../store";
 import { useSelector } from "react-redux";
-import { selFeatures } from "../consoleSlice";
-import AutoColorIcon from "../Common/Components/AutoColorIcon";
-import TooltipWrapper from "../Common/TooltipWrapper/TooltipWrapper";
-import { niceBytesInt } from "../../../common/utils";
-import PageHeaderWrapper from "../Common/PageHeaderWrapper/PageHeaderWrapper";
-import { Bucket } from "../../../api/consoleApi";
-import { api } from "../../../api";
-import { errorToHandler } from "../../../api/errors";
-import HelpMenu from "../HelpMenu";
+import { selFeatures } from "../../consoleSlice";
+import TooltipWrapper from "../../Common/TooltipWrapper/TooltipWrapper";
+import { Bucket } from "../../../../api/consoleApi";
+import { api } from "../../../../api";
+import { errorToHandler } from "../../../../api/errors";
+import EPageLayout from "../../Common/EPageLayout/EPageLayout";
+import BucketsListElement from "./BucketsListElement";
+import VirtualizedList from "../../Common/VirtualizedList/VirtualizedList";
 
 const OBListBuckets = () => {
   const dispatch = useAppDispatch();
@@ -80,6 +78,12 @@ const OBListBuckets = () => {
             setLoading(false);
             dispatch(setErrorSnackMessage(errorToHandler(err)));
           });
+
+        api.admin.adminInfo().then((res) => {
+          if(res.data) {
+            console.log(res.data);
+          }
+        })
       };
       fetchRecords();
     }
@@ -100,15 +104,10 @@ const OBListBuckets = () => {
     IAM_SCOPES.S3_ALL_LIST_BUCKET,
   ]);
 
-  const tableActions = [
-    {
-      type: "view",
-      onClick: (bucket: Bucket) => {
-        !clickOverride &&
-          navigate(`${IAM_PAGES.OBJECT_BROWSER_VIEW}/${bucket.name}`);
-      },
-    },
-  ];
+  const clickBucketItem =  (bucket: Bucket) => {
+    !clickOverride &&
+    navigate(`${IAM_PAGES.OBJECT_BROWSER_VIEW}/${bucket.name}`);
+  };
 
   useEffect(() => {
     dispatch(setHelpName("object_browser"));
@@ -117,69 +116,73 @@ const OBListBuckets = () => {
   return (
     <Fragment>
       {!obOnly && (
-        <PageHeaderWrapper label={"Object Browser"} actions={<HelpMenu />} />
+        <ScreenTitle
+          icon={<CompassIcon />}
+          title={"Object Browser"}
+          sx={{ padding: "12px 24px" }}
+          actions={
+            <Fragment>
+              {hasBuckets && (
+                <SearchBox
+                  onChange={setFilterBuckets}
+                  placeholder="Filter Buckets"
+                  value={filterBuckets}
+                  sx={{
+                    minWidth: 380,
+                    "@media (max-width: 900px)": {
+                      minWidth: 220,
+                    },
+                  }}
+                />
+              )}
+              <TooltipWrapper tooltip={"Refresh"}>
+                <Button
+                  id={"refresh-buckets"}
+                  onClick={() => {
+                    setLoading(true);
+                  }}
+                  icon={<RefreshCWIcon />}
+                  variant={"secondary"}
+                  compact
+                />
+              </TooltipWrapper>
+            </Fragment>
+          }
+        />
       )}
 
-      <PageLayout>
-        <Grid item xs={12} sx={{ ...actionsTray.actionsTray, display: "flex" }}>
-          {obOnly && (
-            <Grid item xs>
-              <AutoColorIcon marginRight={15} marginTop={10} />
-            </Grid>
-          )}
-          {hasBuckets && (
-            <SearchBox
-              onChange={setFilterBuckets}
-              placeholder="Filter Buckets"
-              value={filterBuckets}
-              sx={{
-                minWidth: 380,
-                "@media (max-width: 900px)": {
-                  minWidth: 220,
-                },
-              }}
-            />
-          )}
-
-          <Grid
-            item
-            xs={12}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-end",
-              gap: 8,
-            }}
-          >
-            <TooltipWrapper tooltip={"Refresh"}>
-              <Button
-                id={"refresh-buckets"}
-                onClick={() => {
-                  setLoading(true);
-                }}
-                icon={<RefreshCWIcon />}
-                variant={"secondary"}
-              />
-            </TooltipWrapper>
-          </Grid>
-        </Grid>
-
+      <EPageLayout>
         {loading && <ProgressBar />}
         {!loading && (
-          <Grid
-            item
-            xs={12}
-            sx={{
-              marginTop: 25,
+          <Box sx={{padding: 24}}>
+          <Box
+            sx={(theme) => ({
               height: "calc(100vh - 211px)",
+              border: `1px solid ${theme.colors["Color/Neutral/Border/colorBorderMinimal"]}`,
+              borderRadius: theme.borderRadius["borderRadiusLG"],
               "&.isEmbedded": {
                 height: "calc(100vh - 128px)",
               },
-            }}
+              "& > div:last-child": {
+                borderBottom: 0,
+              }
+            })}
             className={obOnly ? "isEmbedded" : ""}
           >
             {filteredRecords.length !== 0 && (
-              <DataTable
+              <VirtualizedList
+                rowRenderFunction={(index) => (
+                  <BucketsListElement
+                    bucketItem={filteredRecords[index]}
+                    onClick={clickBucketItem}
+                    key={`listElement-${index}`}
+                    lastItem={index === filteredRecords.length - 1}
+                  />
+                )}
+                totalItems={filteredRecords.length}
+                defaultHeight={72}
+              />
+              /*<DataTable
                 isLoading={loading}
                 records={filteredRecords}
                 entityName={"Buckets"}
@@ -241,7 +244,7 @@ const OBListBuckets = () => {
                   },
                 ]}
                 itemActions={tableActions}
-              />
+              />*/
             )}
             {filteredRecords.length === 0 && filterBuckets !== "" && (
               <Grid
@@ -294,7 +297,7 @@ const OBListBuckets = () => {
                                 IAM_SCOPES.S3_LIST_BUCKET,
                                 IAM_SCOPES.S3_ALL_LIST_BUCKET,
                               ],
-                              "view the buckets on this server",
+                              "view the buckets on this server"
                             )}
                             <br />
                           </Fragment>
@@ -319,9 +322,10 @@ const OBListBuckets = () => {
                 </Grid>
               </Grid>
             )}
-          </Grid>
+          </Box>
+          </Box>
         )}
-      </PageLayout>
+      </EPageLayout>
     </Fragment>
   );
 };

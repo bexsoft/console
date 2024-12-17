@@ -48,7 +48,7 @@ const SearchBox = ({
       value={value}
       sx={sx}
       sizeMode={"small"}
-      overlayObject={<Button id={"trigger-search"} icon={<SearchIcon />} />}
+      startIcon={<SearchIcon />}
     />
   );
 };
