@@ -157,7 +157,7 @@ const OBListBuckets = () => {
           <Box sx={{padding: 24}}>
           <Box
             sx={(theme) => ({
-              height: "calc(100vh - 211px)",
+              height: "calc(100vh - 170px)",
               border: `1px solid ${theme.colors["Color/Neutral/Border/colorBorderMinimal"]}`,
               borderRadius: theme.borderRadius["borderRadiusLG"],
               "&.isEmbedded": {

@@ -19,12 +19,13 @@ import {
   Box,
   BucketIcon,
   ClusterReplicationIcon,
-  FingerprintIcon, ProgressBar,
+  FingerprintIcon,
   ShapesIcon,
   SquareStackIcon,
   useMDSTheme
 } from "mds";
 import { Bucket } from "../../../../api/consoleApi";
+import {  niceBytesInt } from "../../../../common/utils";
 
 const BucketsListElement = ({bucketItem, onClick, lastItem}: {bucketItem: Bucket, lastItem: boolean, onClick: (bucket: Bucket) => void}) => {
   const theme = useMDSTheme();
@@ -46,6 +47,8 @@ const BucketsListElement = ({bucketItem, onClick, lastItem}: {bucketItem: Bucket
           width: 16,
           height: 16,
         }
+      },"&:hover": {
+        backgroundColor: theme.colors["Color/Brand/Neutral/colorPrimaryBgHover"]
       }
     }} onClick={() => onClick(bucketItem)}>
       <Box className={"bucketIcon"}>
@@ -58,8 +61,8 @@ const BucketsListElement = ({bucketItem, onClick, lastItem}: {bucketItem: Bucket
         <Box className={"SM_Normal infoItem"}>{bucketItem.details?.replication ? <><ClusterReplicationIcon />Replicated</> : ""}</Box>
         <Box className={"SM_Normal infoItem"}>{bucketItem.details?.versioning ? <><SquareStackIcon /> Versioned</> : ""}</Box>
       </Box>
-      <Box>
-        {bucketItem.size}
+      <Box className="Base_Strong" sx={{display: "flex", alignItems: "center", justifyContent: "flex-end"}}>
+        {niceBytesInt(bucketItem.size || 0)}
       </Box>
     </Box>
   );
