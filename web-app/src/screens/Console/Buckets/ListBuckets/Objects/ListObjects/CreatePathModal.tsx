@@ -60,10 +60,6 @@ const CreatePathModal = ({
     }
   }, [simplePath, bucketName]);
 
-  const resetForm = () => {
-    setPathUrl("");
-  };
-
   const createProcess = () => {
     let folderPath = "/";
 
@@ -126,10 +122,11 @@ const CreatePathModal = ({
         title="Choose or create a new path"
         onClose={onClose}
         titleIcon={<FolderPlusIcon />}
+        customWidth={432}
       >
         <FormLayout withBorders={false} containerPadding={false}>
-          <Box className={"inputItem"} sx={{ display: "flex", gap: 8 }}>
-            <strong>Current Path:</strong> <br />
+          <Box className={"inputItem"} sx={{ display: "flex", gap: 8, flexDirection: "column" }}>
+            <Box className={"Base_Strong"}>Current Path:</Box>
             <Box
               sx={{
                 textOverflow: "ellipsis",
@@ -157,6 +154,7 @@ const CreatePathModal = ({
                 "You may only have write access on a limited set of subpaths within this path. Please carefully review your User permissions to understand the paths to which you may write.") ||
               ""
             }
+            orientation={"vertical"}
           />
           <Grid item xs={12} sx={modalStyleUtils.modalButtonBar}>
             <Button
@@ -164,8 +162,8 @@ const CreatePathModal = ({
               type="button"
               color="primary"
               variant="secondary"
-              onClick={resetForm}
-              label={"Clear"}
+              onClick={onClose}
+              label={"Cancel"}
             />
             <Button
               id={"create"}

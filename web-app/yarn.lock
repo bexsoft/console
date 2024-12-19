@@ -7204,12 +7204,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"detect-gpu@npm:^5.0.60":
-  version: 5.0.60
-  resolution: "detect-gpu@npm:5.0.60"
+"detect-gpu@npm:^5.0.61":
+  version: 5.0.61
+  resolution: "detect-gpu@npm:5.0.61"
   dependencies:
     webgl-constants: "npm:^1.1.1"
-  checksum: 10c0/c208bbab978a61e515cbd53261d93af3b12382d7d23a4cd04321d4f177eeac4413b8d7655df0521594585ae937a540eff85b595f0153ecdd6fb301050638b350
+  checksum: 10c0/48468e5fc3d72addcd5ac10e7e7d9e35fe20e8acb81de716edcae17f9c330e3259de22f00683f5f33f2b0ac485953233d5fb28034596b1cefaa67a7fa70ebc45
   languageName: node
   linkType: hard
 
@@ -12176,9 +12176,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mds@https://github.com/minio/mds.git#v3.1.9":
-  version: 3.1.9
-  resolution: "mds@https://github.com/minio/mds.git#commit=fc5b1debcc3af387983b8608c452ec3699be4407"
+"mds@https://github.com/minio/mds.git#v3.1.10":
+  version: 3.1.10
+  resolution: "mds@https://github.com/minio/mds.git#commit=116a4cd5ec08bcc78361eb7fa12308b3b6dbb733"
   dependencies:
     "@emotion/css": "npm:^11.13.5"
     "@emotion/react": "npm:^11.14.0"
@@ -12188,11 +12188,11 @@ __metadata:
     "@storybook/client-api": "npm:7.6.20"
     "@storybook/test": "npm:^8.4.7"
     "@uiw/react-textarea-code-editor": "npm:^3.1.0"
-    detect-gpu: "npm:^5.0.60"
+    detect-gpu: "npm:^5.0.61"
     luxon: "npm:^3.5.0"
     react-calendar: "npm:^5.1.0"
     react-virtualized: "npm:^9.22.5"
-  checksum: 10c0/ad5270ee1b58efda7e969bd9dfba613a1aa8dff9aa05e6626f81deaca50d66076de0ddb72af0d72a853c78310498e1ef76561eebb62fe65019e9002cb3638cef
+  checksum: 10c0/cef43ffc7b8ba474dc2409f73268a007e6ec9a44a5daf9b7ec81e6f49df40d9818c91bdf95559f1e83c920db7a53e02ed4c8d159dda1d70d1c9d8b5715504c33
   languageName: node
   linkType: hard
 
@@ -18656,7 +18656,7 @@ __metadata:
     local-storage-fallback: "npm:^4.1.2"
     lodash: "npm:^4.17.21"
     luxon: "npm:^3.4.4"
-    mds: "https://github.com/minio/mds.git#v3.1.9"
+    mds: "https://github.com/minio/mds.git#v3.1.10"
     minio: "npm:^8.0.1"
     nyc: "npm:^15.1.0"
     prettier: "npm:3.3.3"

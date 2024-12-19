@@ -28,7 +28,15 @@ import {
   Breadcrumbs,
   breakPoints,
   Box,
-  styled, ExpandMenu, EllipsisVerticalIcon, ExpandMenuOption, EyeOffIcon, EyeIcon, BreadcrumbsOption
+  styled,
+  ExpandMenu,
+  EllipsisVerticalIcon,
+  ExpandMenuOption,
+  EyeOffIcon,
+  EyeIcon,
+  BreadcrumbsOption,
+  ButtonGroup,
+  useNotification
 } from "mds";
 import { hasPermission, SecureComponent } from "../../../common/SecureComponent";
 import {
@@ -70,7 +78,6 @@ interface IObjectBrowser {
   bucketName: string;
   internalPaths: string;
   hidePathButton?: boolean;
-  additionalOptions?: SelectorTypes[];
   uploadButton: ReactNode;
 }
 
@@ -78,11 +85,11 @@ const BrowserBreadcrumbs = ({
   bucketName,
   internalPaths,
   hidePathButton,
-  additionalOptions,
                               uploadButton,
 }: IObjectBrowser) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const notification = useNotification();
 
   const rewindEnabled = useSelector(
     (state: AppState) => state.objectBrowser.rewind.rewindEnabled,
@@ -232,6 +239,43 @@ const BrowserBreadcrumbs = ({
             navigate(to || "/");
             dispatch(setVersionsModeEnabled({ status: false, objectName: "" }));
           }}
+          pathActions={<ButtonGroup>
+            {!hidePathButton && (
+              <Tooltip
+                tooltip={
+                  canCreatePath
+                    ? ""
+                    : permissionTooltipHelper(
+                      [IAM_SCOPES.S3_PUT_OBJECT, IAM_SCOPES.S3_PUT_ACTIONS],
+                      "create a new path"
+                    )
+                }
+              >
+                <Button
+                  id={"new-path"}
+                  onClick={() => {
+                    setCreateFolderOpen(true);
+                  }}
+                  disabled={
+                    anonymousMode ? false : rewindEnabled || !canCreatePath
+                  }
+                  icon={<FolderPlusIcon />}
+                  style={{
+                    whiteSpace: "nowrap",
+                  }}
+                />
+              </Tooltip>
+            )}
+            <CopyToClipboard text={`${bucketName}/${splitPaths.join("/")}`}>
+              <Button
+                id={"copy-path"}
+                icon={<CopyIcon />}
+                onClick={() => {
+                  notification.information("Path copied to clipboard", {position: "bottom-right"});
+                }}
+              />
+            </CopyToClipboard>
+          </ButtonGroup>}
         />
         <SecureComponent
           scopes={[IAM_SCOPES.S3_LIST_BUCKET, IAM_SCOPES.S3_ALL_LIST_BUCKET]}
@@ -250,45 +294,6 @@ const BrowserBreadcrumbs = ({
             dropMenuPosition={"end"}
             dropArrow={false}
           >
-            {!hidePathButton && (
-              <Tooltip
-                tooltip={
-                  canCreatePath
-                    ? ""
-                    : permissionTooltipHelper(
-                        [IAM_SCOPES.S3_PUT_OBJECT, IAM_SCOPES.S3_PUT_ACTIONS],
-                        "create a new path"
-                      )
-                }
-              >
-                <Button
-                  id={"new-path"}
-                  onClick={() => {
-                    setCreateFolderOpen(true);
-                  }}
-                  disabled={
-                    anonymousMode ? false : rewindEnabled || !canCreatePath
-                  }
-                  icon={<FolderPlusIcon />}
-                  style={{
-                    whiteSpace: "nowrap",
-                  }}
-                  label={"Create new path"}
-                />
-              </Tooltip>
-            )}
-            <CopyToClipboard text={`${bucketName}/${splitPaths.join("/")}`}>
-              <Button
-                id={"copy-path"}
-                icon={<CopyIcon />}
-                onClick={() => {
-                  // TODO: ENABLE NOTIFICATIONS
-                  //notification.success("Path copied to clipboard");
-                }}
-                label={"Copy Path"}
-              />
-            </CopyToClipboard>
-
               <ExpandMenuOption
                 id={"deleted-objects-toggle"}
                 icon={showDeleted ? <EyeOffIcon /> : <EyeIcon />}
