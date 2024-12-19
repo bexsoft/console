@@ -34,6 +34,7 @@ import {
   RewindIcon,
   ScreenTitle,
   ScreenTitleOptions,
+  useMDSTheme,
 } from "mds";
 import { api } from "api";
 import { errorToHandler } from "api/errors";
@@ -117,21 +118,21 @@ const PreviewFileModal = withSuspense(
 );
 
 const baseDnDStyle = {
-  borderWidth: 2,
-  borderRadius: 2,
+  borderWidth: 3,
+  borderRadius: 6,
   borderColor: "transparent",
   outline: "none",
 };
 
 const activeDnDStyle = {
   borderStyle: "dashed",
-  backgroundColor: "transparent",
   borderColor: "#2196f3",
+  backgroundColor: "#ff0000",
 };
 
 const acceptDnDStyle = {
   borderStyle: "dashed",
-  backgroundColor: "transparent",
+  //backgroundColor: "transparent",
   borderColor: "#00e676",
 };
 
@@ -140,6 +141,7 @@ const ListObjects = () => {
   const params = useParams();
   const location = useLocation();
   const navigate = useNavigate();
+  const theme = useMDSTheme();
 
   const rewindEnabled = useSelector(
     (state: AppState) => state.objectBrowser.rewind.rewindEnabled
@@ -722,11 +724,7 @@ const ListObjects = () => {
     });
 
   const dndStyles = useMemo(
-    () => ({
-      ...baseDnDStyle,
-      ...(isDragActive ? activeDnDStyle : {}),
-      ...(isDragAccept ? acceptDnDStyle : {}),
-    }),
+    () => (isDragActive || isDragAccept ? "active" : ""),
     [isDragActive, isDragAccept]
   );
 
@@ -994,189 +992,199 @@ const ListObjects = () => {
             <FilterObjectsSB />
           </div>
         )}
-        <div
-          id="object-list-wrapper"
-          {...getRootProps({ style: { ...dndStyles } })}
-        >
-          <input {...getInputProps()} />
-
-          <Box
-            withBorders
-            sx={{
-              display: "flex",
+        <Box
+          withBorders
+          sx={{
+            display: "flex",
+            overflow: "hidden",
+            borderTop: 0,
+            padding: 0,
+            width: "100%",
+            maxWidth: "100%",
+            position: "relative",
+            "& .basicPanel": {
+              width: 0,
+              opacity: 0,
+              transitionDuration: "0.3s",
               overflow: "hidden",
-              borderTop: 0,
-              padding: 0,
+            },
+            "& .panelVisible": {
               width: "100%",
-              maxWidth: "100%",
-              position: "relative",
-              "& .basicPanel": {
-                width: 0,
-                opacity: 0,
-                transitionDuration: "0.3s",
-                overflow: "hidden",
-              },
-              "& .panelVisible": {
-                width: "100%",
-                opacity: 1,
-              },
-              "& .sideBarVisible": {
-                paddingRight: 24,
-              },
-              "& .hiddenPage": {
+              opacity: 1,
+            },
+            "& .sideBarVisible": {
+              paddingRight: 24,
+            },
+            "& .hiddenPage": {
+              display: "none",
+            },
+            "& .hideListOnSmall": {
+              "@media (max-width: 799px)": {
                 display: "none",
               },
-              "& .hideListOnSmall": {
-                "@media (max-width: 799px)": {
-                  display: "none",
-                },
-              },
+            },
+          }}
+        >
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              transitionDuration: "0.3s",
+              padding: "10px 18px",
             }}
           >
             <Box
-              sx={{
-                width: "100%",
-                display: "flex",
-                transitionDuration: "0.3s",
-                padding: "16px 24px",
-              }}
+              className={`basicPanel ${!versionsMode ? "panelVisible" : ""} ${
+                versionsMode && panelHidden === "objects" ? "hiddenPage" : ""
+              } ${detailsOpen ? "sideBarVisible" : ""}`.trim()}
             >
-              <Box
-                className={`basicPanel ${!versionsMode ? "panelVisible" : ""} ${
-                  versionsMode && panelHidden === "objects" ? "hiddenPage" : ""
-                } ${detailsOpen ? "sideBarVisible" : ""}`.trim()}
+              <SecureComponent
+                scopes={[
+                  IAM_SCOPES.S3_LIST_BUCKET,
+                  IAM_SCOPES.S3_ALL_LIST_BUCKET,
+                ]}
+                resource={bucketName!}
+                errorProps={{ disabled: true }}
               >
-                <SecureComponent
-                  scopes={[
-                    IAM_SCOPES.S3_LIST_BUCKET,
-                    IAM_SCOPES.S3_ALL_LIST_BUCKET,
-                  ]}
-                  resource={bucketName!}
-                  errorProps={{ disabled: true }}
+                <Box
+                  sx={{
+                    width: "100%",
+                    position: "relative",
+                    "&.detailsOpen": {
+                      "@media (max-width: 799px)": {
+                        display: "none",
+                      },
+                    },
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 16,
+                    "& .breadcrumbs-bar": {
+                      height: 28,
+                    },
+                    "& .dropWrapper": {
+                      border: `3px transparent dashed`,
+                      "&.active": {
+                        borderRadius: theme.borderRadius.borderRadius,
+                        borderColor:
+                          theme.colors[
+                            "Color/Brand/Primary/colorPrimaryBorder"
+                          ],
+                        backgroundColor: theme.colors["Color/Brand/Primary/colorPrimaryBg"],
+                      },
+                    },
+                  }}
+                  className={detailsOpen ? "detailsOpen" : ""}
                 >
+                  {!anonymousMode && (
+                    <Fragment>
+                      {selectedObjects.length > 0 ? (
+                        <Fragment>
+                          <MultipleObjectSelection />
+                          Multi Select Actions
+                        </Fragment>
+                      ) : (
+                        <BrowserBreadcrumbs
+                          bucketName={bucketName!}
+                          internalPaths={internalPaths!}
+                          hidePathButton={false}
+                          uploadButton={
+                            <UploadFilesButton
+                              bucketName={bucketName!}
+                              uploadPath={pathAsResourceInPolicy}
+                              uploadFileFunction={() => {
+                                if (fileUpload && fileUpload.current) {
+                                  fileUpload.current.click();
+                                }
+                              }}
+                              uploadFolderFunction={() => {
+                                if (folderUpload && folderUpload.current) {
+                                  folderUpload.current.click();
+                                }
+                              }}
+                            />
+                          }
+                        />
+                      )}
+                    </Fragment>
+                  )}
                   <Box
-                    sx={{
-                      width: "100%",
-                      position: "relative",
-                      "&.detailsOpen": {
-                        "@media (max-width: 799px)": {
-                          display: "none",
-                        },
-                      },
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: 16,
-                      "& .breadcrumbs-bar": {
-                        height: 28,
-                      },
-                    }}
-                    className={detailsOpen ? "detailsOpen" : ""}
+                    id="object-list-wrapper"
+                    {...getRootProps({ className: `dropWrapper ${dndStyles}` })}
                   >
-                    {!anonymousMode && (
-                      <Fragment>
-                        {selectedObjects.length > 0 ? (
-                          <Fragment>
-                            <MultipleObjectSelection />
-                            Multi Select Actions
-                          </Fragment>
-                        ) : (
-                          <BrowserBreadcrumbs
-                            bucketName={bucketName!}
-                            internalPaths={internalPaths!}
-                            hidePathButton={false}
-                            uploadButton={
-                              <UploadFilesButton
-                                bucketName={bucketName!}
-                                uploadPath={pathAsResourceInPolicy}
-                                uploadFileFunction={() => {
-                                  if (fileUpload && fileUpload.current) {
-                                    fileUpload.current.click();
-                                  }
-                                }}
-                                uploadFolderFunction={() => {
-                                  if (folderUpload && folderUpload.current) {
-                                    folderUpload.current.click();
-                                  }
-                                }}
-                              />
-                            }
-                          />
-                        )}
-                      </Fragment>
-                    )}
+                    <input {...getInputProps()} />
                     <ListObjectsTable />
                   </Box>
-                </SecureComponent>
-              </Box>
-              <Box sx={{ position: "relative", width: 0 }}>
-                {detailsOpen && (
-                  <Button
-                    variant={"primary-lighter"}
-                    id={"close-details-list"}
-                    onClick={() => {
-                      onClosePanel(false);
-                    }}
-                    icon={<ChevronRightIcon />}
-                    sx={{
-                      zIndex: 10,
-                      position: "absolute",
-                      padding: 6,
-                      height: 22,
-                      width: 22,
-                      borderRadius: "100%",
-                      bottom: 25,
-                      left: -10,
-                      "&:hover:not(:disabled)": {
-                        backgroundColor: "transparent",
-                      },
-                    }}
-                  />
-                )}
-              </Box>
-              {!anonymousMode && (
-                <SecureComponent
-                  scopes={[
-                    IAM_SCOPES.S3_LIST_BUCKET,
-                    IAM_SCOPES.S3_ALL_LIST_BUCKET,
-                  ]}
-                  resource={bucketName!}
-                  errorProps={{ disabled: true }}
-                >
-                  <DetailsListPanel
-                    open={detailsOpen}
-                    className={`${versionsMode ? "hideListOnSmall" : ""}`}
-                  >
-                    {selectedInternalPaths !== null && (
-                      <ObjectDetailPanel
-                        internalPaths={selectedInternalPaths}
-                        bucketName={bucketName}
-                      />
-                    )}
-                    {selectedObjects.length === 0 &&
-                      selectedInternalPaths === null && (
-                        <Box>Select a file to see details here</Box>
-                      )}
-                  </DetailsListPanel>
-                </SecureComponent>
+                </Box>
+              </SecureComponent>
+            </Box>
+            <Box sx={{ position: "relative", width: 0 }}>
+              {detailsOpen && (
+                <Button
+                  variant={"primary-lighter"}
+                  id={"close-details-list"}
+                  onClick={() => {
+                    onClosePanel(false);
+                  }}
+                  icon={<ChevronRightIcon />}
+                  sx={{
+                    zIndex: 10,
+                    position: "absolute",
+                    padding: 6,
+                    height: 22,
+                    width: 22,
+                    borderRadius: "100%",
+                    bottom: 25,
+                    left: -10,
+                    "&:hover:not(:disabled)": {
+                      backgroundColor: "transparent",
+                    },
+                  }}
+                />
               )}
-
-              <Box
-                className={`basicPanel ${versionsMode ? "panelVisible" : ""} ${
-                  panelHidden === "versions" ? "hiddenPage" : ""
-                }`}
+            </Box>
+            {!anonymousMode && (
+              <SecureComponent
+                scopes={[
+                  IAM_SCOPES.S3_LIST_BUCKET,
+                  IAM_SCOPES.S3_ALL_LIST_BUCKET,
+                ]}
+                resource={bucketName!}
+                errorProps={{ disabled: true }}
               >
-                <Fragment>
+                <DetailsListPanel
+                  open={detailsOpen}
+                  className={`${versionsMode ? "hideListOnSmall" : ""}`}
+                >
                   {selectedInternalPaths !== null && (
-                    <VersionsNavigator
+                    <ObjectDetailPanel
                       internalPaths={selectedInternalPaths}
                       bucketName={bucketName}
                     />
                   )}
-                </Fragment>
-              </Box>
+                  {selectedObjects.length === 0 &&
+                    selectedInternalPaths === null && (
+                      <Box>Select a file to see details here</Box>
+                    )}
+                </DetailsListPanel>
+              </SecureComponent>
+            )}
+
+            <Box
+              className={`basicPanel ${versionsMode ? "panelVisible" : ""} ${
+                panelHidden === "versions" ? "hiddenPage" : ""
+              }`}
+            >
+              <Fragment>
+                {selectedInternalPaths !== null && (
+                  <VersionsNavigator
+                    internalPaths={selectedInternalPaths}
+                    bucketName={bucketName}
+                  />
+                )}
+              </Fragment>
             </Box>
           </Box>
-        </div>
+        </Box>
       </EPageLayout>
     </Box>
   );
