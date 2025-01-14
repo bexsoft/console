@@ -12,9 +12,8 @@
     "local-storage-fallback": "^4.1.2",
     "lodash": "^4.17.21",
     "luxon": "^3.4.4",
-    "mds": "https://github.com/minio/mds.git#v1.0.4",
+    "mds": "https://github.com/minio/mds.git#v1.0.6",
     "react": "^18.3.1",
-    "react-component-export-image": "^1.0.6",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.3.1",
     "react-dropzone": "^14.2.3",
@@ -25,7 +24,6 @@
     "react-virtualized": "^9.22.5",
     "react-window": "^1.8.10",
     "react-window-infinite-loader": "^1.0.9",
-    "recharts": "^2.12.7",
     "styled-components": "5.3.11",
     "superagent": "^9.0.2",
     "tinycolor2": "^1.6.0"

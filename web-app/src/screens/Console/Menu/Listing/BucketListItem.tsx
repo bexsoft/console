@@ -1,5 +1,5 @@
 // This file is part of MinIO Console Server
-// Copyright (c) 2022 MinIO, Inc.
+// Copyright (c) 2021 MinIO, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -14,26 +14,26 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { AppState } from "../../../../../store";
-import { api } from "../../../../../api";
-import { MakeBucketRequest } from "../../../../../api/consoleApi";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { BucketsIcon, MenuItem } from "mds";
+import { Bucket } from "../../../../api/consoleApi";
 
-export const addBucketAsync = createAsyncThunk(
-  "buckets/addBucketAsync",
-  async (_, { getState, rejectWithValue, dispatch }) => {
-    const state = getState() as AppState;
+interface IBucketListItem {
+  bucket: Bucket;
+}
 
-    const bucketName = state.addBucket.name;
+const BucketListItem = ({ bucket }: IBucketListItem) => {
+  const navigate = useNavigate();
 
-    let request: MakeBucketRequest = {
-      name: bucketName,
-    };
+  return (
+    <MenuItem
+      name={bucket.name}
+      icon={<BucketsIcon />}
+      onClick={() => navigate(`/browser/${bucket.name}`)}
+      id={`manageBucket-${bucket.name}`}
+    />
+  );
+};
 
-    try {
-      return await api.buckets.makeBucket(request);
-    } catch (err: any) {
-      return rejectWithValue(err.error);
-    }
-  },
-);
+export default BucketListItem;

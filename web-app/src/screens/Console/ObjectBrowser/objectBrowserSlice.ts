@@ -302,9 +302,6 @@ const objectBrowserSlice = createSlice({
     ) => {
       state.versionInfo = action.payload;
     },
-    setLockingEnabled: (state, action: PayloadAction<boolean | undefined>) => {
-      state.lockingEnabled = action.payload;
-    },
     setLoadingLocking: (state, action: PayloadAction<boolean>) => {
       state.loadingLocking = action.payload;
     },
@@ -416,7 +413,6 @@ export const {
   setLoadingVersioning,
   setIsVersioned,
   setLoadingLocking,
-  setLockingEnabled,
   newMessage,
   setSelectedObjects,
   setDownloadRenameModal,

@@ -47,6 +47,7 @@ interface SystemState {
   helpTabName: string;
   locationPath: string;
   darkMode: boolean;
+  filterBucketList: string;
 }
 
 const initialState: SystemState = {
@@ -79,6 +80,7 @@ const initialState: SystemState = {
   helpTabName: "docs",
   locationPath: "",
   darkMode: isDarkModeOn(),
+  filterBucketList: "",
 };
 
 const systemSlice = createSlice({
@@ -183,6 +185,9 @@ const systemSlice = createSlice({
     resetSystem: () => {
       return initialState;
     },
+    setFilterBucket: (state, action: PayloadAction<string>) => {
+      state.filterBucketList = action.payload;
+    },
   },
 });
 
@@ -200,14 +205,13 @@ export const {
   setOverrideStyles,
   setAnonymousMode,
   resetSystem,
-  configurationIsLoading,
   setHelpName,
   setHelpTabName,
   setLocationPath,
   setDarkMode,
+  setFilterBucket,
 } = systemSlice.actions;
 
 export const selDistSet = (state: AppState) => state.system.distributedSetup;
-export const selSiteRep = (state: AppState) => state.system.siteReplicationInfo;
 
 export default systemSlice.reducer;
