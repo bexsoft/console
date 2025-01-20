@@ -75,7 +75,7 @@ const ListBuckets = () => {
 
   return (
     <Fragment>
-      {!loading && filteredRecords.length !== 0 && (
+      {!loading && records.length !== 0 && (
         <Fragment>
           <Box
             sx={{
@@ -95,29 +95,31 @@ const ListBuckets = () => {
           >
             <BucketFiltering />
             <MenuSectionHeader label={"Buckets"} />
-            <Box
-              sx={{
-                display: "block",
-                height: "calc(100vh - 380px)",
-                "& .bucketsListing": {
-                  "&::-webkit-scrollbar": {
-                    width: 5,
+            {filteredRecords.length > 0 && (
+              <Box
+                sx={{
+                  display: "block",
+                  height: "calc(100vh - 380px)",
+                  "& .bucketsListing": {
+                    "&::-webkit-scrollbar": {
+                      width: 5,
+                    },
+                    "&::-webkit-scrollbar-thumb": {
+                      backgroundColor: get(theme, "bulletColor", "#2781B0"),
+                    },
+                    "&::-webkit-scrollbar-thumb:hover": {
+                      backgroundColor: "#fff",
+                    },
                   },
-                  "&::-webkit-scrollbar-thumb": {
-                    backgroundColor: get(theme, "bulletColor", "#2781B0"),
-                  },
-                  "&::-webkit-scrollbar-thumb:hover": {
-                    backgroundColor: "#fff",
-                  },
-                },
-              }}
-            >
-              <VirtualizedList
-                rowRenderFunction={renderItemLine}
-                totalItems={filteredRecords.length}
-                defaultHeight={35}
-              />
-            </Box>
+                }}
+              >
+                <VirtualizedList
+                  rowRenderFunction={renderItemLine}
+                  totalItems={filteredRecords.length}
+                  defaultHeight={35}
+                />
+              </Box>
+            )}
             {filteredRecords.length === 0 && filterBuckets !== "" && (
               <Box
                 sx={{
