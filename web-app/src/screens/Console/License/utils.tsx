@@ -43,6 +43,9 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
   {
     featureLabel: "",
     featurePlans: {
+      openSource: {
+        content: "Requires AGPLv3 License Compliance",
+      },
       eosPlus: {
         content: "Commercial License",
       },
@@ -51,6 +54,9 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
   {
     featureLabel: "",
     featurePlans: {
+      openSource: {
+        content: "Upstream Community Release",
+      },
       eosPlus: {
         content: "Enterprise Stable Release",
       },
@@ -59,6 +65,9 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
   {
     featureLabel: "Additional Features",
     featurePlans: {
+      openSource: {
+        content: "None",
+      },
       eosPlus: {
         content:
           "Global Console, Observability, Cache, Data Firewall, Key Management Server Catalog",
@@ -68,6 +77,9 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
   {
     featureLabel: "Long Term Release Support",
     featurePlans: {
+      openSource: {
+        content: "None",
+      },
       eosPlus: {
         content: "5 years LTS",
       },
@@ -76,6 +88,9 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
   {
     featureLabel: "Support SLA",
     featurePlans: {
+      openSource: {
+        content: "No SLA",
+      },
       eosPlus: {
         content: "Less than 4 Hours",
       },
@@ -84,6 +99,9 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
   {
     featureLabel: "Panic button",
     featurePlans: {
+      openSource: {
+        content: "None",
+      },
       eosPlus: {
         content: "Unlimited Panic Buttons Per Year",
       },
@@ -93,6 +111,9 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
     featureLabel:
       "Call Home Diagnostics, Health Check, Performance Benchmark, Security and Critical Vulnerabilities Notifications",
     featurePlans: {
+      openSource: {
+        content: "",
+      },
       eosPlus: {
         content: "",
         isCheck: true,
@@ -102,6 +123,9 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
   {
     featureLabel: "Indemnification",
     featurePlans: {
+      openSource: {
+        content: "",
+      },
       eosPlus: {
         content: "",
         isCheck: true,
@@ -111,6 +135,9 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
   {
     featureLabel: "Annual Review of Architecture, Performance and Security",
     featurePlans: {
+      openSource: {
+        content: "",
+      },
       eosPlus: {
         content: "",
         isCheck: true,
@@ -120,6 +147,22 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
 ];
 
 export const LICENSE_PLANS_INFORMATION: LicensePlanOption[] = [
+  {
+    planId: "openSource",
+    planName: "Open Source",
+    planType: "open-source",
+    planIcon: (
+      <ApplicationLogo applicationName={"console"} subVariant={"AGPL"} />
+    ),
+    planDescription: (
+      <span>
+        Your current plan, Designed for developers who are building open source applications in
+        compliance with the GNU AGPL v3 license which requires developers to
+        distribute their code under the same AGPL v3 license when they
+        distribute, host or modify MinIO.
+      </span>
+    ),
+  },
   {
     planId: "eosPlus",
     planName: "Enterprise",
