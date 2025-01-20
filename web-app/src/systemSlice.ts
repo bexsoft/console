@@ -20,7 +20,6 @@ import { AppState } from "./store";
 import { SubnetInfo } from "./screens/Console/License/types";
 import { isDarkModeOn } from "./utils/stylesUtils";
 import { addBucketAsync } from "./screens/Console/Buckets/ListBuckets/AddBucket/addBucketThunks";
-import { ApiError } from "./api/consoleApi";
 
 // determine whether we have the sidebar state stored on localstorage
 const initSideBarOpen = localStorage.getItem("sidebarOpen")

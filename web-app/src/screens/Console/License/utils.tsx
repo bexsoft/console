@@ -168,7 +168,7 @@ export const LICENSE_PLANS_INFORMATION: LicensePlanOption[] = [
     planName: "Enterprise",
     planType: "commercial",
     planIcon: (
-      <ApplicationLogo applicationName={"minio"} subVariant={"enterpriseos"} />
+      <ApplicationLogo applicationName={"aistor"} subVariant={"enterprise"} />
     ),
     planDescription: (
       <span>

@@ -93,16 +93,16 @@ const LicensesInformation = styled.div(({ theme }) => ({
     marginTop: 10,
   },
   "& .planIcon": {
-    height: 45,
+    height: 60,
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center",
     "& svg": {
-      height: 35,
+      height: 50,
     },
     "&.commercial": {
       "& svg": {
-        height: 20,
+        height: 40,
       },
     },
   },

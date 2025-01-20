@@ -11496,9 +11496,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mds@https://github.com/minio/mds.git#v1.0.6":
-  version: 1.0.6
-  resolution: "mds@https://github.com/minio/mds.git#commit=811a45139854e1b86fdc974039a609d65aef8d0c"
+"mds@https://github.com/minio/mds.git#v1.0.7":
+  version: 1.0.7
+  resolution: "mds@https://github.com/minio/mds.git#commit=061aa0c3a3528967265f88dbeb1cd738aba62e67"
   dependencies:
     "@storybook/test": "npm:^8.2.4"
     "@types/styled-components": "npm:^5.1.34"
@@ -11508,7 +11508,7 @@ __metadata:
     react-calendar: "npm:^5.0.0"
     react-virtualized: "npm:^9.22.5"
     styled-components: "npm:^5.3.11"
-  checksum: 10c0/f968915e2811ae8d01272eda56bd343243770134e432296ccd6bbea72503b70a9d04365e112fb2b64778f2120bafe2e951a3f98eabb1eab4c137bd23e06d189f
+  checksum: 10c0/cca518d1b9770ba58ef7468a943be851d937a1915d0075b77a9a20ad468ed101220988f327d752663e5919ee7aa3ded649c88e76fccd09ed137f08740bef5f1f
   languageName: node
   linkType: hard
 
@@ -17805,7 +17805,7 @@ __metadata:
     local-storage-fallback: "npm:^4.1.2"
     lodash: "npm:^4.17.21"
     luxon: "npm:^3.4.4"
-    mds: "https://github.com/minio/mds.git#v1.0.6"
+    mds: "https://github.com/minio/mds.git#v1.0.7"
     minio: "npm:^8.0.1"
     nyc: "npm:^15.1.0"
     prettier: "npm:3.3.3"
