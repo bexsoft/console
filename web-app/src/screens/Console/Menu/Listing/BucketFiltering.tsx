@@ -39,7 +39,7 @@ const BucketFiltering = () => {
       }}
     >
       <InputBox
-        id={"search-resource"}
+        id={"filter-buckets"}
         placeholder={"Filter Buckets"}
         sx={{
           "& input": {
