@@ -24,6 +24,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { IAM_PAGES } from "../../../common/SecureComponent/permissions";
 import { setAddBucketOpen } from "../Buckets/ListBuckets/AddBucket/addBucketsSlice";
 import BucketsListing from "./Listing/BucketsListing";
+import { getLicenseConsent } from "../License/utils";
 
 const MenuWrapper = () => {
   const dispatch = useAppDispatch();
@@ -65,6 +66,7 @@ const MenuWrapper = () => {
             icon={<LicenseIcon />}
             path={IAM_PAGES.LICENSE}
             onClick={() => navigate(IAM_PAGES.LICENSE)}
+            badge={!getLicenseConsent()}
           />
         </Fragment>
       }

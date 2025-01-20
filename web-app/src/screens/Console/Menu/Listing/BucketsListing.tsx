@@ -19,7 +19,7 @@ import { Box, BucketsIcon, HelpBox, MenuDivider, MenuSectionHeader } from "mds";
 import { AppState, useAppDispatch } from "../../../../store";
 import { Bucket } from "../../../../api/consoleApi";
 import { api } from "../../../../api";
-import { setErrorSnackMessage } from "../../../../systemSlice";
+import { setBucketLoadListing, setErrorSnackMessage } from "../../../../systemSlice";
 import { errorToHandler } from "../../../../api/errors";
 import BucketListItem from "./BucketListItem";
 import VirtualizedList from "../../Common/VirtualizedList/VirtualizedList";
@@ -35,27 +35,29 @@ const ListBuckets = () => {
   const filterBuckets = useSelector(
     (state: AppState) => state.system.filterBucketList,
   );
+  const loadingBuckets = useSelector(
+    (state: AppState) => state.system.loadBucketsListing,
+  )
 
   const [records, setRecords] = useState<Bucket[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    if (loading) {
+    if (loadingBuckets) {
       const fetchRecords = () => {
-        setLoading(true);
+        dispatch(setBucketLoadListing(true));
         api.buckets.listBuckets().then((res) => {
           if (res.data) {
-            setLoading(false);
+            dispatch(setBucketLoadListing(false));
             setRecords(res.data.buckets || []);
           } else if (res.error) {
-            setLoading(false);
+            dispatch(setBucketLoadListing(false));
             dispatch(setErrorSnackMessage(errorToHandler(res.error)));
           }
         });
       };
       fetchRecords();
     }
-  }, [loading, dispatch]);
+  }, [loadingBuckets, dispatch]);
 
   const filteredRecords = records.filter((b: Bucket) => {
     if (filterBuckets === "") {
@@ -75,7 +77,7 @@ const ListBuckets = () => {
 
   return (
     <Fragment>
-      {!loading && records.length !== 0 && (
+      {!loadingBuckets && records.length !== 0 && (
         <Fragment>
           <Box
             sx={{

@@ -19,6 +19,8 @@ import { ErrorResponseHandler, IEmbeddedCustomStyles } from "./common/types";
 import { AppState } from "./store";
 import { SubnetInfo } from "./screens/Console/License/types";
 import { isDarkModeOn } from "./utils/stylesUtils";
+import { addBucketAsync } from "./screens/Console/Buckets/ListBuckets/AddBucket/addBucketThunks";
+import { ApiError } from "./api/consoleApi";
 
 // determine whether we have the sidebar state stored on localstorage
 const initSideBarOpen = localStorage.getItem("sidebarOpen")
@@ -48,6 +50,7 @@ interface SystemState {
   locationPath: string;
   darkMode: boolean;
   filterBucketList: string;
+  loadBucketsListing: boolean;
 }
 
 const initialState: SystemState = {
@@ -81,6 +84,7 @@ const initialState: SystemState = {
   locationPath: "",
   darkMode: isDarkModeOn(),
   filterBucketList: "",
+  loadBucketsListing: true,
 };
 
 const systemSlice = createSlice({
@@ -188,6 +192,15 @@ const systemSlice = createSlice({
     setFilterBucket: (state, action: PayloadAction<string>) => {
       state.filterBucketList = action.payload;
     },
+    setBucketLoadListing: (state, action: PayloadAction<boolean>) => {
+      state.loadBucketsListing = action.payload;
+    }
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(addBucketAsync.fulfilled, (state, action) => {
+        state.loadBucketsListing = true;
+      });
   },
 });
 
@@ -210,6 +223,7 @@ export const {
   setLocationPath,
   setDarkMode,
   setFilterBucket,
+  setBucketLoadListing
 } = systemSlice.actions;
 
 export const selDistSet = (state: AppState) => state.system.distributedSetup;
