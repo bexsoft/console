@@ -156,10 +156,10 @@ export const LICENSE_PLANS_INFORMATION: LicensePlanOption[] = [
     ),
     planDescription: (
       <span>
-        Your current plan, Designed for developers who are building open source applications in
-        compliance with the GNU AGPL v3 license which requires developers to
-        distribute their code under the same AGPL v3 license when they
-        distribute, host or modify MinIO.
+        Your current plan, Designed for developers who are building open source
+        applications in compliance with the GNU AGPL v3 license which requires
+        developers to distribute their code under the same AGPL v3 license when
+        they distribute, host or modify MinIO.
       </span>
     ),
   },

@@ -193,13 +193,12 @@ const systemSlice = createSlice({
     },
     setBucketLoadListing: (state, action: PayloadAction<boolean>) => {
       state.loadBucketsListing = action.payload;
-    }
+    },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(addBucketAsync.fulfilled, (state, action) => {
-        state.loadBucketsListing = true;
-      });
+    builder.addCase(addBucketAsync.fulfilled, (state, action) => {
+      state.loadBucketsListing = true;
+    });
   },
 });
 
@@ -222,7 +221,7 @@ export const {
   setLocationPath,
   setDarkMode,
   setFilterBucket,
-  setBucketLoadListing
+  setBucketLoadListing,
 } = systemSlice.actions;
 
 export const selDistSet = (state: AppState) => state.system.distributedSetup;

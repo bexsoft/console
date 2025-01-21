@@ -19,7 +19,10 @@ import { Box, BucketsIcon, HelpBox, MenuDivider, MenuSectionHeader } from "mds";
 import { AppState, useAppDispatch } from "../../../../store";
 import { Bucket } from "../../../../api/consoleApi";
 import { api } from "../../../../api";
-import { setBucketLoadListing, setErrorSnackMessage } from "../../../../systemSlice";
+import {
+  setBucketLoadListing,
+  setErrorSnackMessage,
+} from "../../../../systemSlice";
 import { errorToHandler } from "../../../../api/errors";
 import BucketListItem from "./BucketListItem";
 import VirtualizedList from "../../Common/VirtualizedList/VirtualizedList";
@@ -37,7 +40,7 @@ const ListBuckets = () => {
   );
   const loadingBuckets = useSelector(
     (state: AppState) => state.system.loadBucketsListing,
-  )
+  );
 
   const [records, setRecords] = useState<Bucket[]>([]);
 
