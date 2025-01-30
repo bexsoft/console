@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from "react";
-import { ApplicationLogo } from "mds";
+import { ApplicationLogo, Box } from "mds";
 
 interface LicensePlanOption {
   planId: string;
@@ -44,7 +44,7 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
     featureLabel: "",
     featurePlans: {
       openSource: {
-        content: "Requires AGPLv3 License Compliance",
+        content: "GNU AGPL v3 License",
       },
       eosPlus: {
         content: "Commercial License",
@@ -52,13 +52,50 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
     },
   },
   {
-    featureLabel: "",
+    featureLabel: "Best suited for",
     featurePlans: {
       openSource: {
-        content: "Upstream Community Release",
+        content: "Test and Dev Use",
       },
       eosPlus: {
-        content: "Enterprise Stable Release",
+        content: "Production Use",
+      },
+    },
+  },
+  {
+    featureLabel: "Support",
+    featurePlans: {
+      openSource: {
+        content: "Community Support",
+      },
+      eosPlus: {
+        content:
+          "SLA backed - 24/7/365, <4 hr response time, Instant SLA for P0 issues ",
+      },
+    },
+  },
+  {
+    featureLabel: "Regulatory Compliance",
+    featurePlans: {
+      openSource: {
+        content: "N/A",
+      },
+      eosPlus: {
+        content: "FIPS 140-a Compliant, Pentest\n" +
+          "SOC2, ISO 27001, \n" +
+          "SEC 17a-4(f), FINRA 4511(c) and CFTC 1.31(c)-(d)\n" +
+          "\n",
+      },
+    },
+  },
+  {
+    featureLabel: "System Management",
+    featurePlans: {
+      openSource: {
+        content: "CLI and API",
+      },
+      eosPlus: {
+        content: "CLI, API and Graphical User Interface (GUI)",
       },
     },
   },
@@ -66,81 +103,55 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
     featureLabel: "Additional Features",
     featurePlans: {
       openSource: {
-        content: "None",
+        content: "N/A",
       },
       eosPlus: {
-        content:
-          "Global Console, Observability, Cache, Data Firewall, Key Management Server Catalog",
-      },
-    },
-  },
-  {
-    featureLabel: "Long Term Release Support",
-    featurePlans: {
-      openSource: {
-        content: "None",
-      },
-      eosPlus: {
-        content: "5 years LTS",
-      },
-    },
-  },
-  {
-    featureLabel: "Support SLA",
-    featurePlans: {
-      openSource: {
-        content: "No SLA",
-      },
-      eosPlus: {
-        content: "Less than 4 Hours",
-      },
-    },
-  },
-  {
-    featureLabel: "Panic button",
-    featurePlans: {
-      openSource: {
-        content: "None",
-      },
-      eosPlus: {
-        content: "Unlimited Panic Buttons Per Year",
+        content: "Optimisations for Small Objects, Bulk Deletes, List Operations, Low TTFB, Distributed Cache",
       },
     },
   },
   {
     featureLabel:
-      "Call Home Diagnostics, Health Check, Performance Benchmark, Security and Critical Vulnerabilities Notifications",
+      "Data Management",
     featurePlans: {
       openSource: {
-        content: "",
+        content: "S3, SFTP",
       },
       eosPlus: {
-        content: "",
-        isCheck: true,
+        content: "S3, SFTP, GPU Direct, S3 over RDMA",
       },
     },
   },
   {
-    featureLabel: "Indemnification",
+    featureLabel: "Features",
     featurePlans: {
       openSource: {
-        content: "",
+        content: "Core Features",
       },
       eosPlus: {
-        content: "",
-        isCheck: true,
+        content: "Core Features, QoS, Metadata Search, Monitoring, Audit Logs, Load Balancer",
       },
     },
   },
   {
-    featureLabel: "Annual Review of Architecture, Performance and Security",
+    featureLabel: "Security",
     featurePlans: {
       openSource: {
-        content: "",
+        content: "Server Side Encyrption (SSE-S3, SSE-KMS, SSE-C)",
       },
       eosPlus: {
-        content: "",
-        isCheck: true,
+        content: "Server Side Encyrption (SSE-S3, SSE-KMS, SSE-C), Encryption Key Management Server, Data Firewall",
+      },
+    },
+  },
+  {
+    featureLabel: "Extra Features",
+    featurePlans: {
+      openSource: {
+        content: "N/A",
+      },
+      eosPlus: {
+        content: "AI Features- Prompt Object, AI Hub, AI Studio, OpenAI Integration, Model Context Protocols for AI Agents",
       },
     },
   },
@@ -149,34 +160,28 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
 export const LICENSE_PLANS_INFORMATION: LicensePlanOption[] = [
   {
     planId: "openSource",
-    planName: "Open Source",
+    planName: "MinIO Community Edition",
     planType: "open-source",
     planIcon: (
       <ApplicationLogo applicationName={"console"} subVariant={"AGPL"} />
     ),
     planDescription: (
-      <span>
-        Your current plan, Designed for developers who are building open source
-        applications in compliance with the GNU AGPL v3 license which requires
-        developers to distribute their code under the same AGPL v3 license when
-        they distribute, host or modify MinIO.
-      </span>
+      <Box sx={{textAlign: "center", marginTop: 15,}}>
+        Intended for developers building open source  applications.
+      </Box>
     ),
   },
   {
     planId: "eosPlus",
-    planName: "Enterprise",
+    planName: "MinIO Enterprise Edition",
     planType: "commercial",
     planIcon: (
       <ApplicationLogo applicationName={"aistor"} subVariant={"enterprise"} />
     ),
     planDescription: (
-      <span>
-        Designed for customers where a commercial license and the
-        strictest,engineer-backed SLA are required. It offers additional
-        features and operational capabilities, more interaction options and more
-        enterprise deliverables.
-      </span>
+      <Box sx={{textAlign: "center", marginTop: 15}}>
+        Intended for production infrastructure
+      </Box>
     ),
   },
 ];
