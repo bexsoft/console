@@ -106,7 +106,7 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
         content: "N/A",
       },
       eosPlus: {
-        content: "Optimisations for Small Objects, Bulk Deletes, List Operations, Low TTFB, Distributed Cache",
+        content: "Optimizations for Small Objects, Bulk Deletes, List Operations, Low TTFB, Distributed Cache",
       },
     },
   },
