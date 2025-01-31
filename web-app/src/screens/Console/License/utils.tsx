@@ -100,7 +100,7 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
     },
   },
   {
-    featureLabel: "Additional Features",
+    featureLabel: "Optimizations",
     featurePlans: {
       openSource: {
         content: "N/A",
