@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import React from "react";
-import { ApplicationLogo, Box } from "mds";
+import { ApplicationLogo } from "mds";
 
 interface LicensePlanOption {
   planId: string;
@@ -44,16 +44,10 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
     featureLabel: "",
     featurePlans: {
       openSource: {
-        content: <div>GNU AGPL v3 License
-        <br />
-          Intended for open source applications
-        </div>,
+        content: "GNU AGPL v3 License",
       },
       eosPlus: {
-        content: <div>Enterprise License
-        <br />
-          Intended for commercial applications
-        </div>,
+        content: "Enterprise License",
       },
     },
   },
@@ -61,10 +55,18 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
     featureLabel: "Best suited for",
     featurePlans: {
       openSource: {
-        content: "Test and Dev Use",
+        content: (
+          <div>
+            Test and Dev Use <br /> Intended for open source applications
+          </div>
+        ),
       },
       eosPlus: {
-        content: "Production Use",
+        content: (
+          <div>
+            Production Use <br /> Intended for commercial applications
+          </div>
+        ),
       },
     },
   },
@@ -87,7 +89,8 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
         content: "N/A",
       },
       eosPlus: {
-        content: "FIPS 140-a Compliant, Pentest\n" +
+        content:
+          "FIPS 140-a Compliant, Pentest\n" +
           "SOC2, ISO 27001, \n" +
           "SEC 17a-4(f), FINRA 4511(c) and CFTC 1.31(c)-(d)\n" +
           "\n",
@@ -112,13 +115,13 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
         content: "N/A",
       },
       eosPlus: {
-        content: "Optimizations for Small Objects, Bulk Deletes, List Operations, Low TTFB, Distributed Cache",
+        content:
+          "Optimizations for Small Objects, Bulk Deletes, List Operations, Low TTFB, Distributed Cache",
       },
     },
   },
   {
-    featureLabel:
-      "Data Management",
+    featureLabel: "Data Management",
     featurePlans: {
       openSource: {
         content: "S3, SFTP",
@@ -135,7 +138,8 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
         content: "Core Features",
       },
       eosPlus: {
-        content: "Core Features, QoS, Metadata Search, Monitoring, Audit Logs, Load Balancer",
+        content:
+          "Core Features, QoS, Metadata Search, Monitoring, Audit Logs, Load Balancer",
       },
     },
   },
@@ -146,7 +150,8 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
         content: "Server Side Encyrption (SSE-S3, SSE-KMS, SSE-C)",
       },
       eosPlus: {
-        content: "Server Side Encyrption (SSE-S3, SSE-KMS, SSE-C), Encryption Key Management Server, Data Firewall",
+        content:
+          "Server Side Encyrption (SSE-S3, SSE-KMS, SSE-C), Encryption Key Management Server, Data Firewall",
       },
     },
   },
@@ -157,7 +162,8 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
         content: "N/A",
       },
       eosPlus: {
-        content: "AI Features- Prompt Object, AI Hub, AI Studio, OpenAI Integration, Model Context Protocols for AI Agents",
+        content:
+          "AI Features- Prompt Object, AI Hub, AI Studio, OpenAI Integration, Model Context Protocols for AI Agents",
       },
     },
   },
