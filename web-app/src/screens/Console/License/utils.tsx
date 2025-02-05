@@ -44,10 +44,16 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
     featureLabel: "",
     featurePlans: {
       openSource: {
-        content: "GNU AGPL v3 License",
+        content: <div>GNU AGPL v3 License
+        <br />
+          Intended for open source applications
+        </div>,
       },
       eosPlus: {
-        content: "Enterprise License",
+        content: <div>Enterprise License
+        <br />
+          Intended for commercial applications
+        </div>,
       },
     },
   },
@@ -59,17 +65,6 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
       },
       eosPlus: {
         content: "Production Use",
-      },
-    },
-  },
-  {
-    featureLabel: "",
-    featurePlans: {
-      openSource: {
-        content: "Intended for open source applications",
-      },
-      eosPlus: {
-        content: "Intended for commercial applications",
       },
     },
   },
