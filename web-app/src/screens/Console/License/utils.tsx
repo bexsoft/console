@@ -63,6 +63,17 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
     },
   },
   {
+    featureLabel: "",
+    featurePlans: {
+      openSource: {
+        content: "Intended for open source applications",
+      },
+      eosPlus: {
+        content: "Intended for commercial applications",
+      },
+    },
+  },
+  {
     featureLabel: "Support",
     featurePlans: {
       openSource: {
@@ -165,11 +176,7 @@ export const LICENSE_PLANS_INFORMATION: LicensePlanOption[] = [
     planIcon: (
       <ApplicationLogo applicationName={"console"} subVariant={"AGPL"} />
     ),
-    planDescription: (
-      <Box sx={{textAlign: "center", marginTop: 15,}}>
-        Intended for open source applications
-      </Box>
-    ),
+    planDescription: "",
   },
   {
     planId: "eosPlus",
@@ -178,11 +185,7 @@ export const LICENSE_PLANS_INFORMATION: LicensePlanOption[] = [
     planIcon: (
       <ApplicationLogo applicationName={"aistor"} subVariant={"enterprise"} />
     ),
-    planDescription: (
-      <Box sx={{textAlign: "center", marginTop: 15}}>
-        Intended for commercial applications
-      </Box>
-    ),
+    planDescription: "",
   },
 ];
 
