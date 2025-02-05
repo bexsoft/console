@@ -47,7 +47,7 @@ export const FEATURE_ITEMS: PlansFeatures[] = [
         content: "GNU AGPL v3 License",
       },
       eosPlus: {
-        content: "Commercial License",
+        content: "Enterprise License",
       },
     },
   },
@@ -167,7 +167,7 @@ export const LICENSE_PLANS_INFORMATION: LicensePlanOption[] = [
     ),
     planDescription: (
       <Box sx={{textAlign: "center", marginTop: 15,}}>
-        Intended for developers building open source  applications.
+        Intended for open source applications
       </Box>
     ),
   },
@@ -180,7 +180,7 @@ export const LICENSE_PLANS_INFORMATION: LicensePlanOption[] = [
     ),
     planDescription: (
       <Box sx={{textAlign: "center", marginTop: 15}}>
-        Intended for production infrastructure
+        Intended for commercial applications
       </Box>
     ),
   },

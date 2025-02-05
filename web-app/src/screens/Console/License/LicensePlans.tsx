@@ -88,21 +88,21 @@ const LicensesInformation = styled.div(({ theme }) => ({
   "& .planName": {
     fontWeight: 600,
     fontSize: 35,
-    marginBottom: 20,
+    marginBottom: 30,
     textAlign: "center",
     marginTop: 10,
   },
   "& .planIcon": {
-    height: 60,
+    height: 100,
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center",
     "& svg": {
-      height: 50,
+      height: 80,
     },
     "&.commercial": {
       "& svg": {
-        height: 40,
+        height: 70,
       },
     },
   },
