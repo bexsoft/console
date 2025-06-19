@@ -37,7 +37,7 @@ const LicenseConsentModal = () => {
     useState<boolean>(false);
 
   const licenseAcknowledged = useSelector(
-    (state: AppState) => state.system.licenseAcknowledged,
+    (state: AppState) => state.system.licenseAcknowledged
   );
 
   const recordAgplConsent = () => {
@@ -129,7 +129,7 @@ const LicenseConsentModal = () => {
           <Box
             sx={{
               overflowY: "auto",
-              maxHeight: 500,
+              maxHeight: 400,
             }}
           >
             <Box
@@ -166,6 +166,36 @@ const LicenseConsentModal = () => {
               </a>
             </Box>
             <LicenseFAQ />
+          </Box>
+          <Box sx={{ marginTop: "20px" }}>
+            <InformativeMessage
+              variant={"warning"}
+              title={"Acknowledgement"}
+              message={
+                <>
+                  When you use our Services, we may automatically collect
+                  information about your visit, including via cookies, beacons,
+                  invisible tags, and similar technologies (collectively
+                  “cookies”) in your browser and on emails sent to you. This
+                  information may include Personal Information, such as your IP
+                  address, web browser, device type, and the web pages that you
+                  visit just before or just after you use the Services, as well
+                  as information about your interactions with the Services, such
+                  as the date and time of your visit, and where you have
+                  clicked.
+                  <br /><br />
+                  <strong>For more information please refer to our{" "}
+                  <a
+                    href={"https://min.io/privacy-policy"}
+                    target={"_blank"}
+                    rel={"noreferrer"}
+                  >
+                    Privacy Policy
+                  </a>{" "}
+                    page.</strong>
+                </>
+              }
+            />
           </Box>
           <Box
             sx={{
